@@ -116,15 +116,15 @@ def test_set_admin_role_noop_and_validation(tmp_path):
     engine = create_engine(url)
     Base.metadata.create_all(engine)
     with Session(engine) as db:
-        db.add(User(id='u1', nickname='同学', campus='燕园校本部', email='user@stu.pku.edu.cn'))
+        db.add(User(id='u1', nickname='同学', campus='燕园校本部', email='user@example.com'))
         db.commit()
 
-    assert set_admin_role(url, 'user@stu.pku.edu.cn', 'admin') is True
-    assert set_admin_role(url, 'user@stu.pku.edu.cn', 'admin') is False
-    assert set_admin_role(url, 'user@stu.pku.edu.cn', 'student') is True
+    assert set_admin_role(url, 'user@example.com', 'admin') is True
+    assert set_admin_role(url, 'user@example.com', 'admin') is False
+    assert set_admin_role(url, 'user@example.com', 'student') is True
 
     with pytest.raises(ValueError):
-        set_admin_role(url, 'user@stu.pku.edu.cn', 'bogus')
+        set_admin_role(url, 'user@example.com', 'bogus')
     with pytest.raises(ValueError):
         set_admin_role(url, 'someone@example.com', 'admin')
     with pytest.raises(ValueError):

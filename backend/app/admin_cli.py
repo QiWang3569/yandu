@@ -5,14 +5,14 @@ from sqlalchemy import create_engine, delete, select
 from sqlalchemy.orm import Session
 
 from .config import Settings
-from .email_auth import normalize_pku_email
+from .email_auth import normalize_email
 from .models import ActionLog, LoginSession, User
 
 
 def set_admin_role(database_url: str, email: str, role: str) -> bool:
-    normalized = normalize_pku_email(email)
+    normalized = normalize_email(email)
     if not normalized or role not in {'admin', 'student'}:
-        raise ValueError('需要已验证的北大邮箱，以及 admin 或 student 身份')
+        raise ValueError('需要已验证的邮箱，以及 admin 或 student 身份')
     engine = create_engine(database_url, pool_pre_ping=True)
     try:
         with Session(engine) as db:
@@ -34,7 +34,7 @@ def set_admin_role(database_url: str, email: str, role: str) -> bool:
 def main():
     parser = argparse.ArgumentParser(description='调整已注册用户的管理员权限（仅在服务器本机执行）')
     parser.add_argument('action', choices=['grant', 'revoke'])
-    parser.add_argument('email', help='已经通过验证码注册的北大邮箱')
+    parser.add_argument('email', help='已经通过验证码注册的邮箱')
     args = parser.parse_args()
     role = 'admin' if args.action == 'grant' else 'student'
     try:

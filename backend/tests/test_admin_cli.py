@@ -12,10 +12,10 @@ def test_role_change_revokes_existing_sessions(tmp_path):
     engine = create_engine(url)
     Base.metadata.create_all(engine)
     with Session(engine) as db:
-        db.add(User(id='verified', nickname='已验证用户', campus='燕园校本部', email='user@stu.pku.edu.cn'))
+        db.add(User(id='verified', nickname='已验证用户', campus='燕园校本部', email='user@example.com'))
         db.add(LoginSession(token_hash='token', user_id='verified', expires_at=now() + timedelta(days=1)))
         db.commit()
-    assert set_admin_role(url, 'user@stu.pku.edu.cn', 'admin')
+    assert set_admin_role(url, 'USER@EXAMPLE.COM', 'admin')
     with Session(engine) as db:
         assert db.get(User, 'verified').role == 'admin'
         assert db.get(LoginSession, 'token') is None

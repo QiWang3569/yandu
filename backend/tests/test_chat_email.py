@@ -30,7 +30,7 @@ def maildb(tmp_path, monkeypatch):
     with factory.begin() as db:
         db.add_all([
             User(id='buyer', nickname='买家', campus='燕园校本部', email='buyer@pku.edu.cn', email_notifications=False),
-            User(id='seller', nickname='卖家', campus='燕园校本部', email='seller@stu.pku.edu.cn', email_notifications=True),
+            User(id='seller', nickname='卖家', campus='燕园校本部', email='seller@example.com', email_notifications=True),
         ])
         db.flush()
         db.add(Item(id='item', seller_id='seller', title='鼠标', category='数码与影音', price_cents=1000,
@@ -61,7 +61,7 @@ def test_delay_merge_delivery_and_persistent_receipts(maildb):
     add_message(factory, 'message-3', created=AT, body='<script>alert("test")</script>')
     assert process_chat_email_batch(factory, settings, at=AT + timedelta(minutes=1)) == 1
     assert len(sent) == 1
-    assert sent[0]['To'] == 'seller@stu.pku.edu.cn'
+    assert sent[0]['To'] == 'seller@example.com'
     assert sent[0]['From'] == 'yandu@example.org'
     assert sent[0]['Subject'] == '燕渡：买家 发来 3 条未读消息'
     assert sent[0].get_content_type() == 'text/plain'
@@ -104,7 +104,7 @@ def test_ineligible_messages_never_send(maildb, reason):
         elif reason == 'no_email':
             recipient.email = None
         elif reason == 'invalid_email':
-            recipient.email = 'outsider@example.org'
+            recipient.email = 'invalid-address'
         elif reason == 'read':
             message.read_at = AT
         elif reason == 'hidden':
@@ -163,7 +163,7 @@ def test_cooldown_and_each_recipient_has_independent_cursor(maildb):
     assert sent[-1]['To'] == 'buyer@pku.edu.cn'
     assert process_chat_email_batch(factory, settings, at=AT + timedelta(minutes=29)) == 0
     assert process_chat_email_batch(factory, settings, at=AT + timedelta(minutes=30)) == 1
-    assert sent[-1]['To'] == 'seller@stu.pku.edu.cn'
+    assert sent[-1]['To'] == 'seller@example.com'
     assert '1 条未读消息' in sent[-1]['Subject']
 
 
@@ -341,5 +341,5 @@ def test_smtp_transport_uses_tls_and_existing_credentials(maildb, monkeypatch, p
     assert calls[0][1:3] == ('smtp.example', port)
     assert calls[0][3]['timeout'] == 8
     assert ('login', 'mail-user', 'test-password') in calls
-    assert ('send', 'seller@stu.pku.edu.cn') in calls
+    assert ('send', 'seller@example.com') in calls
     assert any(call[0] == 'starttls' for call in calls) == (port == 587)

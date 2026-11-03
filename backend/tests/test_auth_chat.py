@@ -5,7 +5,7 @@ from fastapi.testclient import TestClient
 from sqlalchemy import create_engine, select, text
 
 from app.config import Settings
-from app.email_auth import send_verification_email
+from app.email_auth import normalize_email, send_verification_email
 from app.main import create_app
 from app.models import ChatMessage, EmailChallenge, Item, User, now
 from conftest import login
@@ -38,13 +38,29 @@ def test_smtp_sender_uses_tls_and_addresses_only_verified_recipient(monkeypatch,
     assert '12345678' in sent[0].get_content()
 
 
-def test_verified_pku_mail_creates_user_and_reuses_account(tmp_path, monkeypatch):
+@pytest.mark.parametrize('email', [
+    'student@stu.pku.edu.cn', 'reader@gmail.com', 'reader@sub.example.org',
+])
+def test_email_validation_accepts_any_domain(email):
+    assert normalize_email(email) == email
+    assert normalize_email(' ' + email.upper() + ' ') == email
+
+
+@pytest.mark.parametrize('email', [
+    '', 'invalid-address', '@example.com', 'student@', 'student@example',
+    'student@-example.com', 'student@example..com', 'student@example.com.evil/',
+])
+def test_email_validation_rejects_malformed_addresses(email):
+    assert normalize_email(email) is None
+
+
+def test_verified_external_mail_creates_user_and_reuses_account(tmp_path, monkeypatch):
     app, sent = email_client(tmp_path, monkeypatch)
     with TestClient(app) as client:
-        for bad in ('student@gmail.com', 'student@notpku.edu.cn', 'student@x.pku.edu.cn', 'student@stu.pku.edu.cn.evil'):
+        for bad in ('invalid-address', 'student@', 'student@example..com'):
             assert client.post('/api/v1/auth/email/request-code', json={'email': bad}).status_code == 422
-        assert client.post('/api/v1/auth/email/request-code', json={'email': ' Student@STU.PKU.EDU.CN '}).status_code == 200
-        assert sent[0][0] == 'student@stu.pku.edu.cn'
+        assert client.post('/api/v1/auth/email/request-code', json={'email': ' Student@EXAMPLE.COM '}).status_code == 200
+        assert sent[0][0] == 'student@example.com'
         assert client.post('/api/v1/auth/email/verify', json={'email': sent[0][0], 'code': '00000000', 'nickname': '北大同学'}).status_code == 400
         result = client.post('/api/v1/auth/email/verify', json={'email': sent[0][0], 'code': sent[0][1],
                             'nickname': '北大同学', 'campus': '燕园校本部', 'intent': 'register',
@@ -64,12 +80,12 @@ def test_verified_pku_mail_creates_user_and_reuses_account(tmp_path, monkeypatch
                               'intent': 'login'})
         assert repeat.status_code == 200 and repeat.json()['user']['id'] == user['id']
         client.post('/api/v1/auth/logout')
-        assert client.post('/api/v1/auth/email/request-code', json={'email': 'someone@pku.edu.cn'}).status_code == 200
+        assert client.post('/api/v1/auth/email/request-code', json={'email': 'someone@other.example.org'}).status_code == 200
         existing = client.post('/api/v1/auth/email/verify', json={'email': sent[-1][0], 'code': sent[-1][1],
                                'nickname': '另一位同学', 'password': 'NewCampus9', 'intent': 'register'})
         assert existing.status_code == 200 and existing.json()['user']['id'] != user['id']
         with app.state.session_factory() as db:
-            assert db.scalar(select(User).where(User.email == 'student@stu.pku.edu.cn')).role == 'student'
+            assert db.scalar(select(User).where(User.email == 'student@example.com')).role == 'student'
 
 
 def test_email_code_limits_and_unconfigured_service(tmp_path, monkeypatch):

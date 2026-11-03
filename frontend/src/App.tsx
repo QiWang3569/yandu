@@ -925,7 +925,7 @@ export default function App() {
             onError={setToast}
             autoEdit={editProfile}
             onAutoEditConsumed={() => setEditProfile(false)}
-          /> : <Empty title="登录后查看个人主页" text="使用北大邮箱登录，集中管理你的代蹲、消息、收藏与发布。"
+          /> : <Empty title="登录后查看个人主页" text="使用邮箱登录，集中管理你的代蹲、消息、收藏与发布。"
             action="登录或注册" onAction={() => setModal("login")} />)}
           {(view === "market" || view === "wanted") && <SearchBar {...searchBarProps} mobile />}
           {view === "market" && (
@@ -1791,7 +1791,7 @@ export default function App() {
               onOpenItem={(id) => void openItem({ id }, true)}
               onStarted={() => { setChatItem(null); setChatDraft(""); }} refresh={refresh} />
           ) : (
-            <Empty title="登录后查看站内消息" text="通过北大邮箱验证后，就能和商品发布者沟通。"
+            <Empty title="登录后查看站内消息" text="通过邮箱验证后，就能和商品发布者沟通。"
               action="登录或注册" onAction={() => setModal("login")} />
           ))}
           {adminView && (
