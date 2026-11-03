@@ -12,7 +12,7 @@
 [![Node.js 22](https://img.shields.io/badge/Node.js-22-339933?logo=node.js&logoColor=white)](https://nodejs.org/)
 [![React 19](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white)](https://react.dev/)
 [![PostgreSQL 16 + pgvector](https://img.shields.io/badge/PostgreSQL-16%2Bpgvector-4169E1?logo=postgresql&logoColor=white)](https://www.postgresql.org/)
-[![tests](https://img.shields.io/badge/tests-287%20passed-brightgreen)](#测试与覆盖率)
+[![tests](https://img.shields.io/badge/tests-295%20passed-brightgreen)](#测试与覆盖率)
 [![coverage](https://img.shields.io/badge/coverage-94%25-2ea44f)](#测试与覆盖率)
 
 > 本仓库已转为公开（public）。请勿把本地 `.env`、数据库、图片或密钥提交到仓库。
@@ -74,6 +74,7 @@ flowchart LR
 - 可选[识图发布](docs/VISION_ASSISTED_PUBLISHING.md)：选 1–3 张照片生成标题、分类、描述和标签建议，核对后逐项应用；独立配置 `VISION_*`，默认关闭。
 - 批量导入支持合照拆分为最多 10 件候选商品，可编辑、删除、合并套装后保存为草稿；补齐信息后勾选批量发布，合照不自动充当每件商品封面。
 - 分类、关键词、校区、价格、成色筛选与排序分页；收藏、三件对比与分享链接；收藏分类与同校区优先的基础推荐。
+- 详情页推荐同分类、共同标签、同校区且价格接近的「相似好物」，无需模型与外部接口。
 - 智能搜索将自然语言解析为分类、预算、成色、关键词，支持“左右/大约”等约数价格。
 - 商品撤回、成交后「再发一件」、待确认收货禁止重新上架。
 
@@ -85,14 +86,15 @@ flowchart LR
 
 ### 站内聊天、反馈与交易
 
-- 买家主动发起会话，支持文字、图片与图文消息，未读提示与历史分页。
+- 买家主动发起会话，支持文字、图片与图文消息，未读提示与历史分页；可从自己的列表移除会话，对方发来新消息时自动恢复。
 - 交易状态机：申请预订 → 确认 / 拒绝 → 售出 → 确认收货；拉黑与消息举报。
+- 双方确认成交后可互评 1–5 星、标签与文字；卖家评分与历史评价在商品详情和个人主页展示。
 - 未读站内信邮件提醒，延迟 5 分钟合并发送，并保留投递队列与重试记录。
 - 站内意见反馈支持问题与截图、我的反馈与补充；管理员回复并更新状态，结果通过站内通知送达。
 
 ### 治理与数据
 
-- 管理员工作台：公告管理、用户反馈、聊天举报、商品举报、操作记录；文字风险词与同名商品线索。
+- 管理员工作台：公告管理、用户反馈、聊天举报、商品举报、操作记录；文字风险词与同名商品线索。审核页签显示待处理数量角标，公告支持上线、下线与删除。
 - 公告统一从消息铃铛查看，展开全文后标为已读并移出未读列表，历史公告可分页查看；通知计数跨标签页同步，已读与待处理分别展示。
 - 商品照片可点击放大，支持切图、缩放、拖动与手机手势。更新及验证记录见 [通知与商品图片](docs/NOTIFICATIONS_AND_GALLERY.md)。
 - 商业指标看板：用户增长、访客漏斗、GMV、动销率、停留时长与犹豫商品。
@@ -195,7 +197,7 @@ npm ci
 npm run build
 ```
 
-最新一次本地运行：287 项后端测试全部通过，整体行覆盖率 94%；前端通过 TypeScript 类型检查与 Vite 生产构建。GitHub Actions 会在推送与合并请求时，分别在 Windows 与 Linux 上执行后端测试和前端构建，结果见 [Actions](https://github.com/QiWang3569/yandu/actions)。
+最新一次本地运行：295 项后端测试全部通过，整体行覆盖率 94%；前端通过 TypeScript 类型检查与 Vite 生产构建。GitHub Actions 会在推送与合并请求时，分别在 Windows 与 Linux 上执行后端测试和前端构建，结果见 [Actions](https://github.com/QiWang3569/yandu/actions)。
 
 ## 部署
 

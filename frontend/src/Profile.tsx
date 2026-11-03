@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import { api, type Meta, type User } from "./api";
 import { Modal } from "./components";
+import { SellerRating, UserReviewsPanel } from "./Reviews";
 
 export type PersonalView =
   "profile" | "intents" | "messages" | "favorites" | "mine" | "mywanted";
@@ -151,6 +152,7 @@ export function ProfileHome({
   onAutoEditConsumed?: () => void;
 }) {
   const [editing, setEditing] = useState(false);
+  const [reviewsOpen, setReviewsOpen] = useState(false);
   const [saving, setSaving] = useState(false);
   const [savingNotifications, setSavingNotifications] = useState(false);
   const [notificationEnabled, setNotificationEnabled] = useState(Boolean(user.email_notifications));
@@ -224,6 +226,9 @@ export function ProfileHome({
             <MapPin size={15} />
             {user.campus} · {user.email ? "邮箱已验证" : "本地演示账号"}
           </p>
+          <div className="profile-rating">
+            <SellerRating userId={user.id} onOpen={() => setReviewsOpen(true)} />
+          </div>
           <p className="profile-bio">
             {user.bio || "还没有个人介绍，写一句话让同学认识你吧。"}
           </p>
@@ -365,6 +370,11 @@ export function ProfileHome({
               {saving ? "保存中…" : "保存资料"}
             </button>
           </form>
+        </Modal>
+      )}
+      {reviewsOpen && (
+        <Modal title="我收到的交易评价" onClose={() => setReviewsOpen(false)}>
+          <UserReviewsPanel userId={user.id} />
         </Modal>
       )}
     </>

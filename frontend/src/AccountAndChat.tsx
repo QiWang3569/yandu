@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState, type FormEvent } from "react";
-import { ArrowLeft, ArrowRight, Flag, ImagePlus, LockKeyhole, Mail, MessageCircle, Send, ShieldOff, Sparkles, X } from "lucide-react";
-import { api, statusText, type ChatMessage, type Conversation, type Item, type Meta, type User } from "./api";
+import { ArrowLeft, ArrowRight, Flag, ImagePlus, LockKeyhole, Mail, MessageCircle, Send, ShieldOff, Sparkles, Trash2, X } from "lucide-react";
+import { api, statusText, type ChatMessage, type Conversation, type Item, type Meta, type TradeReview, type User } from "./api";
 import { Empty, Modal, ProductArt } from "./components";
+import { REVIEW_TAGS, Stars } from "./Reviews";
 
 const passwordValid = (value: string) => value.length >= 9 && value.length <= 128 && /[A-Za-z]/.test(value) && /[0-9]/.test(value);
 
@@ -238,6 +239,14 @@ export function ChatCenter({ user, conversations, initialItem, initialDraft, ini
   const uploadEpoch = useRef(0);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
+  const [notice, setNotice] = useState("");
+  const [reviews, setReviews] = useState<TradeReview[]>([]);
+  const [reviewsLoaded, setReviewsLoaded] = useState(false);
+  const [reviewRating, setReviewRating] = useState(5);
+  const [reviewBody, setReviewBody] = useState("");
+  const [reviewTags, setReviewTags] = useState<string[]>([]);
+  const [reviewsOpen, setReviewsOpen] = useState(false);
+  const [reviewBusy, setReviewBusy] = useState(false);
   const [reportMessageId, setReportMessageId] = useState<string | null>(null);
   const [reportReason, setReportReason] = useState("");
   const bottom = useRef<HTMLDivElement>(null);
@@ -276,7 +285,7 @@ export function ChatCenter({ user, conversations, initialItem, initialDraft, ini
       const top = layout.getBoundingClientRect().top + window.scrollY;
       const navigation = window.innerWidth <= 650 ? document.querySelector(".sidebar")?.getBoundingClientRect().height ?? 62 : 0;
       const viewport = window.visualViewport?.height ?? window.innerHeight;
-      setLayoutHeight(Math.max(340, Math.min(650, viewport - top - navigation - 16)));
+      setLayoutHeight(Math.max(360, Math.min(1080, viewport - top - navigation - 16)));
     };
     measure();
     const observer = new ResizeObserver(measure);
@@ -360,6 +369,26 @@ export function ChatCenter({ user, conversations, initialItem, initialDraft, ini
     ?? (activeSnapshot.current?.id === activeId ? activeSnapshot.current : null);
   // Keep the thread mounted while its list is being refreshed after a message or deal action.
   if (active) activeSnapshot.current = active;
+  useEffect(() => {
+    setReviewsOpen(false);
+    setReviewBody("");
+    setReviewTags([]);
+    setReviewRating(5);
+    setReviews([]);
+    setReviewsLoaded(false);
+    if (!activeId) { setReviewsLoaded(true); return; }
+    let alive = true;
+    const read = () => {
+      void api<{ reviews: TradeReview[] }>(`/conversations/${activeId}/reviews`)
+        .then((result) => { if (alive) setReviews(result.reviews); })
+        .catch(() => { if (alive) setReviews([]); })
+        .finally(() => { if (alive) setReviewsLoaded(true); });
+    };
+    read();
+    // A confirmed chat polls slowly so the counterpart's review shows up without reload.
+    const timer = active?.deal_status === "CONFIRMED" ? window.setInterval(read, 30000) : undefined;
+    return () => { alive = false; if (timer !== undefined) clearInterval(timer); };
+  }, [activeId, active?.deal_status]);
   async function changeDeal(action: "request" | "reserve" | "decline" | "cancel" | "sold" | "confirm") {
     if (!activeId) return;
     setBusy(true); setError("");
@@ -379,6 +408,42 @@ export function ChatCenter({ user, conversations, initialItem, initialDraft, ini
       refresh();
     } catch (cause) { setError((cause as Error).message); }
     finally { setBusy(false); }
+  }
+  async function deleteConversation() {
+    if (!activeId || busy) return;
+    if (!window.confirm("从你的会话列表移除这次聊天？对方发来新消息时会重新出现，交易和举报记录仍会保留。")) return;
+    setBusy(true); setError(""); setNotice("");
+    try {
+      await api(`/conversations/${activeId}`, "DELETE");
+      setActiveId(null);
+      setRecentConversation(null);
+      setMessages([]);
+      setReviews([]);
+      setNotice("会话已从列表移除。对方发来新消息后，会自动重新出现。");
+      refresh();
+    } catch (cause) { setError((cause as Error).message); }
+    finally { setBusy(false); }
+  }
+  function toggleReviewTag(tag: string) {
+    setReviewTags((current) => current.includes(tag)
+      ? current.filter((entry) => entry !== tag)
+      : [...current, tag]);
+  }
+  async function submitReview(event: FormEvent) {
+    event.preventDefault();
+    if (!activeId || reviewBusy) return;
+    setReviewBusy(true); setError("");
+    try {
+      const review = await api<TradeReview>(`/conversations/${activeId}/reviews`, "POST", {
+        rating: reviewRating, body: reviewBody, tags: reviewTags,
+      });
+      setReviews((current) => [...current, review]);
+      setReviewRating(5);
+      setReviewBody("");
+      setReviewTags([]);
+      refresh();
+    } catch (cause) { setError((cause as Error).message); }
+    finally { setReviewBusy(false); }
   }
   async function submitReport(event: FormEvent) {
     event.preventDefault();
@@ -468,16 +533,20 @@ export function ChatCenter({ user, conversations, initialItem, initialDraft, ini
       setBusy(false);
     }
   }
+  const myReview = reviews.find((review) => review.reviewer_id === user.id) ?? null;
+  const counterpartReview = reviews.find((review) => review.reviewer_id !== user.id) ?? null;
+  const canDeleteConversation = !!active && !["REQUESTED", "RESERVED", "SOLD"].includes(active.deal_status);
   return (
     <section className="chat-page">
       <div className="chat-heading"><MessageCircle size={22} /><div><h1>站内消息</h1><p>关于商品的沟通会保存在这里，只有买卖双方可见。</p></div></div>
+      {notice && <p className="chat-notice" role="status">{notice}</p>}
       {error && !active && !newItem && <p className="form-error" role="alert">{error}</p>}
       <div ref={layoutRef} style={{ height: layoutHeight }} className={`chat-layout ${activeId || newItem ? "chat-active" : ""}`}>
         <div className="chat-list" aria-label="会话列表">
           {conversations.length ? conversations.map((conversation) => (
             <button key={conversation.id} className={`chat-list-item ${activeId === conversation.id ? "active" : ""}`}
               disabled={busy || uploading}
-              onClick={() => { setActiveId(conversation.id); setRecentConversation(conversation); setMessages([]); setLoadedOlder(false); setNewItem(null); setDraft(""); setReportMessageId(null); setError(""); onStarted(); }}>
+              onClick={() => { setActiveId(conversation.id); setRecentConversation(conversation); setMessages([]); setReviews([]); setReviewsOpen(false); setLoadedOlder(false); setNewItem(null); setDraft(""); setReportMessageId(null); setError(""); setNotice(""); onStarted(); }}>
               <span className="avatar">{conversation.counterpart.nickname[0]}</span>
               <span className="chat-list-text"><strong>{conversation.counterpart.nickname}</strong><small>{conversation.item_title}</small>
                 <span>{conversation.last_message ? conversation.last_message.body || "[图片]" : "开始沟通"}</span></span>
@@ -492,6 +561,10 @@ export function ChatCenter({ user, conversations, initialItem, initialDraft, ini
               <div><strong>{active?.counterpart.nickname ?? newItem?.seller.nickname}</strong></div>
               {active && <button type="button" className="text-button" disabled={busy} onClick={() => void toggleBlock()}>
                 <ShieldOff size={15} />{active.blocked_by_me ? "解除拉黑" : "拉黑"}
+              </button>}
+              {canDeleteConversation && <button type="button" className="icon-button chat-delete" disabled={busy}
+                title="从列表移除会话" aria-label="从列表移除会话" onClick={() => void deleteConversation()}>
+                <Trash2 size={16} />
               </button>}
             </div>
             <button type="button" className="chat-item-summary" onClick={() => onOpenItem(active?.item_id ?? newItem!.id)}
@@ -520,6 +593,17 @@ export function ChatCenter({ user, conversations, initialItem, initialDraft, ini
                 <button className="text-button" disabled={busy} onClick={() => void changeDeal("cancel")}>取消预订</button></>}
               {user.id === active.buyer_id && active.deal_status === "SOLD" &&
                 <button className="text-button" disabled={busy} onClick={() => void changeDeal("confirm")}>确认已收到</button>}
+            </div>}
+            {active?.deal_status === "CONFIRMED" && <div className="trade-review-bar">
+              <span className="trade-review-bar-title">交易已完成</span>
+              {!reviewsLoaded
+                ? <span className="trade-review-chip">评价加载中…</span>
+                : myReview
+                  ? <span className="trade-review-chip">我的评价 <Stars value={myReview.rating} size={12} /> {myReview.rating} 星</span>
+                  : <button type="button" className="text-button" disabled={busy}
+                      onClick={() => setReviewsOpen(true)}>评价对方</button>}
+              {reviewsLoaded && counterpartReview && <span className="trade-review-chip">对方评价 <Stars value={counterpartReview.rating} size={12} /> {counterpartReview.rating} 星</span>}
+              <button type="button" className="text-button trade-review-open" onClick={() => setReviewsOpen(true)}>查看评价</button>
             </div>}
             {active?.blocked && <p className="hint">双方已停止联系。聊天记录仍可查看，不能发送新消息。</p>}
             <div className="chat-history" aria-live="polite">
@@ -577,6 +661,40 @@ export function ChatCenter({ user, conversations, initialItem, initialDraft, ini
           </> : <Empty title="选择一条会话" text="你与其他同学的商品沟通会显示在这里。" />}
         </div>
       </div>
+      {reviewsOpen && active?.deal_status === "CONFIRMED" && <Modal title="交易评价" onClose={() => setReviewsOpen(false)}>
+        <div className="trade-review-dialog">
+          {!reviewsLoaded ? <p className="hint">正在加载评价…</p> : <>
+          {myReview ? <section className="trade-review-block">
+            <div className="trade-review-block-head"><strong>我的评价</strong><Stars value={myReview.rating} /><span>{myReview.rating} 星</span></div>
+            {myReview.tags.length > 0 && <div className="trade-review-tags">{myReview.tags.map((tag) => <span key={tag}>{tag}</span>)}</div>}
+            {myReview.body && <p>{myReview.body}</p>}
+          </section> : <form className="trade-review-form" onSubmit={(event) => void submitReview(event)}>
+            <div className="trade-review-form-rating">
+              <span>给这次交易打分</span>
+              <Stars value={reviewRating} onChange={setReviewRating} size={24} />
+              <strong>{reviewRating} 星</strong>
+            </div>
+            <div className="trade-review-tags">
+              {REVIEW_TAGS.map((tag) => <button type="button" key={tag}
+                className={reviewTags.includes(tag) ? "active" : ""} aria-pressed={reviewTags.includes(tag)}
+                onClick={() => toggleReviewTag(tag)}>{tag}</button>)}
+            </div>
+            <label className="sr-only" htmlFor="trade-review-body">补充评价</label>
+            <textarea id="trade-review-body" rows={3} maxLength={500} value={reviewBody}
+              placeholder="补充一句评价（可选，最多 500 字）" onChange={(event) => setReviewBody(event.target.value)} />
+            <div className="trade-review-form-actions">
+              <span>评价提交后不能修改</span>
+              <button className="button primary" disabled={reviewBusy || busy}>{reviewBusy ? "提交中…" : "提交评价"}</button>
+            </div>
+          </form>}
+          {counterpartReview ? <section className="trade-review-block">
+            <div className="trade-review-block-head"><strong>对方的评价</strong><Stars value={counterpartReview.rating} /><span>{counterpartReview.rating} 星</span></div>
+            {counterpartReview.tags.length > 0 && <div className="trade-review-tags">{counterpartReview.tags.map((tag) => <span key={tag}>{tag}</span>)}</div>}
+            {counterpartReview.body && <p>{counterpartReview.body}</p>}
+          </section> : <p className="hint">对方还没有评价；对方提交后会显示在这里。</p>}
+          </>}
+        </div>
+      </Modal>}
       {imageView && <Modal title="聊天图片" onClose={() => setImageView(null)}><img className="chat-image-full" src={imageView} alt="聊天图片原图" /></Modal>}
     </section>
   );
