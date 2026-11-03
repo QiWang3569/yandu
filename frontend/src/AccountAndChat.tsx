@@ -241,6 +241,7 @@ export function ChatCenter({ user, conversations, initialItem, initialDraft, ini
   const [error, setError] = useState("");
   const [notice, setNotice] = useState("");
   const [reviews, setReviews] = useState<TradeReview[]>([]);
+  const [reviewsLoaded, setReviewsLoaded] = useState(false);
   const [reviewRating, setReviewRating] = useState(5);
   const [reviewBody, setReviewBody] = useState("");
   const [reviewTags, setReviewTags] = useState<string[]>([]);
@@ -374,12 +375,14 @@ export function ChatCenter({ user, conversations, initialItem, initialDraft, ini
     setReviewTags([]);
     setReviewRating(5);
     setReviews([]);
-    if (!activeId) return;
+    setReviewsLoaded(false);
+    if (!activeId) { setReviewsLoaded(true); return; }
     let alive = true;
     const read = () => {
       void api<{ reviews: TradeReview[] }>(`/conversations/${activeId}/reviews`)
         .then((result) => { if (alive) setReviews(result.reviews); })
-        .catch(() => { if (alive) setReviews([]); });
+        .catch(() => { if (alive) setReviews([]); })
+        .finally(() => { if (alive) setReviewsLoaded(true); });
     };
     read();
     // A confirmed chat polls slowly so the counterpart's review shows up without reload.
@@ -593,11 +596,13 @@ export function ChatCenter({ user, conversations, initialItem, initialDraft, ini
             </div>}
             {active?.deal_status === "CONFIRMED" && <div className="trade-review-bar">
               <span className="trade-review-bar-title">交易已完成</span>
-              {myReview
-                ? <span className="trade-review-chip">我的评价 <Stars value={myReview.rating} size={12} /> {myReview.rating} 星</span>
-                : <button type="button" className="text-button" disabled={busy}
-                    onClick={() => setReviewsOpen(true)}>评价对方</button>}
-              {counterpartReview && <span className="trade-review-chip">对方评价 <Stars value={counterpartReview.rating} size={12} /> {counterpartReview.rating} 星</span>}
+              {!reviewsLoaded
+                ? <span className="trade-review-chip">评价加载中…</span>
+                : myReview
+                  ? <span className="trade-review-chip">我的评价 <Stars value={myReview.rating} size={12} /> {myReview.rating} 星</span>
+                  : <button type="button" className="text-button" disabled={busy}
+                      onClick={() => setReviewsOpen(true)}>评价对方</button>}
+              {reviewsLoaded && counterpartReview && <span className="trade-review-chip">对方评价 <Stars value={counterpartReview.rating} size={12} /> {counterpartReview.rating} 星</span>}
               <button type="button" className="text-button trade-review-open" onClick={() => setReviewsOpen(true)}>查看评价</button>
             </div>}
             {active?.blocked && <p className="hint">双方已停止联系。聊天记录仍可查看，不能发送新消息。</p>}
@@ -658,6 +663,7 @@ export function ChatCenter({ user, conversations, initialItem, initialDraft, ini
       </div>
       {reviewsOpen && active?.deal_status === "CONFIRMED" && <Modal title="交易评价" onClose={() => setReviewsOpen(false)}>
         <div className="trade-review-dialog">
+          {!reviewsLoaded ? <p className="hint">正在加载评价…</p> : <>
           {myReview ? <section className="trade-review-block">
             <div className="trade-review-block-head"><strong>我的评价</strong><Stars value={myReview.rating} /><span>{myReview.rating} 星</span></div>
             {myReview.tags.length > 0 && <div className="trade-review-tags">{myReview.tags.map((tag) => <span key={tag}>{tag}</span>)}</div>}
@@ -686,6 +692,7 @@ export function ChatCenter({ user, conversations, initialItem, initialDraft, ini
             {counterpartReview.tags.length > 0 && <div className="trade-review-tags">{counterpartReview.tags.map((tag) => <span key={tag}>{tag}</span>)}</div>}
             {counterpartReview.body && <p>{counterpartReview.body}</p>}
           </section> : <p className="hint">对方还没有评价；对方提交后会显示在这里。</p>}
+          </>}
         </div>
       </Modal>}
       {imageView && <Modal title="聊天图片" onClose={() => setImageView(null)}><img className="chat-image-full" src={imageView} alt="聊天图片原图" /></Modal>}
