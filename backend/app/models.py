@@ -70,6 +70,9 @@ class Conversation(Base):
     created_at: Mapped[datetime] = mapped_column(DateTime, default=now)
     last_message_at: Mapped[datetime] = mapped_column(DateTime, default=now)
     deal_status: Mapped[str] = mapped_column(String(20), default='NONE')
+    # Per-participant "delete from my list" markers. A new message restores the chat.
+    buyer_deleted_at: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
+    seller_deleted_at: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
     __table_args__ = (UniqueConstraint('item_id', 'buyer_id'), Index('idx_conversation_buyer', 'buyer_id', 'last_message_at'), Index('idx_conversation_seller', 'seller_id', 'last_message_at'))
 
 
@@ -180,6 +183,22 @@ class SaleFeedback(Base):
     read_at: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
     created_at: Mapped[datetime] = mapped_column(DateTime, default=now)
     __table_args__ = (UniqueConstraint('reporter_id', 'item_id'),)
+
+
+class TradeReview(Base):
+    """One review per participant after a confirmed deal."""
+    __tablename__ = 'trade_reviews'
+    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=uid)
+    conversation_id: Mapped[str] = mapped_column(ForeignKey('conversations.id'))
+    item_id: Mapped[str] = mapped_column(ForeignKey('items.id'))
+    reviewer_id: Mapped[str] = mapped_column(ForeignKey('users.id'))
+    reviewee_id: Mapped[str] = mapped_column(ForeignKey('users.id'))
+    rating: Mapped[int] = mapped_column(Integer)
+    body: Mapped[str] = mapped_column(Text, default='')
+    tags: Mapped[list] = mapped_column(JSON, default=list)
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=now)
+    __table_args__ = (UniqueConstraint('conversation_id', 'reviewer_id'),
+                      Index('idx_trade_reviews_reviewee', 'reviewee_id', 'created_at'))
 
 
 class Notification(Base):

@@ -61,6 +61,7 @@ import {
   type ChatReport,
   type Log,
   type Conversation,
+  type AdminSummary,
   money,
   campusShort,
   statusText,
@@ -81,6 +82,7 @@ import { SearchBar } from "./SearchBar";
 import { FeedbackCenter, FeedbackWorkspace, type FeedbackNotices } from "./Feedback";
 import { AnnouncementFeed } from "./AnnouncementFeed";
 import { ProductGallery } from "./ProductGallery";
+import { SellerRating, UserReviewsPanel } from "./Reviews";
 import { listenForNotificationChanges, notificationVersion } from "./notificationEvents";
 import { useSessionRenewal } from "./session";
 import { SessionRecovery } from "./SessionRecovery";
@@ -102,6 +104,7 @@ type ModalName =
   | "notifications"
   | "compare"
   | "detail"
+  | "reviews"
   | "announcements"
   | "feedback"
   | null;
@@ -216,6 +219,7 @@ export default function App() {
   const [intentQuery, setIntentQuery] = useState(""),
     [selected, setSelected] = useState<Item | null>(null),
     [compare, setCompare] = useState<Item[]>([]);
+  const [similar, setSimilar] = useState<Item[]>([]);
   const [editingItem, setEditingItem] = useState<Item | null>(null);
   const [detailFromChat, setDetailFromChat] = useState(false);
   const [copiedDraft, setCopiedDraft] = useState<ItemDraft | null>(null);
@@ -650,6 +654,14 @@ export default function App() {
   const siteFeedbackNotices = useResource<FeedbackNotices>(
     "/feedback-notices", noticeRevision, !!user, true, user?.id,
   );
+  useEffect(() => {
+    if (modal !== "detail" || !selected?.id) { setSimilar([]); return; }
+    let alive = true;
+    void api<{ items: Item[] }>(`/items/${selected.id}/similar?limit=6`)
+      .then((result) => { if (alive) setSimilar(result.items); })
+      .catch(() => { if (alive) setSimilar([]); });
+    return () => { alive = false; };
+  }, [modal, selected?.id]);
   const openFeedback = (id: string | null = null) => { setFeedbackId(id); setModal("feedback"); };
   const visibleNotices = noticeIntent
     ? (taskNotices.data ?? []).filter((n) => n.intent_id === noticeIntent.id)
@@ -659,6 +671,9 @@ export default function App() {
   const allUnread = summary.data?.total ?? 0;
   const personalView = ["profile", "intents", "messages", "favorites", "mine", "mywanted"].includes(view);
   const adminView = ["admin", "admin-chat", "admin-reports", "admin-logs", "admin-feedback", "admin-metrics"].includes(view);
+  const adminSummary = useResource<AdminSummary>(
+    "/admin/summary", revision, user?.role === "admin", true, user?.id,
+  );
 
   if (!meta)
     return (
@@ -810,6 +825,7 @@ export default function App() {
             >
               <ShieldCheck size={20} />
               审核工作台
+              {!!adminSummary.data?.pending_total && <span className="nav-new">{adminSummary.data.pending_total}</span>}
             </button>
           )}
         </nav>
@@ -916,7 +932,7 @@ export default function App() {
         </header>
         <main>
           {personalView && user && <ProfileNav view={view as PersonalView} onNavigate={navigate} unread={chatUnread} />}
-          {adminView && user && <AdminNav view={view as AdminView} onNavigate={navigate} />}
+          {adminView && user && <AdminNav view={view as AdminView} onNavigate={navigate} counts={adminSummary.data} />}
           {view === "profile" && (user ? <ProfileHome
             user={user} meta={meta} overview={profileOverview.data}
             unread={chatUnread} conversations={conversations.data?.length ?? 0}
@@ -2238,6 +2254,7 @@ export default function App() {
                   <small>
                     {selected.is_demo ? "校园演示账号" : "平台用户"}
                   </small>
+                  <SellerRating userId={selected.seller.id} onOpen={() => setModal("reviews")} />
                 </div>
                 <ShieldCheck size={20} />
               </div>
@@ -2405,6 +2422,22 @@ export default function App() {
               </div>
             </div>
           </div>
+          {similar.length > 0 && <section className="similar-items" aria-label="相似好物">
+            <div className="similar-heading">
+              <h3>相似好物</h3>
+              <span>按分类、标签与价格为你挑选</span>
+            </div>
+            <div className="similar-grid">
+              {similar.map((item) => (
+                <button type="button" className="similar-card" key={item.id}
+                  onClick={() => void openItem(item)} aria-label={`查看相似商品：${item.title}`}>
+                  <ProductArt item={item} />
+                  <strong>{item.title}</strong>
+                  <span>¥{money(item.price)} · {item.campus}</span>
+                </button>
+              ))}
+            </div>
+          </section>}
           {reporting && (
             <form
               className="stack-form report-form"
@@ -2444,6 +2477,11 @@ export default function App() {
           )}
         </Modal>
       )}
+      {modal === "reviews" && selected && (
+        <Modal title={`${selected.seller.nickname}的交易评价`} onClose={() => setModal("detail")} style={{ width: 720 }}>
+          <UserReviewsPanel userId={selected.seller.id} />
+        </Modal>
+      )}
       {sessionExpired && user && !recoverSession && <div className="session-expired-banner" role="status">
         <span>登录已过期，当前填写内容已保留。</span>
         <button className="button primary" onClick={() => setRecoverSession(true)}>重新登录</button>
@@ -2474,21 +2512,30 @@ const adminTabs = [
 function AdminNav({
   view,
   onNavigate,
+  counts,
 }: {
   view: AdminView;
   onNavigate: (view: AdminView) => void;
+  counts?: AdminSummary | null;
 }) {
   return (
     <nav className="profile-nav" aria-label="审核工作台导航">
-      {adminTabs.map(({ key, label }) => (
-        <button
-          key={key}
-          className={view === key ? "active" : ""}
-          onClick={() => onNavigate(key)}
-        >
-          {label}
-        </button>
-      ))}
+      {adminTabs.map(({ key, label }) => {
+        const badge = key === "admin-reports" ? counts?.reports
+          : key === "admin-chat" ? counts?.chat_reports
+            : key === "admin-feedback" ? counts?.feedback
+              : 0;
+        return (
+          <button
+            key={key}
+            className={view === key ? "active" : ""}
+            onClick={() => onNavigate(key)}
+          >
+            {label}
+            {!!badge && <span className="admin-nav-badge">{badge}</span>}
+          </button>
+        );
+      })}
     </nav>
   );
 }
@@ -2539,6 +2586,7 @@ function Admin({
     user?.role === "admin" && view === "admin-metrics"
   );
   const [busy, setBusy] = useState(false);
+  const [showHandledReports, setShowHandledReports] = useState(false);
   const [annTitle, setAnnTitle] = useState("");
   const [annKind, setAnnKind] = useState<"公告" | "更新">("公告");
   const [annBody, setAnnBody] = useState("");
@@ -2615,6 +2663,21 @@ function Admin({
       setBusy(false);
     }
   }
+  async function deleteAnnouncement(a: AdminAnnouncement) {
+    if (!window.confirm(`删除公告「${a.title}」？删除后无法恢复。`)) return;
+    setBusy(true);
+    try {
+      await api(`/admin/announcements/${a.id}`, "DELETE");
+      notify("公告已删除");
+      refresh();
+    } catch (cause) {
+      notify((cause as Error).message);
+    } finally {
+      setBusy(false);
+    }
+  }
+  const visibleReports = (reports.data ?? []).filter((report) => showHandledReports || report.status === "OPEN");
+  const handledReports = (reports.data ?? []).filter((report) => report.status !== "OPEN").length;
   if (view === "admin-feedback") return <FeedbackWorkspace key={user.id} admin onChange={refresh} />;
   return (
     <>
@@ -2683,6 +2746,13 @@ function Admin({
             >
               {a.active ? "下线" : "上线"}
             </button>
+            <button
+              className="text-button danger"
+              disabled={busy}
+              onClick={() => void deleteAnnouncement(a)}
+            >
+              删除
+            </button>
           </div>
         ))}
       </div>
@@ -2708,7 +2778,13 @@ function Admin({
       )}
       {view === "admin-reports" && (
         <>
-          <h2 className="audit-title">商品举报</h2>
+          <div className="admin-heading-row">
+            <h2 className="audit-title">商品举报</h2>
+            <button type="button" className="button secondary" disabled={busy}
+              onClick={() => setShowHandledReports((value) => !value)}>
+              {showHandledReports ? "只看待处理" : `显示已处理${handledReports ? ` (${handledReports})` : ""}`}
+            </button>
+          </div>
       {reports.loading ? (
         <Busy />
       ) : reports.error ? (
@@ -2718,9 +2794,9 @@ function Admin({
           action="重试"
           onAction={refresh}
         />
-      ) : reports.data?.length ? (
+      ) : visibleReports.length ? (
         <div className="review-list">
-          {reports.data.map((r) => (
+          {visibleReports.map((r) => (
             <article className="review-card" key={r.id}>
               <div className="section-heading">
                 <h3>{r.item.title}</h3>

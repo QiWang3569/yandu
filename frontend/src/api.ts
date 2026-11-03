@@ -212,6 +212,36 @@ export type Log = {
   detail: string;
   created_at: string;
 };
+export type TradeReview = {
+  id: string;
+  conversation_id: string;
+  item_id: string;
+  item_title: string;
+  reviewer_id: string;
+  reviewee_id: string;
+  reviewer: Pick<User, "id" | "nickname" | "campus" | "role"> | null;
+  rating: number;
+  body: string;
+  tags: string[];
+  created_at: string;
+};
+export type ReviewSummary = {
+  average: number | null;
+  count: number;
+  distribution: { rating: number; count: number }[];
+};
+export type UserReviews = {
+  user: Pick<User, "id" | "nickname" | "campus" | "role">;
+  summary: ReviewSummary;
+  reviews: TradeReview[];
+};
+export type AdminSummary = {
+  reports: number;
+  chat_reports: number;
+  feedback: number;
+  announcements: number;
+  pending_total: number;
+};
 
 export class ApiError extends Error {
   constructor(message: string, public status: number) { super(message); }
