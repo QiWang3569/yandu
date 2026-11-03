@@ -51,13 +51,13 @@ export function EmailSignIn({ meta, intent, email, setEmail, code, setCode, sent
   return (
     <form className="stack-form email-sign-in" onSubmit={(event) => void submit(event)}>
       <p className="auth-description">{intent === "register"
-        ? "填写资料并设置密码，再用北大邮箱验证码完成注册。"
+        ? "填写资料并设置密码，再用邮箱验证码完成注册。"
         : "已经有账号？收取一次性验证码即可登录。"}</p>
       <div className="auth-steps" aria-label="操作步骤"><span className="current">1 · {intent === "register" ? "填写账号" : "填写邮箱"}</span><span className={sent ? "current" : ""}>2 · 验证邮箱</span></div>
       <label>
-        北大邮箱
+        邮箱
         <input type="email" autoComplete="email" required value={email}
-          disabled={sent || busy} placeholder="@pku.edu.cn 或 @stu.pku.edu.cn"
+          disabled={sent || busy} maxLength={254} placeholder="name@example.com"
           onChange={(event) => setEmail(event.target.value)} />
       </label>
       {intent === "register" && <><div className="form-grid">
@@ -148,9 +148,9 @@ function PasswordSignIn({ email, setEmail, onSignedIn, onReset }: {
     }
   }
   return <form className="stack-form email-sign-in" onSubmit={(event) => void submit(event)}>
-    <p className="auth-description">已设置密码的北大邮箱账号，可以直接登录。</p>
-    <label>北大邮箱<input type="email" autoComplete="username" required maxLength={254} value={email}
-        placeholder="@pku.edu.cn 或 @stu.pku.edu.cn" onChange={(event) => setEmail(event.target.value)} /></label>
+    <p className="auth-description">已设置密码的邮箱账号，可以直接登录。</p>
+    <label>邮箱<input type="email" autoComplete="username" required maxLength={254} value={email}
+        placeholder="name@example.com" onChange={(event) => setEmail(event.target.value)} /></label>
     <label>登录密码<input type="password" autoComplete="current-password" required maxLength={128} value={password}
       onChange={(event) => setPassword(event.target.value)} /></label>
     {error && <p className="form-error" role="alert">{error}</p>}
@@ -190,9 +190,9 @@ export function PasswordSetup({ meta, initialEmail = "", onSignedIn }: {
     }
   }
   return <form className="stack-form email-sign-in" onSubmit={(event) => void submit(event)}>
-    <p className="auth-description">验证北大邮箱后设置新密码。完成后，其他设备上的登录会失效。</p>
-    <label>北大邮箱<input type="email" autoComplete="email" required maxLength={254} value={email}
-      disabled={sent || busy || !!initialEmail} placeholder="@pku.edu.cn 或 @stu.pku.edu.cn"
+    <p className="auth-description">验证邮箱后设置新密码。完成后，其他设备上的登录会失效。</p>
+    <label>邮箱<input type="email" autoComplete="email" required maxLength={254} value={email}
+      disabled={sent || busy || !!initialEmail} placeholder="name@example.com"
       onChange={(event) => setEmail(event.target.value)} /></label>
     {sent && <>
       <p className="hint" role="status">验证码已发送至 {email}，10 分钟内有效。</p>

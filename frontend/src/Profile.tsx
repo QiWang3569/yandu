@@ -222,7 +222,7 @@ export function ProfileHome({
           <h1>{user.nickname}</h1>
           <p className="profile-location">
             <MapPin size={15} />
-            {user.campus} · {user.email ? "北大邮箱已验证" : "本地演示账号"}
+            {user.campus} · {user.email ? "邮箱已验证" : "本地演示账号"}
           </p>
           <p className="profile-bio">
             {user.bio || "还没有个人介绍，写一句话让同学认识你吧。"}
