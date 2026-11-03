@@ -512,6 +512,7 @@ export default function App() {
   async function openItem(item: Pick<Item, "id">, fromChat = false) {
     setReporting(false);
     setReportText("");
+    setSimilar([]);
     try {
       const fresh = await api<Item>("/items/" + item.id);
       setDetailFromChat(fromChat);
