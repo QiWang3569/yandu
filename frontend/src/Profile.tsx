@@ -157,13 +157,11 @@ export function ProfileHome({
   const [savingNotifications, setSavingNotifications] = useState(false);
   const [notificationEnabled, setNotificationEnabled] = useState(Boolean(user.email_notifications));
   const [nickname, setNickname] = useState(user.nickname);
-  const [campus, setCampus] = useState(user.campus);
   const [bio, setBio] = useState(user.bio ?? "");
   const [color, setColor] = useState(user.avatar_color ?? "sage");
   useEffect(() => {
     setNickname(user.nickname);
     setNotificationEnabled(Boolean(user.email_notifications));
-    setCampus(user.campus);
     setBio(user.bio ?? "");
     setColor(user.avatar_color ?? "sage");
   }, [user]);
@@ -176,7 +174,6 @@ export function ProfileHome({
 
   function openEditor() {
     setNickname(user.nickname);
-    setCampus(user.campus);
     setBio(user.bio ?? "");
     setColor(user.avatar_color ?? "sage");
     setEditing(true);
@@ -188,7 +185,6 @@ export function ProfileHome({
     try {
       const result = await api<{ user: User }>("/users/me", "PATCH", {
         nickname,
-        campus,
         bio,
         avatar_color: color,
       });
@@ -224,7 +220,8 @@ export function ProfileHome({
           <h1>{user.nickname}</h1>
           <p className="profile-location">
             <MapPin size={15} />
-            {user.campus} · {user.email ? "邮箱已验证" : "本地演示账号"}
+            {user.campus && user.campus !== "不限校区" ? `${user.campus} · ` : ""}
+            {user.email ? "邮箱已验证" : "本地演示账号"}
           </p>
           <div className="profile-rating">
             <SellerRating userId={user.id} onOpen={() => setReviewsOpen(true)} />
@@ -309,17 +306,6 @@ export function ProfileHome({
                 maxLength={50}
                 required
               />
-            </label>
-            <label>
-              常用校区
-              <select
-                value={campus}
-                onChange={(event) => setCampus(event.target.value)}
-              >
-                {meta.campuses.map((place) => (
-                  <option key={place}>{place}</option>
-                ))}
-              </select>
             </label>
             <label>
               个人介绍

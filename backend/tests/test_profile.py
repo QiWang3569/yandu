@@ -12,7 +12,7 @@ def test_profile_is_private_editable_and_persistent(client, app):
     assert all(isinstance(value, int) for value in counts.json().values())
 
     changed = client.patch('/api/v1/users/me', json={
-        'nickname': '爱读旧书', 'campus': '燕园校本部',
+        'nickname': '爱读旧书',
         'bio': '在燕园寻找旧书和有趣的小物。', 'avatar_color': 'peach',
     })
     assert changed.status_code == 200, changed.text
@@ -24,9 +24,8 @@ def test_profile_is_private_editable_and_persistent(client, app):
         assert db.get(User, original['id']).nickname == '爱读旧书'
 
     for payload in (
-        {'nickname': 'A', 'campus': '燕园校本部'},
-        {'nickname': '新同学', 'campus': '别的学校'},
-        {'nickname': '新同学', 'campus': '燕园校本部', 'avatar_color': 'javascript:red'},
+        {'nickname': 'A'},
+        {'nickname': '新同学', 'avatar_color': 'javascript:red'},
     ):
         assert client.patch('/api/v1/users/me', json=payload).status_code == 422
     assert client.get('/api/v1/auth/me').json()['user']['nickname'] == '爱读旧书'

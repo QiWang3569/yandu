@@ -517,6 +517,8 @@ def create_app(settings: Settings | None = None):
     def update_profile(data: ProfileUpdate, user: User = Depends(require_user), db: Session = Depends(get_db)):
         with mutation_lock:
             values = data.model_dump(exclude_unset=True)
+            # Campus is no longer an editable account attribute.
+            values.pop('campus', None)
             if any(value is None for value in values.values()):
                 raise HTTPException(422, '个人资料字段不能设为空')
             if 'email_notifications' in values:
@@ -597,7 +599,7 @@ def create_app(settings: Settings | None = None):
                 password = data.password.get_secret_value() if data.password is not None else ''
                 if error := new_password_error(password):
                     raise HTTPException(422, error)
-                user = User(email=email, nickname=nickname, campus=data.campus, role='student',
+                user = User(email=email, nickname=nickname, campus='不限校区', role='student',
                             password_hash=hash_password(password))
                 db.add(user)
                 db.flush()
@@ -984,7 +986,11 @@ def create_app(settings: Settings | None = None):
         elif sort == 'recommended' and user:
             preferred = select(Item.category).join(Favorite).where(Favorite.user_id == user.id)
             categories = list(db.scalars(preferred))
-            query = query.order_by(status_rank, Item.category.in_(categories).desc(), (Item.campus == user.campus).desc(), Item.created_at.desc())
+            ordering = [status_rank, Item.category.in_(categories).desc()]
+            if user.campus and user.campus != '不限校区':
+                ordering.append((Item.campus == user.campus).desc())
+            ordering.append(Item.created_at.desc())
+            query = query.order_by(*ordering)
         else:
             query = query.order_by(status_rank, Item.created_at.desc())
         return {'items': [item_out(i, db, user) for i in db.scalars(query.offset((page-1)*size).limit(size))], 'total': total, 'page': page, 'size': size}
@@ -1264,6 +1270,8 @@ def create_app(settings: Settings | None = None):
             if item.status not in {'ACTIVE', 'RESERVED', 'EXPIRED'}:
                 raise HTTPException(409, '已售出、审核隐藏或已撤回的商品不能编辑')
             values = data.model_dump(exclude_unset=True)
+            # Campus is no longer an editable account attribute.
+            values.pop('campus', None)
             if any(value is None for value in values.values()):
                 raise HTTPException(422, '商品字段不能设为 null')
             if 'images' in values:
@@ -1430,7 +1438,8 @@ def create_app(settings: Settings | None = None):
         extra = ('另外想确认：' + '；'.join(questions)) if questions else ''
         log(db, user, 'message.draft', item.id)
         db.commit()
-        return {'draft': f'你好，请问「{item.title}」还在吗？我在{user.campus}，希望确认一下商品状况和方便的当面交易时间。{extra}谢谢！', 'sent': False}
+        location = f'我在{user.campus}，' if user.campus and user.campus != '不限校区' else ''
+        return {'draft': f'你好，请问「{item.title}」还在吗？{location}希望确认一下商品状况和方便的当面交易时间。{extra}谢谢！', 'sent': False}
 
     @app.post('/api/v1/intents/parse')
     def parse(data: QueryIn, db: Session = Depends(get_db), user=Depends(require_user)):

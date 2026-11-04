@@ -188,6 +188,7 @@ class EmailCodeVerify(EmailCodeRequest):
     model_config = ConfigDict(extra='forbid', str_strip_whitespace=False)
     code: str = Field(pattern=r'^\d{8}$')
     nickname: str = Field(default='', max_length=50)
+    # Accepted for older clients; new accounts are created without a campus.
     campus: str = '不限校区'
     password: SecretStr | None = None
     intent: Literal['register', 'login', 'auto'] = 'auto'

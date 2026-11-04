@@ -20,7 +20,6 @@ export function EmailSignIn({ meta, intent, email, setEmail, code, setCode, sent
   onSignedIn: (user: User) => void;
 }) {
   const [nickname, setNickname] = useState("");
-  const [campus, setCampus] = useState("燕园校本部");
   const [password, setPassword] = useState("");
   const [confirm, setConfirm] = useState("");
   const [busy, setBusy] = useState(false);
@@ -39,7 +38,7 @@ export function EmailSignIn({ meta, intent, email, setEmail, code, setCode, sent
         setSent(true);
       } else {
         const result = await api<{ user: User }>("/auth/email/verify", "POST", {
-          email, code, intent, ...(intent === "register" ? { nickname, campus, password } : {}),
+          email, code, intent, ...(intent === "register" ? { nickname, password } : {}),
         });
         onSignedIn(result.user);
       }
@@ -61,18 +60,10 @@ export function EmailSignIn({ meta, intent, email, setEmail, code, setCode, sent
           disabled={sent || busy} maxLength={254} placeholder="name@example.com"
           onChange={(event) => setEmail(event.target.value)} />
       </label>
-      {intent === "register" && <><div className="form-grid">
-          <label>
-            昵称
-            <input value={nickname} required minLength={2} maxLength={50} onChange={(event) => setNickname(event.target.value)} />
-          </label>
-          <label>
-            校区
-            <select value={campus} onChange={(event) => setCampus(event.target.value)}>
-              {meta.campuses.map((value) => <option key={value}>{value}</option>)}
-            </select>
-          </label>
-        </div>
+      {intent === "register" && <><label>
+          昵称
+          <input value={nickname} required minLength={2} maxLength={50} onChange={(event) => setNickname(event.target.value)} />
+        </label>
         <label>设置密码<input type="password" autoComplete="new-password" required minLength={9} maxLength={128}
           value={password} onChange={(event) => setPassword(event.target.value)} /></label>
         <PasswordRules value={password} />
