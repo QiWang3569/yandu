@@ -7,7 +7,7 @@
 1. 在服务器安装 Docker 与 Compose，开放入站 80、443 端口，让域名的 DNS 记录指向服务器。Caddy 会按域名自动申请和续期 HTTPS 证书，并将 HTTP 请求重定向到 HTTPS。参见 [Caddy 自动 HTTPS 文档](https://caddyserver.com/docs/automatic-https)。
 2. 复制 `.env.example` 为服务器本机 `.env`。填写 `SITE_DOMAIN`（仅域名，不带 `https://`）、长度足够的随机 `POSTGRES_PASSWORD`、`AUTH_CODE_SECRET` 和真实 SMTP 参数。数据库密码需使用 URL 安全字符（字母、数字、`-`、`_`），因为 Compose 会用它生成容器间连接地址。不要提交 `.env`，也不要把凭据放入 Dockerfile。
 3. `APP_ENV=production` 由生产 Compose 设置，并强制使用 PostgreSQL、`DEMO_MODE=false`、安全 Cookie、可用邮件验证和单个 HTTPS 来源。应用容器不会向公网发布 8000 端口，PostgreSQL 也不会向公网发布 5432 端口。
-4. 确认至少有一个已通过邮箱验证的真实账号。部署后可通过服务器命令 `docker compose -f compose.production.yaml exec app python -m app.admin_cli grant 你的注册邮箱` 授予管理员权限；不要把演示管理员账号用于公开服务。
+4. 确认至少有一个已通过北大邮箱验证的真实账号。部署后可通过服务器命令 `docker compose -f compose.production.yaml exec app python -m app.admin_cli grant 你的北大邮箱` 授予管理员权限；不要把演示管理员账号用于公开服务。
 
 ## 部署
 
@@ -34,16 +34,16 @@ docker compose -f compose.production.yaml up -d
 
 ## 授予管理员权限
 
-生产环境不使用演示管理员账号。先用真实邮箱完成验证码注册并登录一次，然后在服务器项目根目录执行：
+生产环境不使用演示管理员账号。先用真实北大邮箱完成验证码注册并登录一次，然后在服务器项目根目录执行：
 
 ```sh
-docker compose -f compose.production.yaml exec app python -m app.admin_cli grant 你的注册邮箱
+docker compose -f compose.production.yaml exec app python -m app.admin_cli grant 你的北大邮箱
 ```
 
 取消管理员：
 
 ```sh
-docker compose -f compose.production.yaml exec app python -m app.admin_cli revoke 你的注册邮箱
+docker compose -f compose.production.yaml exec app python -m app.admin_cli revoke 你的北大邮箱
 ```
 
 说明：被授权的邮箱必须先完成注册，否则命令会提示“该邮箱尚未完成注册”。授权后该用户需要重新登录，权限才会生效。

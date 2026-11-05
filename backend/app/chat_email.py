@@ -20,7 +20,7 @@ from sqlalchemy import DateTime, ForeignKey, Integer, String, and_, case, exists
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Mapped, mapped_column
 
-from .email_auth import normalize_email
+from .email_auth import normalize_pku_email
 from .item_lifecycle import PUBLIC_ITEM_STATES
 from .models import Base, ChatAttachment, ChatMessage, Conversation, Item, User, UserBlock, now, uid
 
@@ -129,7 +129,7 @@ def _prepare(factory, key, token, settings, at):
             return None
         if recipient.id not in {conversation.buyer_id, conversation.seller_id}:
             return None
-        address = normalize_email(recipient.email or '')
+        address = normalize_pku_email(recipient.email or '')
         sender_id = conversation.seller_id if recipient.id == conversation.buyer_id else conversation.buyer_id
         if not address or sender_id.startswith('demo-') or db.scalar(select(_blocked(recipient.id, sender_id))):
             return None

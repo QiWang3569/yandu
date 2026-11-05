@@ -224,7 +224,7 @@ export function ProfileHome({
           <h1>{user.nickname}</h1>
           <p className="profile-location">
             <MapPin size={15} />
-            {user.campus} · {user.email ? "邮箱已验证" : "本地演示账号"}
+            {user.campus} · {user.email ? "北大邮箱已验证" : "本地演示账号"}
           </p>
           <div className="profile-rating">
             <SellerRating userId={user.id} onOpen={() => setReviewsOpen(true)} />

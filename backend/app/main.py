@@ -34,7 +34,7 @@ from .draft_batches import register_draft_batches
 from .schemas import AnnouncementReadRequest
 from .chat_email import ChatEmailRunner
 from .database import prepare_database, retire_demo_data
-from .email_auth import code_digest, new_code, normalize_email, send_verification_email
+from .email_auth import code_digest, new_code, normalize_pku_email, send_verification_email
 from .matching import MatchingRunner, intent_data
 from .item_lifecycle import (OPEN_DEAL_STATES, PUBLIC_ITEM_STATES, can_manage, change_conversation,
                              item_capabilities, sync_conversations, validate_seller_status)
@@ -520,7 +520,7 @@ def create_app(settings: Settings | None = None):
             if any(value is None for value in values.values()):
                 raise HTTPException(422, '个人资料字段不能设为空')
             if 'email_notifications' in values:
-                if values['email_notifications'] and (user.id.startswith('demo-') or not normalize_email(user.email or '')):
+                if values['email_notifications'] and (user.id.startswith('demo-') or not normalize_pku_email(user.email or '')):
                     raise HTTPException(422, '请先使用注册邮箱账号登录后开启邮件提醒')
             for key, value in values.items():
                 setattr(user, key, value)
@@ -538,9 +538,9 @@ def create_app(settings: Settings | None = None):
 
     @app.post('/api/v1/auth/email/request-code')
     def request_email_code(data: EmailCodeRequest, request: Request, db: Session = Depends(get_db)):
-        email = normalize_email(data.email)
+        email = normalize_pku_email(data.email)
         if not email:
-            raise HTTPException(422, '请输入有效的邮箱地址')
+            raise HTTPException(422, '仅支持 @pku.edu.cn 或 @stu.pku.edu.cn 邮箱')
         if not settings.email_auth_ready:
             raise HTTPException(503, '邮件登录尚未配置，请联系管理员')
         with mutation_lock:
@@ -578,9 +578,9 @@ def create_app(settings: Settings | None = None):
 
     @app.post('/api/v1/auth/email/verify')
     def verify_email_code(data: EmailCodeVerify, request: Request, response: Response, db: Session = Depends(get_db)):
-        email = normalize_email(data.email)
+        email = normalize_pku_email(data.email)
         if not email:
-            raise HTTPException(422, '请输入有效的邮箱地址')
+            raise HTTPException(422, '仅支持 @pku.edu.cn 或 @stu.pku.edu.cn 邮箱')
         if not settings.email_auth_ready:
             raise HTTPException(503, '邮件登录尚未配置，请联系管理员')
         with mutation_lock:
@@ -633,9 +633,9 @@ def create_app(settings: Settings | None = None):
 
     @app.post('/api/v1/auth/password/login')
     def password_login(data: PasswordLogin, request: Request, response: Response, db: Session = Depends(get_db)):
-        email = normalize_email(data.email)
+        email = normalize_pku_email(data.email)
         if not email:
-            raise HTTPException(422, '请输入有效的邮箱地址')
+            raise HTTPException(422, '仅支持 @pku.edu.cn 或 @stu.pku.edu.cn 邮箱')
         password = data.password.get_secret_value()
         if not 1 <= len(password) <= 128:
             raise HTTPException(422, '密码长度不能超过 128 个字符')
@@ -660,9 +660,9 @@ def create_app(settings: Settings | None = None):
 
     @app.post('/api/v1/auth/password/set')
     def set_password(data: PasswordSet, request: Request, response: Response, db: Session = Depends(get_db)):
-        email = normalize_email(data.email)
+        email = normalize_pku_email(data.email)
         if not email:
-            raise HTTPException(422, '请输入有效的邮箱地址')
+            raise HTTPException(422, '仅支持 @pku.edu.cn 或 @stu.pku.edu.cn 邮箱')
         password = data.password.get_secret_value()
         if error := new_password_error(password):
             raise HTTPException(422, error)
@@ -684,7 +684,7 @@ def create_app(settings: Settings | None = None):
     @app.post('/api/v1/auth/demo')
     def login(data: DemoLogin, request: Request, response: Response, db: Session = Depends(get_db)):
         if not settings.demo_mode:
-            raise HTTPException(503, '演示登录已关闭，请使用邮箱登录')
+            raise HTTPException(503, '演示登录已关闭，请使用北大邮箱登录')
         user = db.get(User, 'demo-' + data.profile)
         return begin_session(request, response, db, user)
 

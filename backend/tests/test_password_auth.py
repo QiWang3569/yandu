@@ -22,7 +22,7 @@ def register(client, sent, email='reader@stu.pku.edu.cn'):
 
 def test_registration_sets_nine_character_password_and_keeps_code_login(tmp_path, monkeypatch):
     app, sent = email_client(tmp_path, monkeypatch)
-    email = 'new@example.com'
+    email = 'new@pku.edu.cn'
     with TestClient(app) as client:
         assert client.post('/api/v1/auth/email/request-code', json={'email': email}).status_code == 200
         base = {'email': email, 'code': sent[-1][1], 'nickname': '新同学', 'intent': 'register'}
@@ -49,10 +49,10 @@ def test_password_requires_verified_account_and_code(tmp_path, monkeypatch):
     app, sent = email_client(tmp_path, monkeypatch)
     with TestClient(app) as client:
         assert client.post('/api/v1/auth/password/login', json={
-            'email': 'invalid-address', 'password': PASSWORD,
+            'email': 'reader@gmail.com', 'password': PASSWORD,
         }).status_code == 422
         assert client.post('/api/v1/auth/password/login', json={
-            'email': 'reader@gmail.com', 'password': PASSWORD,
+            'email': 'reader@stu.pku.edu.cn', 'password': PASSWORD,
         }).status_code == 401
 
         email = 'reader@stu.pku.edu.cn'
@@ -98,7 +98,7 @@ def test_password_requires_verified_account_and_code(tmp_path, monkeypatch):
 
 def test_password_login_reset_and_session_revocation(tmp_path, monkeypatch):
     app, sent = email_client(tmp_path, monkeypatch)
-    email = 'reader@other.example.org'
+    email = 'reader@pku.edu.cn'
     with TestClient(app) as client:
         account = register(client, sent, email)
         assert account['has_password'] is True

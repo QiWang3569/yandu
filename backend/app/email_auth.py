@@ -1,4 +1,4 @@
-"""Email ownership proof for registered accounts."""
+"""Email ownership proof for the two PKU mailbox domains."""
 import hashlib
 import hmac
 import re
@@ -10,17 +10,12 @@ from email.message import EmailMessage
 import certifi
 
 
-EMAIL_PATTERN = re.compile(
-    r'^[a-z0-9][a-z0-9._%+-]*@(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+'
-    r'[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?$',
-    re.IGNORECASE,
-)
+EMAIL_PATTERN = re.compile(r'^[a-z0-9][a-z0-9._%+-]*@(?:stu\.)?pku\.edu\.cn$', re.IGNORECASE)
 
 
-def normalize_email(value: str) -> str | None:
+def normalize_pku_email(value: str) -> str | None:
     email = value.strip().lower()
-    local_part = email.partition('@')[0]
-    return email if len(email) <= 254 and len(local_part) <= 64 and EMAIL_PATTERN.fullmatch(email) else None
+    return email if len(email) <= 254 and EMAIL_PATTERN.fullmatch(email) else None
 
 
 def code_digest(secret: str, challenge_id: str, email: str, code: str) -> str:
