@@ -28,6 +28,7 @@ from prometheus_client.core import GaugeMetricFamily
 from .config import ROOT, Settings
 from .feedback import register_feedback
 from .notification_center import register_notification_center
+from .reviews import register_reviews
 from .vision import register_vision
 from .draft_batches import register_draft_batches
 from .schemas import AnnouncementReadRequest
@@ -35,12 +36,12 @@ from .chat_email import ChatEmailRunner
 from .database import prepare_database, retire_demo_data
 from .email_auth import code_digest, new_code, normalize_pku_email, send_verification_email
 from .matching import MatchingRunner, intent_data
-from .item_lifecycle import (PUBLIC_ITEM_STATES, can_manage, change_conversation,
+from .item_lifecycle import (OPEN_DEAL_STATES, PUBLIC_ITEM_STATES, can_manage, change_conversation,
                              item_capabilities, sync_conversations, validate_seller_status)
 from .search import keyword_filters
 from .retention import prune_chat
 from .needs import apply_wanted, backfill_wanted, sync_wanted, wanted_query
-from .models import ActionLog, Announcement, AnnouncementRead, ChatAttachment, ChatMessage, ChatReport, Conversation, EmailChallenge, Favorite, Intent, Item, ItemDraft, LoginSession, MatchJob, Notification, PageDwellLog, PasswordAttempt, Report, SaleFeedback, Upload, User, UserBlock, VisitorEvent, Wanted, now, uid
+from .models import ActionLog, Announcement, AnnouncementRead, ChatAttachment, ChatMessage, ChatReport, Conversation, EmailChallenge, Favorite, Feedback, Intent, Item, ItemDraft, LoginSession, MatchJob, Notification, PageDwellLog, PasswordAttempt, Report, SaleFeedback, Upload, User, UserBlock, VisitorEvent, Wanted, now, uid
 from .password_auth import DUMMY_HASH, hash_password, new_password_error, verify_password
 from .schemas import CAMPUSES, CATEGORIES, CONDITIONS, AnnouncementCreate, AnnouncementUpdate, ChatMessageCreate, ChatReportCreate, ChatReviewAction, DealAction, DemoLogin, DwellReport, EmailCodeRequest, EmailCodeVerify, IntentChange, IntentComplete, IntentCreate, ItemCreate, ItemDraftImport, ItemDraftUpdate, ItemParseRequest, ItemUpdate, PasswordLogin, PasswordSet, ProfileUpdate, QueryIn, ReportCreate, ReviewAction, SmartSearchIn, StatusChange, WantedCreate, WantedParseRequest, WantedUpdate
 from .services import FEATURES, assess_report, embed, log, model_name, normalize, parse_intent, parse_item, parse_local, parse_wanted, seed
@@ -459,6 +460,7 @@ def create_app(settings: Settings | None = None):
     register_notification_center(app, get_db, current_user, require_user, mutation_lock)
     register_vision(app, get_db, require_user, settings)
     register_draft_batches(app, get_db, require_user, settings, mutation_lock, draft_out, item_out, matching)
+    register_reviews(app, get_db, require_user, mutation_lock)
 
     @app.get('/api/v1/announcements/unread')
     def announcements_unread(db: Session = Depends(get_db), user: User = Depends(require_user)):
@@ -751,14 +753,42 @@ def create_app(settings: Settings | None = None):
         for position, path in enumerate(data.images):
             db.add(ChatAttachment(path=path, message_id=message.id, position=position))
         conversation.last_message_at = message.created_at
+        # A new message restores a chat that either side removed from their list.
+        conversation.buyer_deleted_at = None
+        conversation.seller_deleted_at = None
         return message
 
     @app.get('/api/v1/conversations')
     def conversations(db: Session = Depends(get_db), user=Depends(require_user)):
         unread = select(ChatMessage.conversation_id).where(ChatMessage.sender_id != user.id, ChatMessage.read_at.is_(None))
-        rows = db.scalars(select(Conversation).where(or_(Conversation.buyer_id == user.id, Conversation.seller_id == user.id))
+        visible = or_(
+            (Conversation.buyer_id == user.id) & Conversation.buyer_deleted_at.is_(None),
+            (Conversation.seller_id == user.id) & Conversation.seller_deleted_at.is_(None),
+        )
+        rows = db.scalars(select(Conversation).where(
+                              or_(Conversation.buyer_id == user.id, Conversation.seller_id == user.id), visible)
                           .order_by(Conversation.id.in_(unread).desc(), Conversation.last_message_at.desc()).limit(100)).all()
         return [conversation_out(db, row, user) for row in rows]
+
+    @app.delete('/api/v1/conversations/{conversation_id}')
+    def delete_conversation(conversation_id: str, db: Session = Depends(get_db), user=Depends(require_user)):
+        with mutation_lock:
+            conversation = owned_conversation(db, conversation_id, user)
+            if conversation.deal_status in OPEN_DEAL_STATES:
+                raise HTTPException(409, '交易进行中，暂不能删除会话')
+            instant = now()
+            if user.id == conversation.buyer_id:
+                conversation.buyer_deleted_at = instant
+            else:
+                conversation.seller_deleted_at = instant
+            # Removing a chat also dismisses its unread badge for this user.
+            db.execute(update(ChatMessage).where(
+                ChatMessage.conversation_id == conversation_id,
+                ChatMessage.sender_id != user.id,
+                ChatMessage.read_at.is_(None)).values(read_at=instant))
+            log(db, user, 'chat.delete', conversation_id)
+            db.commit()
+        return {'ok': True}
 
     @app.get('/api/v1/conversations/{conversation_id}')
     def conversation_detail(conversation_id: str, db: Session = Depends(get_db), user=Depends(require_user)):
@@ -1032,6 +1062,34 @@ def create_app(settings: Settings | None = None):
     @app.get('/api/v1/items/{item_id}')
     def item_detail(item_id: str, db: Session = Depends(get_db), user=Depends(current_user)):
         return item_out(get_item(db, item_id, user), db, user)
+
+    @app.get('/api/v1/items/{item_id}/similar')
+    def similar_items(item_id: str, limit: int = Query(6, ge=1, le=12),
+                      db: Session = Depends(get_db), user=Depends(current_user)):
+        item = get_item(db, item_id, user)
+        query = select(Item).where(Item.id != item.id, Item.status == 'ACTIVE')
+        if not settings.demo_mode:
+            query = query.where(Item.seller_id.not_like('demo-%'))
+        # The campus market is small; score a recent window in Python so tag and
+        # price closeness can be combined without a provider-side embedding call.
+        candidates = db.scalars(query.order_by(Item.created_at.desc()).limit(400)).all()
+        base_tags = set(item.tags or [])
+
+        def score(other):
+            value = 4.0 if other.category == item.category else 0.0
+            shared = base_tags & set(other.tags or [])
+            value += 1.5 * min(len(shared), 3)
+            if other.campus == item.campus:
+                value += 1.0
+            if other.condition_grade == item.condition_grade:
+                value += 0.3
+            reference = max(item.price_cents, 1)
+            difference = abs(other.price_cents - item.price_cents) / reference
+            value += max(0.0, 2.0 - difference * 2.0)
+            return value
+
+        ranked = sorted(candidates, key=lambda other: (score(other), other.created_at.timestamp()), reverse=True)
+        return {'items': [item_out(other, db, user) for other in ranked[:limit]]}
 
     def save_image(file, user, db, purpose='item', commit=True):
         directory, prefix = {
@@ -1759,6 +1817,18 @@ def create_app(settings: Settings | None = None):
         return [{'id': l.id, 'action': l.action, 'actor': user_out(db.get(User, l.actor_id)), 'target_id': l.target_id,
                  'detail': l.detail, 'created_at': iso(l.created_at)} for l in db.scalars(select(ActionLog).order_by(ActionLog.created_at.desc()).limit(100))]
 
+    @app.get('/api/v1/admin/summary')
+    def admin_summary(db: Session = Depends(get_db), user=Depends(require_admin)):
+        def count(model, *conditions):
+            return db.scalar(select(func.count()).select_from(model).where(*conditions)) or 0
+
+        reports = count(Report, Report.status == 'OPEN')
+        chat_reports = count(ChatReport, ChatReport.status == 'OPEN')
+        feedback = count(Feedback, Feedback.status.in_(['OPEN', 'IN_PROGRESS']))
+        return {'reports': reports, 'chat_reports': chat_reports, 'feedback': feedback,
+                'announcements': count(Announcement, Announcement.active == True),
+                'pending_total': reports + chat_reports + feedback}
+
     @app.get('/api/v1/admin/announcements')
     def admin_announcements(db: Session = Depends(get_db), user=Depends(require_admin)):
         rows = db.scalars(select(Announcement).order_by(Announcement.created_at.desc())).all()
@@ -1791,6 +1861,19 @@ def create_app(settings: Settings | None = None):
             if data.active is not None:
                 announcement.active = data.active
             log(db, user, 'announcement.update', announcement.id)
+            db.commit()
+        return {'ok': True}
+
+    @app.delete('/api/v1/admin/announcements/{announcement_id}')
+    def delete_announcement(announcement_id: str, db: Session = Depends(get_db), user=Depends(require_admin)):
+        with mutation_lock:
+            announcement = db.scalar(select(Announcement).where(
+                Announcement.id == announcement_id).with_for_update())
+            if not announcement:
+                raise HTTPException(404, '公告不存在')
+            db.execute(delete(AnnouncementRead).where(AnnouncementRead.announcement_id == announcement_id))
+            db.delete(announcement)
+            log(db, user, 'announcement.delete', announcement_id)
             db.commit()
         return {'ok': True}
 
