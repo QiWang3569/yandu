@@ -37,12 +37,63 @@ CATEGORY_FEATURES = [
 ]
 
 
+AROUND_PRICE_PATTERN = r'左右|上下|大约|大概|约|近|差不多'
+NEGATION_PREFIX = r'(?:不是|并非|不属于|不支持|不具备|不含|没有|非|无|不)'
+EXCLUSION_NEGATION_PREFIX = r'(?:不是|并非|不属于|不含|没有|非|无)'
+
+
 def normalize(text: str) -> str:
     text = text.lower()
     for canonical, synonyms in FEATURES.items():
         for synonym in synonyms:
             text = text.replace(synonym, canonical)
     return text
+
+
+def is_around_price(query: str) -> bool:
+    return bool(re.search(AROUND_PRICE_PATTERN, query))
+
+
+def item_text(item) -> str:
+    if isinstance(item, dict):
+        parts = [item.get('title', ''), item.get('description', ''), *(item.get('tags') or [])]
+    elif isinstance(item, str):
+        return item
+    else:
+        parts = [item.title, item.description, *(item.tags or [])]
+    return ' '.join(p for p in parts if p)
+
+
+def term_matches(
+    term: str,
+    text: str,
+    *,
+    ignore_negated: bool = False,
+    negation_prefix: str = NEGATION_PREFIX,
+) -> bool:
+    """Whether a parsed term appears in item text after synonym normalization."""
+    needle = normalize(term).strip()
+    if not needle:
+        return False
+    haystack = normalize(item_text(text))
+    if ignore_negated:
+        haystack = re.sub(negation_prefix + re.escape(needle), '', haystack)
+    return needle in haystack
+
+
+def keyword_coverage(
+    keywords: list[str],
+    item_or_text,
+    *,
+    ignore_negated: bool = False,
+) -> tuple[list[str], float]:
+    """Return (matched_keywords, coverage_ratio) shared by search ranking and intent recall."""
+    words = [w for w in keywords if w and w.strip()]
+    if not words:
+        return [], 1.0
+    text = item_text(item_or_text)
+    matched = [w for w in words if term_matches(w, text, ignore_negated=ignore_negated)]
+    return matched, len(matched) / len(words)
 
 
 def parse_local(query: str) -> ParsedIntent:
@@ -144,11 +195,25 @@ def parse_item(raw: str, settings: Settings) -> ParsedItem:
         return parse_item_local(raw)
 
 
-def parse_wanted(raw: str, settings: Settings) -> ParsedWanted:
+def understand_intent(
+    query: str,
+    settings: Settings,
+    *,
+    fallback: bool = True,
+    parser=None,
+) -> ParsedIntent:
+    """Unified Query Understanding (QU) entry point for buyer intents, search, and wanted posts."""
+    intent_parser = parser or parse_intent
     try:
-        parsed = parse_intent(raw, settings)
+        return intent_parser(query, settings)
     except HTTPException:
-        parsed = parse_local(raw)
+        if not fallback:
+            raise
+        return parse_local(query)
+
+
+def parse_wanted(raw: str, settings: Settings, *, parser=None) -> ParsedWanted:
+    parsed = understand_intent(raw, settings, fallback=True, parser=parser)
     if parsed.keywords:
         title = '求购' + '、'.join(parsed.keywords[:4])
     else:
@@ -156,6 +221,24 @@ def parse_wanted(raw: str, settings: Settings) -> ParsedWanted:
     return ParsedWanted(title=title[:120], description=raw, category=parsed.category,
                         budget=parsed.max_price, campus=parsed.campus,
                         clarification=parsed.clarification)
+
+
+def parse_natural_language(
+    raw: str,
+    settings: Settings,
+    kind: str = 'intent',
+    *,
+    fallback: bool = True,
+    parser=None,
+):
+    """Unified dispatcher for all natural-language parsing tasks ('intent', 'wanted', 'item')."""
+    if kind == 'intent':
+        return understand_intent(raw, settings, fallback=fallback, parser=parser)
+    if kind == 'wanted':
+        return parse_wanted(raw, settings, parser=parser)
+    if kind == 'item':
+        return parse_item(raw, settings) if fallback else parse_item_local(raw)
+    raise ValueError(f'Unknown natural language parse kind: {kind}')
 
 
 def embed(text: str, settings: Settings) -> list[float] | None:
@@ -192,10 +275,9 @@ def similarity(item: Item, intent: Intent, settings: Settings) -> float:
         a, b = item.embedding, intent.embedding
         norm = math.sqrt(sum(x*x for x in a) * sum(x*x for x in b))
         return max(0., min(1., sum(x*y for x, y in zip(a, b)) / norm)) if norm else 0
-    haystack = normalize(' '.join([item.title, item.description, *item.tags]))
-    words = [normalize(w) for w in intent.keywords if w.strip()]
+    words = [w for w in intent.keywords if w.strip()]
     # Fraction of explicitly requested features found, not a semantic confidence score.
-    return sum(w in haystack for w in words) / len(words) if words else 0
+    return keyword_coverage(words, item)[1] if words else 0
 
 
 def log(db: Session, actor: User, action: str, target: str, detail: str = ''):

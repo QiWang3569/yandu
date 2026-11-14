@@ -1,8 +1,10 @@
 """A public wanted post and its private matching task represent the same need."""
+from dataclasses import replace
+
 from sqlalchemy import select
 
 from .models import Intent, Wanted
-from .services import model_name, parse_local
+from .services import model_name, understand_intent
 
 
 def wanted_query(wanted):
@@ -11,10 +13,11 @@ def wanted_query(wanted):
     return wanted.title + ('\n' + wanted.description if wanted.description else '')
 
 
-def apply_wanted(wanted, intent, settings, preserve_conditions=False):
+def apply_wanted(wanted, intent, settings, preserve_conditions=False, *, allow_remote=False):
     intent.raw_query = wanted_query(wanted)
     if not preserve_conditions:
-        parsed = parse_local(intent.raw_query)
+        qu_settings = settings if allow_remote else replace(settings, ai_mode='local')
+        parsed = understand_intent(intent.raw_query, qu_settings, fallback=True)
         intent.keywords = parsed.keywords or [wanted.title[:30]]
         intent.excluded_keywords = parsed.excluded_keywords
         intent.preferences = parsed.preferences

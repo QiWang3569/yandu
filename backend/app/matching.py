@@ -12,14 +12,12 @@ from sqlalchemy.exc import IntegrityError
 
 from .buyer_agent import Assessment, Evidence, ModelUnavailable, review_candidates
 from .models import Intent, Item, MatchJob, Notification, now
-from .schemas import CONDITIONS
-from .services import embed, model_name, normalize, similarity
+from .search import item_snapshot, matches_hard_constraints, recall_candidates_for_intent
+from .services import EXCLUSION_NEGATION_PREFIX, NEGATION_PREFIX, embed, model_name, normalize, term_matches
 
 
 def item_data(item):
-    return {'id': item.id, 'title': item.title, 'description': item.description,
-            'tags': item.tags, 'price_cents': item.price_cents, 'campus': item.campus,
-            'condition_grade': item.condition_grade}
+    return item_snapshot(item)
 
 
 def intent_data(intent):
@@ -30,13 +28,7 @@ def intent_data(intent):
 
 
 def eligible(item, intent):
-    return (intent.status == 'ACTIVE'
-            and item.status == 'ACTIVE'
-            and item.seller_id != intent.buyer_id
-            and (not intent.category or item.category == intent.category)
-            and (intent.max_price_cents is None or item.price_cents <= intent.max_price_cents)
-            and (intent.campus == '不限校区' or item.campus in {intent.campus, '不限校区'})
-            and (not intent.condition_grade or CONDITIONS.index(item.condition_grade) <= CONDITIONS.index(intent.condition_grade)))
+    return matches_hard_constraints(item, intent)
 
 
 def local_review(intent, item):
@@ -47,8 +39,7 @@ def local_review(intent, item):
     for term in intent['excluded_keywords']:
         normalized = normalize(term)
         # A negated exclusion is not positive evidence that the item has it.
-        positive = re.sub(r'(?:不是|并非|不属于|不含|没有|非|无)' + re.escape(normalized), '', text)
-        if normalized in positive:
+        if term_matches(term, text, ignore_negated=True, negation_prefix=EXCLUSION_NEGATION_PREFIX):
             quote = next((s[:160] for s in source if term in s), None)
             # Pick an exact slice even when the term occurs late in a long description.
             if quote is None:
@@ -58,14 +49,14 @@ def local_review(intent, item):
             verdict = 'UNCERTAIN'
             questions.append(f'请确认商品是否具有“{term}”这一不接受的特征？')
     for term in intent['keywords']:
-        if re.search(r'(?:不是|并非|不支持|不具备|不含|没有|非|无|不)' + re.escape(normalize(term)), text):
+        if re.search(NEGATION_PREFIX + re.escape(normalize(term)), text):
             quote = next(s for s in source if normalize(term) in normalize(s))
             return Assessment(item_id=item['id'], verdict='NO_MATCH', evidence=[Evidence(criterion=term, quote=quote[:160])], questions=[])
-        if normalize(term) in text:
+        if term_matches(term, text):
             quote = next((s for s in source if normalize(term) in normalize(s)), '')
             evidence.append(Evidence(criterion=term, quote=quote[:160]))
     for term in intent['preferences']:
-        if normalize(term) not in text or re.search(r'(?:不是|并非|不支持|不具备|不含|没有|非|无|不)' + re.escape(normalize(term)), text):
+        if not term_matches(term, text) or re.search(NEGATION_PREFIX + re.escape(normalize(term)), text):
             questions.append(f'请问商品是否满足“{term}”这一偏好？')
     return Assessment(item_id=item['id'], verdict=verdict, evidence=evidence[:12], questions=questions[:6])
 
@@ -174,30 +165,11 @@ class MatchingRunner:
             if not intent or intent.status != 'ACTIVE':
                 return []
             spec = intent_data(intent)
-            query = select(Item).where(Item.status == 'ACTIVE', Item.seller_id != intent.buyer_id)
-            if item_id:
-                query = query.where(Item.id == item_id)
-            if intent.category:
-                query = query.where(Item.category == intent.category)
-            if intent.max_price_cents is not None:
-                query = query.where(Item.price_cents <= intent.max_price_cents)
-            if intent.campus != '不限校区':
-                query = query.where(Item.campus.in_([intent.campus, '不限校区']))
-            if intent.condition_grade:
-                query = query.where(Item.condition_grade.in_(CONDITIONS[:CONDITIONS.index(intent.condition_grade) + 1]))
             existing = set(db.scalars(select(Notification.item_id).where(Notification.intent_id == intent_id)))
             # Exclude already assessed pairs before spending any model tokens.
-            if existing:
-                query = query.where(Item.id.not_in(existing))
-            if self.settings.embedding_mode == 'remote':
-                query = query.where(Item.embedding_model == intent.embedding_model, Item.embedding.is_not(None))
-                if db.bind.dialect.name == 'postgresql' and intent.embedding is not None:
-                    query = query.order_by(Item.embedding.op('<=>')(intent.embedding)).limit(10)
-            candidates = [(item_data(i), similarity(i, intent, self.settings)) for i in db.scalars(query)]
-            if self.settings.ai_mode == 'local' or self.settings.embedding_mode == 'remote':
-                candidates = [(i, s) for i, s in candidates if s >= self.settings.threshold]
-            candidates.sort(key=lambda pair: (-pair[1], pair[0]['price_cents'], pair[0]['id']))
-            candidates = candidates[:10]
+            candidates = recall_candidates_for_intent(
+                db, intent, self.settings, item_id=item_id, exclude_item_ids=existing, limit=10
+            )
         # All provider work happens after the read session has closed.
         if self.settings.ai_mode == 'remote':
             reviews = review_candidates(spec, [i for i, _ in candidates], self.settings)
