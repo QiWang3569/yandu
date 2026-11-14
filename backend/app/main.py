@@ -38,13 +38,13 @@ from .email_auth import code_digest, new_code, normalize_pku_email, send_verific
 from .matching import MatchingRunner, intent_data
 from .item_lifecycle import (OPEN_DEAL_STATES, PUBLIC_ITEM_STATES, can_manage, change_conversation,
                              item_capabilities, sync_conversations, validate_seller_status)
-from .search import keyword_filters
+from .search import execute_smart_search, keyword_filters
 from .retention import prune_chat
 from .needs import apply_wanted, backfill_wanted, sync_wanted, wanted_query
 from .models import ActionLog, Announcement, AnnouncementRead, ChatAttachment, ChatMessage, ChatReport, Conversation, EmailChallenge, Favorite, Feedback, Intent, Item, ItemDraft, LoginSession, MatchJob, Notification, PageDwellLog, PasswordAttempt, Report, SaleFeedback, Upload, User, UserBlock, VisitorEvent, Wanted, now, uid
 from .password_auth import DUMMY_HASH, hash_password, new_password_error, verify_password
 from .schemas import CAMPUSES, CATEGORIES, CONDITIONS, AnnouncementCreate, AnnouncementUpdate, ChatMessageCreate, ChatReportCreate, ChatReviewAction, DealAction, DemoLogin, DwellReport, EmailCodeRequest, EmailCodeVerify, IntentChange, IntentComplete, IntentCreate, ItemCreate, ItemDraftImport, ItemDraftUpdate, ItemParseRequest, ItemUpdate, PasswordLogin, PasswordSet, ProfileUpdate, QueryIn, ReportCreate, ReviewAction, SmartSearchIn, StatusChange, WantedCreate, WantedParseRequest, WantedUpdate
-from .services import FEATURES, assess_report, embed, log, model_name, normalize, parse_intent, parse_item, parse_local, parse_wanted, seed
+from .services import FEATURES, assess_report, embed, log, model_name, normalize, parse_intent, parse_item, parse_local, parse_natural_language, parse_wanted, seed, term_matches, understand_intent
 
 SESSION_IDLE = timedelta(days=7)
 SESSION_MAX_AGE = timedelta(days=30)
@@ -53,14 +53,6 @@ SESSION_RENEW_INTERVAL = timedelta(hours=1)
 
 def iso(value):
     return value.isoformat() + 'Z'
-
-
-def term_matches(term: str, text: str) -> bool:
-    """Whether a parsed term appears in item text after synonym normalization."""
-    needle = normalize(term).strip()
-    if not needle:
-        return False
-    return needle in normalize(text)
 
 
 class VisitorTracker:
@@ -991,66 +983,15 @@ def create_app(settings: Settings | None = None):
 
     @app.post('/api/v1/items/smart-search')
     def smart_search(data: SmartSearchIn, db: Session = Depends(get_db), user=Depends(current_user)):
-        try:
-            parsed = parse_intent(data.query, settings)
-        except HTTPException:
-            # Keep natural-language search usable even when the model provider is unavailable.
-            parsed = parse_local(data.query)
-
-        around = bool(re.search(r'左右|上下|大约|大概|约|近|差不多', data.query))
-        target_cents = int(parsed.max_price * 100) if parsed.max_price is not None else None
-
-        query = select(Item)
-        if not settings.demo_mode:
-            query = query.where(Item.seller_id.not_like('demo-%'))
-        query = query.where(Item.status == 'ACTIVE')
-        if parsed.category:
-            query = query.where(Item.category == parsed.category)
-        if parsed.campus and parsed.campus != '不限校区':
-            query = query.where(Item.campus.in_([parsed.campus, '不限校区']))
-        if target_cents is not None:
-            cap = int(target_cents * 1.15) if around else target_cents
-            query = query.where(Item.price_cents <= cap)
-        if parsed.condition_grade:
-            allowed = CONDITIONS[:CONDITIONS.index(parsed.condition_grade) + 1]
-            query = query.where(Item.condition_grade.in_(allowed))
-
-        scored = []
-        for item in db.scalars(query):
-            text = ' '.join([item.title, item.description, *item.tags])
-            if any(term_matches(word, text) for word in parsed.excluded_keywords):
-                continue
-            matched = [word for word in parsed.keywords if term_matches(word, text)]
-            if parsed.keywords and not matched:
-                continue
-            coverage = len(matched) / len(parsed.keywords) if parsed.keywords else 1.0
-            scored.append((item, coverage))
-
-        def sort_key(entry):
-            item, coverage = entry
-            if data.sort == 'price_asc':
-                return (0, item.price_cents, -coverage, -item.created_at.timestamp())
-            if data.sort == 'price_desc':
-                return (0, -item.price_cents, -coverage, -item.created_at.timestamp())
-            if data.sort == 'newest':
-                return (0, -item.created_at.timestamp(), -coverage, 0)
-            closeness = abs(item.price_cents - target_cents) if (around and target_cents is not None) else 0
-            return (-coverage, closeness, -item.created_at.timestamp(), 0)
-
-        scored.sort(key=sort_key)
-        total = len(scored)
-        page_items = scored[(data.page - 1) * data.size: data.page * data.size]
-        parsed_out = {
-            'category': parsed.category,
-            'max_price': float(parsed.max_price) if parsed.max_price is not None else None,
-            'campus': parsed.campus,
-            'keywords': parsed.keywords,
-            'excluded_keywords': parsed.excluded_keywords,
-            'preferences': parsed.preferences,
-            'condition_grade': parsed.condition_grade,
-            'clarification': parsed.clarification,
-            'around_price': around,
-        }
+        parsed_out, page_items, total = execute_smart_search(
+            db,
+            data.query,
+            settings,
+            sort=data.sort,
+            page=data.page,
+            size=data.size,
+            parser=parse_intent,
+        )
         return {
             'parsed': parsed_out,
             'items': [item_out(item, db, user) for item, _ in page_items],
@@ -1194,7 +1135,7 @@ def create_app(settings: Settings | None = None):
             if not 5 <= len(line) <= 3000:
                 raise HTTPException(422, f'第 {index} 件商品需要 5–3000 字')
         db.commit()  # Do not keep a database transaction open during model calls.
-        parsed = [parse_item(line, settings) for line in lines]
+        parsed = [parse_natural_language(line, settings, kind='item') for line in lines]
         with mutation_lock:
             db.scalar(select(User).where(User.id == user.id).with_for_update())
             count = db.scalar(select(func.count()).select_from(ItemDraft).where(ItemDraft.seller_id == user.id))
@@ -1435,12 +1376,15 @@ def create_app(settings: Settings | None = None):
     @app.post('/api/v1/intents/parse')
     def parse(data: QueryIn, db: Session = Depends(get_db), user=Depends(require_user)):
         db.commit()
-        return {'parsed': parse_intent(data.raw_query, settings), 'mode': settings.ai_mode}
+        return {
+            'parsed': parse_natural_language(data.raw_query, settings, kind='intent', fallback=False, parser=parse_intent),
+            'mode': settings.ai_mode,
+        }
 
     @app.post('/api/v1/items/parse')
     def parse_item_fields(data: ItemParseRequest, db: Session = Depends(get_db), user=Depends(require_user)):
         db.commit()
-        return {'parsed': parse_item(data.raw, settings), 'mode': settings.ai_mode}
+        return {'parsed': parse_natural_language(data.raw, settings, kind='item'), 'mode': settings.ai_mode}
 
     @app.post('/api/v1/intents/', status_code=201)
     def add_intent(data: IntentCreate, db: Session = Depends(get_db), user=Depends(require_user)):
@@ -1641,7 +1585,10 @@ def create_app(settings: Settings | None = None):
 
     @app.post('/api/v1/wanted/parse')
     def parse_wanted_fields(data: WantedParseRequest, db: Session = Depends(get_db), user=Depends(require_user)):
-        return {'parsed': parse_wanted(data.raw, settings), 'mode': settings.ai_mode}
+        return {
+            'parsed': parse_natural_language(data.raw, settings, kind='wanted', parser=parse_intent),
+            'mode': settings.ai_mode,
+        }
 
     @app.post('/api/v1/wanted/', status_code=201)
     def wanted_create(data: WantedCreate, db: Session = Depends(get_db), user=Depends(require_user)):

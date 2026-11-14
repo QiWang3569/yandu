@@ -46,6 +46,32 @@ def test_smart_search_falls_back_to_local_parser_when_remote_unavailable(client,
     assert res.json()['parsed']['category'] == '数码与影音'
 
 
+def test_smart_search_negated_exclusion_is_not_falsely_filtered(client):
+    from conftest import publish
+
+    login(client, 'seller')
+    gaming = publish(client, title='游戏鼠标', description='电竞游戏鼠标，功能正常，附接收器。', tags=['鼠标']).json()
+    office = publish(client, title='非游戏鼠标', description='这是一只非游戏鼠标，适合办公，功能正常。', tags=['鼠标']).json()
+    res = client.post('/api/v1/items/smart-search', json={'query': '万柳300以内鼠标，不要游戏鼠标', 'size': 50})
+    assert res.status_code == 200, res.text
+    ids = {item['id'] for item in res.json()['items']}
+    assert gaming['id'] not in ids
+    assert office['id'] in ids
+
+
+def test_unified_parse_natural_language_dispatcher():
+    from app.config import Settings
+    from app.services import parse_natural_language
+
+    settings = Settings(ai_mode='local')
+    intent_res = parse_natural_language('万柳300以内静音鼠标', settings, kind='intent')
+    wanted_res = parse_natural_language('万柳300以内静音鼠标', settings, kind='wanted')
+    item_res = parse_natural_language('出九成新无线鼠标 120元 万柳自取', settings, kind='item')
+    assert intent_res.category == '数码与影音' and intent_res.max_price == 300
+    assert wanted_res.category == '数码与影音' and wanted_res.budget == 300
+    assert item_res.category == '数码与影音' and float(item_res.price) == 120.0
+
+
 def test_admin_can_create_update_and_deactivate_announcement(client):
     login(client, 'admin')
     created = client.post(
