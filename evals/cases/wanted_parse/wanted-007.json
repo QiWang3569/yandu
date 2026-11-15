@@ -1,0 +1,26 @@
+{
+  "id": "wanted-007",
+  "task": "wanted_parse",
+  "enabled": true,
+  "split": "dev",
+  "family": "conflicting-conditions",
+  "tags": [
+    "conflicting-conditions",
+    "text"
+  ],
+  "source": "助手构造的合成校园二手描述；非真实用户记录。",
+  "rationale": "求购虽不返回条件数组，仍应保留冲突提示。",
+  "label_status": "draft",
+  "input": {
+    "text": "燕园校本部求购无线键盘，同时不要无线键盘，预算100元。"
+  },
+  "expected": {
+    "fields": {
+      "category": "数码与影音",
+      "budget": 100,
+      "campus": "燕园校本部"
+    },
+    "sets": {},
+    "clarification": true
+  }
+}

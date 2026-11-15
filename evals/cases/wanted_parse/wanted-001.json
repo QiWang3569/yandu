@@ -1,0 +1,25 @@
+{
+  "id": "wanted-001",
+  "task": "wanted_parse",
+  "enabled": true,
+  "split": "dev",
+  "family": "explicit-budget",
+  "tags": [
+    "explicit-budget",
+    "text"
+  ],
+  "source": "助手构造的合成校园二手描述；非真实用户记录。",
+  "rationale": "求购输出使用budget字段；标题与描述允许合理改写。",
+  "label_status": "draft",
+  "input": {
+    "text": "医学部求购无线鼠标，预算50元。"
+  },
+  "expected": {
+    "fields": {
+      "category": "数码与影音",
+      "budget": 50,
+      "campus": "医学部"
+    },
+    "sets": {}
+  }
+}

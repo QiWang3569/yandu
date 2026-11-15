@@ -1,0 +1,34 @@
+{
+  "id": "intent-005",
+  "task": "intent_parse",
+  "enabled": true,
+  "split": "dev",
+  "family": "decimal-budget",
+  "tags": [
+    "decimal-budget",
+    "text"
+  ],
+  "source": "助手构造的合成校园二手需求；非真实用户记录。",
+  "rationale": "保留两位小数金额；99.50 与数值99.5等价。",
+  "label_status": "draft",
+  "input": {
+    "text": "医学部收风扇，不超过99.50元。"
+  },
+  "expected": {
+    "fields": {
+      "category": "宿舍生活与家电",
+      "max_price": 99.5,
+      "campus": "医学部",
+      "condition_grade": null
+    },
+    "sets": {
+      "keywords": [
+        [
+          "风扇"
+        ]
+      ],
+      "excluded_keywords": [],
+      "preferences": []
+    }
+  }
+}

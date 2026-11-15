@@ -1,0 +1,39 @@
+{
+  "id": "intent-020",
+  "task": "intent_parse",
+  "enabled": true,
+  "split": "dev",
+  "family": "negation-scope",
+  "tags": [
+    "negation-scope",
+    "text"
+  ],
+  "source": "助手构造的合成校园二手需求；非真实用户记录。",
+  "rationale": "非游戏应落为排除游戏鼠标；不能要求游戏鼠标。",
+  "label_status": "draft",
+  "input": {
+    "text": "燕园校本部收非游戏鼠标，预算120元。"
+  },
+  "expected": {
+    "fields": {
+      "category": "数码与影音",
+      "max_price": 120,
+      "campus": "燕园校本部",
+      "condition_grade": null
+    },
+    "sets": {
+      "keywords": [
+        [
+          "鼠标",
+          "滑鼠"
+        ]
+      ],
+      "excluded_keywords": [
+        [
+          "游戏鼠标"
+        ]
+      ],
+      "preferences": []
+    }
+  }
+}

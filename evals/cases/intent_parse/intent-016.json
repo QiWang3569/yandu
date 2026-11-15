@@ -1,0 +1,39 @@
+{
+  "id": "intent-016",
+  "task": "intent_parse",
+  "enabled": true,
+  "split": "dev",
+  "family": "missing-campus",
+  "tags": [
+    "missing-campus",
+    "text"
+  ],
+  "source": "助手构造的合成校园二手需求；非真实用户记录。",
+  "rationale": "未指定校区应为不限校区；课程名与教材性质分别作为概念。",
+  "label_status": "draft",
+  "input": {
+    "text": "求购高等数学教材，预算30元。"
+  },
+  "expected": {
+    "fields": {
+      "category": "课程资料与书籍",
+      "max_price": 30,
+      "campus": "不限校区",
+      "condition_grade": null
+    },
+    "sets": {
+      "keywords": [
+        [
+          "高等数学",
+          "高数"
+        ],
+        [
+          "教材",
+          "课本"
+        ]
+      ],
+      "excluded_keywords": [],
+      "preferences": []
+    }
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "id": "intent-004",
+  "task": "intent_parse",
+  "enabled": true,
+  "split": "dev",
+  "family": "zero-budget",
+  "tags": [
+    "zero-budget",
+    "text"
+  ],
+  "source": "助手构造的合成校园二手需求；非真实用户记录。",
+  "rationale": "零元是明确预算，不能与未提及预算的 null 混淆。",
+  "label_status": "draft",
+  "input": {
+    "text": "昌平新校区求赠送台灯，只接受免费，预算0元。"
+  },
+  "expected": {
+    "fields": {
+      "category": "宿舍生活与家电",
+      "max_price": 0,
+      "campus": "昌平新校区",
+      "condition_grade": null
+    },
+    "sets": {
+      "keywords": [
+        [
+          "台灯",
+          "阅读灯"
+        ]
+      ],
+      "excluded_keywords": [],
+      "preferences": []
+    }
+  }
+}

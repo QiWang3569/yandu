@@ -1,0 +1,34 @@
+{
+  "id": "intent-022",
+  "task": "intent_parse",
+  "enabled": true,
+  "split": "dev",
+  "family": "recruitment-category",
+  "tags": [
+    "recruitment-category",
+    "text"
+  ],
+  "source": "助手构造的合成校园二手需求；非真实用户记录。",
+  "rationale": "覆盖第六类人员招募；招募是行为，志愿者是明确需求主体。",
+  "label_status": "draft",
+  "input": {
+    "text": "燕园校本部招募志愿者，预算不限。"
+  },
+  "expected": {
+    "fields": {
+      "category": "人员招募",
+      "max_price": null,
+      "campus": "燕园校本部",
+      "condition_grade": null
+    },
+    "sets": {
+      "keywords": [
+        [
+          "志愿者"
+        ]
+      ],
+      "excluded_keywords": [],
+      "preferences": []
+    }
+  }
+}

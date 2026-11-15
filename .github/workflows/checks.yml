@@ -14,7 +14,22 @@ jobs:
           cache: pip
           cache-dependency-path: backend/requirements.lock.txt
       - run: pip install -r backend/requirements.lock.txt
-      - run: python -m pytest backend/tests -q
+      - run: python -m pytest backend/tests evals/tests -q
+      - name: Validate model evaluation cases
+        run: python scripts/run_model_eval.py validate
+      - name: Run offline model baseline
+        run: python scripts/run_model_eval.py run --models local-rules --output test-results/model-eval
+      - name: Compare offline regression baseline
+        run: python scripts/run_model_eval.py compare --baseline evals/baselines/local-rules --current test-results/model-eval --output test-results/model-regression --fail-on-regression
+      - name: Upload evaluation reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: model-evaluation-${{ matrix.os }}
+          path: |
+            test-results/model-eval
+            test-results/model-regression
+          if-no-files-found: ignore
       - uses: actions/setup-node@v4
         with:
           node-version: '22'

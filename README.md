@@ -232,6 +232,7 @@ data/                   数据库、图片、日志（不提交）
 - [PostgreSQL 接入与迁移](docs/POSTGRESQL.md)
 - [邮箱登录与站内聊天](docs/EMAIL_AND_CHAT.md)
 - [买家助手说明](docs/BUYER_AGENT.md)
+- [测试用例管理与模型评测](docs/MODEL_EVALUATION.md) / [模型选型报告](docs/MODEL_SELECTION_REPORT.md)
 - [站内意见反馈](docs/FEEDBACK.md)
 - [通知已读与商品图片查看](docs/NOTIFICATIONS_AND_GALLERY.md)
 - [识图辅助发布方案（调研）](docs/VISION_ASSISTED_PUBLISHING.md)

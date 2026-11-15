@@ -1,0 +1,35 @@
+{
+  "id": "intent-008",
+  "task": "intent_parse",
+  "enabled": true,
+  "split": "dev",
+  "family": "condition-grade",
+  "tags": [
+    "condition-grade",
+    "text"
+  ],
+  "source": "助手构造的合成校园二手需求；非真实用户记录。",
+  "rationale": "成色字段采用业务枚举，不能作为商品关键词重复输出。",
+  "label_status": "draft",
+  "input": {
+    "text": "医学部收9成新显示器，预算500元。"
+  },
+  "expected": {
+    "fields": {
+      "category": "数码与影音",
+      "max_price": 500,
+      "campus": "医学部",
+      "condition_grade": "9成新"
+    },
+    "sets": {
+      "keywords": [
+        [
+          "显示器",
+          "显示屏"
+        ]
+      ],
+      "excluded_keywords": [],
+      "preferences": []
+    }
+  }
+}

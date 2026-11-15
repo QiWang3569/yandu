@@ -1,0 +1,35 @@
+{
+  "id": "intent-006",
+  "task": "intent_parse",
+  "enabled": true,
+  "split": "dev",
+  "family": "chinese-number",
+  "tags": [
+    "chinese-number",
+    "text"
+  ],
+  "source": "助手构造的合成校园二手需求；非真实用户记录。",
+  "rationale": "中文数字应转换为350，不随本地规则的识别能力修改标签。",
+  "label_status": "draft",
+  "input": {
+    "text": "万柳学区想收自行车，最多三百五十元。"
+  },
+  "expected": {
+    "fields": {
+      "category": "校园出行与运动",
+      "max_price": 350,
+      "campus": "万柳学区",
+      "condition_grade": null
+    },
+    "sets": {
+      "keywords": [
+        [
+          "自行车",
+          "单车"
+        ]
+      ],
+      "excluded_keywords": [],
+      "preferences": []
+    }
+  }
+}

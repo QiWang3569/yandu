@@ -1,0 +1,44 @@
+{
+  "id": "intent-011",
+  "task": "intent_parse",
+  "enabled": true,
+  "split": "dev",
+  "family": "multiple-exclusions",
+  "tags": [
+    "multiple-exclusions",
+    "text"
+  ],
+  "source": "助手构造的合成校园二手需求；非真实用户记录。",
+  "rationale": "两个排除项分别标注；不能因排除词出现而改写购买品类。",
+  "label_status": "draft",
+  "input": {
+    "text": "燕园校本部收自行车，不要折叠车，不接受电动车，预算400元。"
+  },
+  "expected": {
+    "fields": {
+      "category": "校园出行与运动",
+      "max_price": 400,
+      "campus": "燕园校本部",
+      "condition_grade": null
+    },
+    "sets": {
+      "keywords": [
+        [
+          "自行车",
+          "单车"
+        ]
+      ],
+      "excluded_keywords": [
+        [
+          "折叠车",
+          "折叠自行车"
+        ],
+        [
+          "电动车",
+          "电动自行车"
+        ]
+      ],
+      "preferences": []
+    }
+  }
+}

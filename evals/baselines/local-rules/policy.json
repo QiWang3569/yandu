@@ -1,0 +1,27 @@
+{
+  "version": "1.0",
+  "status": "draft",
+  "description": "预设实验规则。需求解析整例正确率目标沿用课程材料；文字提取使用平均断言评分，不等同于原目标中的字段总准确率。其余门槛为本次拟定，须由团队在保留集评测前确认，并将 status 改为 confirmed 或 locked。",
+  "minimum_reviewed_cases": 20,
+  "minimum_remote_models": 2,
+  "quality_tolerance": 0.0,
+  "tasks": {
+    "intent_parse": {
+      "min_pass_rate": 0.9,
+      "max_error_rate": 0.05
+    },
+    "wanted_parse": {
+      "min_pass_rate": 0.9,
+      "max_error_rate": 0.05
+    },
+    "item_parse": {
+      "min_mean_score": 0.95,
+      "max_error_rate": 0.05
+    },
+    "candidate_review": {
+      "min_macro_f1": 0.85,
+      "max_false_match_rate": 0.05,
+      "max_error_rate": 0.05
+    }
+  }
+}

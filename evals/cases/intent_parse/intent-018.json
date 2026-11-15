@@ -1,0 +1,31 @@
+{
+  "id": "intent-018",
+  "task": "intent_parse",
+  "enabled": true,
+  "split": "dev",
+  "family": "underspecified-item",
+  "tags": [
+    "underspecified-item",
+    "text"
+  ],
+  "source": "助手构造的合成校园二手需求；非真实用户记录。",
+  "rationale": "缺少物品主体，不能把一个当商品或凭空猜测分类，需请求补充。",
+  "label_status": "draft",
+  "input": {
+    "text": "想收一个，预算100元。"
+  },
+  "expected": {
+    "fields": {
+      "category": null,
+      "max_price": 100,
+      "campus": "不限校区",
+      "condition_grade": null
+    },
+    "sets": {
+      "keywords": [],
+      "excluded_keywords": [],
+      "preferences": []
+    },
+    "clarification": true
+  }
+}

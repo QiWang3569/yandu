@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "models": [
+    {
+      "id": "local-rules",
+      "mode": "local",
+      "tasks": ["intent_parse", "item_parse", "wanted_parse"]
+    },
+    {
+      "id": "text-a",
+      "mode": "remote",
+      "model_env": "EVAL_MODEL_A",
+      "base_url_env": "EVAL_BASE_URL_A",
+      "api_key_env": "EVAL_API_KEY_A",
+      "tasks": ["intent_parse", "item_parse", "wanted_parse", "candidate_review"],
+      "temperature": 0.1,
+      "timeout": 30,
+      "retries": 1
+    },
+    {
+      "id": "text-b",
+      "mode": "remote",
+      "model_env": "EVAL_MODEL_B",
+      "base_url_env": "EVAL_BASE_URL_B",
+      "api_key_env": "EVAL_API_KEY_B",
+      "tasks": ["intent_parse", "item_parse", "wanted_parse", "candidate_review"],
+      "temperature": 0.1,
+      "timeout": 30,
+      "retries": 1
+    }
+  ]
+}

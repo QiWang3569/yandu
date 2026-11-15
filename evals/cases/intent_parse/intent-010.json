@@ -1,0 +1,42 @@
+{
+  "id": "intent-010",
+  "task": "intent_parse",
+  "enabled": true,
+  "split": "dev",
+  "family": "negation-preference",
+  "tags": [
+    "negation-preference",
+    "text"
+  ],
+  "source": "助手构造的合成校园二手需求；非真实用户记录。",
+  "rationale": "静音是必须条件，无线只是偏好；两者不能交换。",
+  "label_status": "draft",
+  "input": {
+    "text": "万柳学区收键盘，必须静音，最好无线，预算200元。"
+  },
+  "expected": {
+    "fields": {
+      "category": "数码与影音",
+      "max_price": 200,
+      "campus": "万柳学区",
+      "condition_grade": null
+    },
+    "sets": {
+      "keywords": [
+        [
+          "键盘"
+        ],
+        [
+          "静音",
+          "无声"
+        ]
+      ],
+      "excluded_keywords": [],
+      "preferences": [
+        [
+          "无线"
+        ]
+      ]
+    }
+  }
+}

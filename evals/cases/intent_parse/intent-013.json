@@ -1,0 +1,34 @@
+{
+  "id": "intent-013",
+  "task": "intent_parse",
+  "enabled": true,
+  "split": "dev",
+  "family": "specific-category",
+  "tags": [
+    "specific-category",
+    "text"
+  ],
+  "source": "助手构造的合成校园二手需求；非真实用户记录。",
+  "rationale": "羽毛球拍与网球拍不等价；与intent-002同属具体品类测试族。",
+  "label_status": "draft",
+  "input": {
+    "text": "昌平新校区收羽毛球拍，预算100元。"
+  },
+  "expected": {
+    "fields": {
+      "category": "校园出行与运动",
+      "max_price": 100,
+      "campus": "昌平新校区",
+      "condition_grade": null
+    },
+    "sets": {
+      "keywords": [
+        [
+          "羽毛球拍"
+        ]
+      ],
+      "excluded_keywords": [],
+      "preferences": []
+    }
+  }
+}

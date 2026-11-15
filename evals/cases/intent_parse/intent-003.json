@@ -1,0 +1,47 @@
+{
+  "id": "intent-003",
+  "task": "intent_parse",
+  "enabled": true,
+  "split": "dev",
+  "family": "negation-preference",
+  "tags": [
+    "negation-preference",
+    "text"
+  ],
+  "source": "助手构造的合成校园二手需求；非真实用户记录。",
+  "rationale": "把必须条件、排除项和可选偏好分开；偏好不能移入必须条件。",
+  "label_status": "draft",
+  "input": {
+    "text": "医学部收无线耳机，不要入耳式，预算200元，最好头戴式。"
+  },
+  "expected": {
+    "fields": {
+      "category": "数码与影音",
+      "max_price": 200,
+      "campus": "医学部",
+      "condition_grade": null
+    },
+    "sets": {
+      "keywords": [
+        [
+          "耳机"
+        ],
+        [
+          "无线"
+        ]
+      ],
+      "excluded_keywords": [
+        [
+          "入耳式",
+          "入耳式耳机"
+        ]
+      ],
+      "preferences": [
+        [
+          "头戴式",
+          "头戴式耳机"
+        ]
+      ]
+    }
+  }
+}

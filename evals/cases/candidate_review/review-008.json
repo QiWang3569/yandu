@@ -1,0 +1,64 @@
+{
+  "id": "review-008",
+  "task": "candidate_review",
+  "enabled": true,
+  "split": "dev",
+  "family": "exclusion-evidence",
+  "tags": [
+    "exclusion-evidence",
+    "candidate-verdict",
+    "evidence"
+  ],
+  "source": "助手构造的合成需求和候选商品；价格、校区、成色视为已通过程序硬过滤；非真实用户记录。",
+  "rationale": "排除维修过需要有证据；外盒只是偏好，不能填补维修经历的信息缺口。",
+  "label_status": "draft",
+  "input": {
+    "intent": {
+      "keywords": [
+        "耳机"
+      ],
+      "excluded_keywords": [
+        "维修过"
+      ],
+      "preferences": [
+        "外盒"
+      ]
+    },
+    "items": [
+      {
+        "id": "r08-a",
+        "title": "耳机",
+        "description": "耳机从未维修，附外盒。",
+        "tags": [],
+        "price_cents": 5000,
+        "campus": "燕园校本部",
+        "condition_grade": "9成新"
+      },
+      {
+        "id": "r08-b",
+        "title": "耳机",
+        "description": "这副耳机维修过一次，现在附外盒出售。",
+        "tags": [],
+        "price_cents": 5000,
+        "campus": "燕园校本部",
+        "condition_grade": "9成新"
+      },
+      {
+        "id": "r08-c",
+        "title": "耳机",
+        "description": "耳机附外盒，维修经历未说明。",
+        "tags": [],
+        "price_cents": 5000,
+        "campus": "燕园校本部",
+        "condition_grade": "9成新"
+      }
+    ]
+  },
+  "expected": {
+    "verdicts": {
+      "r08-a": "MATCH",
+      "r08-b": "NO_MATCH",
+      "r08-c": "UNCERTAIN"
+    }
+  }
+}

@@ -1,0 +1,72 @@
+name: Model evaluation
+
+on:
+  workflow_dispatch:
+    inputs:
+      models:
+        description: Model profiles
+        type: choice
+        options: [text-a,text-b,"text-a,text-b"]
+        default: "text-a,text-b"
+      split:
+        description: Dataset split
+        type: choice
+        options: [dev,holdout]
+        default: dev
+      repeats:
+        description: Repetitions per case (1-20)
+        type: string
+        default: '3'
+      max_requests:
+        description: Maximum worst-case requests including retries
+        type: string
+        default: '600'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: model-evaluation-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  evaluate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: backend/requirements.lock.txt
+      - run: pip install -r backend/requirements.lock.txt
+      - name: Validate cases and evaluation framework
+        run: |
+          python scripts/run_model_eval.py validate
+          python -m pytest evals/tests -q
+      - name: Evaluate selected models
+        env:
+          SELECTED_MODELS: ${{ inputs.models }}
+          SELECTED_SPLIT: ${{ inputs.split }}
+          EVAL_REPEATS: ${{ inputs.repeats }}
+          EVAL_REQUEST_LIMIT: ${{ inputs.max_requests }}
+          EVAL_MODEL_A: ${{ vars.EVAL_MODEL_A }}
+          EVAL_BASE_URL_A: ${{ vars.EVAL_BASE_URL_A }}
+          EVAL_API_KEY_A: ${{ secrets.EVAL_API_KEY_A }}
+          EVAL_MODEL_B: ${{ vars.EVAL_MODEL_B }}
+          EVAL_BASE_URL_B: ${{ vars.EVAL_BASE_URL_B }}
+          EVAL_API_KEY_B: ${{ secrets.EVAL_API_KEY_B }}
+        run: >-
+          python scripts/run_model_eval.py run
+          --models "$SELECTED_MODELS" --split "$SELECTED_SPLIT"
+          --repeats "$EVAL_REPEATS" --max-requests "$EVAL_REQUEST_LIMIT"
+          --allow-remote --output test-results/model-eval
+      - name: Upload results including failed or interrupted runs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: model-evaluation-${{ github.run_id }}
+          path: test-results/model-eval
+          if-no-files-found: ignore
+          retention-days: 30

@@ -1,0 +1,36 @@
+{
+  "id": "intent-012",
+  "task": "intent_parse",
+  "enabled": true,
+  "split": "dev",
+  "family": "bilingual-alias",
+  "tags": [
+    "bilingual-alias",
+    "text"
+  ],
+  "source": "助手构造的合成校园二手需求；非真实用户记录。",
+  "rationale": "大小写或语言不同的完整词项可作为同一概念，不接受泛化为数码产品。",
+  "label_status": "draft",
+  "input": {
+    "text": "医学部想收 mouse，预算50元。"
+  },
+  "expected": {
+    "fields": {
+      "category": "数码与影音",
+      "max_price": 50,
+      "campus": "医学部",
+      "condition_grade": null
+    },
+    "sets": {
+      "keywords": [
+        [
+          "鼠标",
+          "滑鼠",
+          "mouse"
+        ]
+      ],
+      "excluded_keywords": [],
+      "preferences": []
+    }
+  }
+}
