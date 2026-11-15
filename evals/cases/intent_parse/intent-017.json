@@ -1,0 +1,26 @@
+{
+  "id": "intent-017",
+  "task": "intent_parse",
+  "enabled": true,
+  "split": "dev",
+  "family": "conflicting-conditions",
+  "tags": [
+    "conflicting-conditions",
+    "text"
+  ],
+  "source": "助手构造的合成校园二手需求；非真实用户记录。",
+  "rationale": "需求直接冲突，应请求澄清。当前schema禁止同词同时要求和排除，因此本例不预设数组表达，只评分未冲突字段与澄清。",
+  "label_status": "draft",
+  "input": {
+    "text": "燕园校本部收无线键盘，同时不要无线键盘，预算100元。"
+  },
+  "expected": {
+    "fields": {
+      "category": "数码与影音",
+      "max_price": 100,
+      "campus": "燕园校本部"
+    },
+    "sets": {},
+    "clarification": true
+  }
+}

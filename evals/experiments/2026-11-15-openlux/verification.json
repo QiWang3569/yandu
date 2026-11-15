@@ -1,0 +1,23 @@
+{
+  "run_id": "20261115T111828Z-e16d7659",
+  "record_count": 3480,
+  "actual_remote_attempts": 2856,
+  "unique_complete_matrix": true,
+  "implementation_unchanged": true,
+  "dataset_hash_verified": true,
+  "baseline_checks": [
+    {
+      "baseline": "local-rules-v1.2",
+      "matching_records_checked": 120,
+      "output_and_score_identical": true,
+      "latency_compared": false
+    },
+    {
+      "baseline": "search-v1.2",
+      "matching_records_checked": 480,
+      "output_and_score_identical": true,
+      "latency_compared": false
+    }
+  ],
+  "unexpected_returned_models": []
+}

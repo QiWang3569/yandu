@@ -18,3 +18,4 @@ output/
 *.tsbuildinfo
 .DS_Store
 video/
+evals/results/

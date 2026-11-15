@@ -1,0 +1,4 @@
+﻿model,task,split,case_count,count,expected_count,complete,pass_rate,mean_score,error_rate,schema_valid_rate,raw_pass_rate,application_pass_rate,macro_f1,false_match_rate,p50_latency_ms,p95_latency_ms,attempt_count,total_cost_cny,mean_cost_cny,unknown_cost_count,mrr,map_at_5,recall_at_10,retrieval_positive_count,zero_result_error_rate,zero_result_evaluated_count,first_schema_valid_rate,consistency_rate,metamorphic_pass_rate,p95_parse_latency_ms,p95_search_latency_ms,category_accuracy,status_accuracy
+local-rules,intent_parse,dev,24,24,24,True,0.5833333333333334,0.9337797619047619,0.0,1.0,,0.5833333333333334,,,0.04,0.06094999999999998,0,0.0,0.0,0,,,,0,,0,,,,,,,
+local-rules,item_parse,dev,8,8,8,True,0.25,0.8416666666666667,0.0,1.0,,0.25,,,0.041999999999999996,0.5650499999999998,0,0.0,0.0,0,,,,0,,0,,,,,,,
+local-rules,wanted_parse,dev,8,8,8,True,0.625,0.8854166666666666,0.0,1.0,,0.625,,,0.0485,0.20429999999999993,0,0.0,0.0,0,,,,0,,0,,,,,,,

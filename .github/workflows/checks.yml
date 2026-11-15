@@ -14,7 +14,30 @@ jobs:
           cache: pip
           cache-dependency-path: backend/requirements.lock.txt
       - run: pip install -r backend/requirements.lock.txt
-      - run: python -m pytest backend/tests -q
+      - run: python -m pytest backend/tests evals/tests -q
+      - name: Validate model evaluation cases
+        run: python scripts/run_model_eval.py validate
+      - name: Run offline model baseline
+        run: python scripts/run_model_eval.py run --models local-rules --output test-results/model-eval
+      - name: Compare offline regression baseline
+        run: python scripts/run_model_eval.py compare --baseline evals/baselines/local-rules-v1.2 --current test-results/model-eval --output test-results/model-regression --fail-on-regression
+      - name: Validate fixed-catalog search cases
+        run: python scripts/run_model_eval.py validate --cases evals/search_benchmark/cases --model-config evals/models.search.json --relations evals/search_benchmark/relations.json
+      - name: Run search and metamorphic baseline
+        run: python scripts/run_model_eval.py run --cases evals/search_benchmark/cases --model-config evals/models.search.json --models local-rules,oracle --relations evals/search_benchmark/relations.json --policy evals/selection_policy.search.json --repeats 3 --output test-results/search-eval
+      - name: Compare search regression baseline
+        run: python scripts/run_model_eval.py compare --baseline evals/baselines/search-v1.2 --current test-results/search-eval --output test-results/search-regression --fail-on-regression
+      - name: Upload evaluation reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: model-evaluation-${{ matrix.os }}
+          path: |
+            test-results/model-eval
+            test-results/model-regression
+            test-results/search-eval
+            test-results/search-regression
+          if-no-files-found: ignore
       - uses: actions/setup-node@v4
         with:
           node-version: '22'

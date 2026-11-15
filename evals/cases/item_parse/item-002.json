@@ -1,0 +1,37 @@
+{
+  "id": "item-002",
+  "task": "item_parse",
+  "enabled": true,
+  "split": "dev",
+  "family": "book-sale",
+  "tags": [
+    "book-sale",
+    "text"
+  ],
+  "source": "助手构造的合成校园二手描述；非真实用户记录。",
+  "rationale": "课程名与教材是两个已给出的概念，描述措辞本身不作精确匹配。",
+  "label_status": "draft",
+  "input": {
+    "text": "医学部转让8成新高等数学教材，售价30元。"
+  },
+  "expected": {
+    "fields": {
+      "category": "课程资料与书籍",
+      "price": 30,
+      "campus": "医学部",
+      "condition_grade": "8成新"
+    },
+    "sets": {
+      "tags": [
+        [
+          "高等数学",
+          "高数"
+        ],
+        [
+          "教材",
+          "课本"
+        ]
+      ]
+    }
+  }
+}

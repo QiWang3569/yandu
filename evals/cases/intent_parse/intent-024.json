@@ -1,0 +1,48 @@
+{
+  "id": "intent-024",
+  "task": "intent_parse",
+  "enabled": true,
+  "split": "dev",
+  "family": "unseen-attributes",
+  "tags": [
+    "unseen-attributes",
+    "text"
+  ],
+  "source": "助手构造的合成校园二手需求；非真实用户记录。",
+  "rationale": "覆盖本地词典以外的属性；必须、偏好和排除仍须分开。",
+  "label_status": "draft",
+  "input": {
+    "text": "昌平新校区收台灯，必须USB供电，最好可调亮度，不要触摸开关，预算80元。"
+  },
+  "expected": {
+    "fields": {
+      "category": "宿舍生活与家电",
+      "max_price": 80,
+      "campus": "昌平新校区",
+      "condition_grade": null
+    },
+    "sets": {
+      "keywords": [
+        [
+          "台灯",
+          "阅读灯"
+        ],
+        [
+          "USB供电",
+          "USB电源供电"
+        ]
+      ],
+      "excluded_keywords": [
+        [
+          "触摸开关"
+        ]
+      ],
+      "preferences": [
+        [
+          "可调亮度",
+          "亮度可调"
+        ]
+      ]
+    }
+  }
+}

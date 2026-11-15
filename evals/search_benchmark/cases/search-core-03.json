@@ -1,0 +1,54 @@
+{
+  "id": "search-core-03",
+  "task": "smart_search",
+  "enabled": true,
+  "split": "dev",
+  "family": "search-core-03",
+  "tags": [
+    "campus-search",
+    "slice:core"
+  ],
+  "source": "synthetic-campus-v1; authored before model evaluation",
+  "rationale": "按查询语义与固定商品描述独立预标注；型号和配件不泛化，软偏好不作硬过滤。待团队交叉复核。",
+  "label_status": "draft",
+  "input": {
+    "text": "医学部50以内电风扇"
+  },
+  "expected": {
+    "parse": {
+      "fields": {
+        "category": "宿舍生活与家电",
+        "max_price": 50,
+        "campus": "医学部",
+        "condition_grade": null
+      },
+      "sets": {
+        "keywords": [
+          [
+            "电风扇"
+          ]
+        ],
+        "excluded_keywords": [],
+        "preferences": []
+      },
+      "clarification": false
+    },
+    "oracle_intent": {
+      "category": "宿舍生活与家电",
+      "max_price": 50,
+      "campus": "医学部",
+      "condition_grade": null,
+      "keywords": [
+        "电风扇"
+      ],
+      "excluded_keywords": [],
+      "preferences": [],
+      "clarification": null
+    },
+    "relevant_item_ids": [
+      "h04"
+    ],
+    "retrieval_applicable": true,
+    "around_price": false
+  }
+}

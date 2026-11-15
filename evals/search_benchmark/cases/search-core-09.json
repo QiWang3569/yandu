@@ -1,0 +1,54 @@
+{
+  "id": "search-core-09",
+  "task": "smart_search",
+  "enabled": true,
+  "split": "dev",
+  "family": "search-core-09",
+  "tags": [
+    "campus-search",
+    "slice:core"
+  ],
+  "source": "synthetic-campus-v1; authored before model evaluation",
+  "rationale": "按查询语义与固定商品描述独立预标注；型号和配件不泛化，软偏好不作硬过滤。待团队交叉复核。",
+  "label_status": "draft",
+  "input": {
+    "text": "燕园免费摄影模特招募"
+  },
+  "expected": {
+    "parse": {
+      "fields": {
+        "category": "人员招募",
+        "max_price": 0,
+        "campus": "燕园校本部",
+        "condition_grade": null
+      },
+      "sets": {
+        "keywords": [
+          [
+            "摄影模特招募"
+          ]
+        ],
+        "excluded_keywords": [],
+        "preferences": []
+      },
+      "clarification": false
+    },
+    "oracle_intent": {
+      "category": "人员招募",
+      "max_price": 0,
+      "campus": "燕园校本部",
+      "condition_grade": null,
+      "keywords": [
+        "摄影模特招募"
+      ],
+      "excluded_keywords": [],
+      "preferences": [],
+      "clarification": null
+    },
+    "relevant_item_ids": [
+      "r01"
+    ],
+    "retrieval_applicable": true,
+    "around_price": false
+  }
+}

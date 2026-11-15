@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "models": [
+    {
+      "id": "deepseek-pilot",
+      "mode": "remote",
+      "tasks": ["item_parse"],
+      "model": "deepseek-chat",
+      "base_url": "https://api.deepseek.com/v1",
+      "api_key_env": "LLM_API_KEY",
+      "temperature": 0.1,
+      "timeout": 60,
+      "retries": 0
+    },
+    {
+      "id": "qwen-vl-pilot",
+      "mode": "remote",
+      "tasks": ["vision_draft"],
+      "model": "qwen3-vl-plus",
+      "base_url": "https://api.openlux.ai/v1",
+      "api_key_env": "YUNWU_GEMINI_API_KEY",
+      "temperature": 0.1,
+      "timeout": 60,
+      "retries": 0
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "id": "item-008",
+  "task": "item_parse",
+  "enabled": true,
+  "split": "dev",
+  "family": "conflicting-sale-prices",
+  "tags": [
+    "conflicting-sale-prices",
+    "text"
+  ],
+  "source": "助手构造的合成校园二手描述；非真实用户记录。",
+  "rationale": "售价明确未确定，应留空并澄清，不能任取第一个数值。",
+  "label_status": "draft",
+  "input": {
+    "text": "医学部出9成新自行车，售价200元，也写了售价300元，尚未确认哪个价格正确。"
+  },
+  "expected": {
+    "fields": {
+      "category": "校园出行与运动",
+      "price": null,
+      "campus": "医学部",
+      "condition_grade": "9成新"
+    },
+    "sets": {
+      "tags": [
+        [
+          "自行车",
+          "单车"
+        ]
+      ]
+    },
+    "clarification": true
+  }
+}

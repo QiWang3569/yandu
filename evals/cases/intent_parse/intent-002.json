@@ -1,0 +1,34 @@
+{
+  "id": "intent-002",
+  "task": "intent_parse",
+  "enabled": true,
+  "split": "dev",
+  "family": "specific-category",
+  "tags": [
+    "specific-category",
+    "text"
+  ],
+  "source": "助手构造的合成校园二手需求；非真实用户记录。",
+  "rationale": "没有价格上限，必须保留网球拍而非泛化成球拍。",
+  "label_status": "draft",
+  "input": {
+    "text": "燕园校本部收网球拍，价格不限。"
+  },
+  "expected": {
+    "fields": {
+      "category": "校园出行与运动",
+      "max_price": null,
+      "campus": "燕园校本部",
+      "condition_grade": null
+    },
+    "sets": {
+      "keywords": [
+        [
+          "网球拍"
+        ]
+      ],
+      "excluded_keywords": [],
+      "preferences": []
+    }
+  }
+}

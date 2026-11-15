@@ -1,0 +1,46 @@
+{
+  "id": "search-ambiguity-02",
+  "task": "smart_search",
+  "enabled": true,
+  "split": "dev",
+  "family": "search-ambiguity-02",
+  "tags": [
+    "campus-search",
+    "slice:ambiguity"
+  ],
+  "source": "synthetic-campus-v1; authored before model evaluation",
+  "rationale": "按查询语义与固定商品描述独立预标注；型号和配件不泛化，软偏好不作硬过滤。待团队交叉复核。",
+  "label_status": "draft",
+  "input": {
+    "text": "便宜点的"
+  },
+  "expected": {
+    "parse": {
+      "fields": {
+        "category": null,
+        "max_price": null,
+        "campus": "不限校区",
+        "condition_grade": null
+      },
+      "sets": {
+        "keywords": [],
+        "excluded_keywords": [],
+        "preferences": []
+      },
+      "clarification": true
+    },
+    "oracle_intent": {
+      "category": null,
+      "max_price": null,
+      "campus": "不限校区",
+      "condition_grade": null,
+      "keywords": [],
+      "excluded_keywords": [],
+      "preferences": [],
+      "clarification": "请明确具体物品和相互冲突的要求。"
+    },
+    "relevant_item_ids": [],
+    "retrieval_applicable": false,
+    "around_price": false
+  }
+}

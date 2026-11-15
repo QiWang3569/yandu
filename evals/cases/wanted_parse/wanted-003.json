@@ -1,0 +1,25 @@
+{
+  "id": "wanted-003",
+  "task": "wanted_parse",
+  "enabled": true,
+  "split": "dev",
+  "family": "chinese-number",
+  "tags": [
+    "chinese-number",
+    "text"
+  ],
+  "source": "助手构造的合成校园二手描述；非真实用户记录。",
+  "rationale": "中文金额应进入求购budget。",
+  "label_status": "draft",
+  "input": {
+    "text": "昌平新校区求购自行车，最多三百五十元。"
+  },
+  "expected": {
+    "fields": {
+      "category": "校园出行与运动",
+      "budget": 350,
+      "campus": "昌平新校区"
+    },
+    "sets": {}
+  }
+}

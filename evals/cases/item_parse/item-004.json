@@ -1,0 +1,32 @@
+{
+  "id": "item-004",
+  "task": "item_parse",
+  "enabled": true,
+  "split": "dev",
+  "family": "decimal-sale-price",
+  "tags": [
+    "decimal-sale-price",
+    "text"
+  ],
+  "source": "助手构造的合成校园二手描述；非真实用户记录。",
+  "rationale": "价格保留小数，数值39.9与39.90等价。",
+  "label_status": "draft",
+  "input": {
+    "text": "燕园校本部出8成新风扇，售价39.90元。"
+  },
+  "expected": {
+    "fields": {
+      "category": "宿舍生活与家电",
+      "price": 39.9,
+      "campus": "燕园校本部",
+      "condition_grade": "8成新"
+    },
+    "sets": {
+      "tags": [
+        [
+          "风扇"
+        ]
+      ]
+    }
+  }
+}

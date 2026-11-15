@@ -1,0 +1,60 @@
+{
+  "id": "review-002",
+  "task": "candidate_review",
+  "enabled": true,
+  "split": "dev",
+  "family": "specific-category",
+  "tags": [
+    "specific-category",
+    "candidate-verdict",
+    "evidence"
+  ],
+  "source": "助手构造的合成需求和候选商品；价格、校区、成色视为已通过程序硬过滤；非真实用户记录。",
+  "rationale": "相近品类不可混同；泛称球拍缺少确定品类证据。",
+  "label_status": "draft",
+  "input": {
+    "intent": {
+      "keywords": [
+        "网球拍"
+      ],
+      "excluded_keywords": [],
+      "preferences": []
+    },
+    "items": [
+      {
+        "id": "r02-a",
+        "title": "网球拍",
+        "description": "一支网球拍，可在校内面交。",
+        "tags": [],
+        "price_cents": 5000,
+        "campus": "燕园校本部",
+        "condition_grade": "9成新"
+      },
+      {
+        "id": "r02-b",
+        "title": "羽毛球拍",
+        "description": "一支羽毛球拍，只适用于羽毛球运动。",
+        "tags": [],
+        "price_cents": 5000,
+        "campus": "燕园校本部",
+        "condition_grade": "9成新"
+      },
+      {
+        "id": "r02-c",
+        "title": "球拍",
+        "description": "出售一支球拍，具体运动种类未说明。",
+        "tags": [],
+        "price_cents": 5000,
+        "campus": "燕园校本部",
+        "condition_grade": "9成新"
+      }
+    ]
+  },
+  "expected": {
+    "verdicts": {
+      "r02-a": "MATCH",
+      "r02-b": "NO_MATCH",
+      "r02-c": "UNCERTAIN"
+    }
+  }
+}

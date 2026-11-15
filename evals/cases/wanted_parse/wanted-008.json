@@ -1,0 +1,25 @@
+{
+  "id": "wanted-008",
+  "task": "wanted_parse",
+  "enabled": true,
+  "split": "dev",
+  "family": "requirement-correction",
+  "tags": [
+    "requirement-correction",
+    "text"
+  ],
+  "source": "助手构造的合成校园二手描述；非真实用户记录。",
+  "rationale": "否定的旧物品不应影响已明确的新需求；标题和描述需人工复核保留风扇，当前自动评分只覆盖结构字段。",
+  "label_status": "draft",
+  "input": {
+    "text": "我不是要台灯，求购的是风扇，预算80元，只在医学部交易。"
+  },
+  "expected": {
+    "fields": {
+      "category": "宿舍生活与家电",
+      "budget": 80,
+      "campus": "医学部"
+    },
+    "sets": {}
+  }
+}

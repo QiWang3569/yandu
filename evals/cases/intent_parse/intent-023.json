@@ -1,0 +1,34 @@
+{
+  "id": "intent-023",
+  "task": "intent_parse",
+  "enabled": true,
+  "split": "dev",
+  "family": "fashion-category",
+  "tags": [
+    "fashion-category",
+    "text"
+  ],
+  "source": "助手构造的合成校园二手需求；非真实用户记录。",
+  "rationale": "覆盖服饰类和全新枚举；帆布包不能泛化为任何手提袋。",
+  "label_status": "draft",
+  "input": {
+    "text": "医学部收全新帆布包，预算60元。"
+  },
+  "expected": {
+    "fields": {
+      "category": "美妆服饰与周边",
+      "max_price": 60,
+      "campus": "医学部",
+      "condition_grade": "全新"
+    },
+    "sets": {
+      "keywords": [
+        [
+          "帆布包"
+        ]
+      ],
+      "excluded_keywords": [],
+      "preferences": []
+    }
+  }
+}

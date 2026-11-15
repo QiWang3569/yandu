@@ -1,0 +1,36 @@
+{
+  "id": "item-001",
+  "task": "item_parse",
+  "enabled": true,
+  "split": "dev",
+  "family": "explicit-sale-fields",
+  "tags": [
+    "explicit-sale-fields",
+    "text"
+  ],
+  "source": "助手构造的合成校园二手描述；非真实用户记录。",
+  "rationale": "出售价格、校区和成色均显式给出；tags不含价格、校区和成色。",
+  "label_status": "draft",
+  "input": {
+    "text": "万柳学区出9成新无线鼠标，售价120元。"
+  },
+  "expected": {
+    "fields": {
+      "category": "数码与影音",
+      "price": 120,
+      "campus": "万柳学区",
+      "condition_grade": "9成新"
+    },
+    "sets": {
+      "tags": [
+        [
+          "鼠标",
+          "滑鼠"
+        ],
+        [
+          "无线"
+        ]
+      ]
+    }
+  }
+}

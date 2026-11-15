@@ -1,0 +1,32 @@
+{
+  "id": "item-003",
+  "task": "item_parse",
+  "enabled": true,
+  "split": "dev",
+  "family": "missing-sale-price",
+  "tags": [
+    "missing-sale-price",
+    "text"
+  ],
+  "source": "助手构造的合成校园二手描述；非真实用户记录。",
+  "rationale": "未决定价格时price为null，不能使用0或猜测价格。",
+  "label_status": "draft",
+  "input": {
+    "text": "昌平新校区出全新帆布包，价格还没想好。"
+  },
+  "expected": {
+    "fields": {
+      "category": "美妆服饰与周边",
+      "price": null,
+      "campus": "昌平新校区",
+      "condition_grade": "全新"
+    },
+    "sets": {
+      "tags": [
+        [
+          "帆布包"
+        ]
+      ]
+    }
+  }
+}

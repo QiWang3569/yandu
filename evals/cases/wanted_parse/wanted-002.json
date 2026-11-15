@@ -1,0 +1,25 @@
+{
+  "id": "wanted-002",
+  "task": "wanted_parse",
+  "enabled": true,
+  "split": "dev",
+  "family": "specific-category",
+  "tags": [
+    "specific-category",
+    "text"
+  ],
+  "source": "助手构造的合成校园二手描述；非真实用户记录。",
+  "rationale": "明确价格不限对应null，不应使用默认金额。",
+  "label_status": "draft",
+  "input": {
+    "text": "燕园校本部求购网球拍，价格不限。"
+  },
+  "expected": {
+    "fields": {
+      "category": "校园出行与运动",
+      "budget": null,
+      "campus": "燕园校本部"
+    },
+    "sets": {}
+  }
+}

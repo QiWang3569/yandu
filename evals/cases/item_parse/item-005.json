@@ -1,0 +1,32 @@
+{
+  "id": "item-005",
+  "task": "item_parse",
+  "enabled": true,
+  "split": "dev",
+  "family": "chinese-number",
+  "tags": [
+    "chinese-number",
+    "text"
+  ],
+  "source": "助手构造的合成校园二手描述；非真实用户记录。",
+  "rationale": "中文售价和成色分别归一化，不依据本地解析结果反改预期。",
+  "label_status": "draft",
+  "input": {
+    "text": "医学部出九五新耳机，售价一百二十元。"
+  },
+  "expected": {
+    "fields": {
+      "category": "数码与影音",
+      "price": 120,
+      "campus": "医学部",
+      "condition_grade": "95新"
+    },
+    "sets": {
+      "tags": [
+        [
+          "耳机"
+        ]
+      ]
+    }
+  }
+}

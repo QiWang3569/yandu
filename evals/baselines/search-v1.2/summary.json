@@ -1,0 +1,3335 @@
+{
+  "run_id": "20261115T105148Z-80c171dd",
+  "complete": true,
+  "record_count": 480,
+  "policy_version": "search-draft-1",
+  "groups": [
+    {
+      "model": "local-rules",
+      "task": "smart_search",
+      "split": "dev",
+      "count": 240,
+      "case_count": 80,
+      "expected_count": 240,
+      "complete": true,
+      "passed_count": 63,
+      "pass_rate": 0.2625,
+      "mean_score": 0.8201578282828283,
+      "error_count": 3,
+      "error_rate": 0.0125,
+      "fallback_count": 0,
+      "raw_pass_rate": null,
+      "raw_mean_score": null,
+      "application_pass_rate": 0.2625,
+      "schema_valid_rate": 0.9875,
+      "latency_samples": 240,
+      "mean_latency_ms": 0.6954875,
+      "p50_latency_ms": 0.5845,
+      "p95_latency_ms": 1.0721499999999988,
+      "attempt_count": 0,
+      "unknown_cost_count": 0,
+      "known_cost_subtotal_cny": 0.0,
+      "total_cost_cny": 0.0,
+      "mean_cost_cny": 0.0,
+      "errors": {
+        "output_validation_error": 3
+      },
+      "prompt_hashes": [],
+      "cost_per_pass_cny": 0.0,
+      "macro_f1": null,
+      "false_match_rate": null,
+      "verdict_count": 0,
+      "confusion_matrix": {},
+      "raw_classification": {
+        "macro_f1": null,
+        "false_match_rate": null,
+        "verdict_count": 0,
+        "confusion_matrix": {}
+      },
+      "parse_diagnostics": {
+        "fields": {
+          "category": {
+            "count": 240,
+            "accuracy": 0.7875,
+            "macro_f1": 0.7905849424836767,
+            "label_support": {
+              "\"人员招募\"": 3,
+              "\"宿舍生活与家电\"": 24,
+              "\"数码与影音\"": 132,
+              "\"校园出行与运动\"": 33,
+              "\"美妆服饰与周边\"": 24,
+              "\"课程资料与书籍\"": 12,
+              "null": 12
+            }
+          },
+          "max_price": {
+            "count": 240,
+            "accuracy": 0.8375,
+            "macro_f1": null,
+            "label_support": {
+              "\"0\"": 12,
+              "\"1.5E+2\"": 6,
+              "\"1.5E+3\"": 6,
+              "\"1E+2\"": 21,
+              "\"1E+3\"": 3,
+              "\"2E+1\"": 3,
+              "\"2E+2\"": 33,
+              "\"2E+3\"": 6,
+              "\"3.5E+3\"": 3,
+              "\"3E+1\"": 6,
+              "\"3E+2\"": 30,
+              "\"49.99\"": 3,
+              "\"4E+2\"": 15,
+              "\"5E+1\"": 9,
+              "\"5E+2\"": 15,
+              "\"99.5\"": 3,
+              "\"9E+1\"": 3,
+              "null": 63
+            }
+          },
+          "campus": {
+            "count": 240,
+            "accuracy": 0.9875,
+            "macro_f1": 0.9982300884955752,
+            "label_support": {
+              "\"万柳学区\"": 45,
+              "\"不限校区\"": 171,
+              "\"医学部\"": 3,
+              "\"昌平新校区\"": 3,
+              "\"燕园校本部\"": 18
+            }
+          },
+          "condition_grade": {
+            "count": 240,
+            "accuracy": 0.9875,
+            "macro_f1": 0.9988505747126437,
+            "label_support": {
+              "\"8成新\"": 3,
+              "\"95新\"": 3,
+              "\"9成新\"": 6,
+              "\"全新\"": 3,
+              "\"基本可用\"": 6,
+              "null": 219
+            }
+          }
+        },
+        "sets": {
+          "keywords": {
+            "count": 240,
+            "tp": 189,
+            "fp": 87,
+            "fn": 90,
+            "micro_precision": 0.6847826086956522,
+            "micro_recall": 0.6774193548387096,
+            "micro_f1": 0.6810810810810811,
+            "macro_f1": 0.6333333333333333
+          },
+          "excluded_keywords": {
+            "count": 240,
+            "tp": 39,
+            "fp": 6,
+            "fn": 0,
+            "micro_precision": 0.8666666666666667,
+            "micro_recall": 1.0,
+            "micro_f1": 0.9285714285714286,
+            "macro_f1": 0.975
+          },
+          "preferences": {
+            "count": 240,
+            "tp": 18,
+            "fp": 3,
+            "fn": 0,
+            "micro_precision": 0.8571428571428571,
+            "micro_recall": 1.0,
+            "micro_f1": 0.9230769230769231,
+            "macro_f1": 0.9875
+          }
+        },
+        "clarification": {
+          "count": 240,
+          "tp": 12,
+          "fp": 48,
+          "fn": 6,
+          "f1": 0.3076923076923077,
+          "positive_count": 18,
+          "invalid_count": 3,
+          "accuracy": 0.775
+        }
+      },
+      "consistency_rate": 0.9875,
+      "consistency_case_count": 80,
+      "consistent_case_count": 79,
+      "first_schema_valid_rate": null,
+      "mean_parse_latency_ms": 0.05519166666666667,
+      "p95_parse_latency_ms": 0.068,
+      "mean_search_latency_ms": 0.6349495832182583,
+      "p95_search_latency_ms": 0.9843399988312728,
+      "mrr": 0.7548701298701299,
+      "map_at_5": 0.7487380952380953,
+      "recall_at_10": 0.8571428571428571,
+      "retrieval_positive_count": 210,
+      "zero_result_evaluated_count": 210,
+      "zero_result_error_rate": 0.12857142857142856,
+      "metamorphic_pass_rate": 0.75
+    },
+    {
+      "model": "oracle",
+      "task": "smart_search",
+      "split": "dev",
+      "count": 240,
+      "case_count": 80,
+      "expected_count": 240,
+      "complete": true,
+      "passed_count": 180,
+      "pass_rate": 0.75,
+      "mean_score": 0.9755492424242423,
+      "error_count": 0,
+      "error_rate": 0.0,
+      "fallback_count": 0,
+      "raw_pass_rate": null,
+      "raw_mean_score": null,
+      "application_pass_rate": 0.75,
+      "schema_valid_rate": 1.0,
+      "latency_samples": 240,
+      "mean_latency_ms": 0.5096333333333333,
+      "p50_latency_ms": 0.4845,
+      "p95_latency_ms": 0.7382499999999999,
+      "attempt_count": 0,
+      "unknown_cost_count": 0,
+      "known_cost_subtotal_cny": 0.0,
+      "total_cost_cny": 0.0,
+      "mean_cost_cny": 0.0,
+      "errors": {},
+      "prompt_hashes": [
+        "16b0177613678ff8156f531d1486a0f64d822a0c79ec2b1552a3eb088670c27e"
+      ],
+      "cost_per_pass_cny": 0.0,
+      "macro_f1": null,
+      "false_match_rate": null,
+      "verdict_count": 0,
+      "confusion_matrix": {},
+      "raw_classification": {
+        "macro_f1": null,
+        "false_match_rate": null,
+        "verdict_count": 0,
+        "confusion_matrix": {}
+      },
+      "parse_diagnostics": {
+        "fields": {
+          "category": {
+            "count": 240,
+            "accuracy": 1.0,
+            "macro_f1": 1.0,
+            "label_support": {
+              "\"人员招募\"": 3,
+              "\"宿舍生活与家电\"": 24,
+              "\"数码与影音\"": 132,
+              "\"校园出行与运动\"": 33,
+              "\"美妆服饰与周边\"": 24,
+              "\"课程资料与书籍\"": 12,
+              "null": 12
+            }
+          },
+          "max_price": {
+            "count": 240,
+            "accuracy": 1.0,
+            "macro_f1": null,
+            "label_support": {
+              "\"0\"": 12,
+              "\"1.5E+2\"": 6,
+              "\"1.5E+3\"": 6,
+              "\"1E+2\"": 21,
+              "\"1E+3\"": 3,
+              "\"2E+1\"": 3,
+              "\"2E+2\"": 33,
+              "\"2E+3\"": 6,
+              "\"3.5E+3\"": 3,
+              "\"3E+1\"": 6,
+              "\"3E+2\"": 30,
+              "\"49.99\"": 3,
+              "\"4E+2\"": 15,
+              "\"5E+1\"": 9,
+              "\"5E+2\"": 15,
+              "\"99.5\"": 3,
+              "\"9E+1\"": 3,
+              "null": 63
+            }
+          },
+          "campus": {
+            "count": 240,
+            "accuracy": 1.0,
+            "macro_f1": 1.0,
+            "label_support": {
+              "\"万柳学区\"": 45,
+              "\"不限校区\"": 171,
+              "\"医学部\"": 3,
+              "\"昌平新校区\"": 3,
+              "\"燕园校本部\"": 18
+            }
+          },
+          "condition_grade": {
+            "count": 240,
+            "accuracy": 1.0,
+            "macro_f1": 1.0,
+            "label_support": {
+              "\"8成新\"": 3,
+              "\"95新\"": 3,
+              "\"9成新\"": 6,
+              "\"全新\"": 3,
+              "\"基本可用\"": 6,
+              "null": 219
+            }
+          }
+        },
+        "sets": {
+          "keywords": {
+            "count": 240,
+            "tp": 279,
+            "fp": 0,
+            "fn": 0,
+            "micro_precision": 1.0,
+            "micro_recall": 1.0,
+            "micro_f1": 1.0,
+            "macro_f1": 1.0
+          },
+          "excluded_keywords": {
+            "count": 240,
+            "tp": 39,
+            "fp": 0,
+            "fn": 0,
+            "micro_precision": 1.0,
+            "micro_recall": 1.0,
+            "micro_f1": 1.0,
+            "macro_f1": 1.0
+          },
+          "preferences": {
+            "count": 240,
+            "tp": 18,
+            "fp": 0,
+            "fn": 0,
+            "micro_precision": 1.0,
+            "micro_recall": 1.0,
+            "micro_f1": 1.0,
+            "macro_f1": 1.0
+          }
+        },
+        "clarification": {
+          "count": 240,
+          "tp": 18,
+          "fp": 0,
+          "fn": 0,
+          "f1": 1.0,
+          "positive_count": 18,
+          "invalid_count": 0,
+          "accuracy": 1.0
+        }
+      },
+      "consistency_rate": 1.0,
+      "consistency_case_count": 80,
+      "consistent_case_count": 80,
+      "first_schema_valid_rate": null,
+      "mean_parse_latency_ms": 0.0,
+      "p95_parse_latency_ms": 0.0,
+      "mean_search_latency_ms": 0.4848270831644186,
+      "p95_search_latency_ms": 0.7165850016463081,
+      "mrr": 0.9428571428571428,
+      "map_at_5": 0.9411904761904762,
+      "recall_at_10": 0.9685714285714286,
+      "retrieval_positive_count": 210,
+      "zero_result_evaluated_count": 210,
+      "zero_result_error_rate": 0.02857142857142857,
+      "metamorphic_pass_rate": 0.9166666666666666
+    }
+  ],
+  "slices": [
+    {
+      "slice": "ambiguity",
+      "model": "local-rules",
+      "task": "smart_search",
+      "split": "dev",
+      "count": 30,
+      "case_count": 10,
+      "expected_count": 30,
+      "complete": true,
+      "passed_count": 6,
+      "pass_rate": 0.2,
+      "mean_score": 0.7383838383838384,
+      "error_count": 3,
+      "error_rate": 0.1,
+      "fallback_count": 0,
+      "raw_pass_rate": null,
+      "raw_mean_score": null,
+      "application_pass_rate": 0.2,
+      "schema_valid_rate": 0.9,
+      "latency_samples": 30,
+      "mean_latency_ms": 0.6910333333333334,
+      "p50_latency_ms": 0.675,
+      "p95_latency_ms": 1.3331499999999998,
+      "attempt_count": 0,
+      "unknown_cost_count": 0,
+      "known_cost_subtotal_cny": 0.0,
+      "total_cost_cny": 0.0,
+      "mean_cost_cny": 0.0,
+      "errors": {
+        "output_validation_error": 3
+      },
+      "prompt_hashes": [],
+      "cost_per_pass_cny": 0.0,
+      "macro_f1": null,
+      "false_match_rate": null,
+      "verdict_count": 0,
+      "confusion_matrix": {},
+      "raw_classification": {
+        "macro_f1": null,
+        "false_match_rate": null,
+        "verdict_count": 0,
+        "confusion_matrix": {}
+      },
+      "parse_diagnostics": {
+        "fields": {
+          "category": {
+            "count": 30,
+            "accuracy": 0.8,
+            "macro_f1": 0.7377777777777779,
+            "label_support": {
+              "\"宿舍生活与家电\"": 3,
+              "\"数码与影音\"": 9,
+              "\"校园出行与运动\"": 3,
+              "\"课程资料与书籍\"": 3,
+              "null": 12
+            }
+          },
+          "max_price": {
+            "count": 30,
+            "accuracy": 0.7,
+            "macro_f1": null,
+            "label_support": {
+              "null": 30
+            }
+          },
+          "campus": {
+            "count": 30,
+            "accuracy": 0.9,
+            "macro_f1": 0.9705882352941176,
+            "label_support": {
+              "\"万柳学区\"": 3,
+              "\"不限校区\"": 27
+            }
+          },
+          "condition_grade": {
+            "count": 30,
+            "accuracy": 0.9,
+            "macro_f1": 0.9473684210526315,
+            "label_support": {
+              "null": 30
+            }
+          }
+        },
+        "sets": {
+          "keywords": {
+            "count": 30,
+            "tp": 12,
+            "fp": 21,
+            "fn": 9,
+            "micro_precision": 0.36363636363636365,
+            "micro_recall": 0.5714285714285714,
+            "micro_f1": 0.4444444444444444,
+            "macro_f1": 0.4
+          },
+          "excluded_keywords": {
+            "count": 30,
+            "tp": 0,
+            "fp": 6,
+            "fn": 0,
+            "micro_precision": 0.0,
+            "micro_recall": 1.0,
+            "micro_f1": 0.0,
+            "macro_f1": 0.8
+          },
+          "preferences": {
+            "count": 30,
+            "tp": 0,
+            "fp": 3,
+            "fn": 0,
+            "micro_precision": 0.0,
+            "micro_recall": 1.0,
+            "micro_f1": 0.0,
+            "macro_f1": 0.9
+          }
+        },
+        "clarification": {
+          "count": 30,
+          "tp": 12,
+          "fp": 3,
+          "fn": 6,
+          "f1": 0.7272727272727273,
+          "positive_count": 18,
+          "invalid_count": 3,
+          "accuracy": 0.7
+        }
+      },
+      "consistency_rate": 0.9,
+      "consistency_case_count": 10,
+      "consistent_case_count": 9,
+      "first_schema_valid_rate": null,
+      "mean_parse_latency_ms": 0.04956666666666667,
+      "p95_parse_latency_ms": 0.06355,
+      "mean_search_latency_ms": 0.6359866669905992,
+      "p95_search_latency_ms": 1.2692600008449517,
+      "mrr": 0.75,
+      "map_at_5": 0.75,
+      "recall_at_10": 0.75,
+      "retrieval_positive_count": 12,
+      "zero_result_evaluated_count": 12,
+      "zero_result_error_rate": 0.25
+    },
+    {
+      "slice": "confusable",
+      "model": "local-rules",
+      "task": "smart_search",
+      "split": "dev",
+      "count": 33,
+      "case_count": 11,
+      "expected_count": 33,
+      "complete": true,
+      "passed_count": 9,
+      "pass_rate": 0.2727272727272727,
+      "mean_score": 0.8322314049586778,
+      "error_count": 0,
+      "error_rate": 0.0,
+      "fallback_count": 0,
+      "raw_pass_rate": null,
+      "raw_mean_score": null,
+      "application_pass_rate": 0.2727272727272727,
+      "schema_valid_rate": 1.0,
+      "latency_samples": 33,
+      "mean_latency_ms": 0.5915151515151515,
+      "p50_latency_ms": 0.59,
+      "p95_latency_ms": 1.0051999999999999,
+      "attempt_count": 0,
+      "unknown_cost_count": 0,
+      "known_cost_subtotal_cny": 0.0,
+      "total_cost_cny": 0.0,
+      "mean_cost_cny": 0.0,
+      "errors": {},
+      "prompt_hashes": [],
+      "cost_per_pass_cny": 0.0,
+      "macro_f1": null,
+      "false_match_rate": null,
+      "verdict_count": 0,
+      "confusion_matrix": {},
+      "raw_classification": {
+        "macro_f1": null,
+        "false_match_rate": null,
+        "verdict_count": 0,
+        "confusion_matrix": {}
+      },
+      "parse_diagnostics": {
+        "fields": {
+          "category": {
+            "count": 33,
+            "accuracy": 0.9090909090909091,
+            "macro_f1": 0.8888888888888888,
+            "label_support": {
+              "\"数码与影音\"": 21,
+              "\"校园出行与运动\"": 6,
+              "\"美妆服饰与周边\"": 6
+            }
+          },
+          "max_price": {
+            "count": 33,
+            "accuracy": 1.0,
+            "macro_f1": null,
+            "label_support": {
+              "null": 33
+            }
+          },
+          "campus": {
+            "count": 33,
+            "accuracy": 1.0,
+            "macro_f1": 1.0,
+            "label_support": {
+              "\"不限校区\"": 33
+            }
+          },
+          "condition_grade": {
+            "count": 33,
+            "accuracy": 1.0,
+            "macro_f1": 1.0,
+            "label_support": {
+              "null": 33
+            }
+          }
+        },
+        "sets": {
+          "keywords": {
+            "count": 33,
+            "tp": 18,
+            "fp": 15,
+            "fn": 18,
+            "micro_precision": 0.5454545454545454,
+            "micro_recall": 0.5,
+            "micro_f1": 0.5217391304347826,
+            "macro_f1": 0.5151515151515151
+          },
+          "excluded_keywords": {
+            "count": 33,
+            "tp": 0,
+            "fp": 0,
+            "fn": 0,
+            "micro_precision": 1.0,
+            "micro_recall": 1.0,
+            "micro_f1": 1.0,
+            "macro_f1": 1.0
+          },
+          "preferences": {
+            "count": 33,
+            "tp": 0,
+            "fp": 0,
+            "fn": 0,
+            "micro_precision": 1.0,
+            "micro_recall": 1.0,
+            "micro_f1": 1.0,
+            "macro_f1": 1.0
+          }
+        },
+        "clarification": {
+          "count": 33,
+          "tp": 0,
+          "fp": 3,
+          "fn": 0,
+          "f1": 0.0,
+          "positive_count": 0,
+          "invalid_count": 0,
+          "accuracy": 0.9090909090909091
+        }
+      },
+      "consistency_rate": 1.0,
+      "consistency_case_count": 11,
+      "consistent_case_count": 11,
+      "first_schema_valid_rate": null,
+      "mean_parse_latency_ms": 0.0453030303030303,
+      "p95_parse_latency_ms": 0.0484,
+      "mean_search_latency_ms": 0.5411545452344316,
+      "p95_search_latency_ms": 0.9562200000800658,
+      "mrr": 0.7424242424242424,
+      "map_at_5": 0.75,
+      "recall_at_10": 1.0,
+      "retrieval_positive_count": 33,
+      "zero_result_evaluated_count": 33,
+      "zero_result_error_rate": 0.0
+    },
+    {
+      "slice": "core",
+      "model": "local-rules",
+      "task": "smart_search",
+      "split": "dev",
+      "count": 42,
+      "case_count": 14,
+      "expected_count": 42,
+      "complete": true,
+      "passed_count": 15,
+      "pass_rate": 0.35714285714285715,
+      "mean_score": 0.8372294372294372,
+      "error_count": 0,
+      "error_rate": 0.0,
+      "fallback_count": 0,
+      "raw_pass_rate": null,
+      "raw_mean_score": null,
+      "application_pass_rate": 0.35714285714285715,
+      "schema_valid_rate": 1.0,
+      "latency_samples": 42,
+      "mean_latency_ms": 0.4572857142857143,
+      "p50_latency_ms": 0.4215,
+      "p95_latency_ms": 0.7468499999999998,
+      "attempt_count": 0,
+      "unknown_cost_count": 0,
+      "known_cost_subtotal_cny": 0.0,
+      "total_cost_cny": 0.0,
+      "mean_cost_cny": 0.0,
+      "errors": {},
+      "prompt_hashes": [],
+      "cost_per_pass_cny": 0.0,
+      "macro_f1": null,
+      "false_match_rate": null,
+      "verdict_count": 0,
+      "confusion_matrix": {},
+      "raw_classification": {
+        "macro_f1": null,
+        "false_match_rate": null,
+        "verdict_count": 0,
+        "confusion_matrix": {}
+      },
+      "parse_diagnostics": {
+        "fields": {
+          "category": {
+            "count": 42,
+            "accuracy": 0.9285714285714286,
+            "macro_f1": 0.9444444444444445,
+            "label_support": {
+              "\"人员招募\"": 3,
+              "\"宿舍生活与家电\"": 6,
+              "\"数码与影音\"": 9,
+              "\"校园出行与运动\"": 12,
+              "\"美妆服饰与周边\"": 6,
+              "\"课程资料与书籍\"": 6
+            }
+          },
+          "max_price": {
+            "count": 42,
+            "accuracy": 0.6428571428571429,
+            "macro_f1": null,
+            "label_support": {
+              "\"0\"": 6,
+              "\"1.5E+2\"": 6,
+              "\"1E+2\"": 3,
+              "\"2E+2\"": 9,
+              "\"3E+1\"": 6,
+              "\"4E+2\"": 3,
+              "\"5E+1\"": 6,
+              "\"5E+2\"": 3
+            }
+          },
+          "campus": {
+            "count": 42,
+            "accuracy": 1.0,
+            "macro_f1": 1.0,
+            "label_support": {
+              "\"万柳学区\"": 21,
+              "\"医学部\"": 3,
+              "\"昌平新校区\"": 3,
+              "\"燕园校本部\"": 15
+            }
+          },
+          "condition_grade": {
+            "count": 42,
+            "accuracy": 1.0,
+            "macro_f1": 1.0,
+            "label_support": {
+              "\"8成新\"": 3,
+              "\"95新\"": 3,
+              "\"9成新\"": 6,
+              "\"基本可用\"": 6,
+              "null": 24
+            }
+          }
+        },
+        "sets": {
+          "keywords": {
+            "count": 42,
+            "tp": 33,
+            "fp": 18,
+            "fn": 15,
+            "micro_precision": 0.6470588235294118,
+            "micro_recall": 0.6875,
+            "micro_f1": 0.6666666666666666,
+            "macro_f1": 0.6428571428571429
+          },
+          "excluded_keywords": {
+            "count": 42,
+            "tp": 0,
+            "fp": 0,
+            "fn": 0,
+            "micro_precision": 1.0,
+            "micro_recall": 1.0,
+            "micro_f1": 1.0,
+            "macro_f1": 1.0
+          },
+          "preferences": {
+            "count": 42,
+            "tp": 0,
+            "fp": 0,
+            "fn": 0,
+            "micro_precision": 1.0,
+            "micro_recall": 1.0,
+            "micro_f1": 1.0,
+            "macro_f1": 1.0
+          }
+        },
+        "clarification": {
+          "count": 42,
+          "tp": 0,
+          "fp": 3,
+          "fn": 0,
+          "f1": 0.0,
+          "positive_count": 0,
+          "invalid_count": 0,
+          "accuracy": 0.9285714285714286
+        }
+      },
+      "consistency_rate": 1.0,
+      "consistency_case_count": 14,
+      "consistent_case_count": 14,
+      "first_schema_valid_rate": null,
+      "mean_parse_latency_ms": 0.05411904761904762,
+      "p95_parse_latency_ms": 0.08439999999999995,
+      "mean_search_latency_ms": 0.39784047606060213,
+      "p95_search_latency_ms": 0.6897550005305673,
+      "mrr": 0.7142857142857143,
+      "map_at_5": 0.7142857142857143,
+      "recall_at_10": 0.7142857142857143,
+      "retrieval_positive_count": 42,
+      "zero_result_evaluated_count": 42,
+      "zero_result_error_rate": 0.2857142857142857
+    },
+    {
+      "slice": "negation",
+      "model": "local-rules",
+      "task": "smart_search",
+      "split": "dev",
+      "count": 33,
+      "case_count": 11,
+      "expected_count": 33,
+      "complete": true,
+      "passed_count": 12,
+      "pass_rate": 0.36363636363636365,
+      "mean_score": 0.8949035812672176,
+      "error_count": 0,
+      "error_rate": 0.0,
+      "fallback_count": 0,
+      "raw_pass_rate": null,
+      "raw_mean_score": null,
+      "application_pass_rate": 0.36363636363636365,
+      "schema_valid_rate": 1.0,
+      "latency_samples": 33,
+      "mean_latency_ms": 0.6700909090909091,
+      "p50_latency_ms": 0.617,
+      "p95_latency_ms": 0.9246000000000001,
+      "attempt_count": 0,
+      "unknown_cost_count": 0,
+      "known_cost_subtotal_cny": 0.0,
+      "total_cost_cny": 0.0,
+      "mean_cost_cny": 0.0,
+      "errors": {},
+      "prompt_hashes": [],
+      "cost_per_pass_cny": 0.0,
+      "macro_f1": null,
+      "false_match_rate": null,
+      "verdict_count": 0,
+      "confusion_matrix": {},
+      "raw_classification": {
+        "macro_f1": null,
+        "false_match_rate": null,
+        "verdict_count": 0,
+        "confusion_matrix": {}
+      },
+      "parse_diagnostics": {
+        "fields": {
+          "category": {
+            "count": 33,
+            "accuracy": 0.8181818181818182,
+            "macro_f1": 0.6666666666666666,
+            "label_support": {
+              "\"数码与影音\"": 24,
+              "\"校园出行与运动\"": 3,
+              "\"美妆服饰与周边\"": 6
+            }
+          },
+          "max_price": {
+            "count": 33,
+            "accuracy": 1.0,
+            "macro_f1": null,
+            "label_support": {
+              "\"1E+2\"": 3,
+              "\"2E+2\"": 6,
+              "\"3E+2\"": 18,
+              "\"4E+2\"": 3,
+              "\"5E+2\"": 3
+            }
+          },
+          "campus": {
+            "count": 33,
+            "accuracy": 1.0,
+            "macro_f1": 1.0,
+            "label_support": {
+              "\"万柳学区\"": 12,
+              "\"不限校区\"": 18,
+              "\"燕园校本部\"": 3
+            }
+          },
+          "condition_grade": {
+            "count": 33,
+            "accuracy": 1.0,
+            "macro_f1": 1.0,
+            "label_support": {
+              "null": 33
+            }
+          }
+        },
+        "sets": {
+          "keywords": {
+            "count": 33,
+            "tp": 42,
+            "fp": 0,
+            "fn": 3,
+            "micro_precision": 1.0,
+            "micro_recall": 0.9333333333333333,
+            "micro_f1": 0.9655172413793104,
+            "macro_f1": 0.9090909090909091
+          },
+          "excluded_keywords": {
+            "count": 33,
+            "tp": 39,
+            "fp": 0,
+            "fn": 0,
+            "micro_precision": 1.0,
+            "micro_recall": 1.0,
+            "micro_f1": 1.0,
+            "macro_f1": 1.0
+          },
+          "preferences": {
+            "count": 33,
+            "tp": 0,
+            "fp": 0,
+            "fn": 0,
+            "micro_precision": 1.0,
+            "micro_recall": 1.0,
+            "micro_f1": 1.0,
+            "macro_f1": 1.0
+          }
+        },
+        "clarification": {
+          "count": 33,
+          "tp": 0,
+          "fp": 6,
+          "fn": 0,
+          "f1": 0.0,
+          "positive_count": 0,
+          "invalid_count": 0,
+          "accuracy": 0.8181818181818182
+        }
+      },
+      "consistency_rate": 1.0,
+      "consistency_case_count": 11,
+      "consistent_case_count": 11,
+      "first_schema_valid_rate": null,
+      "mean_parse_latency_ms": 0.056151515151515154,
+      "p95_parse_latency_ms": 0.0674,
+      "mean_search_latency_ms": 0.6084515151804115,
+      "p95_search_latency_ms": 0.8578799992392305,
+      "mrr": 0.7809917355371901,
+      "map_at_5": 0.7727272727272727,
+      "recall_at_10": 0.8181818181818182,
+      "retrieval_positive_count": 33,
+      "zero_result_evaluated_count": 33,
+      "zero_result_error_rate": 0.09090909090909091
+    },
+    {
+      "slice": "ood",
+      "model": "local-rules",
+      "task": "smart_search",
+      "split": "dev",
+      "count": 30,
+      "case_count": 10,
+      "expected_count": 30,
+      "complete": true,
+      "passed_count": 0,
+      "pass_rate": 0.0,
+      "mean_score": 0.7454545454545455,
+      "error_count": 0,
+      "error_rate": 0.0,
+      "fallback_count": 0,
+      "raw_pass_rate": null,
+      "raw_mean_score": null,
+      "application_pass_rate": 0.0,
+      "schema_valid_rate": 1.0,
+      "latency_samples": 30,
+      "mean_latency_ms": 0.8308333333333333,
+      "p50_latency_ms": 0.877,
+      "p95_latency_ms": 1.1919499999999996,
+      "attempt_count": 0,
+      "unknown_cost_count": 0,
+      "known_cost_subtotal_cny": 0.0,
+      "total_cost_cny": 0.0,
+      "mean_cost_cny": 0.0,
+      "errors": {},
+      "prompt_hashes": [],
+      "cost_per_pass_cny": null,
+      "macro_f1": null,
+      "false_match_rate": null,
+      "verdict_count": 0,
+      "confusion_matrix": {},
+      "raw_classification": {
+        "macro_f1": null,
+        "false_match_rate": null,
+        "verdict_count": 0,
+        "confusion_matrix": {}
+      },
+      "parse_diagnostics": {
+        "fields": {
+          "category": {
+            "count": 30,
+            "accuracy": 0.2,
+            "macro_f1": 0.18181818181818182,
+            "label_support": {
+              "\"宿舍生活与家电\"": 3,
+              "\"数码与影音\"": 27
+            }
+          },
+          "max_price": {
+            "count": 30,
+            "accuracy": 1.0,
+            "macro_f1": null,
+            "label_support": {
+              "\"1E+2\"": 3,
+              "\"1E+3\"": 3,
+              "\"2E+1\"": 3,
+              "\"2E+2\"": 3,
+              "\"2E+3\"": 6,
+              "\"3.5E+3\"": 3,
+              "\"3E+2\"": 3,
+              "\"4E+2\"": 3,
+              "\"9E+1\"": 3
+            }
+          },
+          "campus": {
+            "count": 30,
+            "accuracy": 1.0,
+            "macro_f1": 1.0,
+            "label_support": {
+              "\"不限校区\"": 30
+            }
+          },
+          "condition_grade": {
+            "count": 30,
+            "accuracy": 1.0,
+            "macro_f1": 1.0,
+            "label_support": {
+              "null": 30
+            }
+          }
+        },
+        "sets": {
+          "keywords": {
+            "count": 30,
+            "tp": 15,
+            "fp": 15,
+            "fn": 15,
+            "micro_precision": 0.5,
+            "micro_recall": 0.5,
+            "micro_f1": 0.5,
+            "macro_f1": 0.5
+          },
+          "excluded_keywords": {
+            "count": 30,
+            "tp": 0,
+            "fp": 0,
+            "fn": 0,
+            "micro_precision": 1.0,
+            "micro_recall": 1.0,
+            "micro_f1": 1.0,
+            "macro_f1": 1.0
+          },
+          "preferences": {
+            "count": 30,
+            "tp": 0,
+            "fp": 0,
+            "fn": 0,
+            "micro_precision": 1.0,
+            "micro_recall": 1.0,
+            "micro_f1": 1.0,
+            "macro_f1": 1.0
+          }
+        },
+        "clarification": {
+          "count": 30,
+          "tp": 0,
+          "fp": 24,
+          "fn": 0,
+          "f1": 0.0,
+          "positive_count": 0,
+          "invalid_count": 0,
+          "accuracy": 0.2
+        }
+      },
+      "consistency_rate": 1.0,
+      "consistency_case_count": 10,
+      "consistent_case_count": 10,
+      "first_schema_valid_rate": null,
+      "mean_parse_latency_ms": 0.05296666666666667,
+      "p95_parse_latency_ms": 0.059,
+      "mean_search_latency_ms": 0.7726100000581937,
+      "p95_search_latency_ms": 1.131139999051811,
+      "mrr": 0.9285714285714286,
+      "map_at_5": 0.9285714285714286,
+      "recall_at_10": 1.0,
+      "retrieval_positive_count": 21,
+      "zero_result_evaluated_count": 21,
+      "zero_result_error_rate": 0.0
+    },
+    {
+      "slice": "preference",
+      "model": "local-rules",
+      "task": "smart_search",
+      "split": "dev",
+      "count": 33,
+      "case_count": 11,
+      "expected_count": 33,
+      "complete": true,
+      "passed_count": 15,
+      "pass_rate": 0.45454545454545453,
+      "mean_score": 0.8694214876033058,
+      "error_count": 0,
+      "error_rate": 0.0,
+      "fallback_count": 0,
+      "raw_pass_rate": null,
+      "raw_mean_score": null,
+      "application_pass_rate": 0.45454545454545453,
+      "schema_valid_rate": 1.0,
+      "latency_samples": 33,
+      "mean_latency_ms": 0.6047878787878788,
+      "p50_latency_ms": 0.522,
+      "p95_latency_ms": 0.8193999999999999,
+      "attempt_count": 0,
+      "unknown_cost_count": 0,
+      "known_cost_subtotal_cny": 0.0,
+      "total_cost_cny": 0.0,
+      "mean_cost_cny": 0.0,
+      "errors": {},
+      "prompt_hashes": [],
+      "cost_per_pass_cny": 0.0,
+      "macro_f1": null,
+      "false_match_rate": null,
+      "verdict_count": 0,
+      "confusion_matrix": {},
+      "raw_classification": {
+        "macro_f1": null,
+        "false_match_rate": null,
+        "verdict_count": 0,
+        "confusion_matrix": {}
+      },
+      "parse_diagnostics": {
+        "fields": {
+          "category": {
+            "count": 33,
+            "accuracy": 0.8181818181818182,
+            "macro_f1": 0.75,
+            "label_support": {
+              "\"宿舍生活与家电\"": 6,
+              "\"数码与影音\"": 12,
+              "\"校园出行与运动\"": 9,
+              "\"美妆服饰与周边\"": 6
+            }
+          },
+          "max_price": {
+            "count": 33,
+            "accuracy": 1.0,
+            "macro_f1": null,
+            "label_support": {
+              "\"1E+2\"": 12,
+              "\"2E+2\"": 6,
+              "\"4E+2\"": 6,
+              "\"5E+2\"": 9
+            }
+          },
+          "campus": {
+            "count": 33,
+            "accuracy": 1.0,
+            "macro_f1": 1.0,
+            "label_support": {
+              "\"万柳学区\"": 9,
+              "\"不限校区\"": 24
+            }
+          },
+          "condition_grade": {
+            "count": 33,
+            "accuracy": 1.0,
+            "macro_f1": 1.0,
+            "label_support": {
+              "null": 33
+            }
+          }
+        },
+        "sets": {
+          "keywords": {
+            "count": 33,
+            "tp": 33,
+            "fp": 3,
+            "fn": 15,
+            "micro_precision": 0.9166666666666666,
+            "micro_recall": 0.6875,
+            "micro_f1": 0.7857142857142857,
+            "macro_f1": 0.8181818181818182
+          },
+          "excluded_keywords": {
+            "count": 33,
+            "tp": 0,
+            "fp": 0,
+            "fn": 0,
+            "micro_precision": 1.0,
+            "micro_recall": 1.0,
+            "micro_f1": 1.0,
+            "macro_f1": 1.0
+          },
+          "preferences": {
+            "count": 33,
+            "tp": 18,
+            "fp": 0,
+            "fn": 0,
+            "micro_precision": 1.0,
+            "micro_recall": 1.0,
+            "micro_f1": 1.0,
+            "macro_f1": 1.0
+          }
+        },
+        "clarification": {
+          "count": 33,
+          "tp": 0,
+          "fp": 6,
+          "fn": 0,
+          "f1": 0.0,
+          "positive_count": 0,
+          "invalid_count": 0,
+          "accuracy": 0.8181818181818182
+        }
+      },
+      "consistency_rate": 1.0,
+      "consistency_case_count": 11,
+      "consistent_case_count": 11,
+      "first_schema_valid_rate": null,
+      "mean_parse_latency_ms": 0.07633333333333334,
+      "p95_parse_latency_ms": 0.06739999999999999,
+      "mean_search_latency_ms": 0.5231484843313934,
+      "p95_search_latency_ms": 0.7453799997165332,
+      "mrr": 0.7727272727272727,
+      "map_at_5": 0.7727272727272727,
+      "recall_at_10": 0.8181818181818182,
+      "retrieval_positive_count": 33,
+      "zero_result_evaluated_count": 33,
+      "zero_result_error_rate": 0.18181818181818182
+    },
+    {
+      "slice": "price",
+      "model": "local-rules",
+      "task": "smart_search",
+      "split": "dev",
+      "count": 39,
+      "case_count": 13,
+      "expected_count": 39,
+      "complete": true,
+      "passed_count": 6,
+      "pass_rate": 0.15384615384615385,
+      "mean_score": 0.806993006993007,
+      "error_count": 0,
+      "error_rate": 0.0,
+      "fallback_count": 0,
+      "raw_pass_rate": null,
+      "raw_mean_score": null,
+      "application_pass_rate": 0.15384615384615385,
+      "schema_valid_rate": 1.0,
+      "latency_samples": 39,
+      "mean_latency_ms": 1.0375384615384615,
+      "p50_latency_ms": 0.581,
+      "p95_latency_ms": 1.0937000000000014,
+      "attempt_count": 0,
+      "unknown_cost_count": 0,
+      "known_cost_subtotal_cny": 0.0,
+      "total_cost_cny": 0.0,
+      "mean_cost_cny": 0.0,
+      "errors": {},
+      "prompt_hashes": [],
+      "cost_per_pass_cny": 0.0,
+      "macro_f1": null,
+      "false_match_rate": null,
+      "verdict_count": 0,
+      "confusion_matrix": {},
+      "raw_classification": {
+        "macro_f1": null,
+        "false_match_rate": null,
+        "verdict_count": 0,
+        "confusion_matrix": {}
+      },
+      "parse_diagnostics": {
+        "fields": {
+          "category": {
+            "count": 39,
+            "accuracy": 0.9230769230769231,
+            "macro_f1": 0.9824561403508771,
+            "label_support": {
+              "\"宿舍生活与家电\"": 6,
+              "\"数码与影音\"": 30,
+              "\"课程资料与书籍\"": 3
+            }
+          },
+          "max_price": {
+            "count": 39,
+            "accuracy": 0.6153846153846154,
+            "macro_f1": null,
+            "label_support": {
+              "\"0\"": 6,
+              "\"1.5E+3\"": 6,
+              "\"2E+2\"": 9,
+              "\"3E+2\"": 9,
+              "\"49.99\"": 3,
+              "\"5E+1\"": 3,
+              "\"99.5\"": 3
+            }
+          },
+          "campus": {
+            "count": 39,
+            "accuracy": 1.0,
+            "macro_f1": 1.0,
+            "label_support": {
+              "\"不限校区\"": 39
+            }
+          },
+          "condition_grade": {
+            "count": 39,
+            "accuracy": 1.0,
+            "macro_f1": 1.0,
+            "label_support": {
+              "\"全新\"": 3,
+              "null": 36
+            }
+          }
+        },
+        "sets": {
+          "keywords": {
+            "count": 39,
+            "tp": 36,
+            "fp": 15,
+            "fn": 15,
+            "micro_precision": 0.7058823529411765,
+            "micro_recall": 0.7058823529411765,
+            "micro_f1": 0.7058823529411765,
+            "macro_f1": 0.6153846153846154
+          },
+          "excluded_keywords": {
+            "count": 39,
+            "tp": 0,
+            "fp": 0,
+            "fn": 0,
+            "micro_precision": 1.0,
+            "micro_recall": 1.0,
+            "micro_f1": 1.0,
+            "macro_f1": 1.0
+          },
+          "preferences": {
+            "count": 39,
+            "tp": 0,
+            "fp": 0,
+            "fn": 0,
+            "micro_precision": 1.0,
+            "micro_recall": 1.0,
+            "micro_f1": 1.0,
+            "macro_f1": 1.0
+          }
+        },
+        "clarification": {
+          "count": 39,
+          "tp": 0,
+          "fp": 3,
+          "fn": 0,
+          "f1": 0.0,
+          "positive_count": 0,
+          "invalid_count": 0,
+          "accuracy": 0.9230769230769231
+        }
+      },
+      "consistency_rate": 1.0,
+      "consistency_case_count": 13,
+      "consistent_case_count": 13,
+      "first_schema_valid_rate": null,
+      "mean_parse_latency_ms": 0.052051282051282045,
+      "p95_parse_latency_ms": 0.057100000000000005,
+      "mean_search_latency_ms": 0.9799948715319774,
+      "p95_search_latency_ms": 1.0260499999276373,
+      "mrr": 0.6736111111111112,
+      "map_at_5": 0.6384722222222222,
+      "recall_at_10": 0.9166666666666666,
+      "retrieval_positive_count": 36,
+      "zero_result_evaluated_count": 36,
+      "zero_result_error_rate": 0.08333333333333333
+    },
+    {
+      "slice": "ambiguity",
+      "model": "oracle",
+      "task": "smart_search",
+      "split": "dev",
+      "count": 30,
+      "case_count": 10,
+      "expected_count": 30,
+      "complete": true,
+      "passed_count": 27,
+      "pass_rate": 0.9,
+      "mean_score": 0.9909090909090909,
+      "error_count": 0,
+      "error_rate": 0.0,
+      "fallback_count": 0,
+      "raw_pass_rate": null,
+      "raw_mean_score": null,
+      "application_pass_rate": 0.9,
+      "schema_valid_rate": 1.0,
+      "latency_samples": 30,
+      "mean_latency_ms": 0.6242,
+      "p50_latency_ms": 0.6034999999999999,
+      "p95_latency_ms": 1.1827499999999989,
+      "attempt_count": 0,
+      "unknown_cost_count": 0,
+      "known_cost_subtotal_cny": 0.0,
+      "total_cost_cny": 0.0,
+      "mean_cost_cny": 0.0,
+      "errors": {},
+      "prompt_hashes": [
+        "16b0177613678ff8156f531d1486a0f64d822a0c79ec2b1552a3eb088670c27e"
+      ],
+      "cost_per_pass_cny": 0.0,
+      "macro_f1": null,
+      "false_match_rate": null,
+      "verdict_count": 0,
+      "confusion_matrix": {},
+      "raw_classification": {
+        "macro_f1": null,
+        "false_match_rate": null,
+        "verdict_count": 0,
+        "confusion_matrix": {}
+      },
+      "parse_diagnostics": {
+        "fields": {
+          "category": {
+            "count": 30,
+            "accuracy": 1.0,
+            "macro_f1": 1.0,
+            "label_support": {
+              "\"宿舍生活与家电\"": 3,
+              "\"数码与影音\"": 9,
+              "\"校园出行与运动\"": 3,
+              "\"课程资料与书籍\"": 3,
+              "null": 12
+            }
+          },
+          "max_price": {
+            "count": 30,
+            "accuracy": 1.0,
+            "macro_f1": null,
+            "label_support": {
+              "null": 30
+            }
+          },
+          "campus": {
+            "count": 30,
+            "accuracy": 1.0,
+            "macro_f1": 1.0,
+            "label_support": {
+              "\"万柳学区\"": 3,
+              "\"不限校区\"": 27
+            }
+          },
+          "condition_grade": {
+            "count": 30,
+            "accuracy": 1.0,
+            "macro_f1": 1.0,
+            "label_support": {
+              "null": 30
+            }
+          }
+        },
+        "sets": {
+          "keywords": {
+            "count": 30,
+            "tp": 21,
+            "fp": 0,
+            "fn": 0,
+            "micro_precision": 1.0,
+            "micro_recall": 1.0,
+            "micro_f1": 1.0,
+            "macro_f1": 1.0
+          },
+          "excluded_keywords": {
+            "count": 30,
+            "tp": 0,
+            "fp": 0,
+            "fn": 0,
+            "micro_precision": 1.0,
+            "micro_recall": 1.0,
+            "micro_f1": 1.0,
+            "macro_f1": 1.0
+          },
+          "preferences": {
+            "count": 30,
+            "tp": 0,
+            "fp": 0,
+            "fn": 0,
+            "micro_precision": 1.0,
+            "micro_recall": 1.0,
+            "micro_f1": 1.0,
+            "macro_f1": 1.0
+          }
+        },
+        "clarification": {
+          "count": 30,
+          "tp": 18,
+          "fp": 0,
+          "fn": 0,
+          "f1": 1.0,
+          "positive_count": 18,
+          "invalid_count": 0,
+          "accuracy": 1.0
+        }
+      },
+      "consistency_rate": 1.0,
+      "consistency_case_count": 10,
+      "consistent_case_count": 10,
+      "first_schema_valid_rate": null,
+      "mean_parse_latency_ms": 0.0,
+      "p95_parse_latency_ms": 0.0,
+      "mean_search_latency_ms": 0.5984733326234467,
+      "p95_search_latency_ms": 1.154289999976753,
+      "mrr": 1.0,
+      "map_at_5": 1.0,
+      "recall_at_10": 1.0,
+      "retrieval_positive_count": 12,
+      "zero_result_evaluated_count": 12,
+      "zero_result_error_rate": 0.0
+    },
+    {
+      "slice": "confusable",
+      "model": "oracle",
+      "task": "smart_search",
+      "split": "dev",
+      "count": 33,
+      "case_count": 11,
+      "expected_count": 33,
+      "complete": true,
+      "passed_count": 27,
+      "pass_rate": 0.8181818181818182,
+      "mean_score": 0.9826446280991736,
+      "error_count": 0,
+      "error_rate": 0.0,
+      "fallback_count": 0,
+      "raw_pass_rate": null,
+      "raw_mean_score": null,
+      "application_pass_rate": 0.8181818181818182,
+      "schema_valid_rate": 1.0,
+      "latency_samples": 33,
+      "mean_latency_ms": 0.5226969696969697,
+      "p50_latency_ms": 0.57,
+      "p95_latency_ms": 0.7053999999999999,
+      "attempt_count": 0,
+      "unknown_cost_count": 0,
+      "known_cost_subtotal_cny": 0.0,
+      "total_cost_cny": 0.0,
+      "mean_cost_cny": 0.0,
+      "errors": {},
+      "prompt_hashes": [
+        "16b0177613678ff8156f531d1486a0f64d822a0c79ec2b1552a3eb088670c27e"
+      ],
+      "cost_per_pass_cny": 0.0,
+      "macro_f1": null,
+      "false_match_rate": null,
+      "verdict_count": 0,
+      "confusion_matrix": {},
+      "raw_classification": {
+        "macro_f1": null,
+        "false_match_rate": null,
+        "verdict_count": 0,
+        "confusion_matrix": {}
+      },
+      "parse_diagnostics": {
+        "fields": {
+          "category": {
+            "count": 33,
+            "accuracy": 1.0,
+            "macro_f1": 1.0,
+            "label_support": {
+              "\"数码与影音\"": 21,
+              "\"校园出行与运动\"": 6,
+              "\"美妆服饰与周边\"": 6
+            }
+          },
+          "max_price": {
+            "count": 33,
+            "accuracy": 1.0,
+            "macro_f1": null,
+            "label_support": {
+              "null": 33
+            }
+          },
+          "campus": {
+            "count": 33,
+            "accuracy": 1.0,
+            "macro_f1": 1.0,
+            "label_support": {
+              "\"不限校区\"": 33
+            }
+          },
+          "condition_grade": {
+            "count": 33,
+            "accuracy": 1.0,
+            "macro_f1": 1.0,
+            "label_support": {
+              "null": 33
+            }
+          }
+        },
+        "sets": {
+          "keywords": {
+            "count": 33,
+            "tp": 36,
+            "fp": 0,
+            "fn": 0,
+            "micro_precision": 1.0,
+            "micro_recall": 1.0,
+            "micro_f1": 1.0,
+            "macro_f1": 1.0
+          },
+          "excluded_keywords": {
+            "count": 33,
+            "tp": 0,
+            "fp": 0,
+            "fn": 0,
+            "micro_precision": 1.0,
+            "micro_recall": 1.0,
+            "micro_f1": 1.0,
+            "macro_f1": 1.0
+          },
+          "preferences": {
+            "count": 33,
+            "tp": 0,
+            "fp": 0,
+            "fn": 0,
+            "micro_precision": 1.0,
+            "micro_recall": 1.0,
+            "micro_f1": 1.0,
+            "macro_f1": 1.0
+          }
+        },
+        "clarification": {
+          "count": 33,
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "f1": null,
+          "positive_count": 0,
+          "invalid_count": 0,
+          "accuracy": 1.0
+        }
+      },
+      "consistency_rate": 1.0,
+      "consistency_case_count": 11,
+      "consistent_case_count": 11,
+      "first_schema_valid_rate": null,
+      "mean_parse_latency_ms": 0.0,
+      "p95_parse_latency_ms": 0.0,
+      "mean_search_latency_ms": 0.49881212136383646,
+      "p95_search_latency_ms": 0.6778399998438545,
+      "mrr": 0.9090909090909091,
+      "map_at_5": 0.9166666666666666,
+      "recall_at_10": 1.0,
+      "retrieval_positive_count": 33,
+      "zero_result_evaluated_count": 33,
+      "zero_result_error_rate": 0.0
+    },
+    {
+      "slice": "core",
+      "model": "oracle",
+      "task": "smart_search",
+      "split": "dev",
+      "count": 42,
+      "case_count": 14,
+      "expected_count": 42,
+      "complete": true,
+      "passed_count": 36,
+      "pass_rate": 0.8571428571428571,
+      "mean_score": 0.987012987012987,
+      "error_count": 0,
+      "error_rate": 0.0,
+      "fallback_count": 0,
+      "raw_pass_rate": null,
+      "raw_mean_score": null,
+      "application_pass_rate": 0.8571428571428571,
+      "schema_valid_rate": 1.0,
+      "latency_samples": 42,
+      "mean_latency_ms": 0.4220238095238096,
+      "p50_latency_ms": 0.404,
+      "p95_latency_ms": 0.5214999999999999,
+      "attempt_count": 0,
+      "unknown_cost_count": 0,
+      "known_cost_subtotal_cny": 0.0,
+      "total_cost_cny": 0.0,
+      "mean_cost_cny": 0.0,
+      "errors": {},
+      "prompt_hashes": [
+        "16b0177613678ff8156f531d1486a0f64d822a0c79ec2b1552a3eb088670c27e"
+      ],
+      "cost_per_pass_cny": 0.0,
+      "macro_f1": null,
+      "false_match_rate": null,
+      "verdict_count": 0,
+      "confusion_matrix": {},
+      "raw_classification": {
+        "macro_f1": null,
+        "false_match_rate": null,
+        "verdict_count": 0,
+        "confusion_matrix": {}
+      },
+      "parse_diagnostics": {
+        "fields": {
+          "category": {
+            "count": 42,
+            "accuracy": 1.0,
+            "macro_f1": 1.0,
+            "label_support": {
+              "\"人员招募\"": 3,
+              "\"宿舍生活与家电\"": 6,
+              "\"数码与影音\"": 9,
+              "\"校园出行与运动\"": 12,
+              "\"美妆服饰与周边\"": 6,
+              "\"课程资料与书籍\"": 6
+            }
+          },
+          "max_price": {
+            "count": 42,
+            "accuracy": 1.0,
+            "macro_f1": null,
+            "label_support": {
+              "\"0\"": 6,
+              "\"1.5E+2\"": 6,
+              "\"1E+2\"": 3,
+              "\"2E+2\"": 9,
+              "\"3E+1\"": 6,
+              "\"4E+2\"": 3,
+              "\"5E+1\"": 6,
+              "\"5E+2\"": 3
+            }
+          },
+          "campus": {
+            "count": 42,
+            "accuracy": 1.0,
+            "macro_f1": 1.0,
+            "label_support": {
+              "\"万柳学区\"": 21,
+              "\"医学部\"": 3,
+              "\"昌平新校区\"": 3,
+              "\"燕园校本部\"": 15
+            }
+          },
+          "condition_grade": {
+            "count": 42,
+            "accuracy": 1.0,
+            "macro_f1": 1.0,
+            "label_support": {
+              "\"8成新\"": 3,
+              "\"95新\"": 3,
+              "\"9成新\"": 6,
+              "\"基本可用\"": 6,
+              "null": 24
+            }
+          }
+        },
+        "sets": {
+          "keywords": {
+            "count": 42,
+            "tp": 48,
+            "fp": 0,
+            "fn": 0,
+            "micro_precision": 1.0,
+            "micro_recall": 1.0,
+            "micro_f1": 1.0,
+            "macro_f1": 1.0
+          },
+          "excluded_keywords": {
+            "count": 42,
+            "tp": 0,
+            "fp": 0,
+            "fn": 0,
+            "micro_precision": 1.0,
+            "micro_recall": 1.0,
+            "micro_f1": 1.0,
+            "macro_f1": 1.0
+          },
+          "preferences": {
+            "count": 42,
+            "tp": 0,
+            "fp": 0,
+            "fn": 0,
+            "micro_precision": 1.0,
+            "micro_recall": 1.0,
+            "micro_f1": 1.0,
+            "macro_f1": 1.0
+          }
+        },
+        "clarification": {
+          "count": 42,
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "f1": null,
+          "positive_count": 0,
+          "invalid_count": 0,
+          "accuracy": 1.0
+        }
+      },
+      "consistency_rate": 1.0,
+      "consistency_case_count": 14,
+      "consistent_case_count": 14,
+      "first_schema_valid_rate": null,
+      "mean_parse_latency_ms": 0.0,
+      "p95_parse_latency_ms": 0.0,
+      "mean_search_latency_ms": 0.3965238095025554,
+      "p95_search_latency_ms": 0.47958000268408785,
+      "mrr": 1.0,
+      "map_at_5": 1.0,
+      "recall_at_10": 1.0,
+      "retrieval_positive_count": 42,
+      "zero_result_evaluated_count": 42,
+      "zero_result_error_rate": 0.0
+    },
+    {
+      "slice": "negation",
+      "model": "oracle",
+      "task": "smart_search",
+      "split": "dev",
+      "count": 33,
+      "case_count": 11,
+      "expected_count": 33,
+      "complete": true,
+      "passed_count": 15,
+      "pass_rate": 0.45454545454545453,
+      "mean_score": 0.9494490358126721,
+      "error_count": 0,
+      "error_rate": 0.0,
+      "fallback_count": 0,
+      "raw_pass_rate": null,
+      "raw_mean_score": null,
+      "application_pass_rate": 0.45454545454545453,
+      "schema_valid_rate": 1.0,
+      "latency_samples": 33,
+      "mean_latency_ms": 0.5813939393939394,
+      "p50_latency_ms": 0.574,
+      "p95_latency_ms": 0.7772,
+      "attempt_count": 0,
+      "unknown_cost_count": 0,
+      "known_cost_subtotal_cny": 0.0,
+      "total_cost_cny": 0.0,
+      "mean_cost_cny": 0.0,
+      "errors": {},
+      "prompt_hashes": [
+        "16b0177613678ff8156f531d1486a0f64d822a0c79ec2b1552a3eb088670c27e"
+      ],
+      "cost_per_pass_cny": 0.0,
+      "macro_f1": null,
+      "false_match_rate": null,
+      "verdict_count": 0,
+      "confusion_matrix": {},
+      "raw_classification": {
+        "macro_f1": null,
+        "false_match_rate": null,
+        "verdict_count": 0,
+        "confusion_matrix": {}
+      },
+      "parse_diagnostics": {
+        "fields": {
+          "category": {
+            "count": 33,
+            "accuracy": 1.0,
+            "macro_f1": 1.0,
+            "label_support": {
+              "\"数码与影音\"": 24,
+              "\"校园出行与运动\"": 3,
+              "\"美妆服饰与周边\"": 6
+            }
+          },
+          "max_price": {
+            "count": 33,
+            "accuracy": 1.0,
+            "macro_f1": null,
+            "label_support": {
+              "\"1E+2\"": 3,
+              "\"2E+2\"": 6,
+              "\"3E+2\"": 18,
+              "\"4E+2\"": 3,
+              "\"5E+2\"": 3
+            }
+          },
+          "campus": {
+            "count": 33,
+            "accuracy": 1.0,
+            "macro_f1": 1.0,
+            "label_support": {
+              "\"万柳学区\"": 12,
+              "\"不限校区\"": 18,
+              "\"燕园校本部\"": 3
+            }
+          },
+          "condition_grade": {
+            "count": 33,
+            "accuracy": 1.0,
+            "macro_f1": 1.0,
+            "label_support": {
+              "null": 33
+            }
+          }
+        },
+        "sets": {
+          "keywords": {
+            "count": 33,
+            "tp": 45,
+            "fp": 0,
+            "fn": 0,
+            "micro_precision": 1.0,
+            "micro_recall": 1.0,
+            "micro_f1": 1.0,
+            "macro_f1": 1.0
+          },
+          "excluded_keywords": {
+            "count": 33,
+            "tp": 39,
+            "fp": 0,
+            "fn": 0,
+            "micro_precision": 1.0,
+            "micro_recall": 1.0,
+            "micro_f1": 1.0,
+            "macro_f1": 1.0
+          },
+          "preferences": {
+            "count": 33,
+            "tp": 0,
+            "fp": 0,
+            "fn": 0,
+            "micro_precision": 1.0,
+            "micro_recall": 1.0,
+            "micro_f1": 1.0,
+            "macro_f1": 1.0
+          }
+        },
+        "clarification": {
+          "count": 33,
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "f1": null,
+          "positive_count": 0,
+          "invalid_count": 0,
+          "accuracy": 1.0
+        }
+      },
+      "consistency_rate": 1.0,
+      "consistency_case_count": 11,
+      "consistent_case_count": 11,
+      "first_schema_valid_rate": null,
+      "mean_parse_latency_ms": 0.0,
+      "p95_parse_latency_ms": 0.0,
+      "mean_search_latency_ms": 0.5564181816280875,
+      "p95_search_latency_ms": 0.7542999992438125,
+      "mrr": 0.8636363636363636,
+      "map_at_5": 0.8636363636363636,
+      "recall_at_10": 0.9090909090909091,
+      "retrieval_positive_count": 33,
+      "zero_result_evaluated_count": 33,
+      "zero_result_error_rate": 0.09090909090909091
+    },
+    {
+      "slice": "ood",
+      "model": "oracle",
+      "task": "smart_search",
+      "split": "dev",
+      "count": 30,
+      "case_count": 10,
+      "expected_count": 30,
+      "complete": true,
+      "passed_count": 30,
+      "pass_rate": 1.0,
+      "mean_score": 1.0,
+      "error_count": 0,
+      "error_rate": 0.0,
+      "fallback_count": 0,
+      "raw_pass_rate": null,
+      "raw_mean_score": null,
+      "application_pass_rate": 1.0,
+      "schema_valid_rate": 1.0,
+      "latency_samples": 30,
+      "mean_latency_ms": 0.5153,
+      "p50_latency_ms": 0.5535000000000001,
+      "p95_latency_ms": 0.6355999999999999,
+      "attempt_count": 0,
+      "unknown_cost_count": 0,
+      "known_cost_subtotal_cny": 0.0,
+      "total_cost_cny": 0.0,
+      "mean_cost_cny": 0.0,
+      "errors": {},
+      "prompt_hashes": [
+        "16b0177613678ff8156f531d1486a0f64d822a0c79ec2b1552a3eb088670c27e"
+      ],
+      "cost_per_pass_cny": 0.0,
+      "macro_f1": null,
+      "false_match_rate": null,
+      "verdict_count": 0,
+      "confusion_matrix": {},
+      "raw_classification": {
+        "macro_f1": null,
+        "false_match_rate": null,
+        "verdict_count": 0,
+        "confusion_matrix": {}
+      },
+      "parse_diagnostics": {
+        "fields": {
+          "category": {
+            "count": 30,
+            "accuracy": 1.0,
+            "macro_f1": 1.0,
+            "label_support": {
+              "\"宿舍生活与家电\"": 3,
+              "\"数码与影音\"": 27
+            }
+          },
+          "max_price": {
+            "count": 30,
+            "accuracy": 1.0,
+            "macro_f1": null,
+            "label_support": {
+              "\"1E+2\"": 3,
+              "\"1E+3\"": 3,
+              "\"2E+1\"": 3,
+              "\"2E+2\"": 3,
+              "\"2E+3\"": 6,
+              "\"3.5E+3\"": 3,
+              "\"3E+2\"": 3,
+              "\"4E+2\"": 3,
+              "\"9E+1\"": 3
+            }
+          },
+          "campus": {
+            "count": 30,
+            "accuracy": 1.0,
+            "macro_f1": 1.0,
+            "label_support": {
+              "\"不限校区\"": 30
+            }
+          },
+          "condition_grade": {
+            "count": 30,
+            "accuracy": 1.0,
+            "macro_f1": 1.0,
+            "label_support": {
+              "null": 30
+            }
+          }
+        },
+        "sets": {
+          "keywords": {
+            "count": 30,
+            "tp": 30,
+            "fp": 0,
+            "fn": 0,
+            "micro_precision": 1.0,
+            "micro_recall": 1.0,
+            "micro_f1": 1.0,
+            "macro_f1": 1.0
+          },
+          "excluded_keywords": {
+            "count": 30,
+            "tp": 0,
+            "fp": 0,
+            "fn": 0,
+            "micro_precision": 1.0,
+            "micro_recall": 1.0,
+            "micro_f1": 1.0,
+            "macro_f1": 1.0
+          },
+          "preferences": {
+            "count": 30,
+            "tp": 0,
+            "fp": 0,
+            "fn": 0,
+            "micro_precision": 1.0,
+            "micro_recall": 1.0,
+            "micro_f1": 1.0,
+            "macro_f1": 1.0
+          }
+        },
+        "clarification": {
+          "count": 30,
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "f1": null,
+          "positive_count": 0,
+          "invalid_count": 0,
+          "accuracy": 1.0
+        }
+      },
+      "consistency_rate": 1.0,
+      "consistency_case_count": 10,
+      "consistent_case_count": 10,
+      "first_schema_valid_rate": null,
+      "mean_parse_latency_ms": 0.0,
+      "p95_parse_latency_ms": 0.0,
+      "mean_search_latency_ms": 0.49044333269800217,
+      "p95_search_latency_ms": 0.6041599990567192,
+      "mrr": 1.0,
+      "map_at_5": 1.0,
+      "recall_at_10": 1.0,
+      "retrieval_positive_count": 21,
+      "zero_result_evaluated_count": 21,
+      "zero_result_error_rate": 0.0
+    },
+    {
+      "slice": "preference",
+      "model": "oracle",
+      "task": "smart_search",
+      "split": "dev",
+      "count": 33,
+      "case_count": 11,
+      "expected_count": 33,
+      "complete": true,
+      "passed_count": 18,
+      "pass_rate": 0.5454545454545454,
+      "mean_score": 0.9578512396694215,
+      "error_count": 0,
+      "error_rate": 0.0,
+      "fallback_count": 0,
+      "raw_pass_rate": null,
+      "raw_mean_score": null,
+      "application_pass_rate": 0.5454545454545454,
+      "schema_valid_rate": 1.0,
+      "latency_samples": 33,
+      "mean_latency_ms": 0.4570909090909091,
+      "p50_latency_ms": 0.416,
+      "p95_latency_ms": 0.655,
+      "attempt_count": 0,
+      "unknown_cost_count": 0,
+      "known_cost_subtotal_cny": 0.0,
+      "total_cost_cny": 0.0,
+      "mean_cost_cny": 0.0,
+      "errors": {},
+      "prompt_hashes": [
+        "16b0177613678ff8156f531d1486a0f64d822a0c79ec2b1552a3eb088670c27e"
+      ],
+      "cost_per_pass_cny": 0.0,
+      "macro_f1": null,
+      "false_match_rate": null,
+      "verdict_count": 0,
+      "confusion_matrix": {},
+      "raw_classification": {
+        "macro_f1": null,
+        "false_match_rate": null,
+        "verdict_count": 0,
+        "confusion_matrix": {}
+      },
+      "parse_diagnostics": {
+        "fields": {
+          "category": {
+            "count": 33,
+            "accuracy": 1.0,
+            "macro_f1": 1.0,
+            "label_support": {
+              "\"宿舍生活与家电\"": 6,
+              "\"数码与影音\"": 12,
+              "\"校园出行与运动\"": 9,
+              "\"美妆服饰与周边\"": 6
+            }
+          },
+          "max_price": {
+            "count": 33,
+            "accuracy": 1.0,
+            "macro_f1": null,
+            "label_support": {
+              "\"1E+2\"": 12,
+              "\"2E+2\"": 6,
+              "\"4E+2\"": 6,
+              "\"5E+2\"": 9
+            }
+          },
+          "campus": {
+            "count": 33,
+            "accuracy": 1.0,
+            "macro_f1": 1.0,
+            "label_support": {
+              "\"万柳学区\"": 9,
+              "\"不限校区\"": 24
+            }
+          },
+          "condition_grade": {
+            "count": 33,
+            "accuracy": 1.0,
+            "macro_f1": 1.0,
+            "label_support": {
+              "null": 33
+            }
+          }
+        },
+        "sets": {
+          "keywords": {
+            "count": 33,
+            "tp": 48,
+            "fp": 0,
+            "fn": 0,
+            "micro_precision": 1.0,
+            "micro_recall": 1.0,
+            "micro_f1": 1.0,
+            "macro_f1": 1.0
+          },
+          "excluded_keywords": {
+            "count": 33,
+            "tp": 0,
+            "fp": 0,
+            "fn": 0,
+            "micro_precision": 1.0,
+            "micro_recall": 1.0,
+            "micro_f1": 1.0,
+            "macro_f1": 1.0
+          },
+          "preferences": {
+            "count": 33,
+            "tp": 18,
+            "fp": 0,
+            "fn": 0,
+            "micro_precision": 1.0,
+            "micro_recall": 1.0,
+            "micro_f1": 1.0,
+            "macro_f1": 1.0
+          }
+        },
+        "clarification": {
+          "count": 33,
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "f1": null,
+          "positive_count": 0,
+          "invalid_count": 0,
+          "accuracy": 1.0
+        }
+      },
+      "consistency_rate": 1.0,
+      "consistency_case_count": 11,
+      "consistent_case_count": 11,
+      "first_schema_valid_rate": null,
+      "mean_parse_latency_ms": 0.0,
+      "p95_parse_latency_ms": 0.0,
+      "mean_search_latency_ms": 0.432196969610011,
+      "p95_search_latency_ms": 0.6302599991613533,
+      "mrr": 0.8636363636363636,
+      "map_at_5": 0.8636363636363636,
+      "recall_at_10": 0.9090909090909091,
+      "retrieval_positive_count": 33,
+      "zero_result_evaluated_count": 33,
+      "zero_result_error_rate": 0.09090909090909091
+    },
+    {
+      "slice": "price",
+      "model": "oracle",
+      "task": "smart_search",
+      "split": "dev",
+      "count": 39,
+      "case_count": 13,
+      "expected_count": 39,
+      "complete": true,
+      "passed_count": 27,
+      "pass_rate": 0.6923076923076923,
+      "mean_score": 0.9636363636363635,
+      "error_count": 0,
+      "error_rate": 0.0,
+      "fallback_count": 0,
+      "raw_pass_rate": null,
+      "raw_mean_score": null,
+      "application_pass_rate": 0.6923076923076923,
+      "schema_valid_rate": 1.0,
+      "latency_samples": 39,
+      "mean_latency_ms": 0.48417948717948717,
+      "p50_latency_ms": 0.494,
+      "p95_latency_ms": 0.6862000000000001,
+      "attempt_count": 0,
+      "unknown_cost_count": 0,
+      "known_cost_subtotal_cny": 0.0,
+      "total_cost_cny": 0.0,
+      "mean_cost_cny": 0.0,
+      "errors": {},
+      "prompt_hashes": [
+        "16b0177613678ff8156f531d1486a0f64d822a0c79ec2b1552a3eb088670c27e"
+      ],
+      "cost_per_pass_cny": 0.0,
+      "macro_f1": null,
+      "false_match_rate": null,
+      "verdict_count": 0,
+      "confusion_matrix": {},
+      "raw_classification": {
+        "macro_f1": null,
+        "false_match_rate": null,
+        "verdict_count": 0,
+        "confusion_matrix": {}
+      },
+      "parse_diagnostics": {
+        "fields": {
+          "category": {
+            "count": 39,
+            "accuracy": 1.0,
+            "macro_f1": 1.0,
+            "label_support": {
+              "\"宿舍生活与家电\"": 6,
+              "\"数码与影音\"": 30,
+              "\"课程资料与书籍\"": 3
+            }
+          },
+          "max_price": {
+            "count": 39,
+            "accuracy": 1.0,
+            "macro_f1": null,
+            "label_support": {
+              "\"0\"": 6,
+              "\"1.5E+3\"": 6,
+              "\"2E+2\"": 9,
+              "\"3E+2\"": 9,
+              "\"49.99\"": 3,
+              "\"5E+1\"": 3,
+              "\"99.5\"": 3
+            }
+          },
+          "campus": {
+            "count": 39,
+            "accuracy": 1.0,
+            "macro_f1": 1.0,
+            "label_support": {
+              "\"不限校区\"": 39
+            }
+          },
+          "condition_grade": {
+            "count": 39,
+            "accuracy": 1.0,
+            "macro_f1": 1.0,
+            "label_support": {
+              "\"全新\"": 3,
+              "null": 36
+            }
+          }
+        },
+        "sets": {
+          "keywords": {
+            "count": 39,
+            "tp": 51,
+            "fp": 0,
+            "fn": 0,
+            "micro_precision": 1.0,
+            "micro_recall": 1.0,
+            "micro_f1": 1.0,
+            "macro_f1": 1.0
+          },
+          "excluded_keywords": {
+            "count": 39,
+            "tp": 0,
+            "fp": 0,
+            "fn": 0,
+            "micro_precision": 1.0,
+            "micro_recall": 1.0,
+            "micro_f1": 1.0,
+            "macro_f1": 1.0
+          },
+          "preferences": {
+            "count": 39,
+            "tp": 0,
+            "fp": 0,
+            "fn": 0,
+            "micro_precision": 1.0,
+            "micro_recall": 1.0,
+            "micro_f1": 1.0,
+            "macro_f1": 1.0
+          }
+        },
+        "clarification": {
+          "count": 39,
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "f1": null,
+          "positive_count": 0,
+          "invalid_count": 0,
+          "accuracy": 1.0
+        }
+      },
+      "consistency_rate": 1.0,
+      "consistency_case_count": 13,
+      "consistent_case_count": 13,
+      "first_schema_valid_rate": null,
+      "mean_parse_latency_ms": 0.0,
+      "p95_parse_latency_ms": 0.0,
+      "mean_search_latency_ms": 0.46030512832937975,
+      "p95_search_latency_ms": 0.6636300007812679,
+      "mrr": 1.0,
+      "map_at_5": 0.9833333333333333,
+      "recall_at_10": 0.9833333333333333,
+      "retrieval_positive_count": 36,
+      "zero_result_evaluated_count": 36,
+      "zero_result_error_rate": 0.0
+    }
+  ],
+  "metamorphic": [
+    {
+      "id": "inv-core-01",
+      "model": "local-rules",
+      "repeat": 1,
+      "relation": "invariant",
+      "checks": {
+        "successful_pair": true,
+        "intent_invariant": true,
+        "result_set_invariant": true
+      },
+      "passed": true,
+      "base_nonempty": true
+    },
+    {
+      "id": "inv-core-01",
+      "model": "local-rules",
+      "repeat": 2,
+      "relation": "invariant",
+      "checks": {
+        "successful_pair": true,
+        "intent_invariant": true,
+        "result_set_invariant": true
+      },
+      "passed": true,
+      "base_nonempty": true
+    },
+    {
+      "id": "inv-core-01",
+      "model": "local-rules",
+      "repeat": 3,
+      "relation": "invariant",
+      "checks": {
+        "successful_pair": true,
+        "intent_invariant": true,
+        "result_set_invariant": true
+      },
+      "passed": true,
+      "base_nonempty": true
+    },
+    {
+      "id": "inv-core-01",
+      "model": "oracle",
+      "repeat": 1,
+      "relation": "invariant",
+      "checks": {
+        "successful_pair": true,
+        "intent_invariant": true,
+        "result_set_invariant": true
+      },
+      "passed": true,
+      "base_nonempty": true
+    },
+    {
+      "id": "inv-core-01",
+      "model": "oracle",
+      "repeat": 2,
+      "relation": "invariant",
+      "checks": {
+        "successful_pair": true,
+        "intent_invariant": true,
+        "result_set_invariant": true
+      },
+      "passed": true,
+      "base_nonempty": true
+    },
+    {
+      "id": "inv-core-01",
+      "model": "oracle",
+      "repeat": 3,
+      "relation": "invariant",
+      "checks": {
+        "successful_pair": true,
+        "intent_invariant": true,
+        "result_set_invariant": true
+      },
+      "passed": true,
+      "base_nonempty": true
+    },
+    {
+      "id": "inv-core-05",
+      "model": "local-rules",
+      "repeat": 1,
+      "relation": "invariant",
+      "checks": {
+        "successful_pair": true,
+        "intent_invariant": false,
+        "result_set_invariant": false
+      },
+      "passed": false,
+      "base_nonempty": false
+    },
+    {
+      "id": "inv-core-05",
+      "model": "local-rules",
+      "repeat": 2,
+      "relation": "invariant",
+      "checks": {
+        "successful_pair": true,
+        "intent_invariant": false,
+        "result_set_invariant": false
+      },
+      "passed": false,
+      "base_nonempty": false
+    },
+    {
+      "id": "inv-core-05",
+      "model": "local-rules",
+      "repeat": 3,
+      "relation": "invariant",
+      "checks": {
+        "successful_pair": true,
+        "intent_invariant": false,
+        "result_set_invariant": false
+      },
+      "passed": false,
+      "base_nonempty": false
+    },
+    {
+      "id": "inv-core-05",
+      "model": "oracle",
+      "repeat": 1,
+      "relation": "invariant",
+      "checks": {
+        "successful_pair": true,
+        "intent_invariant": true,
+        "result_set_invariant": true
+      },
+      "passed": true,
+      "base_nonempty": true
+    },
+    {
+      "id": "inv-core-05",
+      "model": "oracle",
+      "repeat": 2,
+      "relation": "invariant",
+      "checks": {
+        "successful_pair": true,
+        "intent_invariant": true,
+        "result_set_invariant": true
+      },
+      "passed": true,
+      "base_nonempty": true
+    },
+    {
+      "id": "inv-core-05",
+      "model": "oracle",
+      "repeat": 3,
+      "relation": "invariant",
+      "checks": {
+        "successful_pair": true,
+        "intent_invariant": true,
+        "result_set_invariant": true
+      },
+      "passed": true,
+      "base_nonempty": true
+    },
+    {
+      "id": "inv-price-02",
+      "model": "local-rules",
+      "repeat": 1,
+      "relation": "invariant",
+      "checks": {
+        "successful_pair": true,
+        "intent_invariant": false,
+        "result_set_invariant": false
+      },
+      "passed": false,
+      "base_nonempty": true
+    },
+    {
+      "id": "inv-price-02",
+      "model": "local-rules",
+      "repeat": 2,
+      "relation": "invariant",
+      "checks": {
+        "successful_pair": true,
+        "intent_invariant": false,
+        "result_set_invariant": false
+      },
+      "passed": false,
+      "base_nonempty": true
+    },
+    {
+      "id": "inv-price-02",
+      "model": "local-rules",
+      "repeat": 3,
+      "relation": "invariant",
+      "checks": {
+        "successful_pair": true,
+        "intent_invariant": false,
+        "result_set_invariant": false
+      },
+      "passed": false,
+      "base_nonempty": true
+    },
+    {
+      "id": "inv-price-02",
+      "model": "oracle",
+      "repeat": 1,
+      "relation": "invariant",
+      "checks": {
+        "successful_pair": true,
+        "intent_invariant": true,
+        "result_set_invariant": true
+      },
+      "passed": true,
+      "base_nonempty": true
+    },
+    {
+      "id": "inv-price-02",
+      "model": "oracle",
+      "repeat": 2,
+      "relation": "invariant",
+      "checks": {
+        "successful_pair": true,
+        "intent_invariant": true,
+        "result_set_invariant": true
+      },
+      "passed": true,
+      "base_nonempty": true
+    },
+    {
+      "id": "inv-price-02",
+      "model": "oracle",
+      "repeat": 3,
+      "relation": "invariant",
+      "checks": {
+        "successful_pair": true,
+        "intent_invariant": true,
+        "result_set_invariant": true
+      },
+      "passed": true,
+      "base_nonempty": true
+    },
+    {
+      "id": "inv-price-08",
+      "model": "local-rules",
+      "repeat": 1,
+      "relation": "invariant",
+      "checks": {
+        "successful_pair": true,
+        "intent_invariant": true,
+        "result_set_invariant": true
+      },
+      "passed": true,
+      "base_nonempty": true
+    },
+    {
+      "id": "inv-price-08",
+      "model": "local-rules",
+      "repeat": 2,
+      "relation": "invariant",
+      "checks": {
+        "successful_pair": true,
+        "intent_invariant": true,
+        "result_set_invariant": true
+      },
+      "passed": true,
+      "base_nonempty": true
+    },
+    {
+      "id": "inv-price-08",
+      "model": "local-rules",
+      "repeat": 3,
+      "relation": "invariant",
+      "checks": {
+        "successful_pair": true,
+        "intent_invariant": true,
+        "result_set_invariant": true
+      },
+      "passed": true,
+      "base_nonempty": true
+    },
+    {
+      "id": "inv-price-08",
+      "model": "oracle",
+      "repeat": 1,
+      "relation": "invariant",
+      "checks": {
+        "successful_pair": true,
+        "intent_invariant": true,
+        "result_set_invariant": true
+      },
+      "passed": true,
+      "base_nonempty": true
+    },
+    {
+      "id": "inv-price-08",
+      "model": "oracle",
+      "repeat": 2,
+      "relation": "invariant",
+      "checks": {
+        "successful_pair": true,
+        "intent_invariant": true,
+        "result_set_invariant": true
+      },
+      "passed": true,
+      "base_nonempty": true
+    },
+    {
+      "id": "inv-price-08",
+      "model": "oracle",
+      "repeat": 3,
+      "relation": "invariant",
+      "checks": {
+        "successful_pair": true,
+        "intent_invariant": true,
+        "result_set_invariant": true
+      },
+      "passed": true,
+      "base_nonempty": true
+    },
+    {
+      "id": "inv-preference-01",
+      "model": "local-rules",
+      "repeat": 1,
+      "relation": "invariant",
+      "checks": {
+        "successful_pair": true,
+        "intent_invariant": true,
+        "result_set_invariant": true
+      },
+      "passed": true,
+      "base_nonempty": true
+    },
+    {
+      "id": "inv-preference-01",
+      "model": "local-rules",
+      "repeat": 2,
+      "relation": "invariant",
+      "checks": {
+        "successful_pair": true,
+        "intent_invariant": true,
+        "result_set_invariant": true
+      },
+      "passed": true,
+      "base_nonempty": true
+    },
+    {
+      "id": "inv-preference-01",
+      "model": "local-rules",
+      "repeat": 3,
+      "relation": "invariant",
+      "checks": {
+        "successful_pair": true,
+        "intent_invariant": true,
+        "result_set_invariant": true
+      },
+      "passed": true,
+      "base_nonempty": true
+    },
+    {
+      "id": "inv-preference-01",
+      "model": "oracle",
+      "repeat": 1,
+      "relation": "invariant",
+      "checks": {
+        "successful_pair": true,
+        "intent_invariant": true,
+        "result_set_invariant": true
+      },
+      "passed": true,
+      "base_nonempty": true
+    },
+    {
+      "id": "inv-preference-01",
+      "model": "oracle",
+      "repeat": 2,
+      "relation": "invariant",
+      "checks": {
+        "successful_pair": true,
+        "intent_invariant": true,
+        "result_set_invariant": true
+      },
+      "passed": true,
+      "base_nonempty": true
+    },
+    {
+      "id": "inv-preference-01",
+      "model": "oracle",
+      "repeat": 3,
+      "relation": "invariant",
+      "checks": {
+        "successful_pair": true,
+        "intent_invariant": true,
+        "result_set_invariant": true
+      },
+      "passed": true,
+      "base_nonempty": true
+    },
+    {
+      "id": "inv-negation-01",
+      "model": "local-rules",
+      "repeat": 1,
+      "relation": "invariant",
+      "checks": {
+        "successful_pair": true,
+        "intent_invariant": true,
+        "result_set_invariant": true
+      },
+      "passed": true,
+      "base_nonempty": true
+    },
+    {
+      "id": "inv-negation-01",
+      "model": "local-rules",
+      "repeat": 2,
+      "relation": "invariant",
+      "checks": {
+        "successful_pair": true,
+        "intent_invariant": true,
+        "result_set_invariant": true
+      },
+      "passed": true,
+      "base_nonempty": true
+    },
+    {
+      "id": "inv-negation-01",
+      "model": "local-rules",
+      "repeat": 3,
+      "relation": "invariant",
+      "checks": {
+        "successful_pair": true,
+        "intent_invariant": true,
+        "result_set_invariant": true
+      },
+      "passed": true,
+      "base_nonempty": true
+    },
+    {
+      "id": "inv-negation-01",
+      "model": "oracle",
+      "repeat": 1,
+      "relation": "invariant",
+      "checks": {
+        "successful_pair": true,
+        "intent_invariant": true,
+        "result_set_invariant": true
+      },
+      "passed": true,
+      "base_nonempty": true
+    },
+    {
+      "id": "inv-negation-01",
+      "model": "oracle",
+      "repeat": 2,
+      "relation": "invariant",
+      "checks": {
+        "successful_pair": true,
+        "intent_invariant": true,
+        "result_set_invariant": true
+      },
+      "passed": true,
+      "base_nonempty": true
+    },
+    {
+      "id": "inv-negation-01",
+      "model": "oracle",
+      "repeat": 3,
+      "relation": "invariant",
+      "checks": {
+        "successful_pair": true,
+        "intent_invariant": true,
+        "result_set_invariant": true
+      },
+      "passed": true,
+      "base_nonempty": true
+    },
+    {
+      "id": "inv-confusable-03",
+      "model": "local-rules",
+      "repeat": 1,
+      "relation": "invariant",
+      "checks": {
+        "successful_pair": true,
+        "intent_invariant": true,
+        "result_set_invariant": true
+      },
+      "passed": true,
+      "base_nonempty": true
+    },
+    {
+      "id": "inv-confusable-03",
+      "model": "local-rules",
+      "repeat": 2,
+      "relation": "invariant",
+      "checks": {
+        "successful_pair": true,
+        "intent_invariant": true,
+        "result_set_invariant": true
+      },
+      "passed": true,
+      "base_nonempty": true
+    },
+    {
+      "id": "inv-confusable-03",
+      "model": "local-rules",
+      "repeat": 3,
+      "relation": "invariant",
+      "checks": {
+        "successful_pair": true,
+        "intent_invariant": true,
+        "result_set_invariant": true
+      },
+      "passed": true,
+      "base_nonempty": true
+    },
+    {
+      "id": "inv-confusable-03",
+      "model": "oracle",
+      "repeat": 1,
+      "relation": "invariant",
+      "checks": {
+        "successful_pair": true,
+        "intent_invariant": true,
+        "result_set_invariant": true
+      },
+      "passed": true,
+      "base_nonempty": true
+    },
+    {
+      "id": "inv-confusable-03",
+      "model": "oracle",
+      "repeat": 2,
+      "relation": "invariant",
+      "checks": {
+        "successful_pair": true,
+        "intent_invariant": true,
+        "result_set_invariant": true
+      },
+      "passed": true,
+      "base_nonempty": true
+    },
+    {
+      "id": "inv-confusable-03",
+      "model": "oracle",
+      "repeat": 3,
+      "relation": "invariant",
+      "checks": {
+        "successful_pair": true,
+        "intent_invariant": true,
+        "result_set_invariant": true
+      },
+      "passed": true,
+      "base_nonempty": true
+    },
+    {
+      "id": "inv-core-08",
+      "model": "local-rules",
+      "repeat": 1,
+      "relation": "invariant",
+      "checks": {
+        "successful_pair": true,
+        "intent_invariant": true,
+        "result_set_invariant": true
+      },
+      "passed": true,
+      "base_nonempty": true
+    },
+    {
+      "id": "inv-core-08",
+      "model": "local-rules",
+      "repeat": 2,
+      "relation": "invariant",
+      "checks": {
+        "successful_pair": true,
+        "intent_invariant": true,
+        "result_set_invariant": true
+      },
+      "passed": true,
+      "base_nonempty": true
+    },
+    {
+      "id": "inv-core-08",
+      "model": "local-rules",
+      "repeat": 3,
+      "relation": "invariant",
+      "checks": {
+        "successful_pair": true,
+        "intent_invariant": true,
+        "result_set_invariant": true
+      },
+      "passed": true,
+      "base_nonempty": true
+    },
+    {
+      "id": "inv-core-08",
+      "model": "oracle",
+      "repeat": 1,
+      "relation": "invariant",
+      "checks": {
+        "successful_pair": true,
+        "intent_invariant": true,
+        "result_set_invariant": true
+      },
+      "passed": true,
+      "base_nonempty": true
+    },
+    {
+      "id": "inv-core-08",
+      "model": "oracle",
+      "repeat": 2,
+      "relation": "invariant",
+      "checks": {
+        "successful_pair": true,
+        "intent_invariant": true,
+        "result_set_invariant": true
+      },
+      "passed": true,
+      "base_nonempty": true
+    },
+    {
+      "id": "inv-core-08",
+      "model": "oracle",
+      "repeat": 3,
+      "relation": "invariant",
+      "checks": {
+        "successful_pair": true,
+        "intent_invariant": true,
+        "result_set_invariant": true
+      },
+      "passed": true,
+      "base_nonempty": true
+    },
+    {
+      "id": "dir-negation-01-negation-03",
+      "model": "local-rules",
+      "repeat": 1,
+      "relation": "subset",
+      "checks": {
+        "successful_pair": true,
+        "full_set_subset": true,
+        "excluded_items_absent": true
+      },
+      "passed": true,
+      "base_nonempty": true
+    },
+    {
+      "id": "dir-negation-01-negation-03",
+      "model": "local-rules",
+      "repeat": 2,
+      "relation": "subset",
+      "checks": {
+        "successful_pair": true,
+        "full_set_subset": true,
+        "excluded_items_absent": true
+      },
+      "passed": true,
+      "base_nonempty": true
+    },
+    {
+      "id": "dir-negation-01-negation-03",
+      "model": "local-rules",
+      "repeat": 3,
+      "relation": "subset",
+      "checks": {
+        "successful_pair": true,
+        "full_set_subset": true,
+        "excluded_items_absent": true
+      },
+      "passed": true,
+      "base_nonempty": true
+    },
+    {
+      "id": "dir-negation-01-negation-03",
+      "model": "oracle",
+      "repeat": 1,
+      "relation": "subset",
+      "checks": {
+        "successful_pair": true,
+        "full_set_subset": true,
+        "excluded_items_absent": true
+      },
+      "passed": true,
+      "base_nonempty": true
+    },
+    {
+      "id": "dir-negation-01-negation-03",
+      "model": "oracle",
+      "repeat": 2,
+      "relation": "subset",
+      "checks": {
+        "successful_pair": true,
+        "full_set_subset": true,
+        "excluded_items_absent": true
+      },
+      "passed": true,
+      "base_nonempty": true
+    },
+    {
+      "id": "dir-negation-01-negation-03",
+      "model": "oracle",
+      "repeat": 3,
+      "relation": "subset",
+      "checks": {
+        "successful_pair": true,
+        "full_set_subset": true,
+        "excluded_items_absent": true
+      },
+      "passed": true,
+      "base_nonempty": true
+    },
+    {
+      "id": "dir-preference-03-preference-04",
+      "model": "local-rules",
+      "repeat": 1,
+      "relation": "subset",
+      "checks": {
+        "successful_pair": true,
+        "full_set_subset": true,
+        "excluded_items_absent": false
+      },
+      "passed": false,
+      "base_nonempty": true
+    },
+    {
+      "id": "dir-preference-03-preference-04",
+      "model": "local-rules",
+      "repeat": 2,
+      "relation": "subset",
+      "checks": {
+        "successful_pair": true,
+        "full_set_subset": true,
+        "excluded_items_absent": false
+      },
+      "passed": false,
+      "base_nonempty": true
+    },
+    {
+      "id": "dir-preference-03-preference-04",
+      "model": "local-rules",
+      "repeat": 3,
+      "relation": "subset",
+      "checks": {
+        "successful_pair": true,
+        "full_set_subset": true,
+        "excluded_items_absent": false
+      },
+      "passed": false,
+      "base_nonempty": true
+    },
+    {
+      "id": "dir-preference-03-preference-04",
+      "model": "oracle",
+      "repeat": 1,
+      "relation": "subset",
+      "checks": {
+        "successful_pair": true,
+        "full_set_subset": true,
+        "excluded_items_absent": false
+      },
+      "passed": false,
+      "base_nonempty": true
+    },
+    {
+      "id": "dir-preference-03-preference-04",
+      "model": "oracle",
+      "repeat": 2,
+      "relation": "subset",
+      "checks": {
+        "successful_pair": true,
+        "full_set_subset": true,
+        "excluded_items_absent": false
+      },
+      "passed": false,
+      "base_nonempty": true
+    },
+    {
+      "id": "dir-preference-03-preference-04",
+      "model": "oracle",
+      "repeat": 3,
+      "relation": "subset",
+      "checks": {
+        "successful_pair": true,
+        "full_set_subset": true,
+        "excluded_items_absent": false
+      },
+      "passed": false,
+      "base_nonempty": true
+    },
+    {
+      "id": "dir-price-08-price-08-budget",
+      "model": "local-rules",
+      "repeat": 1,
+      "relation": "subset",
+      "checks": {
+        "successful_pair": true,
+        "full_set_subset": true,
+        "price_cap": true,
+        "excluded_items_absent": true
+      },
+      "passed": true,
+      "base_nonempty": true
+    },
+    {
+      "id": "dir-price-08-price-08-budget",
+      "model": "local-rules",
+      "repeat": 2,
+      "relation": "subset",
+      "checks": {
+        "successful_pair": true,
+        "full_set_subset": true,
+        "price_cap": true,
+        "excluded_items_absent": true
+      },
+      "passed": true,
+      "base_nonempty": true
+    },
+    {
+      "id": "dir-price-08-price-08-budget",
+      "model": "local-rules",
+      "repeat": 3,
+      "relation": "subset",
+      "checks": {
+        "successful_pair": true,
+        "full_set_subset": true,
+        "price_cap": true,
+        "excluded_items_absent": true
+      },
+      "passed": true,
+      "base_nonempty": true
+    },
+    {
+      "id": "dir-price-08-price-08-budget",
+      "model": "oracle",
+      "repeat": 1,
+      "relation": "subset",
+      "checks": {
+        "successful_pair": true,
+        "full_set_subset": true,
+        "price_cap": true,
+        "excluded_items_absent": true
+      },
+      "passed": true,
+      "base_nonempty": true
+    },
+    {
+      "id": "dir-price-08-price-08-budget",
+      "model": "oracle",
+      "repeat": 2,
+      "relation": "subset",
+      "checks": {
+        "successful_pair": true,
+        "full_set_subset": true,
+        "price_cap": true,
+        "excluded_items_absent": true
+      },
+      "passed": true,
+      "base_nonempty": true
+    },
+    {
+      "id": "dir-price-08-price-08-budget",
+      "model": "oracle",
+      "repeat": 3,
+      "relation": "subset",
+      "checks": {
+        "successful_pair": true,
+        "full_set_subset": true,
+        "price_cap": true,
+        "excluded_items_absent": true
+      },
+      "passed": true,
+      "base_nonempty": true
+    },
+    {
+      "id": "dir-core-10-core-10-budget",
+      "model": "local-rules",
+      "repeat": 1,
+      "relation": "subset",
+      "checks": {
+        "successful_pair": true,
+        "full_set_subset": true,
+        "price_cap": true,
+        "excluded_items_absent": true
+      },
+      "passed": true,
+      "base_nonempty": true
+    },
+    {
+      "id": "dir-core-10-core-10-budget",
+      "model": "local-rules",
+      "repeat": 2,
+      "relation": "subset",
+      "checks": {
+        "successful_pair": true,
+        "full_set_subset": true,
+        "price_cap": true,
+        "excluded_items_absent": true
+      },
+      "passed": true,
+      "base_nonempty": true
+    },
+    {
+      "id": "dir-core-10-core-10-budget",
+      "model": "local-rules",
+      "repeat": 3,
+      "relation": "subset",
+      "checks": {
+        "successful_pair": true,
+        "full_set_subset": true,
+        "price_cap": true,
+        "excluded_items_absent": true
+      },
+      "passed": true,
+      "base_nonempty": true
+    },
+    {
+      "id": "dir-core-10-core-10-budget",
+      "model": "oracle",
+      "repeat": 1,
+      "relation": "subset",
+      "checks": {
+        "successful_pair": true,
+        "full_set_subset": true,
+        "price_cap": true,
+        "excluded_items_absent": true
+      },
+      "passed": true,
+      "base_nonempty": true
+    },
+    {
+      "id": "dir-core-10-core-10-budget",
+      "model": "oracle",
+      "repeat": 2,
+      "relation": "subset",
+      "checks": {
+        "successful_pair": true,
+        "full_set_subset": true,
+        "price_cap": true,
+        "excluded_items_absent": true
+      },
+      "passed": true,
+      "base_nonempty": true
+    },
+    {
+      "id": "dir-core-10-core-10-budget",
+      "model": "oracle",
+      "repeat": 3,
+      "relation": "subset",
+      "checks": {
+        "successful_pair": true,
+        "full_set_subset": true,
+        "price_cap": true,
+        "excluded_items_absent": true
+      },
+      "passed": true,
+      "base_nonempty": true
+    }
+  ],
+  "baseline_comparisons": [
+    {
+      "baseline": "local-rules",
+      "model": "oracle",
+      "task": "smart_search",
+      "split": "dev",
+      "count": 240,
+      "pass_rate_gain": 0.4875,
+      "error_rate_reduction": 0.6610169491525423,
+      "mrr_gain": 0.18798701298701298,
+      "ap_at_5_gain": 0.19245238095238096,
+      "recall_at_10_gain": 0.11142857142857142
+    }
+  ],
+  "selection": [
+    {
+      "task": "smart_search",
+      "status": "insufficient_evidence",
+      "selected_model": null,
+      "reasons": [
+        "选型规则仍为草案；团队须在保留集评测前确认并设为 confirmed 或 locked。",
+        "当前为开发集或本地基线诊断，尚无保留集对照。",
+        "保留集 0 例，少于预设的 20 例。",
+        "同一任务至少需要两个远程候选模型的完整对照。",
+        "固定商品库尚未人工复核。"
+      ],
+      "candidates": []
+    }
+  ]
+}

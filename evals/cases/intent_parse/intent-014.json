@@ -1,0 +1,35 @@
+{
+  "id": "intent-014",
+  "task": "intent_parse",
+  "enabled": true,
+  "split": "dev",
+  "family": "budget-correction",
+  "tags": [
+    "budget-correction",
+    "text"
+  ],
+  "source": "助手构造的合成校园二手需求；非真实用户记录。",
+  "rationale": "已否定的500不能覆盖实际预算80。",
+  "label_status": "draft",
+  "input": {
+    "text": "万柳学区收台灯，不是预算500元，实际预算80元。"
+  },
+  "expected": {
+    "fields": {
+      "category": "宿舍生活与家电",
+      "max_price": 80,
+      "campus": "万柳学区",
+      "condition_grade": null
+    },
+    "sets": {
+      "keywords": [
+        [
+          "台灯",
+          "阅读灯"
+        ]
+      ],
+      "excluded_keywords": [],
+      "preferences": []
+    }
+  }
+}

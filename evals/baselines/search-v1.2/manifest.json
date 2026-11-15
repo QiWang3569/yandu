@@ -1,0 +1,3259 @@
+{
+  "run_id": "20261115T105148Z-80c171dd",
+  "created_at": "2026-11-15T10:51:48.057078+00:00",
+  "git_sha": "1bbf607f99f7378e57e13b390dea8d02e86bbe12",
+  "dirty": true,
+  "implementation_hash": "008cd6cca53a2efb53eb9a9cbd173377140d82df99101762a5360064587615aa",
+  "dataset_hash": "b4be954b29ccd73e2e1f9486f94f2222e1dc37e882203317524fe86144a72ce3",
+  "scorer_version": "1.2.0",
+  "policy_hash": "7667e9b4f863233bb0803d316a300bc24afde37105c7eef867ff307ea0dc2f12",
+  "models": [
+    {
+      "id": "local-rules",
+      "mode": "local",
+      "tasks": [
+        "smart_search"
+      ],
+      "model": "local-keyword-rules",
+      "base_url": null,
+      "thinking": null,
+      "temperature": 0.1,
+      "max_tokens": null,
+      "timeout": 30,
+      "retries": 0,
+      "pricing": null
+    },
+    {
+      "id": "oracle",
+      "mode": "oracle",
+      "tasks": [
+        "smart_search"
+      ],
+      "model": "gold-intent-injection",
+      "base_url": null,
+      "thinking": null,
+      "temperature": 0.1,
+      "max_tokens": null,
+      "timeout": 30,
+      "retries": 0,
+      "pricing": null
+    }
+  ],
+  "cases": [
+    {
+      "id": "search-ambiguity-01",
+      "hash": "0219c9166c4956e4e8187e371da000f91f4103a9f59b6c1606fd9843ad551271",
+      "task": "smart_search",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:ambiguity"
+      ],
+      "parse_expected": {
+        "fields": {
+          "category": null,
+          "max_price": null,
+          "campus": "不限校区",
+          "condition_grade": null
+        },
+        "sets": {
+          "keywords": [],
+          "excluded_keywords": [],
+          "preferences": []
+        },
+        "clarification": true
+      }
+    },
+    {
+      "id": "search-ambiguity-02",
+      "hash": "8e6d797039bbb555722c0e46e161a48d6c68cd265d02eab242646c2b7bef2e00",
+      "task": "smart_search",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:ambiguity"
+      ],
+      "parse_expected": {
+        "fields": {
+          "category": null,
+          "max_price": null,
+          "campus": "不限校区",
+          "condition_grade": null
+        },
+        "sets": {
+          "keywords": [],
+          "excluded_keywords": [],
+          "preferences": []
+        },
+        "clarification": true
+      }
+    },
+    {
+      "id": "search-ambiguity-03",
+      "hash": "e97e074248cdfe7f76166f0e8fd6a29933a3b23184425222f5d2890e68a0c56d",
+      "task": "smart_search",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:ambiguity"
+      ],
+      "parse_expected": {
+        "fields": {
+          "category": "数码与影音",
+          "max_price": null,
+          "campus": "不限校区",
+          "condition_grade": null
+        },
+        "sets": {
+          "keywords": [
+            [
+              "鼠标"
+            ]
+          ],
+          "excluded_keywords": [],
+          "preferences": []
+        },
+        "clarification": true
+      }
+    },
+    {
+      "id": "search-ambiguity-04",
+      "hash": "59fce10023a03d051e15cb173ce3ec3e8de0c4ac10ca22dca57220c0ba8ab2f3",
+      "task": "smart_search",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:ambiguity"
+      ],
+      "parse_expected": {
+        "fields": {
+          "category": "数码与影音",
+          "max_price": null,
+          "campus": "不限校区",
+          "condition_grade": null
+        },
+        "sets": {
+          "keywords": [
+            [
+              "鼠标"
+            ]
+          ],
+          "excluded_keywords": [],
+          "preferences": []
+        },
+        "clarification": true
+      }
+    },
+    {
+      "id": "search-ambiguity-05",
+      "hash": "bd5b6bc9cf074287ca720959c6cbbfca0dac93093531cafd5b2fb960e4d6a93f",
+      "task": "smart_search",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:ambiguity"
+      ],
+      "parse_expected": {
+        "fields": {
+          "category": null,
+          "max_price": null,
+          "campus": "不限校区",
+          "condition_grade": null
+        },
+        "sets": {
+          "keywords": [],
+          "excluded_keywords": [],
+          "preferences": []
+        },
+        "clarification": true
+      }
+    },
+    {
+      "id": "search-ambiguity-06",
+      "hash": "3be2a38e02c2a153fb4969d5b40796ac3eaada3f492823ad2d141e332ec50e0c",
+      "task": "smart_search",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:ambiguity"
+      ],
+      "parse_expected": {
+        "fields": {
+          "category": null,
+          "max_price": null,
+          "campus": "万柳学区",
+          "condition_grade": null
+        },
+        "sets": {
+          "keywords": [],
+          "excluded_keywords": [],
+          "preferences": []
+        },
+        "clarification": true
+      }
+    },
+    {
+      "id": "search-ambiguity-07",
+      "hash": "f7ee37e3bf511452b6afee853e9302475fd805c1affa9d6a0bc68f0a19296580",
+      "task": "smart_search",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:ambiguity"
+      ],
+      "parse_expected": {
+        "fields": {
+          "category": "数码与影音",
+          "max_price": null,
+          "campus": "不限校区",
+          "condition_grade": null
+        },
+        "sets": {
+          "keywords": [
+            [
+              "鼠标"
+            ],
+            [
+              "无线"
+            ]
+          ],
+          "excluded_keywords": [],
+          "preferences": []
+        },
+        "clarification": false
+      }
+    },
+    {
+      "id": "search-ambiguity-08",
+      "hash": "f3de185c011a31fc833682d2a44f62dceaa70b9ebafad815cc5bd90c93c05947",
+      "task": "smart_search",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:ambiguity"
+      ],
+      "parse_expected": {
+        "fields": {
+          "category": "课程资料与书籍",
+          "max_price": null,
+          "campus": "不限校区",
+          "condition_grade": null
+        },
+        "sets": {
+          "keywords": [
+            [
+              "高数教材",
+              "高等数学教材"
+            ]
+          ],
+          "excluded_keywords": [],
+          "preferences": []
+        },
+        "clarification": false
+      }
+    },
+    {
+      "id": "search-ambiguity-09",
+      "hash": "f1bfdda8bf75092a2ccf2b813370115063ba2bfb1a4dee3f5b2fb85c70ee0769",
+      "task": "smart_search",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:ambiguity"
+      ],
+      "parse_expected": {
+        "fields": {
+          "category": "校园出行与运动",
+          "max_price": null,
+          "campus": "不限校区",
+          "condition_grade": null
+        },
+        "sets": {
+          "keywords": [
+            [
+              "网球拍"
+            ]
+          ],
+          "excluded_keywords": [],
+          "preferences": []
+        },
+        "clarification": false
+      }
+    },
+    {
+      "id": "search-ambiguity-10",
+      "hash": "d76ce1db76c20cc2f0663fedc97c83ce1aabd963ae256a1f04c464df0a9a46be",
+      "task": "smart_search",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:ambiguity"
+      ],
+      "parse_expected": {
+        "fields": {
+          "category": "宿舍生活与家电",
+          "max_price": null,
+          "campus": "不限校区",
+          "condition_grade": null
+        },
+        "sets": {
+          "keywords": [
+            [
+              "电饭煲"
+            ]
+          ],
+          "excluded_keywords": [],
+          "preferences": []
+        },
+        "clarification": false
+      }
+    },
+    {
+      "id": "search-confusable-01",
+      "hash": "379aaaf7478e61344fa021a481392695251893d5d96c130196edf65dae48600e",
+      "task": "smart_search",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:confusable"
+      ],
+      "parse_expected": {
+        "fields": {
+          "category": "校园出行与运动",
+          "max_price": null,
+          "campus": "不限校区",
+          "condition_grade": null
+        },
+        "sets": {
+          "keywords": [
+            [
+              "网球拍"
+            ]
+          ],
+          "excluded_keywords": [],
+          "preferences": []
+        },
+        "clarification": false
+      }
+    },
+    {
+      "id": "search-confusable-02",
+      "hash": "9e55a0973141622f43f6699b085f16d1d307a995d5f97689d65e8aa4e1afb890",
+      "task": "smart_search",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:confusable"
+      ],
+      "parse_expected": {
+        "fields": {
+          "category": "校园出行与运动",
+          "max_price": null,
+          "campus": "不限校区",
+          "condition_grade": null
+        },
+        "sets": {
+          "keywords": [
+            [
+              "羽毛球拍"
+            ]
+          ],
+          "excluded_keywords": [],
+          "preferences": []
+        },
+        "clarification": false
+      }
+    },
+    {
+      "id": "search-confusable-03-rewrite",
+      "hash": "5c6c47bae5a3079e409b0fde1b70ed5901c07496a9bad3a4ee0f692f3d3c4bf2",
+      "task": "smart_search",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:confusable",
+        "metamorphic"
+      ],
+      "parse_expected": {
+        "fields": {
+          "category": "数码与影音",
+          "max_price": null,
+          "campus": "不限校区",
+          "condition_grade": null
+        },
+        "sets": {
+          "keywords": [
+            [
+              "MacBook充电器"
+            ]
+          ],
+          "excluded_keywords": [],
+          "preferences": []
+        },
+        "clarification": false
+      }
+    },
+    {
+      "id": "search-confusable-03",
+      "hash": "4c1ebef434b1521e43c0220f0f85757465950e56619c8e7df7f6b965882ed32a",
+      "task": "smart_search",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:confusable"
+      ],
+      "parse_expected": {
+        "fields": {
+          "category": "数码与影音",
+          "max_price": null,
+          "campus": "不限校区",
+          "condition_grade": null
+        },
+        "sets": {
+          "keywords": [
+            [
+              "MacBook充电器"
+            ]
+          ],
+          "excluded_keywords": [],
+          "preferences": []
+        },
+        "clarification": false
+      }
+    },
+    {
+      "id": "search-confusable-04",
+      "hash": "a3f1fd8fb64e6090d165a835d3d0a40d56effbdd08db0f4bc243c67263a54329",
+      "task": "smart_search",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:confusable"
+      ],
+      "parse_expected": {
+        "fields": {
+          "category": "数码与影音",
+          "max_price": null,
+          "campus": "不限校区",
+          "condition_grade": null
+        },
+        "sets": {
+          "keywords": [
+            [
+              "MacBook"
+            ],
+            [
+              "电脑"
+            ]
+          ],
+          "excluded_keywords": [],
+          "preferences": []
+        },
+        "clarification": false
+      }
+    },
+    {
+      "id": "search-confusable-05",
+      "hash": "b86029771455bf5b7032cb6c2efd685071142a4bfef0360f37b41b5b3f0eed44",
+      "task": "smart_search",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:confusable"
+      ],
+      "parse_expected": {
+        "fields": {
+          "category": "数码与影音",
+          "max_price": null,
+          "campus": "不限校区",
+          "condition_grade": null
+        },
+        "sets": {
+          "keywords": [
+            [
+              "笔记本支架"
+            ]
+          ],
+          "excluded_keywords": [],
+          "preferences": []
+        },
+        "clarification": false
+      }
+    },
+    {
+      "id": "search-confusable-06",
+      "hash": "e59c78cdb8e0b8cfcd47f113ec69f7cb6272a7adc74db6e8a3fb6ffe68d0c744",
+      "task": "smart_search",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:confusable"
+      ],
+      "parse_expected": {
+        "fields": {
+          "category": "数码与影音",
+          "max_price": null,
+          "campus": "不限校区",
+          "condition_grade": null
+        },
+        "sets": {
+          "keywords": [
+            [
+              "笔记本电脑"
+            ]
+          ],
+          "excluded_keywords": [],
+          "preferences": []
+        },
+        "clarification": false
+      }
+    },
+    {
+      "id": "search-confusable-07",
+      "hash": "ebd0c48b3656a578bed3d7e4ea11882e9771b17fcaa9b437340c935d29af5c7f",
+      "task": "smart_search",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:confusable"
+      ],
+      "parse_expected": {
+        "fields": {
+          "category": "数码与影音",
+          "max_price": null,
+          "campus": "不限校区",
+          "condition_grade": null
+        },
+        "sets": {
+          "keywords": [
+            [
+              "键盘"
+            ]
+          ],
+          "excluded_keywords": [],
+          "preferences": []
+        },
+        "clarification": false
+      }
+    },
+    {
+      "id": "search-confusable-08",
+      "hash": "eedb22c5fa0191b6876a9bab38c0c888377881047570e5a1a46ec617b1a255b1",
+      "task": "smart_search",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:confusable"
+      ],
+      "parse_expected": {
+        "fields": {
+          "category": "数码与影音",
+          "max_price": null,
+          "campus": "不限校区",
+          "condition_grade": null
+        },
+        "sets": {
+          "keywords": [
+            [
+              "键盘接收器"
+            ]
+          ],
+          "excluded_keywords": [],
+          "preferences": []
+        },
+        "clarification": false
+      }
+    },
+    {
+      "id": "search-confusable-09",
+      "hash": "87b565d843d674b45f5bbbd96df69ee297ca69a9f7426b02b185e3fe7a4b1388",
+      "task": "smart_search",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:confusable"
+      ],
+      "parse_expected": {
+        "fields": {
+          "category": "美妆服饰与周边",
+          "max_price": null,
+          "campus": "不限校区",
+          "condition_grade": null
+        },
+        "sets": {
+          "keywords": [
+            [
+              "帆布包"
+            ]
+          ],
+          "excluded_keywords": [],
+          "preferences": []
+        },
+        "clarification": false
+      }
+    },
+    {
+      "id": "search-confusable-10",
+      "hash": "20561aa2c96862efc4aaee79dcca29aedaaaba56624312242b6bd573a4cc9ae7",
+      "task": "smart_search",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:confusable"
+      ],
+      "parse_expected": {
+        "fields": {
+          "category": "美妆服饰与周边",
+          "max_price": null,
+          "campus": "不限校区",
+          "condition_grade": null
+        },
+        "sets": {
+          "keywords": [
+            [
+              "积木玩具巴士"
+            ]
+          ],
+          "excluded_keywords": [],
+          "preferences": []
+        },
+        "clarification": false
+      }
+    },
+    {
+      "id": "search-core-01-rewrite",
+      "hash": "7dfc23be4005b2ee8ae71abd028b78dc233d2e7c07f3c10083e0f9bd905580be",
+      "task": "smart_search",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:core",
+        "metamorphic"
+      ],
+      "parse_expected": {
+        "fields": {
+          "category": "数码与影音",
+          "max_price": 150,
+          "campus": "万柳学区",
+          "condition_grade": null
+        },
+        "sets": {
+          "keywords": [
+            [
+              "鼠标"
+            ],
+            [
+              "无线"
+            ]
+          ],
+          "excluded_keywords": [],
+          "preferences": []
+        },
+        "clarification": false
+      }
+    },
+    {
+      "id": "search-core-01",
+      "hash": "56d2f90c0e2cd17ae4078b3c75d8ec27ef925ba5347dc88fe39a8187b6c6fbb0",
+      "task": "smart_search",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:core"
+      ],
+      "parse_expected": {
+        "fields": {
+          "category": "数码与影音",
+          "max_price": 150,
+          "campus": "万柳学区",
+          "condition_grade": null
+        },
+        "sets": {
+          "keywords": [
+            [
+              "鼠标"
+            ],
+            [
+              "无线"
+            ]
+          ],
+          "excluded_keywords": [],
+          "preferences": []
+        },
+        "clarification": false
+      }
+    },
+    {
+      "id": "search-core-02",
+      "hash": "704cab1ce4a86e71c36d8d6f117ba5623d2ae110cde29909a9fa97ef64b032f4",
+      "task": "smart_search",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:core"
+      ],
+      "parse_expected": {
+        "fields": {
+          "category": "课程资料与书籍",
+          "max_price": 50,
+          "campus": "燕园校本部",
+          "condition_grade": null
+        },
+        "sets": {
+          "keywords": [
+            [
+              "高数教材",
+              "高等数学教材"
+            ]
+          ],
+          "excluded_keywords": [],
+          "preferences": []
+        },
+        "clarification": false
+      }
+    },
+    {
+      "id": "search-core-03",
+      "hash": "fdebf2e11547d8367073607d1c1c5c0bbce27682318fe94deca312ff830eb84a",
+      "task": "smart_search",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:core"
+      ],
+      "parse_expected": {
+        "fields": {
+          "category": "宿舍生活与家电",
+          "max_price": 50,
+          "campus": "医学部",
+          "condition_grade": null
+        },
+        "sets": {
+          "keywords": [
+            [
+              "电风扇"
+            ]
+          ],
+          "excluded_keywords": [],
+          "preferences": []
+        },
+        "clarification": false
+      }
+    },
+    {
+      "id": "search-core-04",
+      "hash": "2c5bb22af23319b800b5cef8d8410d75f552d20721babe9feaa13053b66e38e2",
+      "task": "smart_search",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:core"
+      ],
+      "parse_expected": {
+        "fields": {
+          "category": "数码与影音",
+          "max_price": 200,
+          "campus": "万柳学区",
+          "condition_grade": "95新"
+        },
+        "sets": {
+          "keywords": [
+            [
+              "键盘"
+            ]
+          ],
+          "excluded_keywords": [],
+          "preferences": []
+        },
+        "clarification": false
+      }
+    },
+    {
+      "id": "search-core-05-rewrite",
+      "hash": "93f1107258d0d14a03ddf0a0d92ff34eec7a1739ba549ac941a1cd97731638b0",
+      "task": "smart_search",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:core",
+        "metamorphic"
+      ],
+      "parse_expected": {
+        "fields": {
+          "category": "校园出行与运动",
+          "max_price": 200,
+          "campus": "燕园校本部",
+          "condition_grade": "9成新"
+        },
+        "sets": {
+          "keywords": [
+            [
+              "网球拍"
+            ]
+          ],
+          "excluded_keywords": [],
+          "preferences": []
+        },
+        "clarification": false
+      }
+    },
+    {
+      "id": "search-core-05",
+      "hash": "89c180e089c5340b702195b8efdb1d2f9104569d75e99c6126ae72d76d32c043",
+      "task": "smart_search",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:core"
+      ],
+      "parse_expected": {
+        "fields": {
+          "category": "校园出行与运动",
+          "max_price": 200,
+          "campus": "燕园校本部",
+          "condition_grade": "9成新"
+        },
+        "sets": {
+          "keywords": [
+            [
+              "网球拍"
+            ]
+          ],
+          "excluded_keywords": [],
+          "preferences": []
+        },
+        "clarification": false
+      }
+    },
+    {
+      "id": "search-core-06",
+      "hash": "9e7f5d7c03ee40eac7b35dd9b355c2b9d9f8193cc9867f64230e8b071207d992",
+      "task": "smart_search",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:core"
+      ],
+      "parse_expected": {
+        "fields": {
+          "category": "课程资料与书籍",
+          "max_price": 0,
+          "campus": "昌平新校区",
+          "condition_grade": null
+        },
+        "sets": {
+          "keywords": [
+            [
+              "英语词典"
+            ]
+          ],
+          "excluded_keywords": [],
+          "preferences": []
+        },
+        "clarification": false
+      }
+    },
+    {
+      "id": "search-core-07",
+      "hash": "7a4a4d2ad40e2d804c36d23143c6a763f0a0286d95162a79fdf6a4bb80217762",
+      "task": "smart_search",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:core"
+      ],
+      "parse_expected": {
+        "fields": {
+          "category": "宿舍生活与家电",
+          "max_price": 100,
+          "campus": "燕园校本部",
+          "condition_grade": "8成新"
+        },
+        "sets": {
+          "keywords": [
+            [
+              "电饭煲"
+            ]
+          ],
+          "excluded_keywords": [],
+          "preferences": []
+        },
+        "clarification": false
+      }
+    },
+    {
+      "id": "search-core-08-rewrite",
+      "hash": "eac85565699644d2b4d4ec626964cc35e67115e06c0e71063e0651e0cc7daf6a",
+      "task": "smart_search",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:core",
+        "metamorphic"
+      ],
+      "parse_expected": {
+        "fields": {
+          "category": "美妆服饰与周边",
+          "max_price": 30,
+          "campus": "万柳学区",
+          "condition_grade": "基本可用"
+        },
+        "sets": {
+          "keywords": [
+            [
+              "帆布包"
+            ]
+          ],
+          "excluded_keywords": [],
+          "preferences": []
+        },
+        "clarification": false
+      }
+    },
+    {
+      "id": "search-core-08",
+      "hash": "caa70a9571acf3f9d3895674ea147adad400d43296c0a7c1d9bfe44bc9217365",
+      "task": "smart_search",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:core"
+      ],
+      "parse_expected": {
+        "fields": {
+          "category": "美妆服饰与周边",
+          "max_price": 30,
+          "campus": "万柳学区",
+          "condition_grade": "基本可用"
+        },
+        "sets": {
+          "keywords": [
+            [
+              "帆布包"
+            ]
+          ],
+          "excluded_keywords": [],
+          "preferences": []
+        },
+        "clarification": false
+      }
+    },
+    {
+      "id": "search-core-09",
+      "hash": "033a150728c454e9212f968410d5d03921148b180f8b079050d6fd9b99c36b9a",
+      "task": "smart_search",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:core"
+      ],
+      "parse_expected": {
+        "fields": {
+          "category": "人员招募",
+          "max_price": 0,
+          "campus": "燕园校本部",
+          "condition_grade": null
+        },
+        "sets": {
+          "keywords": [
+            [
+              "摄影模特招募"
+            ]
+          ],
+          "excluded_keywords": [],
+          "preferences": []
+        },
+        "clarification": false
+      }
+    },
+    {
+      "id": "search-core-10-budget",
+      "hash": "c8df2323ab8f6d639c7da6f27c63be870bb3b67e3ecd4cdea8bbef755e2d1e66",
+      "task": "smart_search",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:core",
+        "metamorphic"
+      ],
+      "parse_expected": {
+        "fields": {
+          "category": "校园出行与运动",
+          "max_price": 400,
+          "campus": "万柳学区",
+          "condition_grade": null
+        },
+        "sets": {
+          "keywords": [
+            [
+              "自行车"
+            ]
+          ],
+          "excluded_keywords": [],
+          "preferences": []
+        },
+        "clarification": false
+      }
+    },
+    {
+      "id": "search-core-10",
+      "hash": "1dfa3f2755230a69643f88dc72506a1c5d02270f13333ca23453040a9b0721aa",
+      "task": "smart_search",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:core"
+      ],
+      "parse_expected": {
+        "fields": {
+          "category": "校园出行与运动",
+          "max_price": 500,
+          "campus": "万柳学区",
+          "condition_grade": null
+        },
+        "sets": {
+          "keywords": [
+            [
+              "自行车"
+            ]
+          ],
+          "excluded_keywords": [],
+          "preferences": []
+        },
+        "clarification": false
+      }
+    },
+    {
+      "id": "search-negation-01-rewrite",
+      "hash": "58b513d110f172fcccf6143985464621d9d49a6e6db7b3469ae9e6ea81f1ea65",
+      "task": "smart_search",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:negation",
+        "metamorphic"
+      ],
+      "parse_expected": {
+        "fields": {
+          "category": "数码与影音",
+          "max_price": 300,
+          "campus": "万柳学区",
+          "condition_grade": null
+        },
+        "sets": {
+          "keywords": [
+            [
+              "鼠标"
+            ],
+            [
+              "无线"
+            ]
+          ],
+          "excluded_keywords": [
+            [
+              "游戏鼠标"
+            ]
+          ],
+          "preferences": []
+        },
+        "clarification": false
+      }
+    },
+    {
+      "id": "search-negation-01",
+      "hash": "c53a90d032782d8c7340089edf640802265f0f2bc862b14e86e6f635c207cd95",
+      "task": "smart_search",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:negation"
+      ],
+      "parse_expected": {
+        "fields": {
+          "category": "数码与影音",
+          "max_price": 300,
+          "campus": "万柳学区",
+          "condition_grade": null
+        },
+        "sets": {
+          "keywords": [
+            [
+              "鼠标"
+            ],
+            [
+              "无线"
+            ]
+          ],
+          "excluded_keywords": [
+            [
+              "游戏鼠标"
+            ]
+          ],
+          "preferences": []
+        },
+        "clarification": false
+      }
+    },
+    {
+      "id": "search-negation-02",
+      "hash": "4949cf3ff7d72f9e3db0be885670457be5338db64a09cae3f106e208cf841093",
+      "task": "smart_search",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:negation"
+      ],
+      "parse_expected": {
+        "fields": {
+          "category": "数码与影音",
+          "max_price": 300,
+          "campus": "万柳学区",
+          "condition_grade": null
+        },
+        "sets": {
+          "keywords": [
+            [
+              "鼠标"
+            ],
+            [
+              "无线"
+            ]
+          ],
+          "excluded_keywords": [
+            [
+              "双击"
+            ]
+          ],
+          "preferences": []
+        },
+        "clarification": false
+      }
+    },
+    {
+      "id": "search-negation-03",
+      "hash": "71494c9ab96aea5edd52cec5a206fd6df99457743f23bb90fe940d5603ff86c8",
+      "task": "smart_search",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:negation"
+      ],
+      "parse_expected": {
+        "fields": {
+          "category": "数码与影音",
+          "max_price": 300,
+          "campus": "万柳学区",
+          "condition_grade": null
+        },
+        "sets": {
+          "keywords": [
+            [
+              "鼠标"
+            ],
+            [
+              "无线"
+            ]
+          ],
+          "excluded_keywords": [
+            [
+              "游戏鼠标"
+            ],
+            [
+              "双击"
+            ]
+          ],
+          "preferences": []
+        },
+        "clarification": false
+      }
+    },
+    {
+      "id": "search-negation-04",
+      "hash": "30de27ddcba51f54b8f45ef2d1954c03ef26baf8ba32aaa6ab682273de6eb0ac",
+      "task": "smart_search",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:negation"
+      ],
+      "parse_expected": {
+        "fields": {
+          "category": "数码与影音",
+          "max_price": 300,
+          "campus": "燕园校本部",
+          "condition_grade": null
+        },
+        "sets": {
+          "keywords": [
+            [
+              "鼠标"
+            ]
+          ],
+          "excluded_keywords": [
+            [
+              "有线"
+            ]
+          ],
+          "preferences": []
+        },
+        "clarification": false
+      }
+    },
+    {
+      "id": "search-negation-05",
+      "hash": "3af368b2d909367130e8125049032a1ba5f903850c7f9c2402c96f5593dca544",
+      "task": "smart_search",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:negation"
+      ],
+      "parse_expected": {
+        "fields": {
+          "category": "数码与影音",
+          "max_price": 200,
+          "campus": "不限校区",
+          "condition_grade": null
+        },
+        "sets": {
+          "keywords": [
+            [
+              "耳机"
+            ]
+          ],
+          "excluded_keywords": [
+            [
+              "降噪"
+            ]
+          ],
+          "preferences": []
+        },
+        "clarification": false
+      }
+    },
+    {
+      "id": "search-negation-06",
+      "hash": "e25cba29ab9cbec61f829bc3f338702d1e6fd55687129bf5c4ac927bcfd708a6",
+      "task": "smart_search",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:negation"
+      ],
+      "parse_expected": {
+        "fields": {
+          "category": "校园出行与运动",
+          "max_price": 500,
+          "campus": "不限校区",
+          "condition_grade": null
+        },
+        "sets": {
+          "keywords": [
+            [
+              "自行车"
+            ]
+          ],
+          "excluded_keywords": [
+            [
+              "山地"
+            ]
+          ],
+          "preferences": []
+        },
+        "clarification": false
+      }
+    },
+    {
+      "id": "search-negation-07",
+      "hash": "0e307632670f2e14d01c08ce678d8b4f1f13c616d6f2241054ee8af0764a7ea5",
+      "task": "smart_search",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:negation"
+      ],
+      "parse_expected": {
+        "fields": {
+          "category": "美妆服饰与周边",
+          "max_price": 200,
+          "campus": "不限校区",
+          "condition_grade": null
+        },
+        "sets": {
+          "keywords": [
+            [
+              "包"
+            ]
+          ],
+          "excluded_keywords": [
+            [
+              "皮"
+            ]
+          ],
+          "preferences": []
+        },
+        "clarification": false
+      }
+    },
+    {
+      "id": "search-negation-08",
+      "hash": "ce06c54c80bde76b0be91a3a0d290251263b8e75f07961ddfc1ef0283607fe8b",
+      "task": "smart_search",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:negation"
+      ],
+      "parse_expected": {
+        "fields": {
+          "category": "数码与影音",
+          "max_price": 300,
+          "campus": "不限校区",
+          "condition_grade": null
+        },
+        "sets": {
+          "keywords": [
+            [
+              "键盘"
+            ]
+          ],
+          "excluded_keywords": [
+            [
+              "无线"
+            ]
+          ],
+          "preferences": []
+        },
+        "clarification": false
+      }
+    },
+    {
+      "id": "search-negation-09",
+      "hash": "ec72bb968068f463485169e3807f6fa7fcd599be419e2ec5caaa6f09320959ac",
+      "task": "smart_search",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:negation"
+      ],
+      "parse_expected": {
+        "fields": {
+          "category": "数码与影音",
+          "max_price": 400,
+          "campus": "不限校区",
+          "condition_grade": null
+        },
+        "sets": {
+          "keywords": [
+            [
+              "鼠标"
+            ]
+          ],
+          "excluded_keywords": [
+            [
+              "游戏鼠标"
+            ],
+            [
+              "双击"
+            ]
+          ],
+          "preferences": []
+        },
+        "clarification": false
+      }
+    },
+    {
+      "id": "search-negation-10",
+      "hash": "c03dd9cd36e8b06f57f54c9244a62fb2032658a2512164091a2564c0cba116ad",
+      "task": "smart_search",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:negation"
+      ],
+      "parse_expected": {
+        "fields": {
+          "category": "美妆服饰与周边",
+          "max_price": 100,
+          "campus": "不限校区",
+          "condition_grade": null
+        },
+        "sets": {
+          "keywords": [
+            [
+              "鞋子",
+              "鞋"
+            ]
+          ],
+          "excluded_keywords": [
+            [
+              "白色"
+            ]
+          ],
+          "preferences": []
+        },
+        "clarification": false
+      }
+    },
+    {
+      "id": "search-ood-01",
+      "hash": "45c8a433109d25002d52a5882f10f30698e874853155a7bf5254cbbaae9d3f32",
+      "task": "smart_search",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:ood"
+      ],
+      "parse_expected": {
+        "fields": {
+          "category": "数码与影音",
+          "max_price": 2000,
+          "campus": "不限校区",
+          "condition_grade": null
+        },
+        "sets": {
+          "keywords": [
+            [
+              "Pocket 3",
+              "Pocket3",
+              "大疆Pocket 3",
+              "大疆Pocket3"
+            ]
+          ],
+          "excluded_keywords": [],
+          "preferences": []
+        },
+        "clarification": false
+      }
+    },
+    {
+      "id": "search-ood-02",
+      "hash": "441708eb9ac8d0ae78cc7ef055251c54268cacee7d89263d0d79d71c78dd5459",
+      "task": "smart_search",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:ood"
+      ],
+      "parse_expected": {
+        "fields": {
+          "category": "数码与影音",
+          "max_price": 400,
+          "campus": "不限校区",
+          "condition_grade": null
+        },
+        "sets": {
+          "keywords": [
+            [
+              "GPW二代",
+              "GPW二代鼠标",
+              "罗技GPW二代",
+              "GPW2"
+            ]
+          ],
+          "excluded_keywords": [],
+          "preferences": []
+        },
+        "clarification": false
+      }
+    },
+    {
+      "id": "search-ood-03",
+      "hash": "bbcca73bf57f38b5342cd9fc46addc8f135bbf31b40ad60a2de7f3447c21a44a",
+      "task": "smart_search",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:ood"
+      ],
+      "parse_expected": {
+        "fields": {
+          "category": "数码与影音",
+          "max_price": 200,
+          "campus": "不限校区",
+          "condition_grade": null
+        },
+        "sets": {
+          "keywords": [
+            [
+              "Switch手柄"
+            ]
+          ],
+          "excluded_keywords": [],
+          "preferences": []
+        },
+        "clarification": false
+      }
+    },
+    {
+      "id": "search-ood-04",
+      "hash": "2cbb785c97c39a1935a0fdfe1ca108ce2a2f62407032f04fd3c56ad2ddc9154c",
+      "task": "smart_search",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:ood"
+      ],
+      "parse_expected": {
+        "fields": {
+          "category": "数码与影音",
+          "max_price": 100,
+          "campus": "不限校区",
+          "condition_grade": null
+        },
+        "sets": {
+          "keywords": [
+            [
+              "USB-C扩展坞",
+              "Type-C扩展坞"
+            ]
+          ],
+          "excluded_keywords": [],
+          "preferences": []
+        },
+        "clarification": false
+      }
+    },
+    {
+      "id": "search-ood-05",
+      "hash": "64eb21bd8eb433973b1628755450eaf815da76db5e9b4225037b7a99b8284c42",
+      "task": "smart_search",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:ood"
+      ],
+      "parse_expected": {
+        "fields": {
+          "category": "宿舍生活与家电",
+          "max_price": 1000,
+          "campus": "不限校区",
+          "condition_grade": null
+        },
+        "sets": {
+          "keywords": [
+            [
+              "石头G20扫地机器人"
+            ]
+          ],
+          "excluded_keywords": [],
+          "preferences": []
+        },
+        "clarification": false
+      }
+    },
+    {
+      "id": "search-ood-06",
+      "hash": "86b16dc2707db364431d0039f391af6e8bf334f4468f5cfd9ce379a6827e4d62",
+      "task": "smart_search",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:ood"
+      ],
+      "parse_expected": {
+        "fields": {
+          "category": "数码与影音",
+          "max_price": 3500,
+          "campus": "不限校区",
+          "condition_grade": null
+        },
+        "sets": {
+          "keywords": [
+            [
+              "MacBook Air",
+              "MacBook Air电脑"
+            ]
+          ],
+          "excluded_keywords": [],
+          "preferences": []
+        },
+        "clarification": false
+      }
+    },
+    {
+      "id": "search-ood-07",
+      "hash": "89548bd36054ca8ecdd95bea5e6cecba00cebaa73d0210f45b3cede1899cbf82",
+      "task": "smart_search",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:ood"
+      ],
+      "parse_expected": {
+        "fields": {
+          "category": "数码与影音",
+          "max_price": 90,
+          "campus": "不限校区",
+          "condition_grade": null
+        },
+        "sets": {
+          "keywords": [
+            [
+              "小米手环"
+            ]
+          ],
+          "excluded_keywords": [],
+          "preferences": []
+        },
+        "clarification": false
+      }
+    },
+    {
+      "id": "search-ood-08",
+      "hash": "7353fb173a50bf3db9e59a0ba83273d2427191429f299e505aaba48dcdc338ef",
+      "task": "smart_search",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:ood"
+      ],
+      "parse_expected": {
+        "fields": {
+          "category": "数码与影音",
+          "max_price": 20,
+          "campus": "不限校区",
+          "condition_grade": null
+        },
+        "sets": {
+          "keywords": [
+            [
+              "USB键盘接收器"
+            ]
+          ],
+          "excluded_keywords": [],
+          "preferences": []
+        },
+        "clarification": false
+      }
+    },
+    {
+      "id": "search-ood-09",
+      "hash": "a19dff065e4e031956d3b998e7b33f1974b83a801384d3fc6d4943f52171e654",
+      "task": "smart_search",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:ood"
+      ],
+      "parse_expected": {
+        "fields": {
+          "category": "数码与影音",
+          "max_price": 2000,
+          "campus": "不限校区",
+          "condition_grade": null
+        },
+        "sets": {
+          "keywords": [
+            [
+              "零刻SER8迷你主机"
+            ]
+          ],
+          "excluded_keywords": [],
+          "preferences": []
+        },
+        "clarification": false
+      }
+    },
+    {
+      "id": "search-ood-10",
+      "hash": "fe2ed70a10e3324926508c65db7843260c5114a5980bd1a002e73a3d7e7f0961",
+      "task": "smart_search",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:ood"
+      ],
+      "parse_expected": {
+        "fields": {
+          "category": "数码与影音",
+          "max_price": 300,
+          "campus": "不限校区",
+          "condition_grade": null
+        },
+        "sets": {
+          "keywords": [
+            [
+              "科大讯飞翻译笔"
+            ]
+          ],
+          "excluded_keywords": [],
+          "preferences": []
+        },
+        "clarification": false
+      }
+    },
+    {
+      "id": "search-preference-01-rewrite",
+      "hash": "aa40dcbd1423475855969d2abdd61144e942dcc914eb827ec558a620615fcd03",
+      "task": "smart_search",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:preference",
+        "metamorphic"
+      ],
+      "parse_expected": {
+        "fields": {
+          "category": "校园出行与运动",
+          "max_price": 500,
+          "campus": "万柳学区",
+          "condition_grade": null
+        },
+        "sets": {
+          "keywords": [
+            [
+              "自行车"
+            ]
+          ],
+          "excluded_keywords": [],
+          "preferences": [
+            [
+              "车锁",
+              "带车锁"
+            ]
+          ]
+        },
+        "clarification": false
+      }
+    },
+    {
+      "id": "search-preference-01",
+      "hash": "37dc511a49664c5be70e1612c71d40c67c853d3240bc64747be65796e60f0c63",
+      "task": "smart_search",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:preference"
+      ],
+      "parse_expected": {
+        "fields": {
+          "category": "校园出行与运动",
+          "max_price": 500,
+          "campus": "万柳学区",
+          "condition_grade": null
+        },
+        "sets": {
+          "keywords": [
+            [
+              "自行车"
+            ]
+          ],
+          "excluded_keywords": [],
+          "preferences": [
+            [
+              "车锁",
+              "带车锁"
+            ]
+          ]
+        },
+        "clarification": false
+      }
+    },
+    {
+      "id": "search-preference-02",
+      "hash": "5f40dd613c080c2bf97c8cb43a5a630f42d9e0b352c05af9c1da3d6efdb13ece",
+      "task": "smart_search",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:preference"
+      ],
+      "parse_expected": {
+        "fields": {
+          "category": "校园出行与运动",
+          "max_price": 500,
+          "campus": "万柳学区",
+          "condition_grade": null
+        },
+        "sets": {
+          "keywords": [
+            [
+              "自行车"
+            ],
+            [
+              "车锁",
+              "带车锁"
+            ]
+          ],
+          "excluded_keywords": [],
+          "preferences": []
+        },
+        "clarification": false
+      }
+    },
+    {
+      "id": "search-preference-03",
+      "hash": "42a3012e5f637a84cda1913ece6bc59257eaa7fe2cd0449f7f20ae568fc66012",
+      "task": "smart_search",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:preference"
+      ],
+      "parse_expected": {
+        "fields": {
+          "category": "数码与影音",
+          "max_price": 400,
+          "campus": "不限校区",
+          "condition_grade": null
+        },
+        "sets": {
+          "keywords": [
+            [
+              "鼠标"
+            ]
+          ],
+          "excluded_keywords": [],
+          "preferences": [
+            [
+              "静音"
+            ]
+          ]
+        },
+        "clarification": false
+      }
+    },
+    {
+      "id": "search-preference-04",
+      "hash": "9f7954c22794e86c5e94027be36ee991a7066f43da2e5d710f554578bb8a182b",
+      "task": "smart_search",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:preference"
+      ],
+      "parse_expected": {
+        "fields": {
+          "category": "数码与影音",
+          "max_price": 400,
+          "campus": "不限校区",
+          "condition_grade": null
+        },
+        "sets": {
+          "keywords": [
+            [
+              "鼠标"
+            ],
+            [
+              "静音"
+            ]
+          ],
+          "excluded_keywords": [],
+          "preferences": []
+        },
+        "clarification": false
+      }
+    },
+    {
+      "id": "search-preference-05",
+      "hash": "ed78b13f13ead269eedd6398978a2248b8a321b2c9d8ca2dff81637a358f79f4",
+      "task": "smart_search",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:preference"
+      ],
+      "parse_expected": {
+        "fields": {
+          "category": "宿舍生活与家电",
+          "max_price": 100,
+          "campus": "不限校区",
+          "condition_grade": null
+        },
+        "sets": {
+          "keywords": [
+            [
+              "台灯"
+            ]
+          ],
+          "excluded_keywords": [],
+          "preferences": [
+            [
+              "LED"
+            ]
+          ]
+        },
+        "clarification": false
+      }
+    },
+    {
+      "id": "search-preference-06",
+      "hash": "77077c35af81e90a4c0ddaa18e8419c27ec58e78d604084f3bf60a39c3aae69b",
+      "task": "smart_search",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:preference"
+      ],
+      "parse_expected": {
+        "fields": {
+          "category": "宿舍生活与家电",
+          "max_price": 100,
+          "campus": "不限校区",
+          "condition_grade": null
+        },
+        "sets": {
+          "keywords": [
+            [
+              "台灯"
+            ],
+            [
+              "LED"
+            ]
+          ],
+          "excluded_keywords": [],
+          "preferences": []
+        },
+        "clarification": false
+      }
+    },
+    {
+      "id": "search-preference-07",
+      "hash": "aefad15975a60045782ab9bba11148cf5374c62cd7d5b8f89e00805b8e1c44e3",
+      "task": "smart_search",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:preference"
+      ],
+      "parse_expected": {
+        "fields": {
+          "category": "数码与影音",
+          "max_price": 200,
+          "campus": "不限校区",
+          "condition_grade": null
+        },
+        "sets": {
+          "keywords": [
+            [
+              "耳机"
+            ]
+          ],
+          "excluded_keywords": [],
+          "preferences": [
+            [
+              "降噪"
+            ]
+          ]
+        },
+        "clarification": false
+      }
+    },
+    {
+      "id": "search-preference-08",
+      "hash": "7367e5da6fd6c347788331fbb37c439371d85aa7f7129c9a8154e27cac3271af",
+      "task": "smart_search",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:preference"
+      ],
+      "parse_expected": {
+        "fields": {
+          "category": "数码与影音",
+          "max_price": 200,
+          "campus": "不限校区",
+          "condition_grade": null
+        },
+        "sets": {
+          "keywords": [
+            [
+              "耳机"
+            ],
+            [
+              "降噪"
+            ]
+          ],
+          "excluded_keywords": [],
+          "preferences": []
+        },
+        "clarification": false
+      }
+    },
+    {
+      "id": "search-preference-09",
+      "hash": "5c2ad30609a71f67db4b468a343e1e79a2f80f5d4d003f63f00ec45db2414de8",
+      "task": "smart_search",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:preference"
+      ],
+      "parse_expected": {
+        "fields": {
+          "category": "美妆服饰与周边",
+          "max_price": 100,
+          "campus": "不限校区",
+          "condition_grade": null
+        },
+        "sets": {
+          "keywords": [
+            [
+              "鞋子",
+              "鞋"
+            ]
+          ],
+          "excluded_keywords": [],
+          "preferences": [
+            [
+              "白色"
+            ]
+          ]
+        },
+        "clarification": false
+      }
+    },
+    {
+      "id": "search-preference-10",
+      "hash": "3e435143b03dd34d46407fd9b2c3adff39947404ad56c465f92ba648484d47f3",
+      "task": "smart_search",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:preference"
+      ],
+      "parse_expected": {
+        "fields": {
+          "category": "美妆服饰与周边",
+          "max_price": 100,
+          "campus": "不限校区",
+          "condition_grade": null
+        },
+        "sets": {
+          "keywords": [
+            [
+              "鞋子",
+              "鞋"
+            ],
+            [
+              "白色"
+            ]
+          ],
+          "excluded_keywords": [],
+          "preferences": []
+        },
+        "clarification": false
+      }
+    },
+    {
+      "id": "search-price-01",
+      "hash": "6e8e0528b78b4596ed0304c2bbe470b1cb27de6506976d78543cd0b6cbcef536",
+      "task": "smart_search",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:price"
+      ],
+      "parse_expected": {
+        "fields": {
+          "category": "数码与影音",
+          "max_price": 200,
+          "campus": "不限校区",
+          "condition_grade": null
+        },
+        "sets": {
+          "keywords": [
+            [
+              "鼠标"
+            ]
+          ],
+          "excluded_keywords": [],
+          "preferences": []
+        },
+        "clarification": false
+      }
+    },
+    {
+      "id": "search-price-02-rewrite",
+      "hash": "3337918f3889b401842929f74a8de57c0bda0f31b47d78e211854d0ddb222e2c",
+      "task": "smart_search",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:price",
+        "metamorphic"
+      ],
+      "parse_expected": {
+        "fields": {
+          "category": "数码与影音",
+          "max_price": 1500,
+          "campus": "不限校区",
+          "condition_grade": null
+        },
+        "sets": {
+          "keywords": [
+            [
+              "笔记本电脑"
+            ]
+          ],
+          "excluded_keywords": [],
+          "preferences": []
+        },
+        "clarification": false
+      }
+    },
+    {
+      "id": "search-price-02",
+      "hash": "7436a7084335eeaf26538a5a0e3acb8d0f3990a1341577b5d9c3bcfc6dbb7d73",
+      "task": "smart_search",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:price"
+      ],
+      "parse_expected": {
+        "fields": {
+          "category": "数码与影音",
+          "max_price": 1500,
+          "campus": "不限校区",
+          "condition_grade": null
+        },
+        "sets": {
+          "keywords": [
+            [
+              "笔记本电脑"
+            ]
+          ],
+          "excluded_keywords": [],
+          "preferences": []
+        },
+        "clarification": false
+      }
+    },
+    {
+      "id": "search-price-03",
+      "hash": "827271aae080e2753871f5ea4b9b0494f39ddb9b3f80a93d3c8a0445e229c790",
+      "task": "smart_search",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:price"
+      ],
+      "parse_expected": {
+        "fields": {
+          "category": "宿舍生活与家电",
+          "max_price": 50,
+          "campus": "不限校区",
+          "condition_grade": null
+        },
+        "sets": {
+          "keywords": [
+            [
+              "台灯"
+            ]
+          ],
+          "excluded_keywords": [],
+          "preferences": []
+        },
+        "clarification": false
+      }
+    },
+    {
+      "id": "search-price-04",
+      "hash": "f10eee25dc73433e88adee3a8eaf7a9bb46dbc4c23e5a3397a9eca5a15a9dcab",
+      "task": "smart_search",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:price"
+      ],
+      "parse_expected": {
+        "fields": {
+          "category": "数码与影音",
+          "max_price": 0,
+          "campus": "不限校区",
+          "condition_grade": null
+        },
+        "sets": {
+          "keywords": [
+            [
+              "数据线"
+            ]
+          ],
+          "excluded_keywords": [],
+          "preferences": []
+        },
+        "clarification": false
+      }
+    },
+    {
+      "id": "search-price-05",
+      "hash": "d6f1c51686ecb49418c43d097f2641f0765a812d84ed2d0eee92b66c0ee5462c",
+      "task": "smart_search",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:price"
+      ],
+      "parse_expected": {
+        "fields": {
+          "category": "课程资料与书籍",
+          "max_price": 0,
+          "campus": "不限校区",
+          "condition_grade": null
+        },
+        "sets": {
+          "keywords": [
+            [
+              "英语词典"
+            ]
+          ],
+          "excluded_keywords": [],
+          "preferences": []
+        },
+        "clarification": false
+      }
+    },
+    {
+      "id": "search-price-06",
+      "hash": "b3f40384b0d2eb6a7f0ae0afdb1820d4191e6d062e3390e2d79a5c8bd2ad9cc8",
+      "task": "smart_search",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:price"
+      ],
+      "parse_expected": {
+        "fields": {
+          "category": "数码与影音",
+          "max_price": 99.5,
+          "campus": "不限校区",
+          "condition_grade": null
+        },
+        "sets": {
+          "keywords": [
+            [
+              "MacBook充电器"
+            ]
+          ],
+          "excluded_keywords": [],
+          "preferences": []
+        },
+        "clarification": false
+      }
+    },
+    {
+      "id": "search-price-07",
+      "hash": "7f6f7f5d6f4353df2267a44040d8423899029d17fcbc331d21dfcb5c5f598487",
+      "task": "smart_search",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:price"
+      ],
+      "parse_expected": {
+        "fields": {
+          "category": "数码与影音",
+          "max_price": 200,
+          "campus": "不限校区",
+          "condition_grade": null
+        },
+        "sets": {
+          "keywords": [
+            [
+              "鼠标"
+            ]
+          ],
+          "excluded_keywords": [],
+          "preferences": []
+        },
+        "clarification": false
+      }
+    },
+    {
+      "id": "search-price-08-budget",
+      "hash": "d6720e10c1bd28b7c17da7e587537b27b33a037a85d3b6cf0379ad7a7a87b78a",
+      "task": "smart_search",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:price",
+        "metamorphic"
+      ],
+      "parse_expected": {
+        "fields": {
+          "category": "数码与影音",
+          "max_price": 200,
+          "campus": "不限校区",
+          "condition_grade": null
+        },
+        "sets": {
+          "keywords": [
+            [
+              "鼠标"
+            ],
+            [
+              "无线"
+            ]
+          ],
+          "excluded_keywords": [],
+          "preferences": []
+        },
+        "clarification": false
+      }
+    },
+    {
+      "id": "search-price-08-rewrite",
+      "hash": "dcba175eccc2979c55a1fa95b5dedc97844a1eea4ca6812031843d0081fc298e",
+      "task": "smart_search",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:price",
+        "metamorphic"
+      ],
+      "parse_expected": {
+        "fields": {
+          "category": "数码与影音",
+          "max_price": 300,
+          "campus": "不限校区",
+          "condition_grade": null
+        },
+        "sets": {
+          "keywords": [
+            [
+              "鼠标"
+            ],
+            [
+              "无线"
+            ]
+          ],
+          "excluded_keywords": [],
+          "preferences": []
+        },
+        "clarification": false
+      }
+    },
+    {
+      "id": "search-price-08",
+      "hash": "1d59d24836d408c09f869ba5a777bd871f89a8b610dcddeabb46936dba956cb2",
+      "task": "smart_search",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:price"
+      ],
+      "parse_expected": {
+        "fields": {
+          "category": "数码与影音",
+          "max_price": 300,
+          "campus": "不限校区",
+          "condition_grade": null
+        },
+        "sets": {
+          "keywords": [
+            [
+              "鼠标"
+            ],
+            [
+              "无线"
+            ]
+          ],
+          "excluded_keywords": [],
+          "preferences": []
+        },
+        "clarification": false
+      }
+    },
+    {
+      "id": "search-price-09",
+      "hash": "49d32ee178a7ee76c7a2129b9f089cd491b640e7de563b11a83982175473d525",
+      "task": "smart_search",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:price"
+      ],
+      "parse_expected": {
+        "fields": {
+          "category": "数码与影音",
+          "max_price": 300,
+          "campus": "不限校区",
+          "condition_grade": "全新"
+        },
+        "sets": {
+          "keywords": [
+            [
+              "鼠标"
+            ],
+            [
+              "无线"
+            ]
+          ],
+          "excluded_keywords": [],
+          "preferences": []
+        },
+        "clarification": false
+      }
+    },
+    {
+      "id": "search-price-10",
+      "hash": "be6aace97b0c4fd792517105ff7b23320245d6f062bd77be11060c4d856ef616",
+      "task": "smart_search",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:price"
+      ],
+      "parse_expected": {
+        "fields": {
+          "category": "宿舍生活与家电",
+          "max_price": 49.99,
+          "campus": "不限校区",
+          "condition_grade": null
+        },
+        "sets": {
+          "keywords": [
+            [
+              "台灯"
+            ]
+          ],
+          "excluded_keywords": [],
+          "preferences": []
+        },
+        "clarification": false
+      }
+    }
+  ],
+  "catalog_hash": "6a5558b6bea934326fba61e6e2ef96986ad7211f4ebaf96306a53c733c9d0fb3",
+  "catalog": {
+    "version": "campus-synthetic-v1",
+    "description": "52件由Codex构造的合成校园商品。相关性由查询语义独立预标注，未调用被测搜索程序生成答案；待团队人工复核。",
+    "label_status": "draft",
+    "items": [
+      {
+        "id": "m01",
+        "title": "无线静音办公鼠标",
+        "description": "无线连接，静音按键，办公使用。",
+        "tags": [],
+        "price_cents": 15000,
+        "campus": "万柳学区",
+        "condition_grade": "95新",
+        "category": "数码与影音",
+        "created_at": "2026-01-01T00:00:00",
+        "status": "ACTIVE"
+      },
+      {
+        "id": "m02",
+        "title": "有线静音鼠标",
+        "description": "USB有线连接，静音按键。",
+        "tags": [],
+        "price_cents": 5000,
+        "campus": "燕园校本部",
+        "condition_grade": "9成新",
+        "category": "数码与影音",
+        "created_at": "2026-01-01T00:00:01",
+        "status": "ACTIVE"
+      },
+      {
+        "id": "m03",
+        "title": "无线游戏鼠标",
+        "description": "无线连接，游戏鼠标，可调灵敏度。",
+        "tags": [],
+        "price_cents": 26000,
+        "campus": "万柳学区",
+        "condition_grade": "95新",
+        "category": "数码与影音",
+        "created_at": "2026-01-01T00:00:02",
+        "status": "ACTIVE"
+      },
+      {
+        "id": "m04",
+        "title": "无线静音鼠标",
+        "description": "无线连接，静音按键，未拆封。",
+        "tags": [],
+        "price_cents": 32000,
+        "campus": "医学部",
+        "condition_grade": "全新",
+        "category": "数码与影音",
+        "created_at": "2026-01-01T00:00:03",
+        "status": "ACTIVE"
+      },
+      {
+        "id": "m05",
+        "title": "蓝牙便携鼠标",
+        "description": "无线蓝牙连接，可装入随身包。",
+        "tags": [],
+        "price_cents": 18000,
+        "campus": "昌平新校区",
+        "condition_grade": "8成新",
+        "category": "数码与影音",
+        "created_at": "2026-01-01T00:00:04",
+        "status": "ACTIVE"
+      },
+      {
+        "id": "m06",
+        "title": "无线办公鼠标",
+        "description": "无线连接，按键有声音，适合办公。",
+        "tags": [],
+        "price_cents": 30000,
+        "campus": "万柳学区",
+        "condition_grade": "9成新",
+        "category": "数码与影音",
+        "created_at": "2026-01-01T00:00:05",
+        "status": "ACTIVE"
+      },
+      {
+        "id": "m07",
+        "title": "无线静音鼠标",
+        "description": "无线连接，静音按键，各校区可交接。",
+        "tags": [],
+        "price_cents": 22000,
+        "campus": "不限校区",
+        "condition_grade": "9成新",
+        "category": "数码与影音",
+        "created_at": "2026-01-01T00:00:06",
+        "status": "ACTIVE"
+      },
+      {
+        "id": "m08",
+        "title": "双击故障无线鼠标",
+        "description": "无线连接，左键有双击故障，需要维修。",
+        "tags": [],
+        "price_cents": 4000,
+        "campus": "万柳学区",
+        "condition_grade": "9成新",
+        "category": "数码与影音",
+        "created_at": "2026-01-01T00:00:07",
+        "status": "ACTIVE"
+      },
+      {
+        "id": "b01",
+        "title": "高数教材",
+        "description": "高等数学上下册教材，有少量笔记。",
+        "tags": [],
+        "price_cents": 1500,
+        "campus": "燕园校本部",
+        "condition_grade": "9成新",
+        "category": "课程资料与书籍",
+        "created_at": "2026-01-01T00:00:08",
+        "status": "ACTIVE"
+      },
+      {
+        "id": "b02",
+        "title": "考研政治资料",
+        "description": "考研政治复习资料与习题。",
+        "tags": [],
+        "price_cents": 3000,
+        "campus": "万柳学区",
+        "condition_grade": "95新",
+        "category": "课程资料与书籍",
+        "created_at": "2026-01-01T00:00:09",
+        "status": "ACTIVE"
+      },
+      {
+        "id": "b03",
+        "title": "高数教材",
+        "description": "高等数学教材一套，书页完整。",
+        "tags": [],
+        "price_cents": 2000,
+        "campus": "医学部",
+        "condition_grade": "8成新",
+        "category": "课程资料与书籍",
+        "created_at": "2026-01-01T00:00:10",
+        "status": "ACTIVE"
+      },
+      {
+        "id": "b04",
+        "title": "英语词典",
+        "description": "英语纸质词典，免费赠送。",
+        "tags": [],
+        "price_cents": 0,
+        "campus": "昌平新校区",
+        "condition_grade": "9成新",
+        "category": "课程资料与书籍",
+        "created_at": "2026-01-01T00:00:11",
+        "status": "ACTIVE"
+      },
+      {
+        "id": "b05",
+        "title": "计算机网络教材",
+        "description": "计算机网络课程教材，无缺页。",
+        "tags": [],
+        "price_cents": 4000,
+        "campus": "燕园校本部",
+        "condition_grade": "95新",
+        "category": "课程资料与书籍",
+        "created_at": "2026-01-01T00:00:12",
+        "status": "ACTIVE"
+      },
+      {
+        "id": "d01",
+        "title": "联想轻薄笔记本电脑",
+        "description": "联想笔记本电脑，含电源适配器。",
+        "tags": [],
+        "price_cents": 150000,
+        "campus": "燕园校本部",
+        "condition_grade": "9成新",
+        "category": "数码与影音",
+        "created_at": "2026-01-01T00:00:13",
+        "status": "ACTIVE"
+      },
+      {
+        "id": "d02",
+        "title": "MacBook充电器",
+        "description": "仅出售MacBook充电器，不含电脑。",
+        "tags": [],
+        "price_cents": 9000,
+        "campus": "万柳学区",
+        "condition_grade": "95新",
+        "category": "数码与影音",
+        "created_at": "2026-01-01T00:00:14",
+        "status": "ACTIVE"
+      },
+      {
+        "id": "d03",
+        "title": "MacBook Air笔记本电脑",
+        "description": "MacBook Air电脑整机，含电源。",
+        "tags": [],
+        "price_cents": 350000,
+        "campus": "医学部",
+        "condition_grade": "9成新",
+        "category": "数码与影音",
+        "created_at": "2026-01-01T00:00:15",
+        "status": "ACTIVE"
+      },
+      {
+        "id": "d04",
+        "title": "大疆Pocket 3相机",
+        "description": "大疆Pocket 3口袋相机，含保护套。",
+        "tags": [],
+        "price_cents": 180000,
+        "campus": "燕园校本部",
+        "condition_grade": "95新",
+        "category": "数码与影音",
+        "created_at": "2026-01-01T00:00:16",
+        "status": "ACTIVE"
+      },
+      {
+        "id": "d05",
+        "title": "罗技GPW二代游戏鼠标",
+        "description": "罗技GPW二代，无线游戏鼠标。",
+        "tags": [],
+        "price_cents": 38000,
+        "campus": "万柳学区",
+        "condition_grade": "9成新",
+        "category": "数码与影音",
+        "created_at": "2026-01-01T00:00:17",
+        "status": "ACTIVE"
+      },
+      {
+        "id": "d06",
+        "title": "有线机械键盘",
+        "description": "USB有线机械键盘，含连接线。",
+        "tags": [],
+        "price_cents": 12000,
+        "campus": "燕园校本部",
+        "condition_grade": "9成新",
+        "category": "数码与影音",
+        "created_at": "2026-01-01T00:00:18",
+        "status": "ACTIVE"
+      },
+      {
+        "id": "d07",
+        "title": "无线键盘",
+        "description": "无线办公键盘，含接收器。",
+        "tags": [],
+        "price_cents": 18000,
+        "campus": "万柳学区",
+        "condition_grade": "95新",
+        "category": "数码与影音",
+        "created_at": "2026-01-01T00:00:19",
+        "status": "ACTIVE"
+      },
+      {
+        "id": "d08",
+        "title": "降噪耳机",
+        "description": "支持主动降噪的头戴耳机。",
+        "tags": [],
+        "price_cents": 20000,
+        "campus": "燕园校本部",
+        "condition_grade": "9成新",
+        "category": "数码与影音",
+        "created_at": "2026-01-01T00:00:20",
+        "status": "ACTIVE"
+      },
+      {
+        "id": "d09",
+        "title": "普通有线耳机",
+        "description": "普通有线耳机，无降噪功能。",
+        "tags": [],
+        "price_cents": 4000,
+        "campus": "万柳学区",
+        "condition_grade": "9成新",
+        "category": "数码与影音",
+        "created_at": "2026-01-01T00:00:21",
+        "status": "ACTIVE"
+      },
+      {
+        "id": "d10",
+        "title": "小米手环",
+        "description": "小米手环，附充电线。",
+        "tags": [],
+        "price_cents": 9000,
+        "campus": "医学部",
+        "condition_grade": "95新",
+        "category": "数码与影音",
+        "created_at": "2026-01-01T00:00:22",
+        "status": "ACTIVE"
+      },
+      {
+        "id": "d11",
+        "title": "USB-C扩展坞",
+        "description": "USB-C扩展坞，提供USB和HDMI接口。",
+        "tags": [],
+        "price_cents": 8000,
+        "campus": "昌平新校区",
+        "condition_grade": "95新",
+        "category": "数码与影音",
+        "created_at": "2026-01-01T00:00:23",
+        "status": "ACTIVE"
+      },
+      {
+        "id": "d12",
+        "title": "Switch手柄",
+        "description": "Switch游戏手柄，含腕带。",
+        "tags": [],
+        "price_cents": 15000,
+        "campus": "燕园校本部",
+        "condition_grade": "9成新",
+        "category": "数码与影音",
+        "created_at": "2026-01-01T00:00:24",
+        "status": "ACTIVE"
+      },
+      {
+        "id": "s01",
+        "title": "通勤自行车",
+        "description": "校园通勤自行车，不带车锁。",
+        "tags": [],
+        "price_cents": 35000,
+        "campus": "万柳学区",
+        "condition_grade": "9成新",
+        "category": "校园出行与运动",
+        "created_at": "2026-01-01T00:00:25",
+        "status": "ACTIVE"
+      },
+      {
+        "id": "s02",
+        "title": "带车锁通勤自行车",
+        "description": "校园通勤自行车，带车锁。",
+        "tags": [],
+        "price_cents": 50000,
+        "campus": "万柳学区",
+        "condition_grade": "95新",
+        "category": "校园出行与运动",
+        "created_at": "2026-01-01T00:00:26",
+        "status": "ACTIVE"
+      },
+      {
+        "id": "s03",
+        "title": "山地自行车",
+        "description": "山地自行车，适合休闲骑行。",
+        "tags": [],
+        "price_cents": 70000,
+        "campus": "燕园校本部",
+        "condition_grade": "9成新",
+        "category": "校园出行与运动",
+        "created_at": "2026-01-01T00:00:27",
+        "status": "ACTIVE"
+      },
+      {
+        "id": "s04",
+        "title": "网球拍",
+        "description": "网球拍一支，拍线完整。",
+        "tags": [],
+        "price_cents": 18000,
+        "campus": "燕园校本部",
+        "condition_grade": "9成新",
+        "category": "校园出行与运动",
+        "created_at": "2026-01-01T00:00:28",
+        "status": "ACTIVE"
+      },
+      {
+        "id": "s05",
+        "title": "羽毛球拍",
+        "description": "羽毛球拍一支，带收纳袋。",
+        "tags": [],
+        "price_cents": 8000,
+        "campus": "燕园校本部",
+        "condition_grade": "9成新",
+        "category": "校园出行与运动",
+        "created_at": "2026-01-01T00:00:29",
+        "status": "ACTIVE"
+      },
+      {
+        "id": "s06",
+        "title": "黑色跑步鞋",
+        "description": "黑色跑步鞋，鞋底无开胶。",
+        "tags": [],
+        "price_cents": 10000,
+        "campus": "万柳学区",
+        "condition_grade": "9成新",
+        "category": "美妆服饰与周边",
+        "created_at": "2026-01-01T00:00:30",
+        "status": "ACTIVE"
+      },
+      {
+        "id": "h01",
+        "title": "普通台灯",
+        "description": "普通灯泡台灯，灯臂可调。",
+        "tags": [],
+        "price_cents": 5000,
+        "campus": "万柳学区",
+        "condition_grade": "9成新",
+        "category": "宿舍生活与家电",
+        "created_at": "2026-01-01T00:00:31",
+        "status": "ACTIVE"
+      },
+      {
+        "id": "h02",
+        "title": "LED台灯",
+        "description": "LED台灯，亮度可调。",
+        "tags": [],
+        "price_cents": 5000,
+        "campus": "燕园校本部",
+        "condition_grade": "95新",
+        "category": "宿舍生活与家电",
+        "created_at": "2026-01-01T00:00:32",
+        "status": "ACTIVE"
+      },
+      {
+        "id": "h03",
+        "title": "电饭煲",
+        "description": "小型电饭煲，含内胆和饭勺。",
+        "tags": [],
+        "price_cents": 8000,
+        "campus": "燕园校本部",
+        "condition_grade": "9成新",
+        "category": "宿舍生活与家电",
+        "created_at": "2026-01-01T00:00:33",
+        "status": "ACTIVE"
+      },
+      {
+        "id": "h04",
+        "title": "电风扇",
+        "description": "桌面电风扇，三档风速。",
+        "tags": [],
+        "price_cents": 4500,
+        "campus": "医学部",
+        "condition_grade": "9成新",
+        "category": "宿舍生活与家电",
+        "created_at": "2026-01-01T00:00:34",
+        "status": "ACTIVE"
+      },
+      {
+        "id": "h05",
+        "title": "咖啡机",
+        "description": "家用咖啡机，含滤杯。",
+        "tags": [],
+        "price_cents": 30000,
+        "campus": "燕园校本部",
+        "condition_grade": "9成新",
+        "category": "宿舍生活与家电",
+        "created_at": "2026-01-01T00:00:35",
+        "status": "ACTIVE"
+      },
+      {
+        "id": "h06",
+        "title": "折叠椅",
+        "description": "宿舍折叠椅，可收纳。",
+        "tags": [],
+        "price_cents": 3000,
+        "campus": "万柳学区",
+        "condition_grade": "9成新",
+        "category": "宿舍生活与家电",
+        "created_at": "2026-01-01T00:00:36",
+        "status": "ACTIVE"
+      },
+      {
+        "id": "h07",
+        "title": "单人床垫",
+        "description": "单人床垫，带可拆洗外套。",
+        "tags": [],
+        "price_cents": 10000,
+        "campus": "昌平新校区",
+        "condition_grade": "8成新",
+        "category": "宿舍生活与家电",
+        "created_at": "2026-01-01T00:00:37",
+        "status": "ACTIVE"
+      },
+      {
+        "id": "h08",
+        "title": "保温杯",
+        "description": "不锈钢保温杯，杯盖完整。",
+        "tags": [],
+        "price_cents": 2500,
+        "campus": "燕园校本部",
+        "condition_grade": "9成新",
+        "category": "宿舍生活与家电",
+        "created_at": "2026-01-01T00:00:38",
+        "status": "ACTIVE"
+      },
+      {
+        "id": "h09",
+        "title": "无线路由器",
+        "description": "双频无线路由器，含电源。",
+        "tags": [],
+        "price_cents": 6000,
+        "campus": "万柳学区",
+        "condition_grade": "9成新",
+        "category": "数码与影音",
+        "created_at": "2026-01-01T00:00:39",
+        "status": "ACTIVE"
+      },
+      {
+        "id": "f01",
+        "title": "帆布包",
+        "description": "纯棉帆布包，双肩带。",
+        "tags": [],
+        "price_cents": 2000,
+        "campus": "万柳学区",
+        "condition_grade": "9成新",
+        "category": "美妆服饰与周边",
+        "created_at": "2026-01-01T00:00:40",
+        "status": "ACTIVE"
+      },
+      {
+        "id": "f02",
+        "title": "皮手提包",
+        "description": "皮质手提包，单肩带。",
+        "tags": [],
+        "price_cents": 15000,
+        "campus": "燕园校本部",
+        "condition_grade": "95新",
+        "category": "美妆服饰与周边",
+        "created_at": "2026-01-01T00:00:41",
+        "status": "ACTIVE"
+      },
+      {
+        "id": "f03",
+        "title": "蓝色外套",
+        "description": "蓝色长袖外套，有帽子。",
+        "tags": [],
+        "price_cents": 6000,
+        "campus": "燕园校本部",
+        "condition_grade": "9成新",
+        "category": "美妆服饰与周边",
+        "created_at": "2026-01-01T00:00:42",
+        "status": "ACTIVE"
+      },
+      {
+        "id": "f04",
+        "title": "粉底液",
+        "description": "瓶装粉底液，剩余容量见刻度。",
+        "tags": [],
+        "price_cents": 5000,
+        "campus": "医学部",
+        "condition_grade": "95新",
+        "category": "美妆服饰与周边",
+        "created_at": "2026-01-01T00:00:43",
+        "status": "ACTIVE"
+      },
+      {
+        "id": "f05",
+        "title": "绿色积木玩具巴士",
+        "description": "绿色积木玩具巴士模型，不是真实车辆。",
+        "tags": [],
+        "price_cents": 4000,
+        "campus": "燕园校本部",
+        "condition_grade": "95新",
+        "category": "美妆服饰与周边",
+        "created_at": "2026-01-01T00:00:44",
+        "status": "ACTIVE"
+      },
+      {
+        "id": "f06",
+        "title": "白色运动鞋",
+        "description": "白色运动鞋，鞋带齐全。",
+        "tags": [],
+        "price_cents": 8000,
+        "campus": "燕园校本部",
+        "condition_grade": "9成新",
+        "category": "美妆服饰与周边",
+        "created_at": "2026-01-01T00:00:45",
+        "status": "ACTIVE"
+      },
+      {
+        "id": "r01",
+        "title": "摄影模特招募",
+        "description": "校园摄影约拍招募模特，互免。",
+        "tags": [],
+        "price_cents": 0,
+        "campus": "燕园校本部",
+        "condition_grade": "全新",
+        "category": "人员招募",
+        "created_at": "2026-01-01T00:00:46",
+        "status": "ACTIVE"
+      },
+      {
+        "id": "r02",
+        "title": "数学家教招募",
+        "description": "招募数学家教，按小时结算。",
+        "tags": [],
+        "price_cents": 10000,
+        "campus": "万柳学区",
+        "condition_grade": "全新",
+        "category": "人员招募",
+        "created_at": "2026-01-01T00:00:47",
+        "status": "ACTIVE"
+      },
+      {
+        "id": "x01",
+        "title": "球拍保护套",
+        "description": "只卖球拍保护套，不包含球拍。",
+        "tags": [],
+        "price_cents": 1000,
+        "campus": "燕园校本部",
+        "condition_grade": "9成新",
+        "category": "校园出行与运动",
+        "created_at": "2026-01-01T00:00:48",
+        "status": "ACTIVE"
+      },
+      {
+        "id": "x02",
+        "title": "笔记本支架",
+        "description": "仅笔记本支架，不含电脑。",
+        "tags": [],
+        "price_cents": 2500,
+        "campus": "燕园校本部",
+        "condition_grade": "9成新",
+        "category": "数码与影音",
+        "created_at": "2026-01-01T00:00:49",
+        "status": "ACTIVE"
+      },
+      {
+        "id": "x03",
+        "title": "USB键盘接收器",
+        "description": "仅USB键盘接收器，不含键盘。",
+        "tags": [],
+        "price_cents": 1000,
+        "campus": "医学部",
+        "condition_grade": "95新",
+        "category": "数码与影音",
+        "created_at": "2026-01-01T00:00:50",
+        "status": "ACTIVE"
+      },
+      {
+        "id": "x04",
+        "title": "USB数据线",
+        "description": "USB数据线，免费赠送。",
+        "tags": [],
+        "price_cents": 0,
+        "campus": "昌平新校区",
+        "condition_grade": "9成新",
+        "category": "数码与影音",
+        "created_at": "2026-01-01T00:00:51",
+        "status": "ACTIVE"
+      }
+    ]
+  },
+  "relations_hash": "516fa057829bf3b60389fc7c347da8223e5b4317706fdf604acc4dd03f7c99e1",
+  "relations": [
+    {
+      "id": "inv-core-01",
+      "base": "search-core-01",
+      "mutated": "search-core-01-rewrite",
+      "relation": "invariant",
+      "rationale": "语序、礼貌表达或数字写法变化，保留全部语义约束。",
+      "max_price_cents": null,
+      "forbidden_item_ids": []
+    },
+    {
+      "id": "inv-core-05",
+      "base": "search-core-05",
+      "mutated": "search-core-05-rewrite",
+      "relation": "invariant",
+      "rationale": "语序、礼貌表达或数字写法变化，保留全部语义约束。",
+      "max_price_cents": null,
+      "forbidden_item_ids": []
+    },
+    {
+      "id": "inv-price-02",
+      "base": "search-price-02",
+      "mutated": "search-price-02-rewrite",
+      "relation": "invariant",
+      "rationale": "语序、礼貌表达或数字写法变化，保留全部语义约束。",
+      "max_price_cents": null,
+      "forbidden_item_ids": []
+    },
+    {
+      "id": "inv-price-08",
+      "base": "search-price-08",
+      "mutated": "search-price-08-rewrite",
+      "relation": "invariant",
+      "rationale": "语序、礼貌表达或数字写法变化，保留全部语义约束。",
+      "max_price_cents": null,
+      "forbidden_item_ids": []
+    },
+    {
+      "id": "inv-preference-01",
+      "base": "search-preference-01",
+      "mutated": "search-preference-01-rewrite",
+      "relation": "invariant",
+      "rationale": "语序、礼貌表达或数字写法变化，保留全部语义约束。",
+      "max_price_cents": null,
+      "forbidden_item_ids": []
+    },
+    {
+      "id": "inv-negation-01",
+      "base": "search-negation-01",
+      "mutated": "search-negation-01-rewrite",
+      "relation": "invariant",
+      "rationale": "语序、礼貌表达或数字写法变化，保留全部语义约束。",
+      "max_price_cents": null,
+      "forbidden_item_ids": []
+    },
+    {
+      "id": "inv-confusable-03",
+      "base": "search-confusable-03",
+      "mutated": "search-confusable-03-rewrite",
+      "relation": "invariant",
+      "rationale": "语序、礼貌表达或数字写法变化，保留全部语义约束。",
+      "max_price_cents": null,
+      "forbidden_item_ids": []
+    },
+    {
+      "id": "inv-core-08",
+      "base": "search-core-08",
+      "mutated": "search-core-08-rewrite",
+      "relation": "invariant",
+      "rationale": "语序、礼貌表达或数字写法变化，保留全部语义约束。",
+      "max_price_cents": null,
+      "forbidden_item_ids": []
+    },
+    {
+      "id": "dir-negation-01-negation-03",
+      "base": "search-negation-01",
+      "mutated": "search-negation-03",
+      "relation": "subset",
+      "rationale": "增加硬约束；比较完整结果集合，并检查新增限制。",
+      "max_price_cents": null,
+      "forbidden_item_ids": [
+        "m08"
+      ]
+    },
+    {
+      "id": "dir-preference-03-preference-04",
+      "base": "search-preference-03",
+      "mutated": "search-preference-04",
+      "relation": "subset",
+      "rationale": "增加硬约束；比较完整结果集合，并检查新增限制。",
+      "max_price_cents": null,
+      "forbidden_item_ids": [
+        "m03",
+        "m05",
+        "m06",
+        "m08",
+        "d05"
+      ]
+    },
+    {
+      "id": "dir-price-08-price-08-budget",
+      "base": "search-price-08",
+      "mutated": "search-price-08-budget",
+      "relation": "subset",
+      "rationale": "增加硬约束；比较完整结果集合，并检查新增限制。",
+      "max_price_cents": 20000,
+      "forbidden_item_ids": []
+    },
+    {
+      "id": "dir-core-10-core-10-budget",
+      "base": "search-core-10",
+      "mutated": "search-core-10-budget",
+      "relation": "subset",
+      "rationale": "增加硬约束；比较完整结果集合，并检查新增限制。",
+      "max_price_cents": 40000,
+      "forbidden_item_ids": []
+    }
+  ],
+  "skipped_relation_count": 0,
+  "repeats": 3,
+  "seed": 20261115,
+  "concurrency": 1,
+  "max_remote_requests": 200,
+  "worst_case_remote_requests": 0,
+  "complete": true,
+  "completed_records": 480,
+  "expected_records": 480
+}

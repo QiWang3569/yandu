@@ -1,0 +1,2882 @@
+{
+  "models": {
+    "local-rules": {
+      "records": 384,
+      "cases": 128,
+      "passed": 126,
+      "pass_rate": 0.328125,
+      "error_count": 3,
+      "errors": {
+        "output_validation_error": 3
+      },
+      "p50_latency_ms": 3.1195000000000004,
+      "p95_latency_ms": 7.030399999999999,
+      "partitions": {
+        "intent_parse": {
+          "records": 72,
+          "cases": 24,
+          "passed": 42,
+          "pass_rate": 0.5833333333333334,
+          "error_count": 0,
+          "errors": {},
+          "p50_latency_ms": 0.2575,
+          "p95_latency_ms": 0.42690000000000006
+        },
+        "item_parse": {
+          "records": 24,
+          "cases": 8,
+          "passed": 6,
+          "pass_rate": 0.25,
+          "error_count": 0,
+          "errors": {},
+          "p50_latency_ms": 0.221,
+          "p95_latency_ms": 0.7109499999999996
+        },
+        "smart_search": {
+          "records": 240,
+          "cases": 80,
+          "passed": 63,
+          "pass_rate": 0.2625,
+          "error_count": 3,
+          "errors": {
+            "output_validation_error": 3
+          },
+          "p50_latency_ms": 4.1245,
+          "p95_latency_ms": 7.7951999999999995
+        },
+        "taodescribe": {
+          "records": 24,
+          "cases": 8,
+          "passed": 0,
+          "pass_rate": 0.0,
+          "error_count": 0,
+          "errors": {},
+          "p50_latency_ms": 0.225,
+          "p95_latency_ms": 1.2981499999999988
+        },
+        "wanted_parse": {
+          "records": 24,
+          "cases": 8,
+          "passed": 15,
+          "pass_rate": 0.625,
+          "error_count": 0,
+          "errors": {},
+          "p50_latency_ms": 0.274,
+          "p95_latency_ms": 0.49544999999999995
+        }
+      },
+      "by_repeat": {
+        "1": {
+          "records": 128,
+          "cases": 128,
+          "passed": 42,
+          "pass_rate": 0.328125,
+          "error_count": 1,
+          "errors": {
+            "output_validation_error": 1
+          },
+          "p50_latency_ms": 3.2685,
+          "p95_latency_ms": 7.7010499999999995
+        },
+        "2": {
+          "records": 128,
+          "cases": 128,
+          "passed": 42,
+          "pass_rate": 0.328125,
+          "error_count": 1,
+          "errors": {
+            "output_validation_error": 1
+          },
+          "p50_latency_ms": 3.1685,
+          "p95_latency_ms": 6.321899999999999
+        },
+        "3": {
+          "records": 128,
+          "cases": 128,
+          "passed": 42,
+          "pass_rate": 0.328125,
+          "error_count": 1,
+          "errors": {
+            "output_validation_error": 1
+          },
+          "p50_latency_ms": 3.003,
+          "p95_latency_ms": 6.8553
+        }
+      },
+      "search_parse_pass_count": 102,
+      "search_parse_pass_rate": 0.425,
+      "search_count": 240,
+      "returned_models": {},
+      "reasoning_token_positive_attempts": 0,
+      "reasoning_text_positive_attempts": 0,
+      "reasoning_token_known_attempts": 0,
+      "attempt_count": 0,
+      "usage": {
+        "prompt_tokens": {
+          "reported_sum": 0,
+          "known_attempts": 0
+        },
+        "completion_tokens": {
+          "reported_sum": 0,
+          "known_attempts": 0
+        },
+        "total_tokens": {
+          "reported_sum": 0,
+          "known_attempts": 0
+        },
+        "nonadditive_attempts": 0,
+        "cache_partition_mismatches": 0
+      },
+      "fenced_json_failures": 0,
+      "fence_diagnostic_only": {
+        "decodable_objects": 0,
+        "parse_schema_checked": 0,
+        "parse_schema_valid": 0,
+        "note": "Only a full enclosing code fence is removed offline. No experiment score is replaced; schema validity does not establish semantic correctness."
+      },
+      "schema_issues": []
+    },
+    "oracle": {
+      "records": 240,
+      "cases": 80,
+      "passed": 180,
+      "pass_rate": 0.75,
+      "error_count": 0,
+      "errors": {},
+      "p50_latency_ms": 3.747,
+      "p95_latency_ms": 6.294449999999997,
+      "partitions": {
+        "smart_search": {
+          "records": 240,
+          "cases": 80,
+          "passed": 180,
+          "pass_rate": 0.75,
+          "error_count": 0,
+          "errors": {},
+          "p50_latency_ms": 3.747,
+          "p95_latency_ms": 6.294449999999997
+        }
+      },
+      "by_repeat": {
+        "1": {
+          "records": 80,
+          "cases": 80,
+          "passed": 60,
+          "pass_rate": 0.75,
+          "error_count": 0,
+          "errors": {},
+          "p50_latency_ms": 3.8455000000000004,
+          "p95_latency_ms": 6.294449999999999
+        },
+        "2": {
+          "records": 80,
+          "cases": 80,
+          "passed": 60,
+          "pass_rate": 0.75,
+          "error_count": 0,
+          "errors": {},
+          "p50_latency_ms": 3.833,
+          "p95_latency_ms": 5.80535
+        },
+        "3": {
+          "records": 80,
+          "cases": 80,
+          "passed": 60,
+          "pass_rate": 0.75,
+          "error_count": 0,
+          "errors": {},
+          "p50_latency_ms": 3.513,
+          "p95_latency_ms": 7.050299999999998
+        }
+      },
+      "search_parse_pass_count": 240,
+      "search_parse_pass_rate": 1.0,
+      "search_count": 240,
+      "returned_models": {},
+      "reasoning_token_positive_attempts": 0,
+      "reasoning_text_positive_attempts": 0,
+      "reasoning_token_known_attempts": 0,
+      "attempt_count": 0,
+      "usage": {
+        "prompt_tokens": {
+          "reported_sum": 0,
+          "known_attempts": 0
+        },
+        "completion_tokens": {
+          "reported_sum": 0,
+          "known_attempts": 0
+        },
+        "total_tokens": {
+          "reported_sum": 0,
+          "known_attempts": 0
+        },
+        "nonadditive_attempts": 0,
+        "cache_partition_mismatches": 0
+      },
+      "fenced_json_failures": 0,
+      "fence_diagnostic_only": {
+        "decodable_objects": 0,
+        "parse_schema_checked": 0,
+        "parse_schema_valid": 0,
+        "note": "Only a full enclosing code fence is removed offline. No experiment score is replaced; schema validity does not establish semantic correctness."
+      },
+      "schema_issues": []
+    },
+    "deepseek-flash": {
+      "records": 408,
+      "cases": 136,
+      "passed": 275,
+      "pass_rate": 0.6740196078431373,
+      "error_count": 13,
+      "errors": {
+        "schema_error": 10,
+        "network_error": 2,
+        "invalid_json_response": 1
+      },
+      "p50_latency_ms": 3898.8715,
+      "p95_latency_ms": 6102.837499999998,
+      "partitions": {
+        "candidate_review": {
+          "records": 24,
+          "cases": 8,
+          "passed": 24,
+          "pass_rate": 1.0,
+          "error_count": 0,
+          "errors": {},
+          "p50_latency_ms": 4392.789500000001,
+          "p95_latency_ms": 6256.5527999999995
+        },
+        "intent_parse": {
+          "records": 72,
+          "cases": 24,
+          "passed": 56,
+          "pass_rate": 0.7777777777777778,
+          "error_count": 6,
+          "errors": {
+            "schema_error": 4,
+            "network_error": 1,
+            "invalid_json_response": 1
+          },
+          "p50_latency_ms": 3753.584,
+          "p95_latency_ms": 5348.079650000001
+        },
+        "item_parse": {
+          "records": 24,
+          "cases": 8,
+          "passed": 16,
+          "pass_rate": 0.6666666666666666,
+          "error_count": 0,
+          "errors": {},
+          "p50_latency_ms": 3976.732,
+          "p95_latency_ms": 5903.98375
+        },
+        "smart_search": {
+          "records": 240,
+          "cases": 80,
+          "passed": 134,
+          "pass_rate": 0.5583333333333333,
+          "error_count": 4,
+          "errors": {
+            "schema_error": 3,
+            "network_error": 1
+          },
+          "p50_latency_ms": 3854.3435,
+          "p95_latency_ms": 6204.529199999999
+        },
+        "taodescribe": {
+          "records": 24,
+          "cases": 8,
+          "passed": 24,
+          "pass_rate": 1.0,
+          "error_count": 0,
+          "errors": {},
+          "p50_latency_ms": 4277.8065,
+          "p95_latency_ms": 6291.351599999999
+        },
+        "wanted_parse": {
+          "records": 24,
+          "cases": 8,
+          "passed": 21,
+          "pass_rate": 0.875,
+          "error_count": 3,
+          "errors": {
+            "schema_error": 3
+          },
+          "p50_latency_ms": 3665.705,
+          "p95_latency_ms": 5086.48075
+        }
+      },
+      "by_repeat": {
+        "1": {
+          "records": 136,
+          "cases": 136,
+          "passed": 91,
+          "pass_rate": 0.6691176470588235,
+          "error_count": 4,
+          "errors": {
+            "schema_error": 3,
+            "network_error": 1
+          },
+          "p50_latency_ms": 4048.2115,
+          "p95_latency_ms": 6152.234
+        },
+        "2": {
+          "records": 136,
+          "cases": 136,
+          "passed": 94,
+          "pass_rate": 0.6911764705882353,
+          "error_count": 5,
+          "errors": {
+            "schema_error": 4,
+            "network_error": 1
+          },
+          "p50_latency_ms": 3736.563,
+          "p95_latency_ms": 5692.444
+        },
+        "3": {
+          "records": 136,
+          "cases": 136,
+          "passed": 90,
+          "pass_rate": 0.6617647058823529,
+          "error_count": 4,
+          "errors": {
+            "invalid_json_response": 1,
+            "schema_error": 3
+          },
+          "p50_latency_ms": 3912.4665,
+          "p95_latency_ms": 5981.5065
+        }
+      },
+      "search_parse_pass_count": 182,
+      "search_parse_pass_rate": 0.7583333333333333,
+      "search_count": 240,
+      "returned_models": {
+        "deepseek-v4.1-flash": 406,
+        "null": 2
+      },
+      "reasoning_token_positive_attempts": 0,
+      "reasoning_text_positive_attempts": 0,
+      "reasoning_token_known_attempts": 405,
+      "attempt_count": 408,
+      "usage": {
+        "prompt_tokens": {
+          "reported_sum": 255573,
+          "known_attempts": 406
+        },
+        "completion_tokens": {
+          "reported_sum": 27685,
+          "known_attempts": 406
+        },
+        "total_tokens": {
+          "reported_sum": 306917,
+          "known_attempts": 406
+        },
+        "nonadditive_attempts": 401,
+        "cache_partition_mismatches": 401
+      },
+      "fenced_json_failures": 1,
+      "fence_diagnostic_only": {
+        "decodable_objects": 1,
+        "parse_schema_checked": 1,
+        "parse_schema_valid": 1,
+        "note": "Only a full enclosing code fence is removed offline. No experiment score is replaced; schema validity does not establish semantic correctness."
+      },
+      "schema_issues": [
+        {
+          "task": "intent_parse",
+          "field": "<object>",
+          "type": "value_error",
+          "count": 1
+        },
+        {
+          "task": "intent_parse",
+          "field": "condition_grade",
+          "type": "value_error",
+          "count": 3
+        },
+        {
+          "task": "smart_search",
+          "field": "condition_grade",
+          "type": "value_error",
+          "count": 3
+        },
+        {
+          "task": "wanted_parse",
+          "field": "<object>",
+          "type": "value_error",
+          "count": 3
+        }
+      ]
+    },
+    "deepseek-flash-thinking": {
+      "records": 408,
+      "cases": 136,
+      "passed": 271,
+      "pass_rate": 0.6642156862745098,
+      "error_count": 14,
+      "errors": {
+        "schema_error": 10,
+        "output_validation_error": 2,
+        "network_error": 1,
+        "invalid_json_response": 1
+      },
+      "p50_latency_ms": 3824.5969999999998,
+      "p95_latency_ms": 5733.225699999999,
+      "partitions": {
+        "candidate_review": {
+          "records": 24,
+          "cases": 8,
+          "passed": 22,
+          "pass_rate": 0.9166666666666666,
+          "error_count": 2,
+          "errors": {
+            "output_validation_error": 2
+          },
+          "p50_latency_ms": 4005.777,
+          "p95_latency_ms": 5742.297299999999
+        },
+        "intent_parse": {
+          "records": 72,
+          "cases": 24,
+          "passed": 58,
+          "pass_rate": 0.8055555555555556,
+          "error_count": 6,
+          "errors": {
+            "schema_error": 6
+          },
+          "p50_latency_ms": 3866.3385,
+          "p95_latency_ms": 5220.105700000001
+        },
+        "item_parse": {
+          "records": 24,
+          "cases": 8,
+          "passed": 13,
+          "pass_rate": 0.5416666666666666,
+          "error_count": 0,
+          "errors": {},
+          "p50_latency_ms": 3858.999,
+          "p95_latency_ms": 5604.084499999999
+        },
+        "smart_search": {
+          "records": 240,
+          "cases": 80,
+          "passed": 133,
+          "pass_rate": 0.5541666666666667,
+          "error_count": 4,
+          "errors": {
+            "schema_error": 3,
+            "network_error": 1
+          },
+          "p50_latency_ms": 3759.152,
+          "p95_latency_ms": 5658.24525
+        },
+        "taodescribe": {
+          "records": 24,
+          "cases": 8,
+          "passed": 22,
+          "pass_rate": 0.9166666666666666,
+          "error_count": 1,
+          "errors": {
+            "invalid_json_response": 1
+          },
+          "p50_latency_ms": 4414.237999999999,
+          "p95_latency_ms": 6490.8760999999995
+        },
+        "wanted_parse": {
+          "records": 24,
+          "cases": 8,
+          "passed": 23,
+          "pass_rate": 0.9583333333333334,
+          "error_count": 1,
+          "errors": {
+            "schema_error": 1
+          },
+          "p50_latency_ms": 3648.756,
+          "p95_latency_ms": 5968.598599999998
+        }
+      },
+      "by_repeat": {
+        "1": {
+          "records": 136,
+          "cases": 136,
+          "passed": 92,
+          "pass_rate": 0.6764705882352942,
+          "error_count": 3,
+          "errors": {
+            "schema_error": 3
+          },
+          "p50_latency_ms": 4004.0029999999997,
+          "p95_latency_ms": 5548.8315
+        },
+        "2": {
+          "records": 136,
+          "cases": 136,
+          "passed": 90,
+          "pass_rate": 0.6617647058823529,
+          "error_count": 5,
+          "errors": {
+            "output_validation_error": 1,
+            "schema_error": 3,
+            "network_error": 1
+          },
+          "p50_latency_ms": 3660.011,
+          "p95_latency_ms": 6547.89775
+        },
+        "3": {
+          "records": 136,
+          "cases": 136,
+          "passed": 89,
+          "pass_rate": 0.6544117647058824,
+          "error_count": 6,
+          "errors": {
+            "invalid_json_response": 1,
+            "schema_error": 4,
+            "output_validation_error": 1
+          },
+          "p50_latency_ms": 3756.6915,
+          "p95_latency_ms": 5707.282499999999
+        }
+      },
+      "search_parse_pass_count": 183,
+      "search_parse_pass_rate": 0.7625,
+      "search_count": 240,
+      "returned_models": {
+        "deepseek-v4.1-flash": 407,
+        "null": 1
+      },
+      "reasoning_token_positive_attempts": 9,
+      "reasoning_text_positive_attempts": 9,
+      "reasoning_token_known_attempts": 407,
+      "attempt_count": 408,
+      "usage": {
+        "prompt_tokens": {
+          "reported_sum": 256454,
+          "known_attempts": 407
+        },
+        "completion_tokens": {
+          "reported_sum": 29654,
+          "known_attempts": 407
+        },
+        "total_tokens": {
+          "reported_sum": 309590,
+          "known_attempts": 407
+        },
+        "nonadditive_attempts": 398,
+        "cache_partition_mismatches": 398
+      },
+      "fenced_json_failures": 1,
+      "fence_diagnostic_only": {
+        "decodable_objects": 1,
+        "parse_schema_checked": 1,
+        "parse_schema_valid": 1,
+        "note": "Only a full enclosing code fence is removed offline. No experiment score is replaced; schema validity does not establish semantic correctness."
+      },
+      "schema_issues": [
+        {
+          "task": "intent_parse",
+          "field": "<object>",
+          "type": "value_error",
+          "count": 3
+        },
+        {
+          "task": "intent_parse",
+          "field": "condition_grade",
+          "type": "value_error",
+          "count": 3
+        },
+        {
+          "task": "smart_search",
+          "field": "condition_grade",
+          "type": "value_error",
+          "count": 3
+        },
+        {
+          "task": "wanted_parse",
+          "field": "<object>",
+          "type": "value_error",
+          "count": 1
+        }
+      ]
+    },
+    "qwen-max": {
+      "records": 408,
+      "cases": 136,
+      "passed": 257,
+      "pass_rate": 0.6299019607843137,
+      "error_count": 53,
+      "errors": {
+        "timeout": 17,
+        "invalid_json_response": 25,
+        "schema_error": 8,
+        "network_error": 3
+      },
+      "p50_latency_ms": 6823.6295,
+      "p95_latency_ms": 17873.374449999996,
+      "partitions": {
+        "candidate_review": {
+          "records": 24,
+          "cases": 8,
+          "passed": 22,
+          "pass_rate": 0.9166666666666666,
+          "error_count": 2,
+          "errors": {
+            "timeout": 2
+          },
+          "p50_latency_ms": 7884.3815,
+          "p95_latency_ms": 20759.40975
+        },
+        "intent_parse": {
+          "records": 72,
+          "cases": 24,
+          "passed": 49,
+          "pass_rate": 0.6805555555555556,
+          "error_count": 14,
+          "errors": {
+            "schema_error": 5,
+            "invalid_json_response": 7,
+            "timeout": 2
+          },
+          "p50_latency_ms": 6488.1134999999995,
+          "p95_latency_ms": 12910.972500000005
+        },
+        "item_parse": {
+          "records": 24,
+          "cases": 8,
+          "passed": 19,
+          "pass_rate": 0.7916666666666666,
+          "error_count": 0,
+          "errors": {},
+          "p50_latency_ms": 7107.523999999999,
+          "p95_latency_ms": 16766.42385
+        },
+        "smart_search": {
+          "records": 240,
+          "cases": 80,
+          "passed": 127,
+          "pass_rate": 0.5291666666666667,
+          "error_count": 29,
+          "errors": {
+            "timeout": 9,
+            "invalid_json_response": 17,
+            "network_error": 3
+          },
+          "p50_latency_ms": 6604.2355,
+          "p95_latency_ms": 16997.576999999987
+        },
+        "taodescribe": {
+          "records": 24,
+          "cases": 8,
+          "passed": 20,
+          "pass_rate": 0.8333333333333334,
+          "error_count": 4,
+          "errors": {
+            "timeout": 4
+          },
+          "p50_latency_ms": 7855.259,
+          "p95_latency_ms": 20815.015649999998
+        },
+        "wanted_parse": {
+          "records": 24,
+          "cases": 8,
+          "passed": 20,
+          "pass_rate": 0.8333333333333334,
+          "error_count": 4,
+          "errors": {
+            "schema_error": 3,
+            "invalid_json_response": 1
+          },
+          "p50_latency_ms": 6293.242,
+          "p95_latency_ms": 10788.16535
+        }
+      },
+      "by_repeat": {
+        "1": {
+          "records": 136,
+          "cases": 136,
+          "passed": 80,
+          "pass_rate": 0.5882352941176471,
+          "error_count": 22,
+          "errors": {
+            "timeout": 8,
+            "invalid_json_response": 11,
+            "schema_error": 3
+          },
+          "p50_latency_ms": 6756.4715,
+          "p95_latency_ms": 20763.313000000002
+        },
+        "2": {
+          "records": 136,
+          "cases": 136,
+          "passed": 87,
+          "pass_rate": 0.6397058823529411,
+          "error_count": 18,
+          "errors": {
+            "timeout": 8,
+            "schema_error": 3,
+            "invalid_json_response": 5,
+            "network_error": 2
+          },
+          "p50_latency_ms": 6862.942999999999,
+          "p95_latency_ms": 20750.254249999998
+        },
+        "3": {
+          "records": 136,
+          "cases": 136,
+          "passed": 90,
+          "pass_rate": 0.6617647058823529,
+          "error_count": 13,
+          "errors": {
+            "invalid_json_response": 9,
+            "schema_error": 2,
+            "timeout": 1,
+            "network_error": 1
+          },
+          "p50_latency_ms": 6764.0285,
+          "p95_latency_ms": 16035.11625
+        }
+      },
+      "search_parse_pass_count": 170,
+      "search_parse_pass_rate": 0.7083333333333334,
+      "search_count": 240,
+      "returned_models": {
+        "qwen3.8-max-0902": 388,
+        "null": 20
+      },
+      "reasoning_token_positive_attempts": 43,
+      "reasoning_text_positive_attempts": 43,
+      "reasoning_token_known_attempts": 43,
+      "attempt_count": 408,
+      "usage": {
+        "prompt_tokens": {
+          "reported_sum": 356404,
+          "known_attempts": 388
+        },
+        "completion_tokens": {
+          "reported_sum": 45522,
+          "known_attempts": 388
+        },
+        "total_tokens": {
+          "reported_sum": 401926,
+          "known_attempts": 388
+        },
+        "nonadditive_attempts": 0,
+        "cache_partition_mismatches": 0
+      },
+      "fenced_json_failures": 25,
+      "fence_diagnostic_only": {
+        "decodable_objects": 25,
+        "parse_schema_checked": 25,
+        "parse_schema_valid": 22,
+        "note": "Only a full enclosing code fence is removed offline. No experiment score is replaced; schema validity does not establish semantic correctness."
+      },
+      "schema_issues": [
+        {
+          "task": "intent_parse",
+          "field": "<object>",
+          "type": "value_error",
+          "count": 2
+        },
+        {
+          "task": "intent_parse",
+          "field": "condition_grade",
+          "type": "value_error",
+          "count": 3
+        },
+        {
+          "task": "wanted_parse",
+          "field": "<object>",
+          "type": "value_error",
+          "count": 3
+        }
+      ]
+    },
+    "glm": {
+      "records": 408,
+      "cases": 136,
+      "passed": 144,
+      "pass_rate": 0.35294117647058826,
+      "error_count": 191,
+      "errors": {
+        "invalid_json_response": 118,
+        "timeout": 38,
+        "schema_error": 30,
+        "output_validation_error": 3,
+        "network_error": 2
+      },
+      "p50_latency_ms": 5056.9095,
+      "p95_latency_ms": 20820.0895,
+      "partitions": {
+        "candidate_review": {
+          "records": 24,
+          "cases": 8,
+          "passed": 15,
+          "pass_rate": 0.625,
+          "error_count": 8,
+          "errors": {
+            "output_validation_error": 3,
+            "invalid_json_response": 3,
+            "timeout": 2
+          },
+          "p50_latency_ms": 6516.207,
+          "p95_latency_ms": 20628.719449999997
+        },
+        "intent_parse": {
+          "records": 72,
+          "cases": 24,
+          "passed": 29,
+          "pass_rate": 0.4027777777777778,
+          "error_count": 36,
+          "errors": {
+            "timeout": 9,
+            "schema_error": 6,
+            "invalid_json_response": 21
+          },
+          "p50_latency_ms": 5304.2405,
+          "p95_latency_ms": 20791.71465
+        },
+        "item_parse": {
+          "records": 24,
+          "cases": 8,
+          "passed": 1,
+          "pass_rate": 0.041666666666666664,
+          "error_count": 15,
+          "errors": {
+            "invalid_json_response": 13,
+            "timeout": 2
+          },
+          "p50_latency_ms": 4559.369000000001,
+          "p95_latency_ms": 19158.82249999998
+        },
+        "smart_search": {
+          "records": 240,
+          "cases": 80,
+          "passed": 75,
+          "pass_rate": 0.3125,
+          "error_count": 109,
+          "errors": {
+            "invalid_json_response": 62,
+            "timeout": 24,
+            "schema_error": 21,
+            "network_error": 2
+          },
+          "p50_latency_ms": 4848.139999999999,
+          "p95_latency_ms": 20907.9208
+        },
+        "taodescribe": {
+          "records": 24,
+          "cases": 8,
+          "passed": 8,
+          "pass_rate": 0.3333333333333333,
+          "error_count": 15,
+          "errors": {
+            "invalid_json_response": 13,
+            "timeout": 1,
+            "schema_error": 1
+          },
+          "p50_latency_ms": 6937.276,
+          "p95_latency_ms": 17145.51025
+        },
+        "wanted_parse": {
+          "records": 24,
+          "cases": 8,
+          "passed": 16,
+          "pass_rate": 0.6666666666666666,
+          "error_count": 8,
+          "errors": {
+            "invalid_json_response": 6,
+            "schema_error": 2
+          },
+          "p50_latency_ms": 4390.667,
+          "p95_latency_ms": 9825.728899999998
+        }
+      },
+      "by_repeat": {
+        "1": {
+          "records": 136,
+          "cases": 136,
+          "passed": 49,
+          "pass_rate": 0.3602941176470588,
+          "error_count": 62,
+          "errors": {
+            "invalid_json_response": 35,
+            "timeout": 14,
+            "schema_error": 10,
+            "output_validation_error": 3
+          },
+          "p50_latency_ms": 5297.575,
+          "p95_latency_ms": 20863.96
+        },
+        "2": {
+          "records": 136,
+          "cases": 136,
+          "passed": 41,
+          "pass_rate": 0.3014705882352941,
+          "error_count": 72,
+          "errors": {
+            "invalid_json_response": 47,
+            "schema_error": 12,
+            "timeout": 11,
+            "network_error": 2
+          },
+          "p50_latency_ms": 4797.4465,
+          "p95_latency_ms": 20794.405
+        },
+        "3": {
+          "records": 136,
+          "cases": 136,
+          "passed": 54,
+          "pass_rate": 0.39705882352941174,
+          "error_count": 57,
+          "errors": {
+            "invalid_json_response": 36,
+            "timeout": 13,
+            "schema_error": 8
+          },
+          "p50_latency_ms": 5172.2275,
+          "p95_latency_ms": 20843.11225
+        }
+      },
+      "search_parse_pass_count": 98,
+      "search_parse_pass_rate": 0.4083333333333333,
+      "search_count": 240,
+      "returned_models": {
+        "glm-5.2": 368,
+        "null": 40
+      },
+      "reasoning_token_positive_attempts": 354,
+      "reasoning_text_positive_attempts": 169,
+      "reasoning_token_known_attempts": 368,
+      "attempt_count": 408,
+      "usage": {
+        "prompt_tokens": {
+          "reported_sum": 341031,
+          "known_attempts": 368
+        },
+        "completion_tokens": {
+          "reported_sum": 119034,
+          "known_attempts": 368
+        },
+        "total_tokens": {
+          "reported_sum": 460478,
+          "known_attempts": 368
+        },
+        "nonadditive_attempts": 7,
+        "cache_partition_mismatches": 7
+      },
+      "fenced_json_failures": 99,
+      "fence_diagnostic_only": {
+        "decodable_objects": 98,
+        "parse_schema_checked": 97,
+        "parse_schema_valid": 96,
+        "note": "Only a full enclosing code fence is removed offline. No experiment score is replaced; schema validity does not establish semantic correctness."
+      },
+      "schema_issues": [
+        {
+          "task": "intent_parse",
+          "field": "<object>",
+          "type": "value_error",
+          "count": 1
+        },
+        {
+          "task": "intent_parse",
+          "field": "ad_body",
+          "type": "extra_forbidden",
+          "count": 1
+        },
+        {
+          "task": "intent_parse",
+          "field": "ad_title",
+          "type": "extra_forbidden",
+          "count": 1
+        },
+        {
+          "task": "intent_parse",
+          "field": "condition_grade",
+          "type": "value_error",
+          "count": 2
+        },
+        {
+          "task": "intent_parse",
+          "field": "note",
+          "type": "extra_forbidden",
+          "count": 1
+        },
+        {
+          "task": "intent_parse",
+          "field": "query",
+          "type": "extra_forbidden",
+          "count": 2
+        },
+        {
+          "task": "intent_parse",
+          "field": "tips",
+          "type": "extra_forbidden",
+          "count": 1
+        },
+        {
+          "task": "item_parse",
+          "field": "condition_grade",
+          "type": "string_type",
+          "count": 1
+        },
+        {
+          "task": "smart_search",
+          "field": "answer",
+          "type": "extra_forbidden",
+          "count": 4
+        },
+        {
+          "task": "smart_search",
+          "field": "budget",
+          "type": "extra_forbidden",
+          "count": 1
+        },
+        {
+          "task": "smart_search",
+          "field": "category",
+          "type": "value_error",
+          "count": 2
+        },
+        {
+          "task": "smart_search",
+          "field": "condition_grade",
+          "type": "value_error",
+          "count": 2
+        },
+        {
+          "task": "smart_search",
+          "field": "content",
+          "type": "extra_forbidden",
+          "count": 1
+        },
+        {
+          "task": "smart_search",
+          "field": "details",
+          "type": "extra_forbidden",
+          "count": 1
+        },
+        {
+          "task": "smart_search",
+          "field": "language",
+          "type": "extra_forbidden",
+          "count": 1
+        },
+        {
+          "task": "smart_search",
+          "field": "message",
+          "type": "extra_forbidden",
+          "count": 1
+        },
+        {
+          "task": "smart_search",
+          "field": "note",
+          "type": "extra_forbidden",
+          "count": 1
+        },
+        {
+          "task": "smart_search",
+          "field": "products",
+          "type": "extra_forbidden",
+          "count": 1
+        },
+        {
+          "task": "smart_search",
+          "field": "query",
+          "type": "extra_forbidden",
+          "count": 8
+        },
+        {
+          "task": "smart_search",
+          "field": "recommendations",
+          "type": "extra_forbidden",
+          "count": 1
+        },
+        {
+          "task": "smart_search",
+          "field": "response",
+          "type": "extra_forbidden",
+          "count": 2
+        },
+        {
+          "task": "smart_search",
+          "field": "results",
+          "type": "extra_forbidden",
+          "count": 1
+        },
+        {
+          "task": "smart_search",
+          "field": "rewrite",
+          "type": "extra_forbidden",
+          "count": 1
+        },
+        {
+          "task": "smart_search",
+          "field": "selection_tips",
+          "type": "extra_forbidden",
+          "count": 1
+        },
+        {
+          "task": "smart_search",
+          "field": "source",
+          "type": "extra_forbidden",
+          "count": 1
+        },
+        {
+          "task": "smart_search",
+          "field": "suggestions",
+          "type": "extra_forbidden",
+          "count": 1
+        },
+        {
+          "task": "smart_search",
+          "field": "summary",
+          "type": "extra_forbidden",
+          "count": 1
+        },
+        {
+          "task": "smart_search",
+          "field": "title",
+          "type": "extra_forbidden",
+          "count": 1
+        },
+        {
+          "task": "wanted_parse",
+          "field": "query",
+          "type": "extra_forbidden",
+          "count": 2
+        }
+      ]
+    },
+    "doubao-pro": {
+      "records": 408,
+      "cases": 136,
+      "passed": 276,
+      "pass_rate": 0.6764705882352942,
+      "error_count": 34,
+      "errors": {
+        "timeout": 12,
+        "schema_error": 12,
+        "output_validation_error": 7,
+        "network_error": 3
+      },
+      "p50_latency_ms": 6600.9305,
+      "p95_latency_ms": 16512.393349999995,
+      "partitions": {
+        "candidate_review": {
+          "records": 24,
+          "cases": 8,
+          "passed": 16,
+          "pass_rate": 0.6666666666666666,
+          "error_count": 8,
+          "errors": {
+            "output_validation_error": 7,
+            "timeout": 1
+          },
+          "p50_latency_ms": 11367.943500000001,
+          "p95_latency_ms": 14579.951349999998
+        },
+        "intent_parse": {
+          "records": 72,
+          "cases": 24,
+          "passed": 62,
+          "pass_rate": 0.8611111111111112,
+          "error_count": 6,
+          "errors": {
+            "schema_error": 4,
+            "timeout": 2
+          },
+          "p50_latency_ms": 6247.3845,
+          "p95_latency_ms": 11054.02415
+        },
+        "item_parse": {
+          "records": 24,
+          "cases": 8,
+          "passed": 16,
+          "pass_rate": 0.6666666666666666,
+          "error_count": 0,
+          "errors": {},
+          "p50_latency_ms": 7322.0405,
+          "p95_latency_ms": 15445.651549999995
+        },
+        "smart_search": {
+          "records": 240,
+          "cases": 80,
+          "passed": 143,
+          "pass_rate": 0.5958333333333333,
+          "error_count": 11,
+          "errors": {
+            "timeout": 4,
+            "schema_error": 5,
+            "network_error": 2
+          },
+          "p50_latency_ms": 6114.574500000001,
+          "p95_latency_ms": 13177.623949999997
+        },
+        "taodescribe": {
+          "records": 24,
+          "cases": 8,
+          "passed": 18,
+          "pass_rate": 0.75,
+          "error_count": 6,
+          "errors": {
+            "network_error": 1,
+            "timeout": 5
+          },
+          "p50_latency_ms": 16243.8755,
+          "p95_latency_ms": 21223.07825
+        },
+        "wanted_parse": {
+          "records": 24,
+          "cases": 8,
+          "passed": 21,
+          "pass_rate": 0.875,
+          "error_count": 3,
+          "errors": {
+            "schema_error": 3
+          },
+          "p50_latency_ms": 5963.6595,
+          "p95_latency_ms": 8955.41365
+        }
+      },
+      "by_repeat": {
+        "1": {
+          "records": 136,
+          "cases": 136,
+          "passed": 97,
+          "pass_rate": 0.7132352941176471,
+          "error_count": 9,
+          "errors": {
+            "timeout": 2,
+            "schema_error": 3,
+            "output_validation_error": 3,
+            "network_error": 1
+          },
+          "p50_latency_ms": 7023.4905,
+          "p95_latency_ms": 15300.018250000001
+        },
+        "2": {
+          "records": 136,
+          "cases": 136,
+          "passed": 88,
+          "pass_rate": 0.6470588235294118,
+          "error_count": 15,
+          "errors": {
+            "schema_error": 5,
+            "timeout": 6,
+            "network_error": 2,
+            "output_validation_error": 2
+          },
+          "p50_latency_ms": 6606.5419999999995,
+          "p95_latency_ms": 20369.612500000003
+        },
+        "3": {
+          "records": 136,
+          "cases": 136,
+          "passed": 91,
+          "pass_rate": 0.6691176470588235,
+          "error_count": 10,
+          "errors": {
+            "schema_error": 4,
+            "timeout": 4,
+            "output_validation_error": 2
+          },
+          "p50_latency_ms": 5985.2805,
+          "p95_latency_ms": 15236.48375
+        }
+      },
+      "search_parse_pass_count": 197,
+      "search_parse_pass_rate": 0.8208333333333333,
+      "search_count": 240,
+      "returned_models": {
+        "doubao-seed-2-1-pro-260915": 393,
+        "null": 15
+      },
+      "reasoning_token_positive_attempts": 393,
+      "reasoning_text_positive_attempts": 393,
+      "reasoning_token_known_attempts": 393,
+      "attempt_count": 408,
+      "usage": {
+        "prompt_tokens": {
+          "reported_sum": 316458,
+          "known_attempts": 393
+        },
+        "completion_tokens": {
+          "reported_sum": 73856,
+          "known_attempts": 393
+        },
+        "total_tokens": {
+          "reported_sum": 390314,
+          "known_attempts": 393
+        },
+        "nonadditive_attempts": 0,
+        "cache_partition_mismatches": 0
+      },
+      "fenced_json_failures": 0,
+      "fence_diagnostic_only": {
+        "decodable_objects": 0,
+        "parse_schema_checked": 0,
+        "parse_schema_valid": 0,
+        "note": "Only a full enclosing code fence is removed offline. No experiment score is replaced; schema validity does not establish semantic correctness."
+      },
+      "schema_issues": [
+        {
+          "task": "intent_parse",
+          "field": "<object>",
+          "type": "value_error",
+          "count": 1
+        },
+        {
+          "task": "intent_parse",
+          "field": "condition_grade",
+          "type": "value_error",
+          "count": 3
+        },
+        {
+          "task": "smart_search",
+          "field": "<object>",
+          "type": "value_error",
+          "count": 2
+        },
+        {
+          "task": "smart_search",
+          "field": "condition_grade",
+          "type": "value_error",
+          "count": 3
+        },
+        {
+          "task": "wanted_parse",
+          "field": "<object>",
+          "type": "value_error",
+          "count": 3
+        }
+      ]
+    },
+    "kimi-pro": {
+      "records": 408,
+      "cases": 136,
+      "passed": 218,
+      "pass_rate": 0.5343137254901961,
+      "error_count": 114,
+      "errors": {
+        "invalid_json_response": 50,
+        "schema_error": 7,
+        "timeout": 53,
+        "output_validation_error": 3,
+        "network_error": 1
+      },
+      "p50_latency_ms": 7731.7995,
+      "p95_latency_ms": 20852.91285,
+      "partitions": {
+        "candidate_review": {
+          "records": 24,
+          "cases": 8,
+          "passed": 10,
+          "pass_rate": 0.4166666666666667,
+          "error_count": 13,
+          "errors": {
+            "timeout": 10,
+            "output_validation_error": 3
+          },
+          "p50_latency_ms": 9956.043,
+          "p95_latency_ms": 20915.141099999997
+        },
+        "intent_parse": {
+          "records": 72,
+          "cases": 24,
+          "passed": 56,
+          "pass_rate": 0.7777777777777778,
+          "error_count": 13,
+          "errors": {
+            "schema_error": 2,
+            "timeout": 4,
+            "invalid_json_response": 7
+          },
+          "p50_latency_ms": 5308.094,
+          "p95_latency_ms": 19947.425950000004
+        },
+        "item_parse": {
+          "records": 24,
+          "cases": 8,
+          "passed": 3,
+          "pass_rate": 0.125,
+          "error_count": 14,
+          "errors": {
+            "schema_error": 1,
+            "invalid_json_response": 5,
+            "timeout": 8
+          },
+          "p50_latency_ms": 7265.26,
+          "p95_latency_ms": 21547.23655
+        },
+        "smart_search": {
+          "records": 240,
+          "cases": 80,
+          "passed": 115,
+          "pass_rate": 0.4791666666666667,
+          "error_count": 60,
+          "errors": {
+            "invalid_json_response": 32,
+            "timeout": 23,
+            "schema_error": 4,
+            "network_error": 1
+          },
+          "p50_latency_ms": 8372.013500000001,
+          "p95_latency_ms": 20824.7117
+        },
+        "taodescribe": {
+          "records": 24,
+          "cases": 8,
+          "passed": 14,
+          "pass_rate": 0.5833333333333334,
+          "error_count": 10,
+          "errors": {
+            "invalid_json_response": 4,
+            "timeout": 6
+          },
+          "p50_latency_ms": 11188.7135,
+          "p95_latency_ms": 21541.3935
+        },
+        "wanted_parse": {
+          "records": 24,
+          "cases": 8,
+          "passed": 20,
+          "pass_rate": 0.8333333333333334,
+          "error_count": 4,
+          "errors": {
+            "invalid_json_response": 2,
+            "timeout": 2
+          },
+          "p50_latency_ms": 6744.5045,
+          "p95_latency_ms": 20574.7996
+        }
+      },
+      "by_repeat": {
+        "1": {
+          "records": 136,
+          "cases": 136,
+          "passed": 77,
+          "pass_rate": 0.5661764705882353,
+          "error_count": 29,
+          "errors": {
+            "invalid_json_response": 14,
+            "schema_error": 4,
+            "timeout": 9,
+            "output_validation_error": 2
+          },
+          "p50_latency_ms": 6060.5825,
+          "p95_latency_ms": 20779.082000000002
+        },
+        "2": {
+          "records": 136,
+          "cases": 136,
+          "passed": 66,
+          "pass_rate": 0.4852941176470588,
+          "error_count": 49,
+          "errors": {
+            "timeout": 26,
+            "invalid_json_response": 19,
+            "output_validation_error": 1,
+            "schema_error": 2,
+            "network_error": 1
+          },
+          "p50_latency_ms": 11232.108499999998,
+          "p95_latency_ms": 21182.264499999997
+        },
+        "3": {
+          "records": 136,
+          "cases": 136,
+          "passed": 75,
+          "pass_rate": 0.5514705882352942,
+          "error_count": 36,
+          "errors": {
+            "timeout": 18,
+            "invalid_json_response": 17,
+            "schema_error": 1
+          },
+          "p50_latency_ms": 9882.5945,
+          "p95_latency_ms": 20861.3925
+        }
+      },
+      "search_parse_pass_count": 161,
+      "search_parse_pass_rate": 0.6708333333333333,
+      "search_count": 240,
+      "returned_models": {
+        "kimi-k3.1-pro": 354,
+        "null": 54
+      },
+      "reasoning_token_positive_attempts": 260,
+      "reasoning_text_positive_attempts": 165,
+      "reasoning_token_known_attempts": 354,
+      "attempt_count": 408,
+      "usage": {
+        "prompt_tokens": {
+          "reported_sum": 343326,
+          "known_attempts": 354
+        },
+        "completion_tokens": {
+          "reported_sum": 116365,
+          "known_attempts": 354
+        },
+        "total_tokens": {
+          "reported_sum": 459691,
+          "known_attempts": 354
+        },
+        "nonadditive_attempts": 0,
+        "cache_partition_mismatches": 52
+      },
+      "fenced_json_failures": 44,
+      "fence_diagnostic_only": {
+        "decodable_objects": 43,
+        "parse_schema_checked": 43,
+        "parse_schema_valid": 39,
+        "note": "Only a full enclosing code fence is removed offline. No experiment score is replaced; schema validity does not establish semantic correctness."
+      },
+      "schema_issues": [
+        {
+          "task": "intent_parse",
+          "field": "<object>",
+          "type": "value_error",
+          "count": 1
+        },
+        {
+          "task": "intent_parse",
+          "field": "condition_grade",
+          "type": "value_error",
+          "count": 1
+        },
+        {
+          "task": "item_parse",
+          "field": "category",
+          "type": "value_error",
+          "count": 1
+        },
+        {
+          "task": "item_parse",
+          "field": "condition",
+          "type": "extra_forbidden",
+          "count": 1
+        },
+        {
+          "task": "item_parse",
+          "field": "currency",
+          "type": "extra_forbidden",
+          "count": 1
+        },
+        {
+          "task": "item_parse",
+          "field": "item",
+          "type": "extra_forbidden",
+          "count": 1
+        },
+        {
+          "task": "item_parse",
+          "field": "location",
+          "type": "extra_forbidden",
+          "count": 1
+        },
+        {
+          "task": "smart_search",
+          "field": "<object>",
+          "type": "value_error",
+          "count": 1
+        },
+        {
+          "task": "smart_search",
+          "field": "condition_grade",
+          "type": "value_error",
+          "count": 3
+        }
+      ]
+    },
+    "minimax-flash": {
+      "records": 408,
+      "cases": 136,
+      "passed": 177,
+      "pass_rate": 0.4338235294117647,
+      "error_count": 139,
+      "errors": {
+        "schema_error": 9,
+        "invalid_json_response": 1,
+        "output_validation_error": 2,
+        "timeout": 124,
+        "network_error": 3
+      },
+      "p50_latency_ms": 6138.5135,
+      "p95_latency_ms": 21205.93435,
+      "partitions": {
+        "candidate_review": {
+          "records": 24,
+          "cases": 8,
+          "passed": 13,
+          "pass_rate": 0.5416666666666666,
+          "error_count": 11,
+          "errors": {
+            "output_validation_error": 2,
+            "timeout": 9
+          },
+          "p50_latency_ms": 7981.9195,
+          "p95_latency_ms": 22976.019099999998
+        },
+        "intent_parse": {
+          "records": 72,
+          "cases": 24,
+          "passed": 36,
+          "pass_rate": 0.5,
+          "error_count": 27,
+          "errors": {
+            "schema_error": 4,
+            "timeout": 23
+          },
+          "p50_latency_ms": 6127.9075,
+          "p95_latency_ms": 21800.986650000003
+        },
+        "item_parse": {
+          "records": 24,
+          "cases": 8,
+          "passed": 4,
+          "pass_rate": 0.16666666666666666,
+          "error_count": 9,
+          "errors": {
+            "timeout": 9
+          },
+          "p50_latency_ms": 6017.9905,
+          "p95_latency_ms": 21077.56115
+        },
+        "smart_search": {
+          "records": 240,
+          "cases": 80,
+          "passed": 94,
+          "pass_rate": 0.39166666666666666,
+          "error_count": 77,
+          "errors": {
+            "invalid_json_response": 1,
+            "schema_error": 2,
+            "timeout": 71,
+            "network_error": 3
+          },
+          "p50_latency_ms": 5907.527,
+          "p95_latency_ms": 21069.5433
+        },
+        "taodescribe": {
+          "records": 24,
+          "cases": 8,
+          "passed": 16,
+          "pass_rate": 0.6666666666666666,
+          "error_count": 5,
+          "errors": {
+            "timeout": 5
+          },
+          "p50_latency_ms": 6131.7595,
+          "p95_latency_ms": 20837.2809
+        },
+        "wanted_parse": {
+          "records": 24,
+          "cases": 8,
+          "passed": 14,
+          "pass_rate": 0.5833333333333334,
+          "error_count": 10,
+          "errors": {
+            "schema_error": 3,
+            "timeout": 7
+          },
+          "p50_latency_ms": 6175.4455,
+          "p95_latency_ms": 21086.693
+        }
+      },
+      "by_repeat": {
+        "1": {
+          "records": 136,
+          "cases": 136,
+          "passed": 86,
+          "pass_rate": 0.6323529411764706,
+          "error_count": 6,
+          "errors": {
+            "schema_error": 4,
+            "invalid_json_response": 1,
+            "output_validation_error": 1
+          },
+          "p50_latency_ms": 4741.4365,
+          "p95_latency_ms": 8313.02125
+        },
+        "2": {
+          "records": 136,
+          "cases": 136,
+          "passed": 21,
+          "pass_rate": 0.15441176470588236,
+          "error_count": 104,
+          "errors": {
+            "timeout": 100,
+            "schema_error": 1,
+            "network_error": 3
+          },
+          "p50_latency_ms": 20793.8155,
+          "p95_latency_ms": 22390.227
+        },
+        "3": {
+          "records": 136,
+          "cases": 136,
+          "passed": 70,
+          "pass_rate": 0.5147058823529411,
+          "error_count": 29,
+          "errors": {
+            "timeout": 24,
+            "schema_error": 4,
+            "output_validation_error": 1
+          },
+          "p50_latency_ms": 5510.0205000000005,
+          "p95_latency_ms": 20982.61475
+        }
+      },
+      "search_parse_pass_count": 116,
+      "search_parse_pass_rate": 0.48333333333333334,
+      "search_count": 240,
+      "returned_models": {
+        "MiniMax-M3.1-Flash": 281,
+        "null": 127
+      },
+      "reasoning_token_positive_attempts": 254,
+      "reasoning_text_positive_attempts": 252,
+      "reasoning_token_known_attempts": 281,
+      "attempt_count": 408,
+      "usage": {
+        "prompt_tokens": {
+          "reported_sum": 215955,
+          "known_attempts": 281
+        },
+        "completion_tokens": {
+          "reported_sum": 39195,
+          "known_attempts": 281
+        },
+        "total_tokens": {
+          "reported_sum": 270018,
+          "known_attempts": 281
+        },
+        "nonadditive_attempts": 252,
+        "cache_partition_mismatches": 252
+      },
+      "fenced_json_failures": 1,
+      "fence_diagnostic_only": {
+        "decodable_objects": 1,
+        "parse_schema_checked": 1,
+        "parse_schema_valid": 1,
+        "note": "Only a full enclosing code fence is removed offline. No experiment score is replaced; schema validity does not establish semantic correctness."
+      },
+      "schema_issues": [
+        {
+          "task": "intent_parse",
+          "field": "<object>",
+          "type": "value_error",
+          "count": 2
+        },
+        {
+          "task": "intent_parse",
+          "field": "condition_grade",
+          "type": "value_error",
+          "count": 2
+        },
+        {
+          "task": "smart_search",
+          "field": "condition_grade",
+          "type": "value_error",
+          "count": 2
+        },
+        {
+          "task": "wanted_parse",
+          "field": "<object>",
+          "type": "value_error",
+          "count": 3
+        }
+      ]
+    }
+  },
+  "paired_search_bootstrap": [
+    {
+      "a": "deepseek-flash",
+      "b": "deepseek-flash-thinking",
+      "metric": "pass_rate",
+      "difference_a_minus_b": 0.0041666666666666675,
+      "ci95_low": -0.04313725490196079,
+      "ci95_high": 0.05263157894736842,
+      "cases": 80,
+      "families": 68,
+      "resamples": 5000,
+      "seed": 20261115
+    },
+    {
+      "a": "deepseek-flash",
+      "b": "deepseek-flash-thinking",
+      "metric": "mrr",
+      "difference_a_minus_b": 0.0047619047619047615,
+      "ci95_low": -0.010256410256410258,
+      "ci95_high": 0.021650344191327723,
+      "cases": 70,
+      "families": 58,
+      "resamples": 5000,
+      "seed": 20261115
+    },
+    {
+      "a": "deepseek-flash",
+      "b": "deepseek-flash-thinking",
+      "metric": "ap_at_5",
+      "difference_a_minus_b": 0.0047619047619047615,
+      "ci95_low": -0.010256410256410258,
+      "ci95_high": 0.021650344191327723,
+      "cases": 70,
+      "families": 58,
+      "resamples": 5000,
+      "seed": 20261115
+    },
+    {
+      "a": "deepseek-flash",
+      "b": "deepseek-flash-thinking",
+      "metric": "recall_at_10",
+      "difference_a_minus_b": 0.004761904761904762,
+      "ci95_low": -0.010256410256410258,
+      "ci95_high": 0.021650344191327723,
+      "cases": 70,
+      "families": 58,
+      "resamples": 5000,
+      "seed": 20261115
+    },
+    {
+      "a": "deepseek-flash",
+      "b": "doubao-pro",
+      "metric": "pass_rate",
+      "difference_a_minus_b": -0.0375,
+      "ci95_low": -0.10843373493975904,
+      "ci95_high": 0.03292181069958848,
+      "cases": 80,
+      "families": 68,
+      "resamples": 5000,
+      "seed": 20261115
+    },
+    {
+      "a": "deepseek-flash",
+      "b": "doubao-pro",
+      "metric": "mrr",
+      "difference_a_minus_b": 0.01904761904761905,
+      "ci95_low": -0.014705882352941176,
+      "ci95_high": 0.05406882292128173,
+      "cases": 70,
+      "families": 58,
+      "resamples": 5000,
+      "seed": 20261115
+    },
+    {
+      "a": "deepseek-flash",
+      "b": "doubao-pro",
+      "metric": "ap_at_5",
+      "difference_a_minus_b": 0.01258730158730159,
+      "ci95_low": -0.026698687423687417,
+      "ci95_high": 0.04993827160493827,
+      "cases": 70,
+      "families": 58,
+      "resamples": 5000,
+      "seed": 20261115
+    },
+    {
+      "a": "deepseek-flash",
+      "b": "doubao-pro",
+      "metric": "recall_at_10",
+      "difference_a_minus_b": 0.02857142857142857,
+      "ci95_low": 0.005128205128205129,
+      "ci95_high": 0.056338028169014086,
+      "cases": 70,
+      "families": 58,
+      "resamples": 5000,
+      "seed": 20261115
+    },
+    {
+      "a": "deepseek-flash",
+      "b": "glm",
+      "metric": "pass_rate",
+      "difference_a_minus_b": 0.24583333333333335,
+      "ci95_low": 0.16049382716049385,
+      "ci95_high": 0.33333333333333337,
+      "cases": 80,
+      "families": 68,
+      "resamples": 5000,
+      "seed": 20261115
+    },
+    {
+      "a": "deepseek-flash",
+      "b": "glm",
+      "metric": "mrr",
+      "difference_a_minus_b": 0.4220238095238095,
+      "ci95_low": 0.34576829759652444,
+      "ci95_high": 0.5017836757990868,
+      "cases": 70,
+      "families": 58,
+      "resamples": 5000,
+      "seed": 20261115
+    },
+    {
+      "a": "deepseek-flash",
+      "b": "glm",
+      "metric": "ap_at_5",
+      "difference_a_minus_b": 0.4285873015873016,
+      "ci95_low": 0.34910063110374057,
+      "ci95_high": 0.5093015873015874,
+      "cases": 70,
+      "families": 58,
+      "resamples": 5000,
+      "seed": 20261115
+    },
+    {
+      "a": "deepseek-flash",
+      "b": "glm",
+      "metric": "recall_at_10",
+      "difference_a_minus_b": 0.4561507936507937,
+      "ci95_low": 0.37942703163258557,
+      "ci95_high": 0.5352262170196953,
+      "cases": 70,
+      "families": 58,
+      "resamples": 5000,
+      "seed": 20261115
+    },
+    {
+      "a": "deepseek-flash",
+      "b": "kimi-pro",
+      "metric": "pass_rate",
+      "difference_a_minus_b": 0.07916666666666668,
+      "ci95_low": 0.025918803418803427,
+      "ci95_high": 0.13427579365079342,
+      "cases": 80,
+      "families": 68,
+      "resamples": 5000,
+      "seed": 20261115
+    },
+    {
+      "a": "deepseek-flash",
+      "b": "kimi-pro",
+      "metric": "mrr",
+      "difference_a_minus_b": 0.1904761904761905,
+      "ci95_low": 0.1373873873873874,
+      "ci95_high": 0.24875621890547264,
+      "cases": 70,
+      "families": 58,
+      "resamples": 5000,
+      "seed": 20261115
+    },
+    {
+      "a": "deepseek-flash",
+      "b": "kimi-pro",
+      "metric": "ap_at_5",
+      "difference_a_minus_b": 0.18446031746031746,
+      "ci95_low": 0.12859104627766602,
+      "ci95_high": 0.24397702375871388,
+      "cases": 70,
+      "families": 58,
+      "resamples": 5000,
+      "seed": 20261115
+    },
+    {
+      "a": "deepseek-flash",
+      "b": "kimi-pro",
+      "metric": "recall_at_10",
+      "difference_a_minus_b": 0.20476190476190478,
+      "ci95_low": 0.15350877192982457,
+      "ci95_high": 0.26087560386473424,
+      "cases": 70,
+      "families": 58,
+      "resamples": 5000,
+      "seed": 20261115
+    },
+    {
+      "a": "deepseek-flash",
+      "b": "minimax-flash",
+      "metric": "pass_rate",
+      "difference_a_minus_b": 0.16666666666666669,
+      "ci95_low": 0.09126082251082253,
+      "ci95_high": 0.24657979007294067,
+      "cases": 80,
+      "families": 68,
+      "resamples": 5000,
+      "seed": 20261115
+    },
+    {
+      "a": "deepseek-flash",
+      "b": "minimax-flash",
+      "metric": "mrr",
+      "difference_a_minus_b": 0.2880952380952381,
+      "ci95_low": 0.23744292237442927,
+      "ci95_high": 0.33959600225225206,
+      "cases": 70,
+      "families": 58,
+      "resamples": 5000,
+      "seed": 20261115
+    },
+    {
+      "a": "deepseek-flash",
+      "b": "minimax-flash",
+      "metric": "ap_at_5",
+      "difference_a_minus_b": 0.3156666666666667,
+      "ci95_low": 0.2435897435897436,
+      "ci95_high": 0.3906984126984127,
+      "cases": 70,
+      "families": 58,
+      "resamples": 5000,
+      "seed": 20261115
+    },
+    {
+      "a": "deepseek-flash",
+      "b": "minimax-flash",
+      "metric": "recall_at_10",
+      "difference_a_minus_b": 0.34440476190476194,
+      "ci95_low": 0.27865833333333334,
+      "ci95_high": 0.4130651249841391,
+      "cases": 70,
+      "families": 58,
+      "resamples": 5000,
+      "seed": 20261115
+    },
+    {
+      "a": "deepseek-flash",
+      "b": "qwen-max",
+      "metric": "pass_rate",
+      "difference_a_minus_b": 0.029166666666666674,
+      "ci95_low": -0.04329004329004329,
+      "ci95_high": 0.10163438546150157,
+      "cases": 80,
+      "families": 68,
+      "resamples": 5000,
+      "seed": 20261115
+    },
+    {
+      "a": "deepseek-flash",
+      "b": "qwen-max",
+      "metric": "mrr",
+      "difference_a_minus_b": 0.1261904761904762,
+      "ci95_low": 0.0735294117647059,
+      "ci95_high": 0.1846846846846847,
+      "cases": 70,
+      "families": 58,
+      "resamples": 5000,
+      "seed": 20261115
+    },
+    {
+      "a": "deepseek-flash",
+      "b": "qwen-max",
+      "metric": "ap_at_5",
+      "difference_a_minus_b": 0.13561904761904764,
+      "ci95_low": 0.07953687402190925,
+      "ci95_high": 0.19385680751173695,
+      "cases": 70,
+      "families": 58,
+      "resamples": 5000,
+      "seed": 20261115
+    },
+    {
+      "a": "deepseek-flash",
+      "b": "qwen-max",
+      "metric": "recall_at_10",
+      "difference_a_minus_b": 0.14563492063492064,
+      "ci95_low": 0.09389056561591774,
+      "ci95_high": 0.20139148009950247,
+      "cases": 70,
+      "families": 58,
+      "resamples": 5000,
+      "seed": 20261115
+    },
+    {
+      "a": "deepseek-flash-thinking",
+      "b": "doubao-pro",
+      "metric": "pass_rate",
+      "difference_a_minus_b": -0.04166666666666667,
+      "ci95_low": -0.11111111111111112,
+      "ci95_high": 0.029924242424242284,
+      "cases": 80,
+      "families": 68,
+      "resamples": 5000,
+      "seed": 20261115
+    },
+    {
+      "a": "deepseek-flash-thinking",
+      "b": "doubao-pro",
+      "metric": "mrr",
+      "difference_a_minus_b": 0.014285714285714285,
+      "ci95_low": -0.01904761904761905,
+      "ci95_high": 0.04901960784313726,
+      "cases": 70,
+      "families": 58,
+      "resamples": 5000,
+      "seed": 20261115
+    },
+    {
+      "a": "deepseek-flash-thinking",
+      "b": "doubao-pro",
+      "metric": "ap_at_5",
+      "difference_a_minus_b": 0.007825396825396827,
+      "ci95_low": -0.03095238095238095,
+      "ci95_high": 0.04411764705882354,
+      "cases": 70,
+      "families": 58,
+      "resamples": 5000,
+      "seed": 20261115
+    },
+    {
+      "a": "deepseek-flash-thinking",
+      "b": "doubao-pro",
+      "metric": "recall_at_10",
+      "difference_a_minus_b": 0.023809523809523815,
+      "ci95_low": 0.00462962962962963,
+      "ci95_high": 0.05050505050505051,
+      "cases": 70,
+      "families": 58,
+      "resamples": 5000,
+      "seed": 20261115
+    },
+    {
+      "a": "deepseek-flash-thinking",
+      "b": "glm",
+      "metric": "pass_rate",
+      "difference_a_minus_b": 0.2416666666666667,
+      "ci95_low": 0.1646090534979424,
+      "ci95_high": 0.3244444444444445,
+      "cases": 80,
+      "families": 68,
+      "resamples": 5000,
+      "seed": 20261115
+    },
+    {
+      "a": "deepseek-flash-thinking",
+      "b": "glm",
+      "metric": "mrr",
+      "difference_a_minus_b": 0.4172619047619048,
+      "ci95_low": 0.3410403050108933,
+      "ci95_high": 0.49572649572649574,
+      "cases": 70,
+      "families": 58,
+      "resamples": 5000,
+      "seed": 20261115
+    },
+    {
+      "a": "deepseek-flash-thinking",
+      "b": "glm",
+      "metric": "ap_at_5",
+      "difference_a_minus_b": 0.4238253968253968,
+      "ci95_low": 0.3454500248015873,
+      "ci95_high": 0.5039375,
+      "cases": 70,
+      "families": 58,
+      "resamples": 5000,
+      "seed": 20261115
+    },
+    {
+      "a": "deepseek-flash-thinking",
+      "b": "glm",
+      "metric": "recall_at_10",
+      "difference_a_minus_b": 0.45138888888888895,
+      "ci95_low": 0.37396008513769186,
+      "ci95_high": 0.5300623109940493,
+      "cases": 70,
+      "families": 58,
+      "resamples": 5000,
+      "seed": 20261115
+    },
+    {
+      "a": "deepseek-flash-thinking",
+      "b": "kimi-pro",
+      "metric": "pass_rate",
+      "difference_a_minus_b": 0.07500000000000001,
+      "ci95_low": 0.011764705882352946,
+      "ci95_high": 0.13852813852813856,
+      "cases": 80,
+      "families": 68,
+      "resamples": 5000,
+      "seed": 20261115
+    },
+    {
+      "a": "deepseek-flash-thinking",
+      "b": "kimi-pro",
+      "metric": "mrr",
+      "difference_a_minus_b": 0.18571428571428575,
+      "ci95_low": 0.13288288288288289,
+      "ci95_high": 0.24306382275132268,
+      "cases": 70,
+      "families": 58,
+      "resamples": 5000,
+      "seed": 20261115
+    },
+    {
+      "a": "deepseek-flash-thinking",
+      "b": "kimi-pro",
+      "metric": "ap_at_5",
+      "difference_a_minus_b": 0.17969841269841272,
+      "ci95_low": 0.12487156084656087,
+      "ci95_high": 0.238469104557903,
+      "cases": 70,
+      "families": 58,
+      "resamples": 5000,
+      "seed": 20261115
+    },
+    {
+      "a": "deepseek-flash-thinking",
+      "b": "kimi-pro",
+      "metric": "recall_at_10",
+      "difference_a_minus_b": 0.20000000000000004,
+      "ci95_low": 0.14814814814814817,
+      "ci95_high": 0.25641025641025644,
+      "cases": 70,
+      "families": 58,
+      "resamples": 5000,
+      "seed": 20261115
+    },
+    {
+      "a": "deepseek-flash-thinking",
+      "b": "minimax-flash",
+      "metric": "pass_rate",
+      "difference_a_minus_b": 0.16250000000000003,
+      "ci95_low": 0.09210526315789475,
+      "ci95_high": 0.23696016944490272,
+      "cases": 80,
+      "families": 68,
+      "resamples": 5000,
+      "seed": 20261115
+    },
+    {
+      "a": "deepseek-flash-thinking",
+      "b": "minimax-flash",
+      "metric": "mrr",
+      "difference_a_minus_b": 0.2833333333333334,
+      "ci95_low": 0.22972972972972977,
+      "ci95_high": 0.3359792334401704,
+      "cases": 70,
+      "families": 58,
+      "resamples": 5000,
+      "seed": 20261115
+    },
+    {
+      "a": "deepseek-flash-thinking",
+      "b": "minimax-flash",
+      "metric": "ap_at_5",
+      "difference_a_minus_b": 0.31090476190476196,
+      "ci95_low": 0.23759480012219605,
+      "ci95_high": 0.38892430976430975,
+      "cases": 70,
+      "families": 58,
+      "resamples": 5000,
+      "seed": 20261115
+    },
+    {
+      "a": "deepseek-flash-thinking",
+      "b": "minimax-flash",
+      "metric": "recall_at_10",
+      "difference_a_minus_b": 0.3396428571428572,
+      "ci95_low": 0.27334829270970573,
+      "ci95_high": 0.4093324177722499,
+      "cases": 70,
+      "families": 58,
+      "resamples": 5000,
+      "seed": 20261115
+    },
+    {
+      "a": "deepseek-flash-thinking",
+      "b": "qwen-max",
+      "metric": "pass_rate",
+      "difference_a_minus_b": 0.025000000000000005,
+      "ci95_low": -0.05335135135135135,
+      "ci95_high": 0.10441767068273092,
+      "cases": 80,
+      "families": 68,
+      "resamples": 5000,
+      "seed": 20261115
+    },
+    {
+      "a": "deepseek-flash-thinking",
+      "b": "qwen-max",
+      "metric": "mrr",
+      "difference_a_minus_b": 0.12142857142857143,
+      "ci95_low": 0.0646766169154229,
+      "ci95_high": 0.18311049874123958,
+      "cases": 70,
+      "families": 58,
+      "resamples": 5000,
+      "seed": 20261115
+    },
+    {
+      "a": "deepseek-flash-thinking",
+      "b": "qwen-max",
+      "metric": "ap_at_5",
+      "difference_a_minus_b": 0.13085714285714287,
+      "ci95_low": 0.07194444444444445,
+      "ci95_high": 0.19369750519750517,
+      "cases": 70,
+      "families": 58,
+      "resamples": 5000,
+      "seed": 20261115
+    },
+    {
+      "a": "deepseek-flash-thinking",
+      "b": "qwen-max",
+      "metric": "recall_at_10",
+      "difference_a_minus_b": 0.1408730158730159,
+      "ci95_low": 0.08571263227513229,
+      "ci95_high": 0.20158730158730162,
+      "cases": 70,
+      "families": 58,
+      "resamples": 5000,
+      "seed": 20261115
+    },
+    {
+      "a": "doubao-pro",
+      "b": "glm",
+      "metric": "pass_rate",
+      "difference_a_minus_b": 0.2833333333333333,
+      "ci95_low": 0.19918699186991873,
+      "ci95_high": 0.3684327485380115,
+      "cases": 80,
+      "families": 68,
+      "resamples": 5000,
+      "seed": 20261115
+    },
+    {
+      "a": "doubao-pro",
+      "b": "glm",
+      "metric": "mrr",
+      "difference_a_minus_b": 0.4029761904761905,
+      "ci95_low": 0.3252818035426731,
+      "ci95_high": 0.4828932781743457,
+      "cases": 70,
+      "families": 58,
+      "resamples": 5000,
+      "seed": 20261115
+    },
+    {
+      "a": "doubao-pro",
+      "b": "glm",
+      "metric": "ap_at_5",
+      "difference_a_minus_b": 0.41600000000000004,
+      "ci95_low": 0.33686554660559637,
+      "ci95_high": 0.4973501397272524,
+      "cases": 70,
+      "families": 58,
+      "resamples": 5000,
+      "seed": 20261115
+    },
+    {
+      "a": "doubao-pro",
+      "b": "glm",
+      "metric": "recall_at_10",
+      "difference_a_minus_b": 0.4275793650793651,
+      "ci95_low": 0.34782135518061863,
+      "ci95_high": 0.5091956833594157,
+      "cases": 70,
+      "families": 58,
+      "resamples": 5000,
+      "seed": 20261115
+    },
+    {
+      "a": "doubao-pro",
+      "b": "kimi-pro",
+      "metric": "pass_rate",
+      "difference_a_minus_b": 0.11666666666666667,
+      "ci95_low": 0.06410256410256411,
+      "ci95_high": 0.17316017316017318,
+      "cases": 80,
+      "families": 68,
+      "resamples": 5000,
+      "seed": 20261115
+    },
+    {
+      "a": "doubao-pro",
+      "b": "kimi-pro",
+      "metric": "mrr",
+      "difference_a_minus_b": 0.17142857142857146,
+      "ci95_low": 0.12076897406559879,
+      "ci95_high": 0.22636815920398012,
+      "cases": 70,
+      "families": 58,
+      "resamples": 5000,
+      "seed": 20261115
+    },
+    {
+      "a": "doubao-pro",
+      "b": "kimi-pro",
+      "metric": "ap_at_5",
+      "difference_a_minus_b": 0.1718730158730159,
+      "ci95_low": 0.121022921172795,
+      "ci95_high": 0.22666956882255387,
+      "cases": 70,
+      "families": 58,
+      "resamples": 5000,
+      "seed": 20261115
+    },
+    {
+      "a": "doubao-pro",
+      "b": "kimi-pro",
+      "metric": "recall_at_10",
+      "difference_a_minus_b": 0.1761904761904762,
+      "ci95_low": 0.1232876712328767,
+      "ci95_high": 0.23437500000000003,
+      "cases": 70,
+      "families": 58,
+      "resamples": 5000,
+      "seed": 20261115
+    },
+    {
+      "a": "doubao-pro",
+      "b": "minimax-flash",
+      "metric": "pass_rate",
+      "difference_a_minus_b": 0.2041666666666667,
+      "ci95_low": 0.126984126984127,
+      "ci95_high": 0.2820512820512821,
+      "cases": 80,
+      "families": 68,
+      "resamples": 5000,
+      "seed": 20261115
+    },
+    {
+      "a": "doubao-pro",
+      "b": "minimax-flash",
+      "metric": "mrr",
+      "difference_a_minus_b": 0.2690476190476191,
+      "ci95_low": 0.2121158008658009,
+      "ci95_high": 0.32481060606060574,
+      "cases": 70,
+      "families": 58,
+      "resamples": 5000,
+      "seed": 20261115
+    },
+    {
+      "a": "doubao-pro",
+      "b": "minimax-flash",
+      "metric": "ap_at_5",
+      "difference_a_minus_b": 0.3030793650793651,
+      "ci95_low": 0.22817359891717887,
+      "ci95_high": 0.3816571428571428,
+      "cases": 70,
+      "families": 58,
+      "resamples": 5000,
+      "seed": 20261115
+    },
+    {
+      "a": "doubao-pro",
+      "b": "minimax-flash",
+      "metric": "recall_at_10",
+      "difference_a_minus_b": 0.31583333333333335,
+      "ci95_low": 0.245020612662494,
+      "ci95_high": 0.38923648852657006,
+      "cases": 70,
+      "families": 58,
+      "resamples": 5000,
+      "seed": 20261115
+    },
+    {
+      "a": "doubao-pro",
+      "b": "qwen-max",
+      "metric": "pass_rate",
+      "difference_a_minus_b": 0.06666666666666668,
+      "ci95_low": -0.004331890331890327,
+      "ci95_high": 0.14168055555555534,
+      "cases": 80,
+      "families": 68,
+      "resamples": 5000,
+      "seed": 20261115
+    },
+    {
+      "a": "doubao-pro",
+      "b": "qwen-max",
+      "metric": "mrr",
+      "difference_a_minus_b": 0.10714285714285715,
+      "ci95_low": 0.0547945205479452,
+      "ci95_high": 0.16216216216216217,
+      "cases": 70,
+      "families": 58,
+      "resamples": 5000,
+      "seed": 20261115
+    },
+    {
+      "a": "doubao-pro",
+      "b": "qwen-max",
+      "metric": "ap_at_5",
+      "difference_a_minus_b": 0.12303174603174603,
+      "ci95_low": 0.06666197183098593,
+      "ci95_high": 0.180761685058346,
+      "cases": 70,
+      "families": 58,
+      "resamples": 5000,
+      "seed": 20261115
+    },
+    {
+      "a": "doubao-pro",
+      "b": "qwen-max",
+      "metric": "recall_at_10",
+      "difference_a_minus_b": 0.11706349206349206,
+      "ci95_low": 0.06555289193302892,
+      "ci95_high": 0.1733026785265591,
+      "cases": 70,
+      "families": 58,
+      "resamples": 5000,
+      "seed": 20261115
+    },
+    {
+      "a": "glm",
+      "b": "kimi-pro",
+      "metric": "pass_rate",
+      "difference_a_minus_b": -0.16666666666666669,
+      "ci95_low": -0.25316455696202533,
+      "ci95_high": -0.08536585365853659,
+      "cases": 80,
+      "families": 68,
+      "resamples": 5000,
+      "seed": 20261115
+    },
+    {
+      "a": "glm",
+      "b": "kimi-pro",
+      "metric": "mrr",
+      "difference_a_minus_b": -0.23154761904761909,
+      "ci95_low": -0.33352372607027253,
+      "ci95_high": -0.1287132623180159,
+      "cases": 70,
+      "families": 58,
+      "resamples": 5000,
+      "seed": 20261115
+    },
+    {
+      "a": "glm",
+      "b": "kimi-pro",
+      "metric": "ap_at_5",
+      "difference_a_minus_b": -0.2441269841269841,
+      "ci95_low": -0.3456973078406024,
+      "ci95_high": -0.1401956048119731,
+      "cases": 70,
+      "families": 58,
+      "resamples": 5000,
+      "seed": 20261115
+    },
+    {
+      "a": "glm",
+      "b": "kimi-pro",
+      "metric": "recall_at_10",
+      "difference_a_minus_b": -0.2513888888888889,
+      "ci95_low": -0.35328910189532253,
+      "ci95_high": -0.14700248756218914,
+      "cases": 70,
+      "families": 58,
+      "resamples": 5000,
+      "seed": 20261115
+    },
+    {
+      "a": "glm",
+      "b": "minimax-flash",
+      "metric": "pass_rate",
+      "difference_a_minus_b": -0.07916666666666666,
+      "ci95_low": -0.16034145960306295,
+      "ci95_high": 7.215174855355079e-18,
+      "cases": 80,
+      "families": 68,
+      "resamples": 5000,
+      "seed": 20261115
+    },
+    {
+      "a": "glm",
+      "b": "minimax-flash",
+      "metric": "mrr",
+      "difference_a_minus_b": -0.13392857142857142,
+      "ci95_low": -0.227457981078905,
+      "ci95_high": -0.04718126374090989,
+      "cases": 70,
+      "families": 58,
+      "resamples": 5000,
+      "seed": 20261115
+    },
+    {
+      "a": "glm",
+      "b": "minimax-flash",
+      "metric": "ap_at_5",
+      "difference_a_minus_b": -0.11292063492063491,
+      "ci95_low": -0.2158593840822714,
+      "ci95_high": -0.017602553927553936,
+      "cases": 70,
+      "families": 58,
+      "resamples": 5000,
+      "seed": 20261115
+    },
+    {
+      "a": "glm",
+      "b": "minimax-flash",
+      "metric": "recall_at_10",
+      "difference_a_minus_b": -0.11174603174603175,
+      "ci95_low": -0.21779032258064515,
+      "ci95_high": -0.013920915032679799,
+      "cases": 70,
+      "families": 58,
+      "resamples": 5000,
+      "seed": 20261115
+    },
+    {
+      "a": "glm",
+      "b": "qwen-max",
+      "metric": "pass_rate",
+      "difference_a_minus_b": -0.2166666666666667,
+      "ci95_low": -0.30701754385964913,
+      "ci95_high": -0.12757201646090535,
+      "cases": 80,
+      "families": 68,
+      "resamples": 5000,
+      "seed": 20261115
+    },
+    {
+      "a": "glm",
+      "b": "qwen-max",
+      "metric": "mrr",
+      "difference_a_minus_b": -0.2958333333333334,
+      "ci95_low": -0.3886785296999849,
+      "ci95_high": -0.20446905972874294,
+      "cases": 70,
+      "families": 58,
+      "resamples": 5000,
+      "seed": 20261115
+    },
+    {
+      "a": "glm",
+      "b": "qwen-max",
+      "metric": "ap_at_5",
+      "difference_a_minus_b": -0.292968253968254,
+      "ci95_low": -0.38821048513302037,
+      "ci95_high": -0.19924432520756058,
+      "cases": 70,
+      "families": 58,
+      "resamples": 5000,
+      "seed": 20261115
+    },
+    {
+      "a": "glm",
+      "b": "qwen-max",
+      "metric": "recall_at_10",
+      "difference_a_minus_b": -0.310515873015873,
+      "ci95_low": -0.4054370767026617,
+      "ci95_high": -0.2176587301587302,
+      "cases": 70,
+      "families": 58,
+      "resamples": 5000,
+      "seed": 20261115
+    },
+    {
+      "a": "kimi-pro",
+      "b": "minimax-flash",
+      "metric": "pass_rate",
+      "difference_a_minus_b": 0.08750000000000001,
+      "ci95_low": 0.021097046413502112,
+      "ci95_high": 0.15447154471544716,
+      "cases": 80,
+      "families": 68,
+      "resamples": 5000,
+      "seed": 20261115
+    },
+    {
+      "a": "kimi-pro",
+      "b": "minimax-flash",
+      "metric": "mrr",
+      "difference_a_minus_b": 0.09761904761904763,
+      "ci95_low": 0.026960784313725502,
+      "ci95_high": 0.16190643863179072,
+      "cases": 70,
+      "families": 58,
+      "resamples": 5000,
+      "seed": 20261115
+    },
+    {
+      "a": "kimi-pro",
+      "b": "minimax-flash",
+      "metric": "ap_at_5",
+      "difference_a_minus_b": 0.13120634920634922,
+      "ci95_low": 0.04571142664241624,
+      "ci95_high": 0.2136058452819016,
+      "cases": 70,
+      "families": 58,
+      "resamples": 5000,
+      "seed": 20261115
+    },
+    {
+      "a": "kimi-pro",
+      "b": "minimax-flash",
+      "metric": "recall_at_10",
+      "difference_a_minus_b": 0.13964285714285715,
+      "ci95_low": 0.0523765756302521,
+      "ci95_high": 0.22260658148928691,
+      "cases": 70,
+      "families": 58,
+      "resamples": 5000,
+      "seed": 20261115
+    },
+    {
+      "a": "kimi-pro",
+      "b": "qwen-max",
+      "metric": "pass_rate",
+      "difference_a_minus_b": -0.05,
+      "ci95_low": -0.11688311688311688,
+      "ci95_high": 0.02109704641350211,
+      "cases": 80,
+      "families": 68,
+      "resamples": 5000,
+      "seed": 20261115
+    },
+    {
+      "a": "kimi-pro",
+      "b": "qwen-max",
+      "metric": "mrr",
+      "difference_a_minus_b": -0.0642857142857143,
+      "ci95_low": -0.14493530020703937,
+      "ci95_high": 0.016908212560386476,
+      "cases": 70,
+      "families": 58,
+      "resamples": 5000,
+      "seed": 20261115
+    },
+    {
+      "a": "kimi-pro",
+      "b": "qwen-max",
+      "metric": "ap_at_5",
+      "difference_a_minus_b": -0.04884126984126985,
+      "ci95_low": -0.1285910065059319,
+      "ci95_high": 0.03212070015220699,
+      "cases": 70,
+      "families": 58,
+      "resamples": 5000,
+      "seed": 20261115
+    },
+    {
+      "a": "kimi-pro",
+      "b": "qwen-max",
+      "metric": "recall_at_10",
+      "difference_a_minus_b": -0.05912698412698413,
+      "ci95_low": -0.1380952380952381,
+      "ci95_high": 0.02049180327868852,
+      "cases": 70,
+      "families": 58,
+      "resamples": 5000,
+      "seed": 20261115
+    },
+    {
+      "a": "minimax-flash",
+      "b": "qwen-max",
+      "metric": "pass_rate",
+      "difference_a_minus_b": -0.1375,
+      "ci95_low": -0.20779348102877515,
+      "ci95_high": -0.06751054852320676,
+      "cases": 80,
+      "families": 68,
+      "resamples": 5000,
+      "seed": 20261115
+    },
+    {
+      "a": "minimax-flash",
+      "b": "qwen-max",
+      "metric": "mrr",
+      "difference_a_minus_b": -0.1619047619047619,
+      "ci95_low": -0.22666666666666666,
+      "ci95_high": -0.0931372549019608,
+      "cases": 70,
+      "families": 58,
+      "resamples": 5000,
+      "seed": 20261115
+    },
+    {
+      "a": "minimax-flash",
+      "b": "qwen-max",
+      "metric": "ap_at_5",
+      "difference_a_minus_b": -0.18004761904761907,
+      "ci95_low": -0.26002977357817797,
+      "ci95_high": -0.09780787961600451,
+      "cases": 70,
+      "families": 58,
+      "resamples": 5000,
+      "seed": 20261115
+    },
+    {
+      "a": "minimax-flash",
+      "b": "qwen-max",
+      "metric": "recall_at_10",
+      "difference_a_minus_b": -0.1987698412698413,
+      "ci95_low": -0.27193056098939317,
+      "ci95_high": -0.12142776705276709,
+      "cases": 70,
+      "families": 58,
+      "resamples": 5000,
+      "seed": 20261115
+    }
+  ],
+  "search_draft_gate_failures": {
+    "deepseek-flash": [
+      "pass_rate=0.5583，要求 ≥0.85",
+      "consistency_rate=0.6625，要求 ≥0.95",
+      "metamorphic_pass_rate=0.6944，要求 ≥0.9",
+      "p95_latency_ms=6204.5292，要求 ≤2500"
+    ],
+    "deepseek-flash-thinking": [
+      "pass_rate=0.5542，要求 ≥0.85",
+      "consistency_rate=0.6750，要求 ≥0.95",
+      "metamorphic_pass_rate=0.7500，要求 ≥0.9",
+      "p95_latency_ms=5658.2452，要求 ≤2500"
+    ],
+    "doubao-pro": [
+      "pass_rate=0.5958，要求 ≥0.85",
+      "mrr=0.8952，要求 ≥0.9",
+      "consistency_rate=0.7625，要求 ≥0.95",
+      "metamorphic_pass_rate=0.8056，要求 ≥0.9",
+      "p95_latency_ms=13177.6239，要求 ≤2500"
+    ],
+    "glm": [
+      "pass_rate=0.3125，要求 ≥0.85",
+      "mrr=0.4923，要求 ≥0.9",
+      "map_at_5=0.4783，要求 ≥0.85",
+      "recall_at_10=0.4962，要求 ≥0.9",
+      "error_rate=0.4542，要求 ≤0.05",
+      "first_schema_valid_rate=0.5458，要求 ≥0.95",
+      "consistency_rate=0.0875，要求 ≥0.95",
+      "metamorphic_pass_rate=0.1944，要求 ≥0.9",
+      "p95_latency_ms=20907.9208，要求 ≤2500"
+    ],
+    "kimi-pro": [
+      "pass_rate=0.4792，要求 ≥0.85",
+      "mrr=0.7238，要求 ≥0.9",
+      "map_at_5=0.7225，要求 ≥0.85",
+      "recall_at_10=0.7476，要求 ≥0.9",
+      "error_rate=0.2500，要求 ≤0.05",
+      "first_schema_valid_rate=0.7500，要求 ≥0.95",
+      "consistency_rate=0.3500，要求 ≥0.95",
+      "metamorphic_pass_rate=0.5278，要求 ≥0.9",
+      "p95_latency_ms=20824.7117，要求 ≤2500"
+    ],
+    "minimax-flash": [
+      "pass_rate=0.3917，要求 ≥0.85",
+      "mrr=0.6262，要求 ≥0.9",
+      "map_at_5=0.5913，要求 ≥0.85",
+      "recall_at_10=0.6080，要求 ≥0.9",
+      "zero_result_error_rate=0.0625，要求 ≤0.05",
+      "error_rate=0.3208，要求 ≤0.05",
+      "first_schema_valid_rate=0.6792，要求 ≥0.95",
+      "consistency_rate=0.1125，要求 ≥0.95",
+      "metamorphic_pass_rate=0.3611，要求 ≥0.9",
+      "p95_latency_ms=21069.5433，要求 ≤2500"
+    ],
+    "qwen-max": [
+      "pass_rate=0.5292，要求 ≥0.85",
+      "mrr=0.7881，要求 ≥0.9",
+      "map_at_5=0.7713，要求 ≥0.85",
+      "recall_at_10=0.8067，要求 ≥0.9",
+      "zero_result_error_rate=0.0601，要求 ≤0.05",
+      "error_rate=0.1208，要求 ≤0.05",
+      "first_schema_valid_rate=0.8792，要求 ≥0.95",
+      "consistency_rate=0.5375，要求 ≥0.95",
+      "metamorphic_pass_rate=0.6389，要求 ≥0.9",
+      "p95_latency_ms=16997.5770，要求 ≤2500"
+    ]
+  },
+  "frozen_search_rules": {
+    "min_pass_rate": 0.85,
+    "min_mrr": 0.9,
+    "min_map_at_5": 0.85,
+    "min_recall_at_10": 0.9,
+    "max_zero_result_error_rate": 0.05,
+    "max_error_rate": 0.05,
+    "min_first_schema_valid_rate": 0.95,
+    "min_consistency_rate": 0.95,
+    "min_metamorphic_pass_rate": 0.9,
+    "max_p95_latency_ms": 2500
+  },
+  "bootstrap_note": "Post-hoc paired family-cluster bootstrap; all repeats and paraphrases stay together. Unadjusted 95% intervals, not independent tests or holdout evidence."
+}

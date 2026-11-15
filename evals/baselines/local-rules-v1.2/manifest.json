@@ -1,0 +1,484 @@
+{
+  "run_id": "20261115T105146Z-c5167287",
+  "created_at": "2026-11-15T10:51:46.396250+00:00",
+  "git_sha": "1bbf607f99f7378e57e13b390dea8d02e86bbe12",
+  "dirty": true,
+  "implementation_hash": "008cd6cca53a2efb53eb9a9cbd173377140d82df99101762a5360064587615aa",
+  "dataset_hash": "3ae891897e610690171ed8cf802bed259843dc6224a508f759401be03bede670",
+  "scorer_version": "1.2.0",
+  "policy_hash": "069041535083d95812c6f2fdd1168e3dd8b94f3ab80fece2f22578385975d0ef",
+  "models": [
+    {
+      "id": "local-rules",
+      "mode": "local",
+      "tasks": [
+        "intent_parse",
+        "item_parse",
+        "wanted_parse"
+      ],
+      "model": "local-keyword-rules",
+      "base_url": null,
+      "thinking": null,
+      "temperature": 0.1,
+      "max_tokens": null,
+      "timeout": 30,
+      "retries": 0,
+      "pricing": null
+    }
+  ],
+  "cases": [
+    {
+      "id": "intent-001",
+      "hash": "2e688732fd7631189f1c8b2fba2e1975d394935cabdfb9562e0ef24a3c252b6f",
+      "task": "intent_parse",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "explicit-budget",
+        "text"
+      ]
+    },
+    {
+      "id": "intent-002",
+      "hash": "62b0663c2a98f34ab65e672d99ac32d2ba47ad6fa969ef9bd811429868879fcc",
+      "task": "intent_parse",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "specific-category",
+        "text"
+      ]
+    },
+    {
+      "id": "intent-003",
+      "hash": "f140fc3a428d82d4c921baf7a6528456933ee6cf55ffed4e37517c28147f358f",
+      "task": "intent_parse",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "negation-preference",
+        "text"
+      ]
+    },
+    {
+      "id": "intent-004",
+      "hash": "77d3df90b2ffe25d497bbf1b02ab9c8d3ef36a93ad8c05dc245bea72a209cf39",
+      "task": "intent_parse",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "zero-budget",
+        "text"
+      ]
+    },
+    {
+      "id": "intent-005",
+      "hash": "482652df6d6ef35f44dd83fb6afc3e8d5fdbf4637060a7ce4a87c410a39ceb36",
+      "task": "intent_parse",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "decimal-budget",
+        "text"
+      ]
+    },
+    {
+      "id": "intent-006",
+      "hash": "82981e9b08be8cb72a0cb576780098c7d85e0f06c96d167a33e0b61912184a2d",
+      "task": "intent_parse",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "chinese-number",
+        "text"
+      ]
+    },
+    {
+      "id": "intent-007",
+      "hash": "84fd237c0d43723577d538ba4a2a05639745d00f7194c9524c2f1f64e3c03326",
+      "task": "intent_parse",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "chinese-number",
+        "text"
+      ]
+    },
+    {
+      "id": "intent-008",
+      "hash": "5e977a0e7cf1c9c66aa70b253a36941dedebfd845a2b5494026c6de8256fd30d",
+      "task": "intent_parse",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "condition-grade",
+        "text"
+      ]
+    },
+    {
+      "id": "intent-009",
+      "hash": "5b50c7dd080e69babf6782937c89fbc9dc04e2f1ce5b9dae8bf4d64c737d6296",
+      "task": "intent_parse",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "condition-grade",
+        "text"
+      ]
+    },
+    {
+      "id": "intent-010",
+      "hash": "15a1b50d4a7b4a7d7021035cf548becdc615c89f87798d8d675012ac80f016eb",
+      "task": "intent_parse",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "negation-preference",
+        "text"
+      ]
+    },
+    {
+      "id": "intent-011",
+      "hash": "052d17e5541686cb6aebe36ebe28a021ed41da81df249d937801a69c6ee2f07c",
+      "task": "intent_parse",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "multiple-exclusions",
+        "text"
+      ]
+    },
+    {
+      "id": "intent-012",
+      "hash": "e4123a8fd74e308a73bee820ea91a895ab7f95647e755803ba2cca94b2c1fb43",
+      "task": "intent_parse",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "bilingual-alias",
+        "text"
+      ]
+    },
+    {
+      "id": "intent-013",
+      "hash": "de3d90e6365b03e57f5d8af0e16c0e8e6c30a250bfe6f3e6e214496aab524804",
+      "task": "intent_parse",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "specific-category",
+        "text"
+      ]
+    },
+    {
+      "id": "intent-014",
+      "hash": "ad2d3bea322c6d71d1848ee5fdf5539222d173d929e2e62a81edbbf44efc331d",
+      "task": "intent_parse",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "budget-correction",
+        "text"
+      ]
+    },
+    {
+      "id": "intent-015",
+      "hash": "2561d0c85deeb0683097725eb3a0a1e2fe4367308b85733ebb7947918235d106",
+      "task": "intent_parse",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "requirement-correction",
+        "text"
+      ]
+    },
+    {
+      "id": "intent-016",
+      "hash": "7b8f656d4db916c42faceb33754eed44d0452c6edf80c61f2021eda45fdbfc25",
+      "task": "intent_parse",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "missing-campus",
+        "text"
+      ]
+    },
+    {
+      "id": "intent-017",
+      "hash": "e32011442c479ff0c23e802f324385c0a446a7a1a2cd383508afcceac22c3596",
+      "task": "intent_parse",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "conflicting-conditions",
+        "text"
+      ]
+    },
+    {
+      "id": "intent-018",
+      "hash": "d52943e24bf31ad8f359f03c2e38660b2868e32dd9d5eb4d868412088f9b6ca5",
+      "task": "intent_parse",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "underspecified-item",
+        "text"
+      ]
+    },
+    {
+      "id": "intent-019",
+      "hash": "3da960ac8903107dba8e3ef6f653ea06842d57e20dd7eb34e91d82fbb17bb5d3",
+      "task": "intent_parse",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "instruction-in-data",
+        "text"
+      ]
+    },
+    {
+      "id": "intent-020",
+      "hash": "96178708db2fd98db8bcb7f40b9cb7982ebf5e27d9734f3a72793591772750c3",
+      "task": "intent_parse",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "negation-scope",
+        "text"
+      ]
+    },
+    {
+      "id": "intent-021",
+      "hash": "262fb20e43edea65131552c34ca40fbcad48ff2102a080de76036ccdb4cec857",
+      "task": "intent_parse",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "negation-scope",
+        "text"
+      ]
+    },
+    {
+      "id": "intent-022",
+      "hash": "da3f130779c72632da11c2191445e63dcf6e9ef211a24db5aea844edb03d72a2",
+      "task": "intent_parse",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "recruitment-category",
+        "text"
+      ]
+    },
+    {
+      "id": "intent-023",
+      "hash": "e6840c5bb67cd650454cbe6ac4bdc71d0ec41948ab95adb5f436f9ebbab70633",
+      "task": "intent_parse",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "fashion-category",
+        "text"
+      ]
+    },
+    {
+      "id": "intent-024",
+      "hash": "7cf810a0985ac27f805ec96a6f23a3e1bf5dae5db6e262f57410630f34e8396f",
+      "task": "intent_parse",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "unseen-attributes",
+        "text"
+      ]
+    },
+    {
+      "id": "item-001",
+      "hash": "bd4b0a01b8460f1c1964ac59b37199256d9fb4259409805e253b8f3257d3f85f",
+      "task": "item_parse",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "explicit-sale-fields",
+        "text"
+      ]
+    },
+    {
+      "id": "item-002",
+      "hash": "df26b53e57ef1e4e32a2fda3460ac2569571e2f38a27d31a4fe0c60becbc3edc",
+      "task": "item_parse",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "book-sale",
+        "text"
+      ]
+    },
+    {
+      "id": "item-003",
+      "hash": "bffd8d753a678051485aa09e68999d9bf0b83162335e7a612ac06358e783f056",
+      "task": "item_parse",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "missing-sale-price",
+        "text"
+      ]
+    },
+    {
+      "id": "item-004",
+      "hash": "2f78373d73dd146185615c88889a1c3d56af3c57cda7748b4bd1b20044cd7c8c",
+      "task": "item_parse",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "decimal-sale-price",
+        "text"
+      ]
+    },
+    {
+      "id": "item-005",
+      "hash": "105f737443a8d579c5b30b6d2f139b1313180248d4970f0b6881c682c8526b1e",
+      "task": "item_parse",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "chinese-number",
+        "text"
+      ]
+    },
+    {
+      "id": "item-006",
+      "hash": "71e9f804df3445e432b011334fc8c755b9c15fcd919048e0e0c954508373a100",
+      "task": "item_parse",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "sale-price-correction",
+        "text"
+      ]
+    },
+    {
+      "id": "item-007",
+      "hash": "bb89341e53f505e68b44b1cffcf9f9faa9cb56a12f23d1e06f61bc06ec98220d",
+      "task": "item_parse",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "missing-sale-fields",
+        "text"
+      ]
+    },
+    {
+      "id": "item-008",
+      "hash": "f6254a2279f3e3d0469b1cee6916b4c2439f3f83ab992c60aa71dda3aeb0a774",
+      "task": "item_parse",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "conflicting-sale-prices",
+        "text"
+      ]
+    },
+    {
+      "id": "wanted-001",
+      "hash": "c46218320e0e6621564a880083897b951b22d6a53b820f5bbf03435b0155ebde",
+      "task": "wanted_parse",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "explicit-budget",
+        "text"
+      ]
+    },
+    {
+      "id": "wanted-002",
+      "hash": "3068baebddcc44c40bec6458ce073b9d75e6d6fb3270d0abeedabda4a396b55a",
+      "task": "wanted_parse",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "specific-category",
+        "text"
+      ]
+    },
+    {
+      "id": "wanted-003",
+      "hash": "bc4d830ee20389b1ac2b735ed07cd88237500c87a8926d74f75c8eba2b74faeb",
+      "task": "wanted_parse",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "chinese-number",
+        "text"
+      ]
+    },
+    {
+      "id": "wanted-004",
+      "hash": "137847d29e169ec6073f016e09250edca84b468a744bde1f11d875011667ba98",
+      "task": "wanted_parse",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "around-budget",
+        "text"
+      ]
+    },
+    {
+      "id": "wanted-005",
+      "hash": "22a9587bf3f0b250a52aec371018101476452bc7eee49bb20953dab33f1902f4",
+      "task": "wanted_parse",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "budget-correction",
+        "text"
+      ]
+    },
+    {
+      "id": "wanted-006",
+      "hash": "8ed475a7b8c7ea1b436d8eccd6580abef9d3da8665e678c6da2ec8b2a9a14c04",
+      "task": "wanted_parse",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "underspecified-item",
+        "text"
+      ]
+    },
+    {
+      "id": "wanted-007",
+      "hash": "32f54ad406b4305dabb9a1f0e0e9f6705a7d574d41d3171df626d9db45db861b",
+      "task": "wanted_parse",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "conflicting-conditions",
+        "text"
+      ]
+    },
+    {
+      "id": "wanted-008",
+      "hash": "0ce850469bd6195d5aff4185d1ffce81c37a6b0729a970d2be2c6fd5dcd886a0",
+      "task": "wanted_parse",
+      "split": "dev",
+      "label_status": "draft",
+      "tags": [
+        "requirement-correction",
+        "text"
+      ]
+    }
+  ],
+  "catalog_hash": null,
+  "catalog": null,
+  "relations_hash": null,
+  "relations": [],
+  "skipped_relation_count": 0,
+  "repeats": 1,
+  "seed": 20261115,
+  "concurrency": 1,
+  "max_remote_requests": 200,
+  "worst_case_remote_requests": 0,
+  "complete": true,
+  "completed_records": 40,
+  "expected_records": 40
+}

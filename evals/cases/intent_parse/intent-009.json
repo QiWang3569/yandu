@@ -1,0 +1,34 @@
+{
+  "id": "intent-009",
+  "task": "intent_parse",
+  "enabled": true,
+  "split": "dev",
+  "family": "condition-grade",
+  "tags": [
+    "condition-grade",
+    "text"
+  ],
+  "source": "助手构造的合成校园二手需求；非真实用户记录。",
+  "rationale": "中文九五新归一化为95新。",
+  "label_status": "draft",
+  "input": {
+    "text": "昌平新校区收九五新耳机，预算100元。"
+  },
+  "expected": {
+    "fields": {
+      "category": "数码与影音",
+      "max_price": 100,
+      "campus": "昌平新校区",
+      "condition_grade": "95新"
+    },
+    "sets": {
+      "keywords": [
+        [
+          "耳机"
+        ]
+      ],
+      "excluded_keywords": [],
+      "preferences": []
+    }
+  }
+}

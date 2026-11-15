@@ -1,0 +1,25 @@
+{
+  "id": "wanted-005",
+  "task": "wanted_parse",
+  "enabled": true,
+  "split": "dev",
+  "family": "budget-correction",
+  "tags": [
+    "budget-correction",
+    "text"
+  ],
+  "source": "助手构造的合成校园二手描述；非真实用户记录。",
+  "rationale": "修正后的预算应同步到求购，不能取已否定金额。",
+  "label_status": "draft",
+  "input": {
+    "text": "医学部求购台灯，不是预算500元，实际预算80元。"
+  },
+  "expected": {
+    "fields": {
+      "category": "宿舍生活与家电",
+      "budget": 80,
+      "campus": "医学部"
+    },
+    "sets": {}
+  }
+}
