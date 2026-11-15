@@ -4,7 +4,7 @@ from __future__ import annotations
 import json
 import math
 from decimal import Decimal
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 from typing import Annotated, Any, Literal
 
 from pydantic import BaseModel, ConfigDict, Field, model_validator
@@ -15,7 +15,7 @@ from backend.app.schemas import (
 )
 
 
-Task = Literal['intent_parse', 'item_parse', 'wanted_parse', 'candidate_review']
+Task = Literal['intent_parse', 'item_parse', 'wanted_parse', 'candidate_review', 'vision_draft', 'smart_search']
 Verdict = Literal['MATCH', 'NO_MATCH', 'UNCERTAIN']
 Nonempty = Annotated[str, Field(min_length=1)]
 PARSING_MODELS = {'intent_parse': ParsedIntent, 'item_parse': ParsedItem, 'wanted_parse': ParsedWanted}
@@ -154,6 +154,50 @@ class ReviewExpected(Strict):
     verdicts: dict[Nonempty, Verdict] = Field(min_length=1)
 
 
+class ImageAsset(Strict):
+    path: Nonempty
+    sha256: str = Field(pattern=r'^[0-9a-f]{64}$')
+
+    @model_validator(mode='after')
+    def relative_path(self):
+        path = PurePosixPath(self.path)
+        if path.is_absolute() or '..' in path.parts or '\\' in self.path or ':' in self.path:
+            raise ValueError('image path must be relative to --assets-root without traversal')
+        return self
+
+
+class VisionInput(Strict):
+    images: list[ImageAsset] = Field(min_length=1, max_length=3)
+    note: str = Field(default='', max_length=500)
+
+    @model_validator(mode='after')
+    def unique_images(self):
+        if len({image.sha256 for image in self.images}) != len(self.images):
+            raise ValueError('duplicate image content in one input')
+        return self
+
+
+class VisionExpected(Strict):
+    fields: dict[str, Any]
+    required_mentions: list[list[Nonempty]] = Field(default_factory=list)
+    forbidden_mentions: list[Nonempty] = Field(default_factory=list)
+    uncertainty_required: bool | None = None
+
+    @model_validator(mode='after')
+    def targets(self):
+        if set(self.fields) != {'status', 'category'}:
+            raise ValueError('vision fields require exactly status and category')
+        if self.fields.get('status') not in {'ready', 'unclear', 'multiple_items'}:
+            raise ValueError('vision expected status is required')
+        if 'category' in self.fields and self.fields['category'] not in {*CATEGORIES, None}:
+            raise ValueError('invalid vision category')
+        if self.fields['status'] != 'ready' and (self.fields.get('category') is not None or self.required_mentions):
+            raise ValueError('non-ready vision output must not assert item attributes')
+        if any(not group or any(len(term) > 100 for term in group) for group in self.required_mentions):
+            raise ValueError('visual fact alternatives must contain 1–100 characters')
+        return self
+
+
 class Case(Strict):
     id: str = Field(min_length=1, max_length=120, pattern=r'^[A-Za-z0-9][A-Za-z0-9_.-]*$')
     task: Task
@@ -173,7 +217,13 @@ class Case(Strict):
         ensure_finite(self.expected)
         if len(self.tags) != len(set(self.tags)):
             raise ValueError('case tags must be unique')
-        if self.task == 'candidate_review':
+        if self.task == 'smart_search':
+            from .search_eval import validate_search_case
+            validate_search_case(self.model_dump(mode='json'))
+        elif self.task == 'vision_draft':
+            VisionInput.model_validate(self.input)
+            VisionExpected.model_validate(self.expected)
+        elif self.task == 'candidate_review':
             given = ReviewInput.model_validate(self.input)
             target = ReviewExpected.model_validate(self.expected)
             if set(target.verdicts) != {item.id for item in given.items}:
@@ -227,6 +277,7 @@ def validate_cases(path: str | Path) -> list[dict]:
     cases = []
     ids: set[str] = set()
     families: dict[str, str] = {}
+    image_splits: dict[str, str] = {}
     for filename in files:
         try:
             raw = json.loads(filename.read_text(encoding='utf-8-sig'), object_pairs_hook=_unique_object,
@@ -238,6 +289,12 @@ def validate_cases(path: str | Path) -> list[dict]:
                 raise ValueError(f'family leakage across dev/holdout: {case["family"]}')
             ids.add(case['id'])
             families[case['family']] = case['split']
+            if case['task'] == 'vision_draft':
+                for image in case['input']['images']:
+                    sha = image['sha256']
+                    if sha in image_splits and image_splits[sha] != case['split']:
+                        raise ValueError('image content leakage across dev/holdout')
+                    image_splits[sha] = case['split']
             cases.append(case)
         except (OSError, ValueError, TypeError) as error:
             raise ValueError(f'{filename}: {error}') from error

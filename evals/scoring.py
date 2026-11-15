@@ -83,10 +83,18 @@ def score_case(case: dict, output: Any, error=None) -> dict:
     term. Matching uses only declared alternatives, case and whitespace.
     Evidence grounding checks verbatim provenance, not semantic entailment.
     """
+    if case['task'] == 'smart_search':
+        from .search_eval import score_search
+        return score_search(case, _plain(output), error, score_case)
     checks = []
     metrics = {'schema_valid': False, 'check_count': 0, 'passed_checks': 0}
+    if case['task'] in {'intent_parse', 'item_parse', 'wanted_parse'}:
+        from .diagnostics import parse_diagnostics
+        metrics.update(parse_diagnostics(case, _plain(output), error))
     if case['task'] == 'candidate_review':
         metrics.update(_review_metrics(case, None if error is not None else output))
+    elif case['task'] == 'vision_draft':
+        metrics['requires_human_review'] = True
 
     def add(field, passed, expected, actual):
         checks.append({'field': field, 'passed': bool(passed), 'expected': expected, 'actual': actual})
@@ -102,7 +110,28 @@ def score_case(case: dict, output: Any, error=None) -> dict:
         add('execution', False, 'successful model response', str(error))
         return finish(force_zero=True)
     try:
-        if case['task'] != 'candidate_review':
+        if case['task'] == 'vision_draft':
+            from backend.app.vision import VisionDraft
+            output = _plain(output)
+            VisionDraft.model_validate(output, strict=True)
+            metrics['schema_valid'] = True
+            target = case['expected']
+            for field, expected in target['fields'].items():
+                add(field, field in output and output[field] == expected, expected, output.get(field))
+            # Check the original response, before the business guard clears non-ready fields.
+            if output['status'] != 'ready':
+                add('empty_nonready', all(output.get(f) is None for f in ('title', 'description', 'category'))
+                    and output.get('tags') == [], 'null item fields and empty tags', output)
+            text = normalize_term(' '.join([output.get('title') or '', output.get('description') or '',
+                                           *output['tags']]))
+            for i, alternatives in enumerate(target.get('required_mentions', [])):
+                add(f'visual_fact[{i}]', any(normalize_term(term) in text for term in alternatives), alternatives, text)
+            for i, term in enumerate(target.get('forbidden_mentions', [])):
+                add(f'forbidden_fact[{i}]', normalize_term(term) not in text, 'absent: ' + term, text)
+            if target.get('uncertainty_required') is not None:
+                add('uncertainty', bool(output['uncertainties']) == target['uncertainty_required'],
+                    target['uncertainty_required'], bool(output['uncertainties']))
+        elif case['task'] != 'candidate_review':
             output = _plain(output)
             validate_business_payload(case['task'], output, output=True)
             metrics['schema_valid'] = True

@@ -1,0 +1,55 @@
+{
+  "id": "search-core-05-rewrite",
+  "task": "smart_search",
+  "enabled": true,
+  "split": "dev",
+  "family": "search-core-05",
+  "tags": [
+    "campus-search",
+    "slice:core",
+    "metamorphic"
+  ],
+  "source": "synthetic-campus-v1; authored before model evaluation",
+  "rationale": "按查询语义与固定商品描述独立预标注；型号和配件不泛化，软偏好不作硬过滤。待团队交叉复核。",
+  "label_status": "draft",
+  "input": {
+    "text": "麻烦帮我找燕园200以内九成新网球拍，谢谢"
+  },
+  "expected": {
+    "parse": {
+      "fields": {
+        "category": "校园出行与运动",
+        "max_price": 200,
+        "campus": "燕园校本部",
+        "condition_grade": "9成新"
+      },
+      "sets": {
+        "keywords": [
+          [
+            "网球拍"
+          ]
+        ],
+        "excluded_keywords": [],
+        "preferences": []
+      },
+      "clarification": false
+    },
+    "oracle_intent": {
+      "category": "校园出行与运动",
+      "max_price": 200,
+      "campus": "燕园校本部",
+      "condition_grade": "9成新",
+      "keywords": [
+        "网球拍"
+      ],
+      "excluded_keywords": [],
+      "preferences": [],
+      "clarification": null
+    },
+    "relevant_item_ids": [
+      "s04"
+    ],
+    "retrieval_applicable": true,
+    "around_price": false
+  }
+}

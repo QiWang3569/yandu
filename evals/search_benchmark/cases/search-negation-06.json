@@ -1,0 +1,61 @@
+{
+  "id": "search-negation-06",
+  "task": "smart_search",
+  "enabled": true,
+  "split": "dev",
+  "family": "search-negation-06",
+  "tags": [
+    "campus-search",
+    "slice:negation"
+  ],
+  "source": "synthetic-campus-v1; authored before model evaluation",
+  "rationale": "按查询语义与固定商品描述独立预标注；型号和配件不泛化，软偏好不作硬过滤。待团队交叉复核。",
+  "label_status": "draft",
+  "input": {
+    "text": "500以内自行车，不要山地"
+  },
+  "expected": {
+    "parse": {
+      "fields": {
+        "category": "校园出行与运动",
+        "max_price": 500,
+        "campus": "不限校区",
+        "condition_grade": null
+      },
+      "sets": {
+        "keywords": [
+          [
+            "自行车"
+          ]
+        ],
+        "excluded_keywords": [
+          [
+            "山地"
+          ]
+        ],
+        "preferences": []
+      },
+      "clarification": false
+    },
+    "oracle_intent": {
+      "category": "校园出行与运动",
+      "max_price": 500,
+      "campus": "不限校区",
+      "condition_grade": null,
+      "keywords": [
+        "自行车"
+      ],
+      "excluded_keywords": [
+        "山地"
+      ],
+      "preferences": [],
+      "clarification": null
+    },
+    "relevant_item_ids": [
+      "s01",
+      "s02"
+    ],
+    "retrieval_applicable": true,
+    "around_price": false
+  }
+}

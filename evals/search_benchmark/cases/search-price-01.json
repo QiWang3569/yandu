@@ -1,0 +1,58 @@
+{
+  "id": "search-price-01",
+  "task": "smart_search",
+  "enabled": true,
+  "split": "dev",
+  "family": "search-price-01",
+  "tags": [
+    "campus-search",
+    "slice:price"
+  ],
+  "source": "synthetic-campus-v1; authored before model evaluation",
+  "rationale": "按查询语义与固定商品描述独立预标注；型号和配件不泛化，软偏好不作硬过滤。待团队交叉复核。",
+  "label_status": "draft",
+  "input": {
+    "text": "两百多买鼠标"
+  },
+  "expected": {
+    "parse": {
+      "fields": {
+        "category": "数码与影音",
+        "max_price": 200,
+        "campus": "不限校区",
+        "condition_grade": null
+      },
+      "sets": {
+        "keywords": [
+          [
+            "鼠标"
+          ]
+        ],
+        "excluded_keywords": [],
+        "preferences": []
+      },
+      "clarification": false
+    },
+    "oracle_intent": {
+      "category": "数码与影音",
+      "max_price": 200,
+      "campus": "不限校区",
+      "condition_grade": null,
+      "keywords": [
+        "鼠标"
+      ],
+      "excluded_keywords": [],
+      "preferences": [],
+      "clarification": null
+    },
+    "relevant_item_ids": [
+      "m01",
+      "m02",
+      "m05",
+      "m07",
+      "m08"
+    ],
+    "retrieval_applicable": true,
+    "around_price": true
+  }
+}

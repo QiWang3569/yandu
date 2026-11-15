@@ -2,7 +2,11 @@
 
 这套机制将测试数据、模型配置、执行过程和评分规则分开保存，用同一批输入比较模型，并在代码或提示词变化后检查回归。现有业务测试继续验证权限、交易、重试等程序行为；新增评测记录真实模型输出和任务质量。
 
-首版支持需求解析、商品信息提取、求购解析、候选匹配精筛。48条合成开发用例位于 `evals/cases/`，逐例标注规则见 [用例库说明](../evals/DATASET.md)。识图需要单独的图片与人工标注集，未纳入本轮文本评测。
+支持需求解析、商品信息提取、求购解析、候选匹配精筛，以及图片生成商品草稿 `vision_draft`。48条合成开发用例位于 `evals/cases/`，逐例标注规则见 [用例库说明](../evals/DATASET.md)。公开商品文案与图片的导入方式见 [公开数据接入指南](PUBLIC_DATASET_INTEGRATION.md)，小样本真实调用结果见 [首轮报告](PUBLIC_DATASET_PILOT_REPORT.md)。
+
+新增 `smart_search` 固定商品库评测：52 件商品、七类场景各 10 条基础查询、10 条改写／收紧约束查询、12 组成对关系。覆盖 MRR、MAP@5、Recall@10、零结果误杀率、解析字段统计、切片与重复一致率，见[搜索评测说明](SEARCH_EVALUATION.md)、[首轮离线结果](SEARCH_EVALUATION_REPORT.md)和[六模型三轮选型实验](MODEL_SELECTION_REPORT.md)。
+
+公开数据的适用任务、下载核查和补标建议见 [公开数据集调研报告](PUBLIC_DATASET_REVIEW.md)。
 
 ## 文件与职责
 
@@ -17,7 +21,9 @@
 | `evals/selection_policy.json` | 选型门槛、规则状态与最少样本量 |
 | `evals/reporting.py` | 汇总、选型理由、失败清单、回归比较 |
 | `scripts/run_model_eval.py` | `validate`、`list`、`run`、`compare` 命令 |
-| `evals/baselines/local-rules/` | 已核查的本地规则回归基线 |
+| `evals/baselines/local-rules-v1.2/` | 评分器 1.2 的本地规则回归基线；旧版基线保留在原目录 |
+| `evals/search_benchmark/` | 固定商品库、80 条搜索用例、12 组蜕变关系 |
+| `evals/baselines/search-v1.2/` | 搜索 local / oracle 各重复三次的回归基线 |
 
 ## 本地执行
 
@@ -27,12 +33,14 @@
 python scripts/run_model_eval.py validate
 python scripts/run_model_eval.py list --tasks intent_parse
 python scripts/run_model_eval.py run --models local-rules --output test-results/model-eval
-python scripts/run_model_eval.py compare --baseline evals/baselines/local-rules --current test-results/model-eval --output test-results/model-regression --fail-on-regression
+python scripts/run_model_eval.py compare --baseline evals/baselines/local-rules-v1.2 --current test-results/model-eval --output test-results/model-regression --fail-on-regression
 ```
 
 Windows也可将 `python` 替换为 `.\.venv\Scripts\python.exe`。每次运行使用新的空目录；省略 `--output` 时自动生成 `evals/results/<UTC时间及随机ID>/`，该目录不进入Git。
 
 支持 `--tasks`、`--tags`、`--case-ids`，多个值用逗号分隔；多个标签按“任意标签命中”筛选。默认运行启用的开发集，使用 `--split holdout` 单独执行保留集。`--repeats` 设置每例重复次数；`--seed` 固定调度顺序，按用例交错运行各模型。
+
+`--concurrency` 默认为 1，允许 1–8 个独立工作进程。每个进程隔离业务函数替换和搜索数据库；每条结果完成后立即写入记录。并发数随 manifest 冻结，不同并发数的运行拒绝直接回归比较。并发实验的 P95 表示该负载下的客户端等待时间，不能直接解释为单请求延迟；进程调度和建库耗时不计入模型／搜索服务计时。
 
 ```powershell
 python scripts/run_model_eval.py run --models local-rules --case-ids intent-014,intent-021 --output test-results/negation-check

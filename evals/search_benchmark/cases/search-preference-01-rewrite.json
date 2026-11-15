@@ -1,0 +1,63 @@
+{
+  "id": "search-preference-01-rewrite",
+  "task": "smart_search",
+  "enabled": true,
+  "split": "dev",
+  "family": "search-preference-01",
+  "tags": [
+    "campus-search",
+    "slice:preference",
+    "metamorphic"
+  ],
+  "source": "synthetic-campus-v1; authored before model evaluation",
+  "rationale": "按查询语义与固定商品描述独立预标注；型号和配件不泛化，软偏好不作硬过滤。待团队交叉复核。",
+  "label_status": "draft",
+  "input": {
+    "text": "万柳500以内自行车，优先车锁"
+  },
+  "expected": {
+    "parse": {
+      "fields": {
+        "category": "校园出行与运动",
+        "max_price": 500,
+        "campus": "万柳学区",
+        "condition_grade": null
+      },
+      "sets": {
+        "keywords": [
+          [
+            "自行车"
+          ]
+        ],
+        "excluded_keywords": [],
+        "preferences": [
+          [
+            "车锁",
+            "带车锁"
+          ]
+        ]
+      },
+      "clarification": false
+    },
+    "oracle_intent": {
+      "category": "校园出行与运动",
+      "max_price": 500,
+      "campus": "万柳学区",
+      "condition_grade": null,
+      "keywords": [
+        "自行车"
+      ],
+      "excluded_keywords": [],
+      "preferences": [
+        "车锁"
+      ],
+      "clarification": null
+    },
+    "relevant_item_ids": [
+      "s01",
+      "s02"
+    ],
+    "retrieval_applicable": true,
+    "around_price": false
+  }
+}

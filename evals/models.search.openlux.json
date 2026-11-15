@@ -1,0 +1,143 @@
+{
+  "version": 1,
+  "models": [
+    {
+      "id": "local-rules",
+      "mode": "local",
+      "tasks": [
+        "intent_parse",
+        "item_parse",
+        "wanted_parse",
+        "smart_search"
+      ]
+    },
+    {
+      "id": "oracle",
+      "mode": "oracle",
+      "tasks": [
+        "smart_search"
+      ]
+    },
+    {
+      "id": "deepseek-flash",
+      "mode": "remote",
+      "tasks": [
+        "intent_parse",
+        "item_parse",
+        "wanted_parse",
+        "smart_search",
+        "candidate_review"
+      ],
+      "model": "deepseek-v4.1-flash",
+      "base_url": "https://api.openlux.ai/v1",
+      "api_key_env": "YUNWU_GEMINI_API_KEY",
+      "thinking": "disabled",
+      "temperature": 0.1,
+      "timeout": 20,
+      "retries": 0
+    },
+    {
+      "id": "deepseek-flash-thinking",
+      "mode": "remote",
+      "tasks": [
+        "intent_parse",
+        "item_parse",
+        "wanted_parse",
+        "smart_search",
+        "candidate_review"
+      ],
+      "model": "deepseek-v4.1-flash",
+      "base_url": "https://api.openlux.ai/v1",
+      "api_key_env": "YUNWU_GEMINI_API_KEY",
+      "thinking": "enabled",
+      "temperature": 0.1,
+      "timeout": 20,
+      "retries": 0
+    },
+    {
+      "id": "qwen-max",
+      "mode": "remote",
+      "tasks": [
+        "intent_parse",
+        "item_parse",
+        "wanted_parse",
+        "smart_search",
+        "candidate_review"
+      ],
+      "model": "qwen3.8-max-0902",
+      "base_url": "https://api.openlux.ai/v1",
+      "api_key_env": "YUNWU_GEMINI_API_KEY",
+      "temperature": 0.1,
+      "timeout": 20,
+      "retries": 0
+    },
+    {
+      "id": "glm",
+      "mode": "remote",
+      "tasks": [
+        "intent_parse",
+        "item_parse",
+        "wanted_parse",
+        "smart_search",
+        "candidate_review"
+      ],
+      "model": "glm-5.2",
+      "base_url": "https://api.openlux.ai/v1",
+      "api_key_env": "YUNWU_GEMINI_API_KEY",
+      "temperature": 0.1,
+      "timeout": 20,
+      "retries": 0
+    },
+    {
+      "id": "doubao-pro",
+      "mode": "remote",
+      "tasks": [
+        "intent_parse",
+        "item_parse",
+        "wanted_parse",
+        "smart_search",
+        "candidate_review"
+      ],
+      "model": "doubao-seed-2-1-pro-260915",
+      "base_url": "https://api.openlux.ai/v1",
+      "api_key_env": "YUNWU_GEMINI_API_KEY",
+      "temperature": 0.1,
+      "timeout": 20,
+      "retries": 0
+    },
+    {
+      "id": "kimi-pro",
+      "mode": "remote",
+      "tasks": [
+        "intent_parse",
+        "item_parse",
+        "wanted_parse",
+        "smart_search",
+        "candidate_review"
+      ],
+      "model": "kimi-k3.1-pro",
+      "base_url": "https://api.openlux.ai/v1",
+      "api_key_env": "YUNWU_GEMINI_API_KEY",
+      "temperature": 0.1,
+      "timeout": 20,
+      "retries": 0
+    },
+    {
+      "id": "minimax-flash",
+      "mode": "remote",
+      "tasks": [
+        "intent_parse",
+        "item_parse",
+        "wanted_parse",
+        "smart_search",
+        "candidate_review"
+      ],
+      "model": "MiniMax-M3.1-Flash",
+      "base_url": "https://api.openlux.ai/v1",
+      "api_key_env": "YUNWU_GEMINI_API_KEY",
+      "temperature": 0.1,
+      "timeout": 20,
+      "retries": 0
+    }
+  ]
+}

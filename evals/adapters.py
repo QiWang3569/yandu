@@ -28,7 +28,10 @@ def _invoke(case, settings):
     return entry(data['text'], settings).model_dump(mode='json')
 
 
-def evaluate(case, profile, key, *, client=None, sleep=time.sleep):
+def evaluate(case, profile, key, *, client=None, sleep=time.sleep, vision_images=None, search_context=None):
+    if case['task'] == 'smart_search':
+        from .search_eval import evaluate_search
+        return evaluate_search(case, profile, key, search_context, client=client, sleep=sleep)
     started = time.perf_counter()
     settings = SimpleNamespace(ai_mode=profile['mode'])
     result = {'status': 'ok', 'error': None, 'output': None, 'raw_output': None,
@@ -65,7 +68,23 @@ def evaluate(case, profile, key, *, client=None, sleep=time.sleep):
             raise buyer_agent.ModelUnavailable('schema_error') from None
 
     try:
-        if remote:
+        if case['task'] == 'vision_draft':
+            from backend.app.vision import SYSTEM_PROMPT, VisionDraft, vision_content
+            if remote is None or not vision_images:
+                raise ValueError('vision requires a remote model and verified images')
+            result['prompt_hash'] = digest({'system': SYSTEM_PROMPT,
+                'max_tokens': profile.get('max_tokens') or 1200, 'response_format': 'json_object'})
+            try:
+                raw = remote(SYSTEM_PROMPT, vision_content(vision_images, case['input'].get('note', '')),
+                             max_tokens=1200, multimodal=True)
+                result['raw_output'] = copy.deepcopy(raw)
+                result['raw_score_output'] = copy.deepcopy(raw)
+                result['output'] = VisionDraft.model_validate(raw, strict=True).model_dump(mode='json')
+            except CallFailure as exc:
+                result['error'] = exc.code
+            except (ValueError, TypeError):
+                result['error'] = 'schema_error'
+        elif remote:
             with patch.object(services, 'chat_json', observed_chat), patch.object(buyer_agent, 'chat_json', observed_chat):
                 result['output'] = _invoke(case, settings)
         else:

@@ -18,6 +18,17 @@
       "retries": 1
     },
     {
+      "id": "vision-a",
+      "mode": "remote",
+      "model_env": "EVAL_VISION_MODEL",
+      "base_url_env": "EVAL_VISION_BASE_URL",
+      "api_key_env": "EVAL_VISION_API_KEY",
+      "tasks": ["vision_draft"],
+      "temperature": 0.1,
+      "timeout": 60,
+      "retries": 1
+    },
+    {
       "id": "text-b",
       "mode": "remote",
       "model_env": "EVAL_MODEL_B",

@@ -14,7 +14,7 @@ from pydantic import BaseModel, ConfigDict, Field, SecretStr, model_validator
 
 from .common import read_json
 
-TASKS = {'intent_parse', 'item_parse', 'wanted_parse', 'candidate_review'}
+TASKS = {'intent_parse', 'item_parse', 'wanted_parse', 'candidate_review', 'vision_draft', 'smart_search'}
 
 
 class Pricing(BaseModel):
@@ -29,7 +29,7 @@ class Pricing(BaseModel):
 class Profile(BaseModel):
     model_config = ConfigDict(extra='forbid', strict=True, allow_inf_nan=False)
     id: str = Field(pattern=r'^[A-Za-z0-9][A-Za-z0-9_.-]*$')
-    mode: Literal['local', 'remote']
+    mode: Literal['local', 'remote', 'oracle']
     tasks: list[str] = Field(min_length=1)
     model: str | None = None
     model_env: str | None = None
@@ -47,11 +47,13 @@ class Profile(BaseModel):
     def validate_profile(self):
         if len(set(self.tasks)) != len(self.tasks) or not set(self.tasks) <= TASKS:
             raise ValueError('Tasks must be unique supported task names')
-        if self.mode == 'local':
-            if 'candidate_review' in self.tasks:
-                raise ValueError('The local rules do not implement candidate review')
+        if self.mode in {'local', 'oracle'}:
+            if {'candidate_review', 'vision_draft'} & set(self.tasks):
+                raise ValueError('The local rules do not implement candidate review or vision')
             if any((self.model, self.model_env, self.base_url, self.base_url_env, self.api_key_env, self.pricing)):
                 raise ValueError('Local rules cannot have provider settings')
+            if self.mode == 'oracle' and self.tasks != ['smart_search']:
+                raise ValueError('Oracle only supports smart_search')
         else:
             if bool(self.model) == bool(self.model_env) or bool(self.base_url) == bool(self.base_url_env):
                 raise ValueError('Choose exactly one model/model_env and base_url/base_url_env')
@@ -74,8 +76,8 @@ def load_profiles(path):
 
 def resolve_profile(profile):
     public = profile.model_dump(exclude={'model_env', 'base_url_env', 'api_key_env'})
-    if profile.mode == 'local':
-        public['model'] = 'local-keyword-rules'
+    if profile.mode in {'local', 'oracle'}:
+        public['model'] = 'gold-intent-injection' if profile.mode == 'oracle' else 'local-keyword-rules'
         return public, SecretStr('')
     model = profile.model or os.getenv(profile.model_env or '')
     base_url = profile.base_url or os.getenv(profile.base_url_env or '')
@@ -153,13 +155,13 @@ class RemoteClient:
         self.raw_content = None
         self.error = None
 
-    def __call__(self, system, payload, settings=None, max_tokens=2500):
+    def __call__(self, system, payload, settings=None, max_tokens=2500, *, multimodal=False):
         request = {
             'model': self.profile['model'], 'temperature': self.profile['temperature'],
             'max_tokens': self.profile.get('max_tokens') or max_tokens,
             'response_format': {'type': 'json_object'},
             'messages': [{'role': 'system', 'content': system},
-                         {'role': 'user', 'content': json.dumps(payload, ensure_ascii=False)}],
+                         {'role': 'user', 'content': payload if multimodal else json.dumps(payload, ensure_ascii=False)}],
         }
         if self.profile.get('thinking'):
             request['thinking'] = {'type': self.profile['thinking']}
@@ -188,12 +190,16 @@ class RemoteClient:
                         attempt['returned_model'] = body.get('model') if isinstance(body.get('model'), str) else None
                         attempt['cost_cny'] = usage_cost(attempt['usage'], self.profile.get('pricing'))
                         choice = body['choices'][0]
+                        reasoning = choice['message'].get('reasoning_content')
+                        attempt['reasoning_char_count'] = len(reasoning) if isinstance(reasoning, str) else None
                         content = choice['message']['content']
                         if not isinstance(content, str):
                             raise ValueError()
                         self.raw_content = content
                         if choice.get('finish_reason') == 'length':
                             raise CallFailure('truncated_output')
+                        if multimodal and choice.get('finish_reason') != 'stop':
+                            raise CallFailure('incomplete_output')
                         parsed = json.loads(content, parse_constant=lambda _: (_ for _ in ()).throw(ValueError()))
                         # 1e999 is legal JSON syntax but overflows Python's float;
                         # reject it before an unserializable value reaches records.

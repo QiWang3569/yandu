@@ -35,7 +35,7 @@ def git_info():
 def implementation_hash():
     import hashlib
     paths = sorted((ROOT / 'evals').glob('*.py')) + [ROOT / 'scripts/run_model_eval.py']
-    paths += [ROOT / 'backend/app' / name for name in ('services.py', 'buyer_agent.py', 'schemas.py')]
+    paths += [ROOT / 'backend/app' / name for name in ('services.py', 'buyer_agent.py', 'schemas.py', 'vision.py', 'search.py', 'models.py')]
     return digest({str(p.relative_to(ROOT)): hashlib.sha256(p.read_bytes()).hexdigest() for p in paths})
 
 
@@ -72,14 +72,66 @@ def redact(value, keys):
     return value
 
 
+def evaluate_job(case, profile, key, catalog, images):
+    """Processes isolate the serving adapter's module patches and SQLite sessions."""
+    from evals.adapters import evaluate
+    from evals.search_eval import SearchContext
+    context = SearchContext(catalog) if case['task'] == 'smart_search' else None
+    try:
+        return evaluate(case, profile, key, vision_images=images, search_context=context)
+    finally:
+        if context is not None:
+            context.close()
+
+
+def evaluate_schedule(schedule, concurrency, catalog, images, context):
+    from evals.adapters import evaluate
+    if concurrency == 1:
+        for repeat, case, profile, key in schedule:
+            options = {'vision_images': images.get(case['id'])}
+            if context is not None:
+                options['search_context'] = context
+            yield repeat, case, profile, evaluate(case, profile, key, **options)
+        return
+    from concurrent.futures import ProcessPoolExecutor, wait, FIRST_COMPLETED
+    remaining = iter(schedule)
+    pending = {}
+    pool = ProcessPoolExecutor(max_workers=concurrency)
+    def submit_next():
+        job = next(remaining, None)
+        if job is not None:
+            repeat, case, profile, key = job
+            future = pool.submit(evaluate_job, case, profile, key, catalog, images.get(case['id']))
+            pending[future] = repeat, case, profile
+    try:
+        for _ in range(concurrency):
+            submit_next()
+        while pending:
+            completed, _ = wait(pending, return_when=FIRST_COMPLETED)
+            for future in completed:
+                repeat, case, profile = pending.pop(future)
+                yield repeat, case, profile, future.result()
+                submit_next()
+    finally:
+        # At most concurrency jobs exist; interruption never submits the rest of the run.
+        for future in pending:
+            future.cancel()
+        pool.shutdown(wait=True, cancel_futures=True)
+
+
 def run(args):
     from evals.adapters import evaluate
     from evals.reporting import validate_policy, write_reports
     from evals.scoring import score_case
 
+    if not 1 <= args.concurrency <= 8:
+        raise ValueError('concurrency must be 1–8')
     if not 1 <= args.repeats <= 20 or args.max_requests < 0:
         raise ValueError('repeats must be 1–20 and max-requests must be nonnegative')
-    cases = select_cases(validate_cases(args.cases), args)
+    all_cases = validate_cases(args.cases)
+    from evals.search_eval import load_search_assets, SearchContext
+    catalog, all_relations = load_search_assets(all_cases, args.catalog, args.relations)
+    cases = select_cases(all_cases, args)
     profiles = load_profiles(args.model_config)
     requested = csv_values(args.models)
     if not requested or len(set(requested)) != len(requested):
@@ -94,6 +146,12 @@ def run(args):
         if not any(c['task'] in profile.tasks for c in cases):
             raise ValueError(f'{profile.id}: no selected task is supported')
     cases = [c for c in cases if any(c['task'] in p.tasks for p in chosen)]
+    selected_ids = {c['id'] for c in cases}
+    relations = [r for r in all_relations if {r['base'], r['mutated']} <= selected_ids]
+    if not any(c['task'] == 'smart_search' for c in cases):
+        catalog = None
+    from evals.assets import prepare_assets
+    vision_images = prepare_assets(cases, args.assets_root)
     # Reject the entire run before spending tokens if its worst-case request count exceeds the cap.
     upper_bound = sum(sum(c['task'] in p.tasks for c in cases) * args.repeats * (p.retries + 1)
                       for p in chosen if p.mode == 'remote')
@@ -118,14 +176,21 @@ def run(args):
         'scorer_version': SCORER_VERSION, 'policy_hash': digest(policy),
         'models': [p for p, _ in resolved],
         'cases': [{'id': c['id'], 'hash': case_hashes[c['id']], 'task': c['task'], 'split': c['split'],
-                   'label_status': c['label_status']} for c in cases],
-        'repeats': args.repeats, 'seed': args.seed, 'concurrency': 1,
+                   'label_status': c['label_status'], 'tags': c['tags'],
+                   **({'parse_expected': c['expected']['parse']} if c['task'] == 'smart_search' else {})} for c in cases],
+        'catalog_hash': digest(catalog) if catalog else None, 'catalog': catalog,
+        'relations_hash': digest(relations) if relations else None, 'relations': relations,
+        'skipped_relation_count': len(all_relations) - len(relations),
+        'repeats': args.repeats, 'seed': args.seed, 'concurrency': args.concurrency,
         'max_remote_requests': args.max_requests, 'worst_case_remote_requests': upper_bound,
         'complete': False,
     }
     write_json(destination / 'manifest.json', manifest)
     write_json(destination / 'cases.json', cases)
     write_json(destination / 'policy.json', policy)
+    if catalog:
+        write_json(destination / 'catalog.json', catalog)
+        write_json(destination / 'relations.json', {'version': 1, 'relations': relations})
     records = []
     keys = [key.get_secret_value() for _, key in resolved]
     rng = random.Random(args.seed)
@@ -138,18 +203,19 @@ def run(args):
             rng.shuffle(eligible)
             schedule.extend((repeat, case, p, key) for p, key in eligible)
     interrupted = False
+    search_context = SearchContext(catalog) if catalog and args.concurrency == 1 else None
     try:
         with (destination / 'records.jsonl').open('w', encoding='utf-8') as stream:
-            for number, (repeat, case, profile, key) in enumerate(schedule, 1):
-                value = evaluate(case, profile, key)
+            results = evaluate_schedule(schedule, args.concurrency, catalog, vision_images, search_context)
+            for number, (repeat, case, profile, value) in enumerate(results, 1):
                 raw_score_output = value.pop('raw_score_output')
                 value['application_score'] = score_case(case, value['output'])
                 value['score'] = score_case(case, value['output'], error=value['error'])
-                value['raw_score'] = None if profile['mode'] == 'local' else score_case(
+                value['raw_score'] = None if profile['mode'] != 'remote' else score_case(
                     case, raw_score_output if raw_score_output is not None else value['raw_output'], error=value['error'])
                 record = dict(value, case_id=case['id'], case_hash=case_hashes[case['id']],
                               task=case['task'], split=case['split'], label_status=case['label_status'],
-                              model=profile['id'], repeat=repeat)
+                              model=profile['id'], repeat=repeat, tags=case['tags'])
                 record = redact(record, keys)
                 stream.write(canonical_json(record) + '\n')
                 stream.flush()
@@ -161,6 +227,8 @@ def run(args):
         interrupted = True
         manifest['interrupted'] = True
     finally:
+        if search_context is not None:
+            search_context.close()
         manifest['completed_records'] = len(records)
         manifest['expected_records'] = len(schedule)
         write_reports(destination, records, manifest, policy)
@@ -179,6 +247,9 @@ def parser():
         cmd = commands.add_parser(name)
         cmd.add_argument('--cases', default=str(ROOT / 'evals/cases'))
         cmd.add_argument('--model-config', default=str(ROOT / 'evals/models.json'))
+        cmd.add_argument('--assets-root', default=str(ROOT), help='Root of local image paths recorded in cases')
+        cmd.add_argument('--catalog', default=str(ROOT / 'evals/search_benchmark/catalog.json'))
+        cmd.add_argument('--relations', help='Declarative case pairs; complete pairs in selection are evaluated')
         if name in {'list', 'run'}:
             cmd.add_argument('--tasks', default='')
             cmd.add_argument('--tags', default='')
@@ -188,6 +259,7 @@ def parser():
             cmd.add_argument('--models', default='local-rules')
             cmd.add_argument('--policy', default=str(ROOT / 'evals/selection_policy.json'))
             cmd.add_argument('--repeats', type=int, default=1)
+            cmd.add_argument('--concurrency', type=int, default=1, help='Isolated worker processes, 1–8; affects latency conditions')
             cmd.add_argument('--seed', type=int, default=20261115)
             cmd.add_argument('--max-requests', type=int, default=200)
             cmd.add_argument('--allow-remote', action='store_true')
@@ -206,6 +278,10 @@ def main(argv=None):
     try:
         if args.command == 'validate':
             cases = validate_cases(args.cases)
+            from evals.search_eval import load_search_assets
+            load_search_assets(cases, args.catalog, args.relations)
+            from evals.assets import prepare_assets
+            prepare_assets(cases, args.assets_root)
             models = load_profiles(args.model_config)
             print(f'Valid: {len(cases)} cases ({sum(c["enabled"] for c in cases)} enabled), {len(models)} model profiles')
             return 0

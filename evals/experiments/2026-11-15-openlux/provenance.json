@@ -1,0 +1,1993 @@
+{
+  "run_id": "20261115T111828Z-e16d7659",
+  "created_at": "2026-11-15T11:18:28.083868+00:00",
+  "git_sha": "1bbf607f99f7378e57e13b390dea8d02e86bbe12",
+  "dirty": true,
+  "implementation_hash": "b515109e3eea960a54068824a6adcbe4592cd77b07c0229af099b179aa4459de",
+  "dataset_hash": "4bfb6b2f9bb9d103332b6491db7ca6506e3e45d4a59cf5159a20bb4c2befe37a",
+  "scorer_version": "1.2.0",
+  "policy_hash": "7667e9b4f863233bb0803d316a300bc24afde37105c7eef867ff307ea0dc2f12",
+  "models": [
+    {
+      "id": "local-rules",
+      "mode": "local",
+      "tasks": [
+        "intent_parse",
+        "item_parse",
+        "wanted_parse",
+        "smart_search"
+      ],
+      "model": "local-keyword-rules",
+      "base_url": null,
+      "thinking": null,
+      "temperature": 0.1,
+      "max_tokens": null,
+      "timeout": 30,
+      "retries": 0,
+      "pricing": null
+    },
+    {
+      "id": "oracle",
+      "mode": "oracle",
+      "tasks": [
+        "smart_search"
+      ],
+      "model": "gold-intent-injection",
+      "base_url": null,
+      "thinking": null,
+      "temperature": 0.1,
+      "max_tokens": null,
+      "timeout": 30,
+      "retries": 0,
+      "pricing": null
+    },
+    {
+      "id": "deepseek-flash",
+      "mode": "remote",
+      "tasks": [
+        "intent_parse",
+        "item_parse",
+        "wanted_parse",
+        "smart_search",
+        "candidate_review"
+      ],
+      "model": "deepseek-v4.1-flash",
+      "base_url": "https://api.openlux.ai/v1",
+      "thinking": "disabled",
+      "temperature": 0.1,
+      "max_tokens": null,
+      "timeout": 20.0,
+      "retries": 0,
+      "pricing": null
+    },
+    {
+      "id": "deepseek-flash-thinking",
+      "mode": "remote",
+      "tasks": [
+        "intent_parse",
+        "item_parse",
+        "wanted_parse",
+        "smart_search",
+        "candidate_review"
+      ],
+      "model": "deepseek-v4.1-flash",
+      "base_url": "https://api.openlux.ai/v1",
+      "thinking": "enabled",
+      "temperature": 0.1,
+      "max_tokens": null,
+      "timeout": 20.0,
+      "retries": 0,
+      "pricing": null
+    },
+    {
+      "id": "qwen-max",
+      "mode": "remote",
+      "tasks": [
+        "intent_parse",
+        "item_parse",
+        "wanted_parse",
+        "smart_search",
+        "candidate_review"
+      ],
+      "model": "qwen3.8-max-0902",
+      "base_url": "https://api.openlux.ai/v1",
+      "thinking": null,
+      "temperature": 0.1,
+      "max_tokens": null,
+      "timeout": 20.0,
+      "retries": 0,
+      "pricing": null
+    },
+    {
+      "id": "glm",
+      "mode": "remote",
+      "tasks": [
+        "intent_parse",
+        "item_parse",
+        "wanted_parse",
+        "smart_search",
+        "candidate_review"
+      ],
+      "model": "glm-5.2",
+      "base_url": "https://api.openlux.ai/v1",
+      "thinking": null,
+      "temperature": 0.1,
+      "max_tokens": null,
+      "timeout": 20.0,
+      "retries": 0,
+      "pricing": null
+    },
+    {
+      "id": "doubao-pro",
+      "mode": "remote",
+      "tasks": [
+        "intent_parse",
+        "item_parse",
+        "wanted_parse",
+        "smart_search",
+        "candidate_review"
+      ],
+      "model": "doubao-seed-2-1-pro-260915",
+      "base_url": "https://api.openlux.ai/v1",
+      "thinking": null,
+      "temperature": 0.1,
+      "max_tokens": null,
+      "timeout": 20.0,
+      "retries": 0,
+      "pricing": null
+    },
+    {
+      "id": "kimi-pro",
+      "mode": "remote",
+      "tasks": [
+        "intent_parse",
+        "item_parse",
+        "wanted_parse",
+        "smart_search",
+        "candidate_review"
+      ],
+      "model": "kimi-k3.1-pro",
+      "base_url": "https://api.openlux.ai/v1",
+      "thinking": null,
+      "temperature": 0.1,
+      "max_tokens": null,
+      "timeout": 20.0,
+      "retries": 0,
+      "pricing": null
+    },
+    {
+      "id": "minimax-flash",
+      "mode": "remote",
+      "tasks": [
+        "intent_parse",
+        "item_parse",
+        "wanted_parse",
+        "smart_search",
+        "candidate_review"
+      ],
+      "model": "MiniMax-M3.1-Flash",
+      "base_url": "https://api.openlux.ai/v1",
+      "thinking": null,
+      "temperature": 0.1,
+      "max_tokens": null,
+      "timeout": 20.0,
+      "retries": 0,
+      "pricing": null
+    }
+  ],
+  "catalog_hash": "6a5558b6bea934326fba61e6e2ef96986ad7211f4ebaf96306a53c733c9d0fb3",
+  "relations_hash": "516fa057829bf3b60389fc7c347da8223e5b4317706fdf604acc4dd03f7c99e1",
+  "skipped_relation_count": 0,
+  "repeats": 3,
+  "seed": 20261115,
+  "concurrency": 8,
+  "max_remote_requests": 2856,
+  "worst_case_remote_requests": 2856,
+  "complete": true,
+  "completed_records": 3480,
+  "expected_records": 3480,
+  "cases": [
+    {
+      "id": "intent-001",
+      "task": "intent_parse",
+      "split": "dev",
+      "family": "explicit-budget",
+      "label_status": "draft",
+      "tags": [
+        "explicit-budget",
+        "text"
+      ],
+      "source": "助手构造的合成校园二手需求；非真实用户记录。",
+      "hash": "2e688732fd7631189f1c8b2fba2e1975d394935cabdfb9562e0ef24a3c252b6f"
+    },
+    {
+      "id": "intent-002",
+      "task": "intent_parse",
+      "split": "dev",
+      "family": "specific-category",
+      "label_status": "draft",
+      "tags": [
+        "specific-category",
+        "text"
+      ],
+      "source": "助手构造的合成校园二手需求；非真实用户记录。",
+      "hash": "62b0663c2a98f34ab65e672d99ac32d2ba47ad6fa969ef9bd811429868879fcc"
+    },
+    {
+      "id": "intent-003",
+      "task": "intent_parse",
+      "split": "dev",
+      "family": "negation-preference",
+      "label_status": "draft",
+      "tags": [
+        "negation-preference",
+        "text"
+      ],
+      "source": "助手构造的合成校园二手需求；非真实用户记录。",
+      "hash": "f140fc3a428d82d4c921baf7a6528456933ee6cf55ffed4e37517c28147f358f"
+    },
+    {
+      "id": "intent-004",
+      "task": "intent_parse",
+      "split": "dev",
+      "family": "zero-budget",
+      "label_status": "draft",
+      "tags": [
+        "zero-budget",
+        "text"
+      ],
+      "source": "助手构造的合成校园二手需求；非真实用户记录。",
+      "hash": "77d3df90b2ffe25d497bbf1b02ab9c8d3ef36a93ad8c05dc245bea72a209cf39"
+    },
+    {
+      "id": "intent-005",
+      "task": "intent_parse",
+      "split": "dev",
+      "family": "decimal-budget",
+      "label_status": "draft",
+      "tags": [
+        "decimal-budget",
+        "text"
+      ],
+      "source": "助手构造的合成校园二手需求；非真实用户记录。",
+      "hash": "482652df6d6ef35f44dd83fb6afc3e8d5fdbf4637060a7ce4a87c410a39ceb36"
+    },
+    {
+      "id": "intent-006",
+      "task": "intent_parse",
+      "split": "dev",
+      "family": "chinese-number",
+      "label_status": "draft",
+      "tags": [
+        "chinese-number",
+        "text"
+      ],
+      "source": "助手构造的合成校园二手需求；非真实用户记录。",
+      "hash": "82981e9b08be8cb72a0cb576780098c7d85e0f06c96d167a33e0b61912184a2d"
+    },
+    {
+      "id": "intent-007",
+      "task": "intent_parse",
+      "split": "dev",
+      "family": "chinese-number",
+      "label_status": "draft",
+      "tags": [
+        "chinese-number",
+        "text"
+      ],
+      "source": "助手构造的合成校园二手需求；非真实用户记录。",
+      "hash": "84fd237c0d43723577d538ba4a2a05639745d00f7194c9524c2f1f64e3c03326"
+    },
+    {
+      "id": "intent-008",
+      "task": "intent_parse",
+      "split": "dev",
+      "family": "condition-grade",
+      "label_status": "draft",
+      "tags": [
+        "condition-grade",
+        "text"
+      ],
+      "source": "助手构造的合成校园二手需求；非真实用户记录。",
+      "hash": "5e977a0e7cf1c9c66aa70b253a36941dedebfd845a2b5494026c6de8256fd30d"
+    },
+    {
+      "id": "intent-009",
+      "task": "intent_parse",
+      "split": "dev",
+      "family": "condition-grade",
+      "label_status": "draft",
+      "tags": [
+        "condition-grade",
+        "text"
+      ],
+      "source": "助手构造的合成校园二手需求；非真实用户记录。",
+      "hash": "5b50c7dd080e69babf6782937c89fbc9dc04e2f1ce5b9dae8bf4d64c737d6296"
+    },
+    {
+      "id": "intent-010",
+      "task": "intent_parse",
+      "split": "dev",
+      "family": "negation-preference",
+      "label_status": "draft",
+      "tags": [
+        "negation-preference",
+        "text"
+      ],
+      "source": "助手构造的合成校园二手需求；非真实用户记录。",
+      "hash": "15a1b50d4a7b4a7d7021035cf548becdc615c89f87798d8d675012ac80f016eb"
+    },
+    {
+      "id": "intent-011",
+      "task": "intent_parse",
+      "split": "dev",
+      "family": "multiple-exclusions",
+      "label_status": "draft",
+      "tags": [
+        "multiple-exclusions",
+        "text"
+      ],
+      "source": "助手构造的合成校园二手需求；非真实用户记录。",
+      "hash": "052d17e5541686cb6aebe36ebe28a021ed41da81df249d937801a69c6ee2f07c"
+    },
+    {
+      "id": "intent-012",
+      "task": "intent_parse",
+      "split": "dev",
+      "family": "bilingual-alias",
+      "label_status": "draft",
+      "tags": [
+        "bilingual-alias",
+        "text"
+      ],
+      "source": "助手构造的合成校园二手需求；非真实用户记录。",
+      "hash": "e4123a8fd74e308a73bee820ea91a895ab7f95647e755803ba2cca94b2c1fb43"
+    },
+    {
+      "id": "intent-013",
+      "task": "intent_parse",
+      "split": "dev",
+      "family": "specific-category",
+      "label_status": "draft",
+      "tags": [
+        "specific-category",
+        "text"
+      ],
+      "source": "助手构造的合成校园二手需求；非真实用户记录。",
+      "hash": "de3d90e6365b03e57f5d8af0e16c0e8e6c30a250bfe6f3e6e214496aab524804"
+    },
+    {
+      "id": "intent-014",
+      "task": "intent_parse",
+      "split": "dev",
+      "family": "budget-correction",
+      "label_status": "draft",
+      "tags": [
+        "budget-correction",
+        "text"
+      ],
+      "source": "助手构造的合成校园二手需求；非真实用户记录。",
+      "hash": "ad2d3bea322c6d71d1848ee5fdf5539222d173d929e2e62a81edbbf44efc331d"
+    },
+    {
+      "id": "intent-015",
+      "task": "intent_parse",
+      "split": "dev",
+      "family": "requirement-correction",
+      "label_status": "draft",
+      "tags": [
+        "requirement-correction",
+        "text"
+      ],
+      "source": "助手构造的合成校园二手需求；非真实用户记录。",
+      "hash": "2561d0c85deeb0683097725eb3a0a1e2fe4367308b85733ebb7947918235d106"
+    },
+    {
+      "id": "intent-016",
+      "task": "intent_parse",
+      "split": "dev",
+      "family": "missing-campus",
+      "label_status": "draft",
+      "tags": [
+        "missing-campus",
+        "text"
+      ],
+      "source": "助手构造的合成校园二手需求；非真实用户记录。",
+      "hash": "7b8f656d4db916c42faceb33754eed44d0452c6edf80c61f2021eda45fdbfc25"
+    },
+    {
+      "id": "intent-017",
+      "task": "intent_parse",
+      "split": "dev",
+      "family": "conflicting-conditions",
+      "label_status": "draft",
+      "tags": [
+        "conflicting-conditions",
+        "text"
+      ],
+      "source": "助手构造的合成校园二手需求；非真实用户记录。",
+      "hash": "e32011442c479ff0c23e802f324385c0a446a7a1a2cd383508afcceac22c3596"
+    },
+    {
+      "id": "intent-018",
+      "task": "intent_parse",
+      "split": "dev",
+      "family": "underspecified-item",
+      "label_status": "draft",
+      "tags": [
+        "underspecified-item",
+        "text"
+      ],
+      "source": "助手构造的合成校园二手需求；非真实用户记录。",
+      "hash": "d52943e24bf31ad8f359f03c2e38660b2868e32dd9d5eb4d868412088f9b6ca5"
+    },
+    {
+      "id": "intent-019",
+      "task": "intent_parse",
+      "split": "dev",
+      "family": "instruction-in-data",
+      "label_status": "draft",
+      "tags": [
+        "instruction-in-data",
+        "text"
+      ],
+      "source": "助手构造的合成校园二手需求；非真实用户记录。",
+      "hash": "3da960ac8903107dba8e3ef6f653ea06842d57e20dd7eb34e91d82fbb17bb5d3"
+    },
+    {
+      "id": "intent-020",
+      "task": "intent_parse",
+      "split": "dev",
+      "family": "negation-scope",
+      "label_status": "draft",
+      "tags": [
+        "negation-scope",
+        "text"
+      ],
+      "source": "助手构造的合成校园二手需求；非真实用户记录。",
+      "hash": "96178708db2fd98db8bcb7f40b9cb7982ebf5e27d9734f3a72793591772750c3"
+    },
+    {
+      "id": "intent-021",
+      "task": "intent_parse",
+      "split": "dev",
+      "family": "negation-scope",
+      "label_status": "draft",
+      "tags": [
+        "negation-scope",
+        "text"
+      ],
+      "source": "助手构造的合成校园二手需求；非真实用户记录。",
+      "hash": "262fb20e43edea65131552c34ca40fbcad48ff2102a080de76036ccdb4cec857"
+    },
+    {
+      "id": "intent-022",
+      "task": "intent_parse",
+      "split": "dev",
+      "family": "recruitment-category",
+      "label_status": "draft",
+      "tags": [
+        "recruitment-category",
+        "text"
+      ],
+      "source": "助手构造的合成校园二手需求；非真实用户记录。",
+      "hash": "da3f130779c72632da11c2191445e63dcf6e9ef211a24db5aea844edb03d72a2"
+    },
+    {
+      "id": "intent-023",
+      "task": "intent_parse",
+      "split": "dev",
+      "family": "fashion-category",
+      "label_status": "draft",
+      "tags": [
+        "fashion-category",
+        "text"
+      ],
+      "source": "助手构造的合成校园二手需求；非真实用户记录。",
+      "hash": "e6840c5bb67cd650454cbe6ac4bdc71d0ec41948ab95adb5f436f9ebbab70633"
+    },
+    {
+      "id": "intent-024",
+      "task": "intent_parse",
+      "split": "dev",
+      "family": "unseen-attributes",
+      "label_status": "draft",
+      "tags": [
+        "unseen-attributes",
+        "text"
+      ],
+      "source": "助手构造的合成校园二手需求；非真实用户记录。",
+      "hash": "7cf810a0985ac27f805ec96a6f23a3e1bf5dae5db6e262f57410630f34e8396f"
+    },
+    {
+      "id": "item-001",
+      "task": "item_parse",
+      "split": "dev",
+      "family": "explicit-sale-fields",
+      "label_status": "draft",
+      "tags": [
+        "explicit-sale-fields",
+        "text"
+      ],
+      "source": "助手构造的合成校园二手描述；非真实用户记录。",
+      "hash": "bd4b0a01b8460f1c1964ac59b37199256d9fb4259409805e253b8f3257d3f85f"
+    },
+    {
+      "id": "item-002",
+      "task": "item_parse",
+      "split": "dev",
+      "family": "book-sale",
+      "label_status": "draft",
+      "tags": [
+        "book-sale",
+        "text"
+      ],
+      "source": "助手构造的合成校园二手描述；非真实用户记录。",
+      "hash": "df26b53e57ef1e4e32a2fda3460ac2569571e2f38a27d31a4fe0c60becbc3edc"
+    },
+    {
+      "id": "item-003",
+      "task": "item_parse",
+      "split": "dev",
+      "family": "missing-sale-price",
+      "label_status": "draft",
+      "tags": [
+        "missing-sale-price",
+        "text"
+      ],
+      "source": "助手构造的合成校园二手描述；非真实用户记录。",
+      "hash": "bffd8d753a678051485aa09e68999d9bf0b83162335e7a612ac06358e783f056"
+    },
+    {
+      "id": "item-004",
+      "task": "item_parse",
+      "split": "dev",
+      "family": "decimal-sale-price",
+      "label_status": "draft",
+      "tags": [
+        "decimal-sale-price",
+        "text"
+      ],
+      "source": "助手构造的合成校园二手描述；非真实用户记录。",
+      "hash": "2f78373d73dd146185615c88889a1c3d56af3c57cda7748b4bd1b20044cd7c8c"
+    },
+    {
+      "id": "item-005",
+      "task": "item_parse",
+      "split": "dev",
+      "family": "chinese-number",
+      "label_status": "draft",
+      "tags": [
+        "chinese-number",
+        "text"
+      ],
+      "source": "助手构造的合成校园二手描述；非真实用户记录。",
+      "hash": "105f737443a8d579c5b30b6d2f139b1313180248d4970f0b6881c682c8526b1e"
+    },
+    {
+      "id": "item-006",
+      "task": "item_parse",
+      "split": "dev",
+      "family": "sale-price-correction",
+      "label_status": "draft",
+      "tags": [
+        "sale-price-correction",
+        "text"
+      ],
+      "source": "助手构造的合成校园二手描述；非真实用户记录。",
+      "hash": "71e9f804df3445e432b011334fc8c755b9c15fcd919048e0e0c954508373a100"
+    },
+    {
+      "id": "item-007",
+      "task": "item_parse",
+      "split": "dev",
+      "family": "missing-sale-fields",
+      "label_status": "draft",
+      "tags": [
+        "missing-sale-fields",
+        "text"
+      ],
+      "source": "助手构造的合成校园二手描述；非真实用户记录。",
+      "hash": "bb89341e53f505e68b44b1cffcf9f9faa9cb56a12f23d1e06f61bc06ec98220d"
+    },
+    {
+      "id": "item-008",
+      "task": "item_parse",
+      "split": "dev",
+      "family": "conflicting-sale-prices",
+      "label_status": "draft",
+      "tags": [
+        "conflicting-sale-prices",
+        "text"
+      ],
+      "source": "助手构造的合成校园二手描述；非真实用户记录。",
+      "hash": "f6254a2279f3e3d0469b1cee6916b4c2439f3f83ab992c60aa71dda3aeb0a774"
+    },
+    {
+      "id": "review-001",
+      "task": "candidate_review",
+      "split": "dev",
+      "family": "connectivity-evidence",
+      "label_status": "draft",
+      "tags": [
+        "connectivity-evidence",
+        "candidate-verdict",
+        "evidence"
+      ],
+      "source": "助手构造的合成需求和候选商品；价格、校区、成色视为已通过程序硬过滤；非真实用户记录。",
+      "hash": "5da4bc5d46bb059fefa7206e66ecc49b2e833c9df4f7e00cef281c480f97b175"
+    },
+    {
+      "id": "review-002",
+      "task": "candidate_review",
+      "split": "dev",
+      "family": "specific-category",
+      "label_status": "draft",
+      "tags": [
+        "specific-category",
+        "candidate-verdict",
+        "evidence"
+      ],
+      "source": "助手构造的合成需求和候选商品；价格、校区、成色视为已通过程序硬过滤；非真实用户记录。",
+      "hash": "33d434cf8928742e763a953f18b01760d90d5d1e54811ca9186522dc428c40e0"
+    },
+    {
+      "id": "review-003",
+      "task": "candidate_review",
+      "split": "dev",
+      "family": "negation-scope",
+      "label_status": "draft",
+      "tags": [
+        "negation-scope",
+        "candidate-verdict",
+        "evidence"
+      ],
+      "source": "助手构造的合成需求和候选商品；价格、校区、成色视为已通过程序硬过滤；非真实用户记录。",
+      "hash": "d85a40542cfc24177b66c6f3e26543617b949c72f4587b813aaacc46a6f549f3"
+    },
+    {
+      "id": "review-004",
+      "task": "candidate_review",
+      "split": "dev",
+      "family": "negation-preference",
+      "label_status": "draft",
+      "tags": [
+        "negation-preference",
+        "candidate-verdict",
+        "evidence"
+      ],
+      "source": "助手构造的合成需求和候选商品；价格、校区、成色视为已通过程序硬过滤；非真实用户记录。",
+      "hash": "1ab298ddfc83e336b3c6b3e107adbeb100a1f2ce19ba614858482236afd906da"
+    },
+    {
+      "id": "review-005",
+      "task": "candidate_review",
+      "split": "dev",
+      "family": "required-attribute",
+      "label_status": "draft",
+      "tags": [
+        "required-attribute",
+        "candidate-verdict",
+        "evidence"
+      ],
+      "source": "助手构造的合成需求和候选商品；价格、校区、成色视为已通过程序硬过滤；非真实用户记录。",
+      "hash": "afe7381f25b40af140dfcc94dfb3ea59b8449bfb4bc1e116b798e691338bec48"
+    },
+    {
+      "id": "review-006",
+      "task": "candidate_review",
+      "split": "dev",
+      "family": "instruction-in-data",
+      "label_status": "draft",
+      "tags": [
+        "instruction-in-data",
+        "candidate-verdict",
+        "evidence"
+      ],
+      "source": "助手构造的合成需求和候选商品；价格、校区、成色视为已通过程序硬过滤；非真实用户记录。",
+      "hash": "58d545f3b1475153e22fe114e34477a43dd2c3c1600adac0ce070b4bfa648b49"
+    },
+    {
+      "id": "review-007",
+      "task": "candidate_review",
+      "split": "dev",
+      "family": "unsupported-inference",
+      "label_status": "draft",
+      "tags": [
+        "unsupported-inference",
+        "candidate-verdict",
+        "evidence"
+      ],
+      "source": "助手构造的合成需求和候选商品；价格、校区、成色视为已通过程序硬过滤；非真实用户记录。",
+      "hash": "e8c925335cdea693fe17c040123e92efdd3574dcca5f4dc28144d879263ba643"
+    },
+    {
+      "id": "review-008",
+      "task": "candidate_review",
+      "split": "dev",
+      "family": "exclusion-evidence",
+      "label_status": "draft",
+      "tags": [
+        "exclusion-evidence",
+        "candidate-verdict",
+        "evidence"
+      ],
+      "source": "助手构造的合成需求和候选商品；价格、校区、成色视为已通过程序硬过滤；非真实用户记录。",
+      "hash": "f906f3c8ba284aefa04bc1db3701f9630bc76a6fe79abc164de0545de1717dcd"
+    },
+    {
+      "id": "search-ambiguity-01",
+      "task": "smart_search",
+      "split": "dev",
+      "family": "search-ambiguity-01",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:ambiguity"
+      ],
+      "source": "synthetic-campus-v1; authored before model evaluation",
+      "hash": "0219c9166c4956e4e8187e371da000f91f4103a9f59b6c1606fd9843ad551271"
+    },
+    {
+      "id": "search-ambiguity-02",
+      "task": "smart_search",
+      "split": "dev",
+      "family": "search-ambiguity-02",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:ambiguity"
+      ],
+      "source": "synthetic-campus-v1; authored before model evaluation",
+      "hash": "8e6d797039bbb555722c0e46e161a48d6c68cd265d02eab242646c2b7bef2e00"
+    },
+    {
+      "id": "search-ambiguity-03",
+      "task": "smart_search",
+      "split": "dev",
+      "family": "search-ambiguity-03",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:ambiguity"
+      ],
+      "source": "synthetic-campus-v1; authored before model evaluation",
+      "hash": "e97e074248cdfe7f76166f0e8fd6a29933a3b23184425222f5d2890e68a0c56d"
+    },
+    {
+      "id": "search-ambiguity-04",
+      "task": "smart_search",
+      "split": "dev",
+      "family": "search-ambiguity-04",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:ambiguity"
+      ],
+      "source": "synthetic-campus-v1; authored before model evaluation",
+      "hash": "59fce10023a03d051e15cb173ce3ec3e8de0c4ac10ca22dca57220c0ba8ab2f3"
+    },
+    {
+      "id": "search-ambiguity-05",
+      "task": "smart_search",
+      "split": "dev",
+      "family": "search-ambiguity-05",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:ambiguity"
+      ],
+      "source": "synthetic-campus-v1; authored before model evaluation",
+      "hash": "bd5b6bc9cf074287ca720959c6cbbfca0dac93093531cafd5b2fb960e4d6a93f"
+    },
+    {
+      "id": "search-ambiguity-06",
+      "task": "smart_search",
+      "split": "dev",
+      "family": "search-ambiguity-06",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:ambiguity"
+      ],
+      "source": "synthetic-campus-v1; authored before model evaluation",
+      "hash": "3be2a38e02c2a153fb4969d5b40796ac3eaada3f492823ad2d141e332ec50e0c"
+    },
+    {
+      "id": "search-ambiguity-07",
+      "task": "smart_search",
+      "split": "dev",
+      "family": "search-ambiguity-07",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:ambiguity"
+      ],
+      "source": "synthetic-campus-v1; authored before model evaluation",
+      "hash": "f7ee37e3bf511452b6afee853e9302475fd805c1affa9d6a0bc68f0a19296580"
+    },
+    {
+      "id": "search-ambiguity-08",
+      "task": "smart_search",
+      "split": "dev",
+      "family": "search-ambiguity-08",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:ambiguity"
+      ],
+      "source": "synthetic-campus-v1; authored before model evaluation",
+      "hash": "f3de185c011a31fc833682d2a44f62dceaa70b9ebafad815cc5bd90c93c05947"
+    },
+    {
+      "id": "search-ambiguity-09",
+      "task": "smart_search",
+      "split": "dev",
+      "family": "search-ambiguity-09",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:ambiguity"
+      ],
+      "source": "synthetic-campus-v1; authored before model evaluation",
+      "hash": "f1bfdda8bf75092a2ccf2b813370115063ba2bfb1a4dee3f5b2fb85c70ee0769"
+    },
+    {
+      "id": "search-ambiguity-10",
+      "task": "smart_search",
+      "split": "dev",
+      "family": "search-ambiguity-10",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:ambiguity"
+      ],
+      "source": "synthetic-campus-v1; authored before model evaluation",
+      "hash": "d76ce1db76c20cc2f0663fedc97c83ce1aabd963ae256a1f04c464df0a9a46be"
+    },
+    {
+      "id": "search-confusable-01",
+      "task": "smart_search",
+      "split": "dev",
+      "family": "search-confusable-01",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:confusable"
+      ],
+      "source": "synthetic-campus-v1; authored before model evaluation",
+      "hash": "379aaaf7478e61344fa021a481392695251893d5d96c130196edf65dae48600e"
+    },
+    {
+      "id": "search-confusable-02",
+      "task": "smart_search",
+      "split": "dev",
+      "family": "search-confusable-02",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:confusable"
+      ],
+      "source": "synthetic-campus-v1; authored before model evaluation",
+      "hash": "9e55a0973141622f43f6699b085f16d1d307a995d5f97689d65e8aa4e1afb890"
+    },
+    {
+      "id": "search-confusable-03-rewrite",
+      "task": "smart_search",
+      "split": "dev",
+      "family": "search-confusable-03",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:confusable",
+        "metamorphic"
+      ],
+      "source": "synthetic-campus-v1; authored before model evaluation",
+      "hash": "5c6c47bae5a3079e409b0fde1b70ed5901c07496a9bad3a4ee0f692f3d3c4bf2"
+    },
+    {
+      "id": "search-confusable-03",
+      "task": "smart_search",
+      "split": "dev",
+      "family": "search-confusable-03",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:confusable"
+      ],
+      "source": "synthetic-campus-v1; authored before model evaluation",
+      "hash": "4c1ebef434b1521e43c0220f0f85757465950e56619c8e7df7f6b965882ed32a"
+    },
+    {
+      "id": "search-confusable-04",
+      "task": "smart_search",
+      "split": "dev",
+      "family": "search-confusable-04",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:confusable"
+      ],
+      "source": "synthetic-campus-v1; authored before model evaluation",
+      "hash": "a3f1fd8fb64e6090d165a835d3d0a40d56effbdd08db0f4bc243c67263a54329"
+    },
+    {
+      "id": "search-confusable-05",
+      "task": "smart_search",
+      "split": "dev",
+      "family": "search-confusable-05",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:confusable"
+      ],
+      "source": "synthetic-campus-v1; authored before model evaluation",
+      "hash": "b86029771455bf5b7032cb6c2efd685071142a4bfef0360f37b41b5b3f0eed44"
+    },
+    {
+      "id": "search-confusable-06",
+      "task": "smart_search",
+      "split": "dev",
+      "family": "search-confusable-06",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:confusable"
+      ],
+      "source": "synthetic-campus-v1; authored before model evaluation",
+      "hash": "e59c78cdb8e0b8cfcd47f113ec69f7cb6272a7adc74db6e8a3fb6ffe68d0c744"
+    },
+    {
+      "id": "search-confusable-07",
+      "task": "smart_search",
+      "split": "dev",
+      "family": "search-confusable-07",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:confusable"
+      ],
+      "source": "synthetic-campus-v1; authored before model evaluation",
+      "hash": "ebd0c48b3656a578bed3d7e4ea11882e9771b17fcaa9b437340c935d29af5c7f"
+    },
+    {
+      "id": "search-confusable-08",
+      "task": "smart_search",
+      "split": "dev",
+      "family": "search-confusable-08",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:confusable"
+      ],
+      "source": "synthetic-campus-v1; authored before model evaluation",
+      "hash": "eedb22c5fa0191b6876a9bab38c0c888377881047570e5a1a46ec617b1a255b1"
+    },
+    {
+      "id": "search-confusable-09",
+      "task": "smart_search",
+      "split": "dev",
+      "family": "search-confusable-09",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:confusable"
+      ],
+      "source": "synthetic-campus-v1; authored before model evaluation",
+      "hash": "87b565d843d674b45f5bbbd96df69ee297ca69a9f7426b02b185e3fe7a4b1388"
+    },
+    {
+      "id": "search-confusable-10",
+      "task": "smart_search",
+      "split": "dev",
+      "family": "search-confusable-10",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:confusable"
+      ],
+      "source": "synthetic-campus-v1; authored before model evaluation",
+      "hash": "20561aa2c96862efc4aaee79dcca29aedaaaba56624312242b6bd573a4cc9ae7"
+    },
+    {
+      "id": "search-core-01-rewrite",
+      "task": "smart_search",
+      "split": "dev",
+      "family": "search-core-01",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:core",
+        "metamorphic"
+      ],
+      "source": "synthetic-campus-v1; authored before model evaluation",
+      "hash": "7dfc23be4005b2ee8ae71abd028b78dc233d2e7c07f3c10083e0f9bd905580be"
+    },
+    {
+      "id": "search-core-01",
+      "task": "smart_search",
+      "split": "dev",
+      "family": "search-core-01",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:core"
+      ],
+      "source": "synthetic-campus-v1; authored before model evaluation",
+      "hash": "56d2f90c0e2cd17ae4078b3c75d8ec27ef925ba5347dc88fe39a8187b6c6fbb0"
+    },
+    {
+      "id": "search-core-02",
+      "task": "smart_search",
+      "split": "dev",
+      "family": "search-core-02",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:core"
+      ],
+      "source": "synthetic-campus-v1; authored before model evaluation",
+      "hash": "704cab1ce4a86e71c36d8d6f117ba5623d2ae110cde29909a9fa97ef64b032f4"
+    },
+    {
+      "id": "search-core-03",
+      "task": "smart_search",
+      "split": "dev",
+      "family": "search-core-03",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:core"
+      ],
+      "source": "synthetic-campus-v1; authored before model evaluation",
+      "hash": "fdebf2e11547d8367073607d1c1c5c0bbce27682318fe94deca312ff830eb84a"
+    },
+    {
+      "id": "search-core-04",
+      "task": "smart_search",
+      "split": "dev",
+      "family": "search-core-04",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:core"
+      ],
+      "source": "synthetic-campus-v1; authored before model evaluation",
+      "hash": "2c5bb22af23319b800b5cef8d8410d75f552d20721babe9feaa13053b66e38e2"
+    },
+    {
+      "id": "search-core-05-rewrite",
+      "task": "smart_search",
+      "split": "dev",
+      "family": "search-core-05",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:core",
+        "metamorphic"
+      ],
+      "source": "synthetic-campus-v1; authored before model evaluation",
+      "hash": "93f1107258d0d14a03ddf0a0d92ff34eec7a1739ba549ac941a1cd97731638b0"
+    },
+    {
+      "id": "search-core-05",
+      "task": "smart_search",
+      "split": "dev",
+      "family": "search-core-05",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:core"
+      ],
+      "source": "synthetic-campus-v1; authored before model evaluation",
+      "hash": "89c180e089c5340b702195b8efdb1d2f9104569d75e99c6126ae72d76d32c043"
+    },
+    {
+      "id": "search-core-06",
+      "task": "smart_search",
+      "split": "dev",
+      "family": "search-core-06",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:core"
+      ],
+      "source": "synthetic-campus-v1; authored before model evaluation",
+      "hash": "9e7f5d7c03ee40eac7b35dd9b355c2b9d9f8193cc9867f64230e8b071207d992"
+    },
+    {
+      "id": "search-core-07",
+      "task": "smart_search",
+      "split": "dev",
+      "family": "search-core-07",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:core"
+      ],
+      "source": "synthetic-campus-v1; authored before model evaluation",
+      "hash": "7a4a4d2ad40e2d804c36d23143c6a763f0a0286d95162a79fdf6a4bb80217762"
+    },
+    {
+      "id": "search-core-08-rewrite",
+      "task": "smart_search",
+      "split": "dev",
+      "family": "search-core-08",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:core",
+        "metamorphic"
+      ],
+      "source": "synthetic-campus-v1; authored before model evaluation",
+      "hash": "eac85565699644d2b4d4ec626964cc35e67115e06c0e71063e0651e0cc7daf6a"
+    },
+    {
+      "id": "search-core-08",
+      "task": "smart_search",
+      "split": "dev",
+      "family": "search-core-08",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:core"
+      ],
+      "source": "synthetic-campus-v1; authored before model evaluation",
+      "hash": "caa70a9571acf3f9d3895674ea147adad400d43296c0a7c1d9bfe44bc9217365"
+    },
+    {
+      "id": "search-core-09",
+      "task": "smart_search",
+      "split": "dev",
+      "family": "search-core-09",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:core"
+      ],
+      "source": "synthetic-campus-v1; authored before model evaluation",
+      "hash": "033a150728c454e9212f968410d5d03921148b180f8b079050d6fd9b99c36b9a"
+    },
+    {
+      "id": "search-core-10-budget",
+      "task": "smart_search",
+      "split": "dev",
+      "family": "search-core-10",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:core",
+        "metamorphic"
+      ],
+      "source": "synthetic-campus-v1; authored before model evaluation",
+      "hash": "c8df2323ab8f6d639c7da6f27c63be870bb3b67e3ecd4cdea8bbef755e2d1e66"
+    },
+    {
+      "id": "search-core-10",
+      "task": "smart_search",
+      "split": "dev",
+      "family": "search-core-10",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:core"
+      ],
+      "source": "synthetic-campus-v1; authored before model evaluation",
+      "hash": "1dfa3f2755230a69643f88dc72506a1c5d02270f13333ca23453040a9b0721aa"
+    },
+    {
+      "id": "search-negation-01-rewrite",
+      "task": "smart_search",
+      "split": "dev",
+      "family": "search-negation-01",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:negation",
+        "metamorphic"
+      ],
+      "source": "synthetic-campus-v1; authored before model evaluation",
+      "hash": "58b513d110f172fcccf6143985464621d9d49a6e6db7b3469ae9e6ea81f1ea65"
+    },
+    {
+      "id": "search-negation-01",
+      "task": "smart_search",
+      "split": "dev",
+      "family": "search-negation-01",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:negation"
+      ],
+      "source": "synthetic-campus-v1; authored before model evaluation",
+      "hash": "c53a90d032782d8c7340089edf640802265f0f2bc862b14e86e6f635c207cd95"
+    },
+    {
+      "id": "search-negation-02",
+      "task": "smart_search",
+      "split": "dev",
+      "family": "search-negation-02",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:negation"
+      ],
+      "source": "synthetic-campus-v1; authored before model evaluation",
+      "hash": "4949cf3ff7d72f9e3db0be885670457be5338db64a09cae3f106e208cf841093"
+    },
+    {
+      "id": "search-negation-03",
+      "task": "smart_search",
+      "split": "dev",
+      "family": "search-negation-01",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:negation"
+      ],
+      "source": "synthetic-campus-v1; authored before model evaluation",
+      "hash": "71494c9ab96aea5edd52cec5a206fd6df99457743f23bb90fe940d5603ff86c8"
+    },
+    {
+      "id": "search-negation-04",
+      "task": "smart_search",
+      "split": "dev",
+      "family": "search-negation-04",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:negation"
+      ],
+      "source": "synthetic-campus-v1; authored before model evaluation",
+      "hash": "30de27ddcba51f54b8f45ef2d1954c03ef26baf8ba32aaa6ab682273de6eb0ac"
+    },
+    {
+      "id": "search-negation-05",
+      "task": "smart_search",
+      "split": "dev",
+      "family": "search-negation-05",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:negation"
+      ],
+      "source": "synthetic-campus-v1; authored before model evaluation",
+      "hash": "3af368b2d909367130e8125049032a1ba5f903850c7f9c2402c96f5593dca544"
+    },
+    {
+      "id": "search-negation-06",
+      "task": "smart_search",
+      "split": "dev",
+      "family": "search-negation-06",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:negation"
+      ],
+      "source": "synthetic-campus-v1; authored before model evaluation",
+      "hash": "e25cba29ab9cbec61f829bc3f338702d1e6fd55687129bf5c4ac927bcfd708a6"
+    },
+    {
+      "id": "search-negation-07",
+      "task": "smart_search",
+      "split": "dev",
+      "family": "search-negation-07",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:negation"
+      ],
+      "source": "synthetic-campus-v1; authored before model evaluation",
+      "hash": "0e307632670f2e14d01c08ce678d8b4f1f13c616d6f2241054ee8af0764a7ea5"
+    },
+    {
+      "id": "search-negation-08",
+      "task": "smart_search",
+      "split": "dev",
+      "family": "search-negation-08",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:negation"
+      ],
+      "source": "synthetic-campus-v1; authored before model evaluation",
+      "hash": "ce06c54c80bde76b0be91a3a0d290251263b8e75f07961ddfc1ef0283607fe8b"
+    },
+    {
+      "id": "search-negation-09",
+      "task": "smart_search",
+      "split": "dev",
+      "family": "search-negation-09",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:negation"
+      ],
+      "source": "synthetic-campus-v1; authored before model evaluation",
+      "hash": "ec72bb968068f463485169e3807f6fa7fcd599be419e2ec5caaa6f09320959ac"
+    },
+    {
+      "id": "search-negation-10",
+      "task": "smart_search",
+      "split": "dev",
+      "family": "search-negation-10",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:negation"
+      ],
+      "source": "synthetic-campus-v1; authored before model evaluation",
+      "hash": "c03dd9cd36e8b06f57f54c9244a62fb2032658a2512164091a2564c0cba116ad"
+    },
+    {
+      "id": "search-ood-01",
+      "task": "smart_search",
+      "split": "dev",
+      "family": "search-ood-01",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:ood"
+      ],
+      "source": "synthetic-campus-v1; authored before model evaluation",
+      "hash": "45c8a433109d25002d52a5882f10f30698e874853155a7bf5254cbbaae9d3f32"
+    },
+    {
+      "id": "search-ood-02",
+      "task": "smart_search",
+      "split": "dev",
+      "family": "search-ood-02",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:ood"
+      ],
+      "source": "synthetic-campus-v1; authored before model evaluation",
+      "hash": "441708eb9ac8d0ae78cc7ef055251c54268cacee7d89263d0d79d71c78dd5459"
+    },
+    {
+      "id": "search-ood-03",
+      "task": "smart_search",
+      "split": "dev",
+      "family": "search-ood-03",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:ood"
+      ],
+      "source": "synthetic-campus-v1; authored before model evaluation",
+      "hash": "bbcca73bf57f38b5342cd9fc46addc8f135bbf31b40ad60a2de7f3447c21a44a"
+    },
+    {
+      "id": "search-ood-04",
+      "task": "smart_search",
+      "split": "dev",
+      "family": "search-ood-04",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:ood"
+      ],
+      "source": "synthetic-campus-v1; authored before model evaluation",
+      "hash": "2cbb785c97c39a1935a0fdfe1ca108ce2a2f62407032f04fd3c56ad2ddc9154c"
+    },
+    {
+      "id": "search-ood-05",
+      "task": "smart_search",
+      "split": "dev",
+      "family": "search-ood-05",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:ood"
+      ],
+      "source": "synthetic-campus-v1; authored before model evaluation",
+      "hash": "64eb21bd8eb433973b1628755450eaf815da76db5e9b4225037b7a99b8284c42"
+    },
+    {
+      "id": "search-ood-06",
+      "task": "smart_search",
+      "split": "dev",
+      "family": "search-ood-06",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:ood"
+      ],
+      "source": "synthetic-campus-v1; authored before model evaluation",
+      "hash": "86b16dc2707db364431d0039f391af6e8bf334f4468f5cfd9ce379a6827e4d62"
+    },
+    {
+      "id": "search-ood-07",
+      "task": "smart_search",
+      "split": "dev",
+      "family": "search-ood-07",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:ood"
+      ],
+      "source": "synthetic-campus-v1; authored before model evaluation",
+      "hash": "89548bd36054ca8ecdd95bea5e6cecba00cebaa73d0210f45b3cede1899cbf82"
+    },
+    {
+      "id": "search-ood-08",
+      "task": "smart_search",
+      "split": "dev",
+      "family": "search-ood-08",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:ood"
+      ],
+      "source": "synthetic-campus-v1; authored before model evaluation",
+      "hash": "7353fb173a50bf3db9e59a0ba83273d2427191429f299e505aaba48dcdc338ef"
+    },
+    {
+      "id": "search-ood-09",
+      "task": "smart_search",
+      "split": "dev",
+      "family": "search-ood-09",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:ood"
+      ],
+      "source": "synthetic-campus-v1; authored before model evaluation",
+      "hash": "a19dff065e4e031956d3b998e7b33f1974b83a801384d3fc6d4943f52171e654"
+    },
+    {
+      "id": "search-ood-10",
+      "task": "smart_search",
+      "split": "dev",
+      "family": "search-ood-10",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:ood"
+      ],
+      "source": "synthetic-campus-v1; authored before model evaluation",
+      "hash": "fe2ed70a10e3324926508c65db7843260c5114a5980bd1a002e73a3d7e7f0961"
+    },
+    {
+      "id": "search-preference-01-rewrite",
+      "task": "smart_search",
+      "split": "dev",
+      "family": "search-preference-01",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:preference",
+        "metamorphic"
+      ],
+      "source": "synthetic-campus-v1; authored before model evaluation",
+      "hash": "aa40dcbd1423475855969d2abdd61144e942dcc914eb827ec558a620615fcd03"
+    },
+    {
+      "id": "search-preference-01",
+      "task": "smart_search",
+      "split": "dev",
+      "family": "search-preference-01",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:preference"
+      ],
+      "source": "synthetic-campus-v1; authored before model evaluation",
+      "hash": "37dc511a49664c5be70e1612c71d40c67c853d3240bc64747be65796e60f0c63"
+    },
+    {
+      "id": "search-preference-02",
+      "task": "smart_search",
+      "split": "dev",
+      "family": "search-preference-02",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:preference"
+      ],
+      "source": "synthetic-campus-v1; authored before model evaluation",
+      "hash": "5f40dd613c080c2bf97c8cb43a5a630f42d9e0b352c05af9c1da3d6efdb13ece"
+    },
+    {
+      "id": "search-preference-03",
+      "task": "smart_search",
+      "split": "dev",
+      "family": "search-preference-03",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:preference"
+      ],
+      "source": "synthetic-campus-v1; authored before model evaluation",
+      "hash": "42a3012e5f637a84cda1913ece6bc59257eaa7fe2cd0449f7f20ae568fc66012"
+    },
+    {
+      "id": "search-preference-04",
+      "task": "smart_search",
+      "split": "dev",
+      "family": "search-preference-03",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:preference"
+      ],
+      "source": "synthetic-campus-v1; authored before model evaluation",
+      "hash": "9f7954c22794e86c5e94027be36ee991a7066f43da2e5d710f554578bb8a182b"
+    },
+    {
+      "id": "search-preference-05",
+      "task": "smart_search",
+      "split": "dev",
+      "family": "search-preference-05",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:preference"
+      ],
+      "source": "synthetic-campus-v1; authored before model evaluation",
+      "hash": "ed78b13f13ead269eedd6398978a2248b8a321b2c9d8ca2dff81637a358f79f4"
+    },
+    {
+      "id": "search-preference-06",
+      "task": "smart_search",
+      "split": "dev",
+      "family": "search-preference-06",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:preference"
+      ],
+      "source": "synthetic-campus-v1; authored before model evaluation",
+      "hash": "77077c35af81e90a4c0ddaa18e8419c27ec58e78d604084f3bf60a39c3aae69b"
+    },
+    {
+      "id": "search-preference-07",
+      "task": "smart_search",
+      "split": "dev",
+      "family": "search-preference-07",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:preference"
+      ],
+      "source": "synthetic-campus-v1; authored before model evaluation",
+      "hash": "aefad15975a60045782ab9bba11148cf5374c62cd7d5b8f89e00805b8e1c44e3"
+    },
+    {
+      "id": "search-preference-08",
+      "task": "smart_search",
+      "split": "dev",
+      "family": "search-preference-08",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:preference"
+      ],
+      "source": "synthetic-campus-v1; authored before model evaluation",
+      "hash": "7367e5da6fd6c347788331fbb37c439371d85aa7f7129c9a8154e27cac3271af"
+    },
+    {
+      "id": "search-preference-09",
+      "task": "smart_search",
+      "split": "dev",
+      "family": "search-preference-09",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:preference"
+      ],
+      "source": "synthetic-campus-v1; authored before model evaluation",
+      "hash": "5c2ad30609a71f67db4b468a343e1e79a2f80f5d4d003f63f00ec45db2414de8"
+    },
+    {
+      "id": "search-preference-10",
+      "task": "smart_search",
+      "split": "dev",
+      "family": "search-preference-10",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:preference"
+      ],
+      "source": "synthetic-campus-v1; authored before model evaluation",
+      "hash": "3e435143b03dd34d46407fd9b2c3adff39947404ad56c465f92ba648484d47f3"
+    },
+    {
+      "id": "search-price-01",
+      "task": "smart_search",
+      "split": "dev",
+      "family": "search-price-01",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:price"
+      ],
+      "source": "synthetic-campus-v1; authored before model evaluation",
+      "hash": "6e8e0528b78b4596ed0304c2bbe470b1cb27de6506976d78543cd0b6cbcef536"
+    },
+    {
+      "id": "search-price-02-rewrite",
+      "task": "smart_search",
+      "split": "dev",
+      "family": "search-price-02",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:price",
+        "metamorphic"
+      ],
+      "source": "synthetic-campus-v1; authored before model evaluation",
+      "hash": "3337918f3889b401842929f74a8de57c0bda0f31b47d78e211854d0ddb222e2c"
+    },
+    {
+      "id": "search-price-02",
+      "task": "smart_search",
+      "split": "dev",
+      "family": "search-price-02",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:price"
+      ],
+      "source": "synthetic-campus-v1; authored before model evaluation",
+      "hash": "7436a7084335eeaf26538a5a0e3acb8d0f3990a1341577b5d9c3bcfc6dbb7d73"
+    },
+    {
+      "id": "search-price-03",
+      "task": "smart_search",
+      "split": "dev",
+      "family": "search-price-03",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:price"
+      ],
+      "source": "synthetic-campus-v1; authored before model evaluation",
+      "hash": "827271aae080e2753871f5ea4b9b0494f39ddb9b3f80a93d3c8a0445e229c790"
+    },
+    {
+      "id": "search-price-04",
+      "task": "smart_search",
+      "split": "dev",
+      "family": "search-price-04",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:price"
+      ],
+      "source": "synthetic-campus-v1; authored before model evaluation",
+      "hash": "f10eee25dc73433e88adee3a8eaf7a9bb46dbc4c23e5a3397a9eca5a15a9dcab"
+    },
+    {
+      "id": "search-price-05",
+      "task": "smart_search",
+      "split": "dev",
+      "family": "search-price-05",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:price"
+      ],
+      "source": "synthetic-campus-v1; authored before model evaluation",
+      "hash": "d6f1c51686ecb49418c43d097f2641f0765a812d84ed2d0eee92b66c0ee5462c"
+    },
+    {
+      "id": "search-price-06",
+      "task": "smart_search",
+      "split": "dev",
+      "family": "search-price-06",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:price"
+      ],
+      "source": "synthetic-campus-v1; authored before model evaluation",
+      "hash": "b3f40384b0d2eb6a7f0ae0afdb1820d4191e6d062e3390e2d79a5c8bd2ad9cc8"
+    },
+    {
+      "id": "search-price-07",
+      "task": "smart_search",
+      "split": "dev",
+      "family": "search-price-07",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:price"
+      ],
+      "source": "synthetic-campus-v1; authored before model evaluation",
+      "hash": "7f6f7f5d6f4353df2267a44040d8423899029d17fcbc331d21dfcb5c5f598487"
+    },
+    {
+      "id": "search-price-08-budget",
+      "task": "smart_search",
+      "split": "dev",
+      "family": "search-price-08",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:price",
+        "metamorphic"
+      ],
+      "source": "synthetic-campus-v1; authored before model evaluation",
+      "hash": "d6720e10c1bd28b7c17da7e587537b27b33a037a85d3b6cf0379ad7a7a87b78a"
+    },
+    {
+      "id": "search-price-08-rewrite",
+      "task": "smart_search",
+      "split": "dev",
+      "family": "search-price-08",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:price",
+        "metamorphic"
+      ],
+      "source": "synthetic-campus-v1; authored before model evaluation",
+      "hash": "dcba175eccc2979c55a1fa95b5dedc97844a1eea4ca6812031843d0081fc298e"
+    },
+    {
+      "id": "search-price-08",
+      "task": "smart_search",
+      "split": "dev",
+      "family": "search-price-08",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:price"
+      ],
+      "source": "synthetic-campus-v1; authored before model evaluation",
+      "hash": "1d59d24836d408c09f869ba5a777bd871f89a8b610dcddeabb46936dba956cb2"
+    },
+    {
+      "id": "search-price-09",
+      "task": "smart_search",
+      "split": "dev",
+      "family": "search-price-09",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:price"
+      ],
+      "source": "synthetic-campus-v1; authored before model evaluation",
+      "hash": "49d32ee178a7ee76c7a2129b9f089cd491b640e7de563b11a83982175473d525"
+    },
+    {
+      "id": "search-price-10",
+      "task": "smart_search",
+      "split": "dev",
+      "family": "search-price-10",
+      "label_status": "draft",
+      "tags": [
+        "campus-search",
+        "slice:price"
+      ],
+      "source": "synthetic-campus-v1; authored before model evaluation",
+      "hash": "be6aace97b0c4fd792517105ff7b23320245d6f062bd77be11060c4d856ef616"
+    },
+    {
+      "id": "taodescribe-1e58f86a8fdca83d990d",
+      "task": "item_parse",
+      "split": "dev",
+      "family": "taodescribe-8e13db4484c40e43a6ee",
+      "label_status": "draft",
+      "tags": [
+        "public-data",
+        "taodescribe"
+      ],
+      "source": "https://github.com/THUDM/KOBE | KOBE-v2-saved.zip-test-20261115 | 2226 | sha256:399252aef7d80b5191aee25f880741fa5c534c4c6ff2f40c51c15b94f1fd93d9",
+      "hash": "e3ec143eb60710bf64b4bec15f6492a766c4644fe273dc85a53199bcf64bdfd3"
+    },
+    {
+      "id": "taodescribe-2b562060b6cb2a3489bd",
+      "task": "item_parse",
+      "split": "dev",
+      "family": "taodescribe-116e944abdf16ba61b5e",
+      "label_status": "draft",
+      "tags": [
+        "public-data",
+        "taodescribe"
+      ],
+      "source": "https://github.com/THUDM/KOBE | KOBE-v2-saved.zip-test-20261115 | 2310 | sha256:cfb950aaf61281bbd01607f97d17038e1d8a24d670003ce9bc2fcbe282e24060",
+      "hash": "02e1e58c44344943b070caa2074d38b9fbed921646ef33abcd789d4a3fbab82e"
+    },
+    {
+      "id": "taodescribe-30c3e8ef97b553277299",
+      "task": "item_parse",
+      "split": "dev",
+      "family": "taodescribe-fa9c6878bf3bf9e53331",
+      "label_status": "draft",
+      "tags": [
+        "public-data",
+        "taodescribe"
+      ],
+      "source": "https://github.com/THUDM/KOBE | KOBE-v2-saved.zip-test-20261115 | 1120 | sha256:264994ad0d0cdbb964cf8667f0113114136327b106efb4bf0934a20f20834097",
+      "hash": "1d29b25a7ba540ae506b73ca506ffdf9c9806fffd070c7b2f309eccf1c45a310"
+    },
+    {
+      "id": "taodescribe-30e5538f5215f2c29a5f",
+      "task": "item_parse",
+      "split": "dev",
+      "family": "taodescribe-44d4132d76aed0f263cd",
+      "label_status": "draft",
+      "tags": [
+        "public-data",
+        "taodescribe"
+      ],
+      "source": "https://github.com/THUDM/KOBE | KOBE-v2-saved.zip-test-20261115 | 4022 | sha256:b8e613341c584712cd508c4530efd07a6ef5baba0b68c392bd8a1b07e6e3a34f",
+      "hash": "a2be992877757ad0d7b49e3998102e6e96b5a1f6dbdafc21cea8aa80356f1218"
+    },
+    {
+      "id": "taodescribe-748a2baffa0a1adfcd77",
+      "task": "item_parse",
+      "split": "dev",
+      "family": "taodescribe-62c7ca264ca68098fbb5",
+      "label_status": "draft",
+      "tags": [
+        "public-data",
+        "taodescribe"
+      ],
+      "source": "https://github.com/THUDM/KOBE | KOBE-v2-saved.zip-test-20261115 | 738 | sha256:8af87241be5f0f5a16d8d8f6bd6b1f937578f37240e11072dc5e9205f711b423",
+      "hash": "0ad92d627956b269cc4c47513c2c13a04b3e232334ee507b059976db19a66374"
+    },
+    {
+      "id": "taodescribe-8a98325890ea9cc5a561",
+      "task": "item_parse",
+      "split": "dev",
+      "family": "taodescribe-eb2f1491f50784e60035",
+      "label_status": "draft",
+      "tags": [
+        "public-data",
+        "taodescribe"
+      ],
+      "source": "https://github.com/THUDM/KOBE | KOBE-v2-saved.zip-test-20261115 | 2450 | sha256:1ab176592e6abee6eded21f17466ca21b72221cf380e49a696bf8cfb7d6fc2fc",
+      "hash": "06748b84e18b476ef94a1157e28eeb15d8a06c1680a9ca1cf6a656d720ceb098"
+    },
+    {
+      "id": "taodescribe-b771fafe8751e76817d8",
+      "task": "item_parse",
+      "split": "dev",
+      "family": "taodescribe-f2c5402a81ab41524e19",
+      "label_status": "draft",
+      "tags": [
+        "public-data",
+        "taodescribe"
+      ],
+      "source": "https://github.com/THUDM/KOBE | KOBE-v2-saved.zip-test-20261115 | 1077 | sha256:ce47a6dc6eb4b478cb19125d895febad9ada76c4e07265beb52591f10c840c69",
+      "hash": "ed9691fa1d0626a0d61ea44a90b13b2974349dce0d22f864606bd709c3d91a9c"
+    },
+    {
+      "id": "taodescribe-eecff3ae0c12eeb9b206",
+      "task": "item_parse",
+      "split": "dev",
+      "family": "taodescribe-8692188a58b1f9ac3968",
+      "label_status": "draft",
+      "tags": [
+        "public-data",
+        "taodescribe"
+      ],
+      "source": "https://github.com/THUDM/KOBE | KOBE-v2-saved.zip-test-20261115 | 5003 | sha256:20369d7939339533915dbe8d523ba291a8120a387834fad49b14a0b4113551e3",
+      "hash": "5b426fb2cc150f83f1e31807af23f207326d4c9cfed61f395be883a186cce5a1"
+    },
+    {
+      "id": "wanted-001",
+      "task": "wanted_parse",
+      "split": "dev",
+      "family": "explicit-budget",
+      "label_status": "draft",
+      "tags": [
+        "explicit-budget",
+        "text"
+      ],
+      "source": "助手构造的合成校园二手描述；非真实用户记录。",
+      "hash": "c46218320e0e6621564a880083897b951b22d6a53b820f5bbf03435b0155ebde"
+    },
+    {
+      "id": "wanted-002",
+      "task": "wanted_parse",
+      "split": "dev",
+      "family": "specific-category",
+      "label_status": "draft",
+      "tags": [
+        "specific-category",
+        "text"
+      ],
+      "source": "助手构造的合成校园二手描述；非真实用户记录。",
+      "hash": "3068baebddcc44c40bec6458ce073b9d75e6d6fb3270d0abeedabda4a396b55a"
+    },
+    {
+      "id": "wanted-003",
+      "task": "wanted_parse",
+      "split": "dev",
+      "family": "chinese-number",
+      "label_status": "draft",
+      "tags": [
+        "chinese-number",
+        "text"
+      ],
+      "source": "助手构造的合成校园二手描述；非真实用户记录。",
+      "hash": "bc4d830ee20389b1ac2b735ed07cd88237500c87a8926d74f75c8eba2b74faeb"
+    },
+    {
+      "id": "wanted-004",
+      "task": "wanted_parse",
+      "split": "dev",
+      "family": "around-budget",
+      "label_status": "draft",
+      "tags": [
+        "around-budget",
+        "text"
+      ],
+      "source": "助手构造的合成校园二手描述；非真实用户记录。",
+      "hash": "137847d29e169ec6073f016e09250edca84b468a744bde1f11d875011667ba98"
+    },
+    {
+      "id": "wanted-005",
+      "task": "wanted_parse",
+      "split": "dev",
+      "family": "budget-correction",
+      "label_status": "draft",
+      "tags": [
+        "budget-correction",
+        "text"
+      ],
+      "source": "助手构造的合成校园二手描述；非真实用户记录。",
+      "hash": "22a9587bf3f0b250a52aec371018101476452bc7eee49bb20953dab33f1902f4"
+    },
+    {
+      "id": "wanted-006",
+      "task": "wanted_parse",
+      "split": "dev",
+      "family": "underspecified-item",
+      "label_status": "draft",
+      "tags": [
+        "underspecified-item",
+        "text"
+      ],
+      "source": "助手构造的合成校园二手描述；非真实用户记录。",
+      "hash": "8ed475a7b8c7ea1b436d8eccd6580abef9d3da8665e678c6da2ec8b2a9a14c04"
+    },
+    {
+      "id": "wanted-007",
+      "task": "wanted_parse",
+      "split": "dev",
+      "family": "conflicting-conditions",
+      "label_status": "draft",
+      "tags": [
+        "conflicting-conditions",
+        "text"
+      ],
+      "source": "助手构造的合成校园二手描述；非真实用户记录。",
+      "hash": "32f54ad406b4305dabb9a1f0e0e9f6705a7d574d41d3171df626d9db45db861b"
+    },
+    {
+      "id": "wanted-008",
+      "task": "wanted_parse",
+      "split": "dev",
+      "family": "requirement-correction",
+      "label_status": "draft",
+      "tags": [
+        "requirement-correction",
+        "text"
+      ],
+      "source": "助手构造的合成校园二手描述；非真实用户记录。",
+      "hash": "0ce850469bd6195d5aff4185d1ffce81c37a6b0729a970d2be2c6fd5dcd886a0"
+    }
+  ],
+  "raw_record_sha256": "5ebef323bf657a1de8a57c8506ec912e4ab5c668e7deb54f20c5690a7a17cc7e",
+  "analysis_script_sha256": "bcc3269ef7ff958daa33c1be8f35fc6ad2086ad0e1720c6c262b9b5fda69475b",
+  "raw_records_local_directory": "D:\\University\\智能化软件系统与工程\\yandu-model-evaluation\\test-results\\selection-openlux-full",
+  "environment": {
+    "python": "3.12.14",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "packages": {
+      "httpx": "0.28.1",
+      "pydantic": "2.13.5",
+      "sqlalchemy": "2.0.54",
+      "fastapi": "0.141.1",
+      "pytest": "9.1.1"
+    },
+    "implementation_hash": "b515109e3eea960a54068824a6adcbe4592cd77b07c0229af099b179aa4459de",
+    "source_archive_sha256": "0caff9674cf6a59c902bd31fb70dad6676f9704877c1eae85775661d426b7a10"
+  }
+}

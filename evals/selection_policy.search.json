@@ -1,0 +1,22 @@
+{
+  "version":"search-draft-1",
+  "status":"draft",
+  "description":"按评测方法提出的搜索质量、交互耗时和稳定性门槛草案；团队须在人工复核保留集运行前确认。Oracle仅诊断后续检索损失，不作为候选模型。",
+  "minimum_reviewed_cases":20,
+  "minimum_remote_models":2,
+  "quality_tolerance":0.0,
+  "tasks": {
+    "smart_search": {
+      "min_pass_rate":0.85,
+      "min_mrr":0.9,
+      "min_map_at_5":0.85,
+      "min_recall_at_10":0.9,
+      "max_zero_result_error_rate":0.05,
+      "max_error_rate":0.05,
+      "min_first_schema_valid_rate":0.95,
+      "min_consistency_rate":0.95,
+      "min_metamorphic_pass_rate":0.9,
+      "max_p95_latency_ms":2500
+    }
+  }
+}

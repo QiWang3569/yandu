@@ -1,0 +1,950 @@
+[
+  {
+    "id": "inv-core-01",
+    "model": "local-rules",
+    "repeat": 1,
+    "relation": "invariant",
+    "checks": {
+      "successful_pair": true,
+      "intent_invariant": true,
+      "result_set_invariant": true
+    },
+    "passed": true,
+    "base_nonempty": true
+  },
+  {
+    "id": "inv-core-01",
+    "model": "local-rules",
+    "repeat": 2,
+    "relation": "invariant",
+    "checks": {
+      "successful_pair": true,
+      "intent_invariant": true,
+      "result_set_invariant": true
+    },
+    "passed": true,
+    "base_nonempty": true
+  },
+  {
+    "id": "inv-core-01",
+    "model": "local-rules",
+    "repeat": 3,
+    "relation": "invariant",
+    "checks": {
+      "successful_pair": true,
+      "intent_invariant": true,
+      "result_set_invariant": true
+    },
+    "passed": true,
+    "base_nonempty": true
+  },
+  {
+    "id": "inv-core-01",
+    "model": "oracle",
+    "repeat": 1,
+    "relation": "invariant",
+    "checks": {
+      "successful_pair": true,
+      "intent_invariant": true,
+      "result_set_invariant": true
+    },
+    "passed": true,
+    "base_nonempty": true
+  },
+  {
+    "id": "inv-core-01",
+    "model": "oracle",
+    "repeat": 2,
+    "relation": "invariant",
+    "checks": {
+      "successful_pair": true,
+      "intent_invariant": true,
+      "result_set_invariant": true
+    },
+    "passed": true,
+    "base_nonempty": true
+  },
+  {
+    "id": "inv-core-01",
+    "model": "oracle",
+    "repeat": 3,
+    "relation": "invariant",
+    "checks": {
+      "successful_pair": true,
+      "intent_invariant": true,
+      "result_set_invariant": true
+    },
+    "passed": true,
+    "base_nonempty": true
+  },
+  {
+    "id": "inv-core-05",
+    "model": "local-rules",
+    "repeat": 1,
+    "relation": "invariant",
+    "checks": {
+      "successful_pair": true,
+      "intent_invariant": false,
+      "result_set_invariant": false
+    },
+    "passed": false,
+    "base_nonempty": false
+  },
+  {
+    "id": "inv-core-05",
+    "model": "local-rules",
+    "repeat": 2,
+    "relation": "invariant",
+    "checks": {
+      "successful_pair": true,
+      "intent_invariant": false,
+      "result_set_invariant": false
+    },
+    "passed": false,
+    "base_nonempty": false
+  },
+  {
+    "id": "inv-core-05",
+    "model": "local-rules",
+    "repeat": 3,
+    "relation": "invariant",
+    "checks": {
+      "successful_pair": true,
+      "intent_invariant": false,
+      "result_set_invariant": false
+    },
+    "passed": false,
+    "base_nonempty": false
+  },
+  {
+    "id": "inv-core-05",
+    "model": "oracle",
+    "repeat": 1,
+    "relation": "invariant",
+    "checks": {
+      "successful_pair": true,
+      "intent_invariant": true,
+      "result_set_invariant": true
+    },
+    "passed": true,
+    "base_nonempty": true
+  },
+  {
+    "id": "inv-core-05",
+    "model": "oracle",
+    "repeat": 2,
+    "relation": "invariant",
+    "checks": {
+      "successful_pair": true,
+      "intent_invariant": true,
+      "result_set_invariant": true
+    },
+    "passed": true,
+    "base_nonempty": true
+  },
+  {
+    "id": "inv-core-05",
+    "model": "oracle",
+    "repeat": 3,
+    "relation": "invariant",
+    "checks": {
+      "successful_pair": true,
+      "intent_invariant": true,
+      "result_set_invariant": true
+    },
+    "passed": true,
+    "base_nonempty": true
+  },
+  {
+    "id": "inv-price-02",
+    "model": "local-rules",
+    "repeat": 1,
+    "relation": "invariant",
+    "checks": {
+      "successful_pair": true,
+      "intent_invariant": false,
+      "result_set_invariant": false
+    },
+    "passed": false,
+    "base_nonempty": true
+  },
+  {
+    "id": "inv-price-02",
+    "model": "local-rules",
+    "repeat": 2,
+    "relation": "invariant",
+    "checks": {
+      "successful_pair": true,
+      "intent_invariant": false,
+      "result_set_invariant": false
+    },
+    "passed": false,
+    "base_nonempty": true
+  },
+  {
+    "id": "inv-price-02",
+    "model": "local-rules",
+    "repeat": 3,
+    "relation": "invariant",
+    "checks": {
+      "successful_pair": true,
+      "intent_invariant": false,
+      "result_set_invariant": false
+    },
+    "passed": false,
+    "base_nonempty": true
+  },
+  {
+    "id": "inv-price-02",
+    "model": "oracle",
+    "repeat": 1,
+    "relation": "invariant",
+    "checks": {
+      "successful_pair": true,
+      "intent_invariant": true,
+      "result_set_invariant": true
+    },
+    "passed": true,
+    "base_nonempty": true
+  },
+  {
+    "id": "inv-price-02",
+    "model": "oracle",
+    "repeat": 2,
+    "relation": "invariant",
+    "checks": {
+      "successful_pair": true,
+      "intent_invariant": true,
+      "result_set_invariant": true
+    },
+    "passed": true,
+    "base_nonempty": true
+  },
+  {
+    "id": "inv-price-02",
+    "model": "oracle",
+    "repeat": 3,
+    "relation": "invariant",
+    "checks": {
+      "successful_pair": true,
+      "intent_invariant": true,
+      "result_set_invariant": true
+    },
+    "passed": true,
+    "base_nonempty": true
+  },
+  {
+    "id": "inv-price-08",
+    "model": "local-rules",
+    "repeat": 1,
+    "relation": "invariant",
+    "checks": {
+      "successful_pair": true,
+      "intent_invariant": true,
+      "result_set_invariant": true
+    },
+    "passed": true,
+    "base_nonempty": true
+  },
+  {
+    "id": "inv-price-08",
+    "model": "local-rules",
+    "repeat": 2,
+    "relation": "invariant",
+    "checks": {
+      "successful_pair": true,
+      "intent_invariant": true,
+      "result_set_invariant": true
+    },
+    "passed": true,
+    "base_nonempty": true
+  },
+  {
+    "id": "inv-price-08",
+    "model": "local-rules",
+    "repeat": 3,
+    "relation": "invariant",
+    "checks": {
+      "successful_pair": true,
+      "intent_invariant": true,
+      "result_set_invariant": true
+    },
+    "passed": true,
+    "base_nonempty": true
+  },
+  {
+    "id": "inv-price-08",
+    "model": "oracle",
+    "repeat": 1,
+    "relation": "invariant",
+    "checks": {
+      "successful_pair": true,
+      "intent_invariant": true,
+      "result_set_invariant": true
+    },
+    "passed": true,
+    "base_nonempty": true
+  },
+  {
+    "id": "inv-price-08",
+    "model": "oracle",
+    "repeat": 2,
+    "relation": "invariant",
+    "checks": {
+      "successful_pair": true,
+      "intent_invariant": true,
+      "result_set_invariant": true
+    },
+    "passed": true,
+    "base_nonempty": true
+  },
+  {
+    "id": "inv-price-08",
+    "model": "oracle",
+    "repeat": 3,
+    "relation": "invariant",
+    "checks": {
+      "successful_pair": true,
+      "intent_invariant": true,
+      "result_set_invariant": true
+    },
+    "passed": true,
+    "base_nonempty": true
+  },
+  {
+    "id": "inv-preference-01",
+    "model": "local-rules",
+    "repeat": 1,
+    "relation": "invariant",
+    "checks": {
+      "successful_pair": true,
+      "intent_invariant": true,
+      "result_set_invariant": true
+    },
+    "passed": true,
+    "base_nonempty": true
+  },
+  {
+    "id": "inv-preference-01",
+    "model": "local-rules",
+    "repeat": 2,
+    "relation": "invariant",
+    "checks": {
+      "successful_pair": true,
+      "intent_invariant": true,
+      "result_set_invariant": true
+    },
+    "passed": true,
+    "base_nonempty": true
+  },
+  {
+    "id": "inv-preference-01",
+    "model": "local-rules",
+    "repeat": 3,
+    "relation": "invariant",
+    "checks": {
+      "successful_pair": true,
+      "intent_invariant": true,
+      "result_set_invariant": true
+    },
+    "passed": true,
+    "base_nonempty": true
+  },
+  {
+    "id": "inv-preference-01",
+    "model": "oracle",
+    "repeat": 1,
+    "relation": "invariant",
+    "checks": {
+      "successful_pair": true,
+      "intent_invariant": true,
+      "result_set_invariant": true
+    },
+    "passed": true,
+    "base_nonempty": true
+  },
+  {
+    "id": "inv-preference-01",
+    "model": "oracle",
+    "repeat": 2,
+    "relation": "invariant",
+    "checks": {
+      "successful_pair": true,
+      "intent_invariant": true,
+      "result_set_invariant": true
+    },
+    "passed": true,
+    "base_nonempty": true
+  },
+  {
+    "id": "inv-preference-01",
+    "model": "oracle",
+    "repeat": 3,
+    "relation": "invariant",
+    "checks": {
+      "successful_pair": true,
+      "intent_invariant": true,
+      "result_set_invariant": true
+    },
+    "passed": true,
+    "base_nonempty": true
+  },
+  {
+    "id": "inv-negation-01",
+    "model": "local-rules",
+    "repeat": 1,
+    "relation": "invariant",
+    "checks": {
+      "successful_pair": true,
+      "intent_invariant": true,
+      "result_set_invariant": true
+    },
+    "passed": true,
+    "base_nonempty": true
+  },
+  {
+    "id": "inv-negation-01",
+    "model": "local-rules",
+    "repeat": 2,
+    "relation": "invariant",
+    "checks": {
+      "successful_pair": true,
+      "intent_invariant": true,
+      "result_set_invariant": true
+    },
+    "passed": true,
+    "base_nonempty": true
+  },
+  {
+    "id": "inv-negation-01",
+    "model": "local-rules",
+    "repeat": 3,
+    "relation": "invariant",
+    "checks": {
+      "successful_pair": true,
+      "intent_invariant": true,
+      "result_set_invariant": true
+    },
+    "passed": true,
+    "base_nonempty": true
+  },
+  {
+    "id": "inv-negation-01",
+    "model": "oracle",
+    "repeat": 1,
+    "relation": "invariant",
+    "checks": {
+      "successful_pair": true,
+      "intent_invariant": true,
+      "result_set_invariant": true
+    },
+    "passed": true,
+    "base_nonempty": true
+  },
+  {
+    "id": "inv-negation-01",
+    "model": "oracle",
+    "repeat": 2,
+    "relation": "invariant",
+    "checks": {
+      "successful_pair": true,
+      "intent_invariant": true,
+      "result_set_invariant": true
+    },
+    "passed": true,
+    "base_nonempty": true
+  },
+  {
+    "id": "inv-negation-01",
+    "model": "oracle",
+    "repeat": 3,
+    "relation": "invariant",
+    "checks": {
+      "successful_pair": true,
+      "intent_invariant": true,
+      "result_set_invariant": true
+    },
+    "passed": true,
+    "base_nonempty": true
+  },
+  {
+    "id": "inv-confusable-03",
+    "model": "local-rules",
+    "repeat": 1,
+    "relation": "invariant",
+    "checks": {
+      "successful_pair": true,
+      "intent_invariant": true,
+      "result_set_invariant": true
+    },
+    "passed": true,
+    "base_nonempty": true
+  },
+  {
+    "id": "inv-confusable-03",
+    "model": "local-rules",
+    "repeat": 2,
+    "relation": "invariant",
+    "checks": {
+      "successful_pair": true,
+      "intent_invariant": true,
+      "result_set_invariant": true
+    },
+    "passed": true,
+    "base_nonempty": true
+  },
+  {
+    "id": "inv-confusable-03",
+    "model": "local-rules",
+    "repeat": 3,
+    "relation": "invariant",
+    "checks": {
+      "successful_pair": true,
+      "intent_invariant": true,
+      "result_set_invariant": true
+    },
+    "passed": true,
+    "base_nonempty": true
+  },
+  {
+    "id": "inv-confusable-03",
+    "model": "oracle",
+    "repeat": 1,
+    "relation": "invariant",
+    "checks": {
+      "successful_pair": true,
+      "intent_invariant": true,
+      "result_set_invariant": true
+    },
+    "passed": true,
+    "base_nonempty": true
+  },
+  {
+    "id": "inv-confusable-03",
+    "model": "oracle",
+    "repeat": 2,
+    "relation": "invariant",
+    "checks": {
+      "successful_pair": true,
+      "intent_invariant": true,
+      "result_set_invariant": true
+    },
+    "passed": true,
+    "base_nonempty": true
+  },
+  {
+    "id": "inv-confusable-03",
+    "model": "oracle",
+    "repeat": 3,
+    "relation": "invariant",
+    "checks": {
+      "successful_pair": true,
+      "intent_invariant": true,
+      "result_set_invariant": true
+    },
+    "passed": true,
+    "base_nonempty": true
+  },
+  {
+    "id": "inv-core-08",
+    "model": "local-rules",
+    "repeat": 1,
+    "relation": "invariant",
+    "checks": {
+      "successful_pair": true,
+      "intent_invariant": true,
+      "result_set_invariant": true
+    },
+    "passed": true,
+    "base_nonempty": true
+  },
+  {
+    "id": "inv-core-08",
+    "model": "local-rules",
+    "repeat": 2,
+    "relation": "invariant",
+    "checks": {
+      "successful_pair": true,
+      "intent_invariant": true,
+      "result_set_invariant": true
+    },
+    "passed": true,
+    "base_nonempty": true
+  },
+  {
+    "id": "inv-core-08",
+    "model": "local-rules",
+    "repeat": 3,
+    "relation": "invariant",
+    "checks": {
+      "successful_pair": true,
+      "intent_invariant": true,
+      "result_set_invariant": true
+    },
+    "passed": true,
+    "base_nonempty": true
+  },
+  {
+    "id": "inv-core-08",
+    "model": "oracle",
+    "repeat": 1,
+    "relation": "invariant",
+    "checks": {
+      "successful_pair": true,
+      "intent_invariant": true,
+      "result_set_invariant": true
+    },
+    "passed": true,
+    "base_nonempty": true
+  },
+  {
+    "id": "inv-core-08",
+    "model": "oracle",
+    "repeat": 2,
+    "relation": "invariant",
+    "checks": {
+      "successful_pair": true,
+      "intent_invariant": true,
+      "result_set_invariant": true
+    },
+    "passed": true,
+    "base_nonempty": true
+  },
+  {
+    "id": "inv-core-08",
+    "model": "oracle",
+    "repeat": 3,
+    "relation": "invariant",
+    "checks": {
+      "successful_pair": true,
+      "intent_invariant": true,
+      "result_set_invariant": true
+    },
+    "passed": true,
+    "base_nonempty": true
+  },
+  {
+    "id": "dir-negation-01-negation-03",
+    "model": "local-rules",
+    "repeat": 1,
+    "relation": "subset",
+    "checks": {
+      "successful_pair": true,
+      "full_set_subset": true,
+      "excluded_items_absent": true
+    },
+    "passed": true,
+    "base_nonempty": true
+  },
+  {
+    "id": "dir-negation-01-negation-03",
+    "model": "local-rules",
+    "repeat": 2,
+    "relation": "subset",
+    "checks": {
+      "successful_pair": true,
+      "full_set_subset": true,
+      "excluded_items_absent": true
+    },
+    "passed": true,
+    "base_nonempty": true
+  },
+  {
+    "id": "dir-negation-01-negation-03",
+    "model": "local-rules",
+    "repeat": 3,
+    "relation": "subset",
+    "checks": {
+      "successful_pair": true,
+      "full_set_subset": true,
+      "excluded_items_absent": true
+    },
+    "passed": true,
+    "base_nonempty": true
+  },
+  {
+    "id": "dir-negation-01-negation-03",
+    "model": "oracle",
+    "repeat": 1,
+    "relation": "subset",
+    "checks": {
+      "successful_pair": true,
+      "full_set_subset": true,
+      "excluded_items_absent": true
+    },
+    "passed": true,
+    "base_nonempty": true
+  },
+  {
+    "id": "dir-negation-01-negation-03",
+    "model": "oracle",
+    "repeat": 2,
+    "relation": "subset",
+    "checks": {
+      "successful_pair": true,
+      "full_set_subset": true,
+      "excluded_items_absent": true
+    },
+    "passed": true,
+    "base_nonempty": true
+  },
+  {
+    "id": "dir-negation-01-negation-03",
+    "model": "oracle",
+    "repeat": 3,
+    "relation": "subset",
+    "checks": {
+      "successful_pair": true,
+      "full_set_subset": true,
+      "excluded_items_absent": true
+    },
+    "passed": true,
+    "base_nonempty": true
+  },
+  {
+    "id": "dir-preference-03-preference-04",
+    "model": "local-rules",
+    "repeat": 1,
+    "relation": "subset",
+    "checks": {
+      "successful_pair": true,
+      "full_set_subset": true,
+      "excluded_items_absent": false
+    },
+    "passed": false,
+    "base_nonempty": true
+  },
+  {
+    "id": "dir-preference-03-preference-04",
+    "model": "local-rules",
+    "repeat": 2,
+    "relation": "subset",
+    "checks": {
+      "successful_pair": true,
+      "full_set_subset": true,
+      "excluded_items_absent": false
+    },
+    "passed": false,
+    "base_nonempty": true
+  },
+  {
+    "id": "dir-preference-03-preference-04",
+    "model": "local-rules",
+    "repeat": 3,
+    "relation": "subset",
+    "checks": {
+      "successful_pair": true,
+      "full_set_subset": true,
+      "excluded_items_absent": false
+    },
+    "passed": false,
+    "base_nonempty": true
+  },
+  {
+    "id": "dir-preference-03-preference-04",
+    "model": "oracle",
+    "repeat": 1,
+    "relation": "subset",
+    "checks": {
+      "successful_pair": true,
+      "full_set_subset": true,
+      "excluded_items_absent": false
+    },
+    "passed": false,
+    "base_nonempty": true
+  },
+  {
+    "id": "dir-preference-03-preference-04",
+    "model": "oracle",
+    "repeat": 2,
+    "relation": "subset",
+    "checks": {
+      "successful_pair": true,
+      "full_set_subset": true,
+      "excluded_items_absent": false
+    },
+    "passed": false,
+    "base_nonempty": true
+  },
+  {
+    "id": "dir-preference-03-preference-04",
+    "model": "oracle",
+    "repeat": 3,
+    "relation": "subset",
+    "checks": {
+      "successful_pair": true,
+      "full_set_subset": true,
+      "excluded_items_absent": false
+    },
+    "passed": false,
+    "base_nonempty": true
+  },
+  {
+    "id": "dir-price-08-price-08-budget",
+    "model": "local-rules",
+    "repeat": 1,
+    "relation": "subset",
+    "checks": {
+      "successful_pair": true,
+      "full_set_subset": true,
+      "price_cap": true,
+      "excluded_items_absent": true
+    },
+    "passed": true,
+    "base_nonempty": true
+  },
+  {
+    "id": "dir-price-08-price-08-budget",
+    "model": "local-rules",
+    "repeat": 2,
+    "relation": "subset",
+    "checks": {
+      "successful_pair": true,
+      "full_set_subset": true,
+      "price_cap": true,
+      "excluded_items_absent": true
+    },
+    "passed": true,
+    "base_nonempty": true
+  },
+  {
+    "id": "dir-price-08-price-08-budget",
+    "model": "local-rules",
+    "repeat": 3,
+    "relation": "subset",
+    "checks": {
+      "successful_pair": true,
+      "full_set_subset": true,
+      "price_cap": true,
+      "excluded_items_absent": true
+    },
+    "passed": true,
+    "base_nonempty": true
+  },
+  {
+    "id": "dir-price-08-price-08-budget",
+    "model": "oracle",
+    "repeat": 1,
+    "relation": "subset",
+    "checks": {
+      "successful_pair": true,
+      "full_set_subset": true,
+      "price_cap": true,
+      "excluded_items_absent": true
+    },
+    "passed": true,
+    "base_nonempty": true
+  },
+  {
+    "id": "dir-price-08-price-08-budget",
+    "model": "oracle",
+    "repeat": 2,
+    "relation": "subset",
+    "checks": {
+      "successful_pair": true,
+      "full_set_subset": true,
+      "price_cap": true,
+      "excluded_items_absent": true
+    },
+    "passed": true,
+    "base_nonempty": true
+  },
+  {
+    "id": "dir-price-08-price-08-budget",
+    "model": "oracle",
+    "repeat": 3,
+    "relation": "subset",
+    "checks": {
+      "successful_pair": true,
+      "full_set_subset": true,
+      "price_cap": true,
+      "excluded_items_absent": true
+    },
+    "passed": true,
+    "base_nonempty": true
+  },
+  {
+    "id": "dir-core-10-core-10-budget",
+    "model": "local-rules",
+    "repeat": 1,
+    "relation": "subset",
+    "checks": {
+      "successful_pair": true,
+      "full_set_subset": true,
+      "price_cap": true,
+      "excluded_items_absent": true
+    },
+    "passed": true,
+    "base_nonempty": true
+  },
+  {
+    "id": "dir-core-10-core-10-budget",
+    "model": "local-rules",
+    "repeat": 2,
+    "relation": "subset",
+    "checks": {
+      "successful_pair": true,
+      "full_set_subset": true,
+      "price_cap": true,
+      "excluded_items_absent": true
+    },
+    "passed": true,
+    "base_nonempty": true
+  },
+  {
+    "id": "dir-core-10-core-10-budget",
+    "model": "local-rules",
+    "repeat": 3,
+    "relation": "subset",
+    "checks": {
+      "successful_pair": true,
+      "full_set_subset": true,
+      "price_cap": true,
+      "excluded_items_absent": true
+    },
+    "passed": true,
+    "base_nonempty": true
+  },
+  {
+    "id": "dir-core-10-core-10-budget",
+    "model": "oracle",
+    "repeat": 1,
+    "relation": "subset",
+    "checks": {
+      "successful_pair": true,
+      "full_set_subset": true,
+      "price_cap": true,
+      "excluded_items_absent": true
+    },
+    "passed": true,
+    "base_nonempty": true
+  },
+  {
+    "id": "dir-core-10-core-10-budget",
+    "model": "oracle",
+    "repeat": 2,
+    "relation": "subset",
+    "checks": {
+      "successful_pair": true,
+      "full_set_subset": true,
+      "price_cap": true,
+      "excluded_items_absent": true
+    },
+    "passed": true,
+    "base_nonempty": true
+  },
+  {
+    "id": "dir-core-10-core-10-budget",
+    "model": "oracle",
+    "repeat": 3,
+    "relation": "subset",
+    "checks": {
+      "successful_pair": true,
+      "full_set_subset": true,
+      "price_cap": true,
+      "excluded_items_absent": true
+    },
+    "passed": true,
+    "base_nonempty": true
+  }
+]

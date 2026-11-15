@@ -1,0 +1,1085 @@
+{
+  "version": 1,
+  "created_date": "2026-11-15",
+  "purpose": "Public-data pilot provenance and draft annotations; source text and images remain local.",
+  "label_status": "draft",
+  "split": "dev",
+  "packages": [
+    {
+      "local_package": "data/public-eval/taodescribe-pilot",
+      "metadata": {
+        "dataset": "taodescribe",
+        "source_url": "https://github.com/THUDM/KOBE",
+        "source_version": "KOBE-v2-saved.zip-test-20261115",
+        "seed": 20261115,
+        "sampling": "sha256 order; one sample per title/SKU; no label inference",
+        "source_files": [
+          {
+            "name": "taodescribe-test.title",
+            "sha256": "bea62a2d07d7354c2a3d3491a524d1ea8b6b875120fd58874a22e9f76ed7e200"
+          },
+          {
+            "name": "taodescribe-test.desc",
+            "sha256": "dda202a068f4d3118abd939fff9376d9dbafbd61d1ce53b2c336307d7eb42c4c"
+          }
+        ],
+        "sample_count": 8,
+        "eligible_families": 1462,
+        "excluded_rows": 0
+      },
+      "build": {
+        "samples_hash": "2416b03cf6cb3bca4e0fd6e1a1b99bbb6bf2b0b4973277d2d8f2e7e616ac683c",
+        "annotations_hash": "51a44de01bfa4727f8572e2187e277e7f72bc179d8cb85e07224279bd3d00b28",
+        "case_count": 8,
+        "cases_hash": "7c3278a6d18814eff68eca3cb3df303ab7d0a8fa6554241a497582e03499a9f7"
+      },
+      "samples": [
+        {
+          "id": "taodescribe-b771fafe8751e76817d8",
+          "task": "item_parse",
+          "family": "taodescribe-f2c5402a81ab41524e19",
+          "source_id": "1077",
+          "content_sha256": "ce47a6dc6eb4b478cb19125d895febad9ada76c4e07265beb52591f10c840c69",
+          "annotation": {
+            "id": "taodescribe-b771fafe8751e76817d8",
+            "expected": {
+              "fields": {
+                "category": "美妆服饰与周边",
+                "price": null
+              }
+            },
+            "rationale": "标题与文案描述服饰、鞋或手表；原文未给出实际售价。校园和成色没有来源证据，本轮不将应用默认值当作标准答案。只评价分类与价格，不评价文案事实完整性。",
+            "annotator": "Codex依据原文预标注，待团队复核",
+            "label_status": "draft",
+            "split": "dev",
+            "enabled": true
+          },
+          "case_file_sha256": "c2a200350f9d76005a5760a2595d2a2864df12b580432887c277b401690c7b64"
+        },
+        {
+          "id": "taodescribe-30e5538f5215f2c29a5f",
+          "task": "item_parse",
+          "family": "taodescribe-44d4132d76aed0f263cd",
+          "source_id": "4022",
+          "content_sha256": "b8e613341c584712cd508c4530efd07a6ef5baba0b68c392bd8a1b07e6e3a34f",
+          "annotation": {
+            "id": "taodescribe-30e5538f5215f2c29a5f",
+            "expected": {
+              "fields": {
+                "category": "美妆服饰与周边",
+                "price": null
+              }
+            },
+            "rationale": "标题与文案描述服饰、鞋或手表；原文未给出实际售价。校园和成色没有来源证据，本轮不将应用默认值当作标准答案。只评价分类与价格，不评价文案事实完整性。",
+            "annotator": "Codex依据原文预标注，待团队复核",
+            "label_status": "draft",
+            "split": "dev",
+            "enabled": true
+          },
+          "case_file_sha256": "9687716bd203f00ba4af7ceb863a4a99ab8087411b09807f5d39b0a1109f5a00"
+        },
+        {
+          "id": "taodescribe-eecff3ae0c12eeb9b206",
+          "task": "item_parse",
+          "family": "taodescribe-8692188a58b1f9ac3968",
+          "source_id": "5003",
+          "content_sha256": "20369d7939339533915dbe8d523ba291a8120a387834fad49b14a0b4113551e3",
+          "annotation": {
+            "id": "taodescribe-eecff3ae0c12eeb9b206",
+            "expected": {
+              "fields": {
+                "category": "美妆服饰与周边",
+                "price": null
+              }
+            },
+            "rationale": "标题与文案描述服饰、鞋或手表；原文未给出实际售价。校园和成色没有来源证据，本轮不将应用默认值当作标准答案。只评价分类与价格，不评价文案事实完整性。",
+            "annotator": "Codex依据原文预标注，待团队复核",
+            "label_status": "draft",
+            "split": "dev",
+            "enabled": true
+          },
+          "case_file_sha256": "bf9ba64c9bd54600f08340e97034e54abc3fe37512d1e77dc1680af155c04771"
+        },
+        {
+          "id": "taodescribe-8a98325890ea9cc5a561",
+          "task": "item_parse",
+          "family": "taodescribe-eb2f1491f50784e60035",
+          "source_id": "2450",
+          "content_sha256": "1ab176592e6abee6eded21f17466ca21b72221cf380e49a696bf8cfb7d6fc2fc",
+          "annotation": {
+            "id": "taodescribe-8a98325890ea9cc5a561",
+            "expected": {
+              "fields": {
+                "category": "美妆服饰与周边",
+                "price": null
+              }
+            },
+            "rationale": "标题与文案描述服饰、鞋或手表；原文未给出实际售价。校园和成色没有来源证据，本轮不将应用默认值当作标准答案。只评价分类与价格，不评价文案事实完整性。",
+            "annotator": "Codex依据原文预标注，待团队复核",
+            "label_status": "draft",
+            "split": "dev",
+            "enabled": true
+          },
+          "case_file_sha256": "17a5fd0b6b9e9beaf72d363a16197a1885af266277c5c59aa1bb7144b612e8c6"
+        },
+        {
+          "id": "taodescribe-30c3e8ef97b553277299",
+          "task": "item_parse",
+          "family": "taodescribe-fa9c6878bf3bf9e53331",
+          "source_id": "1120",
+          "content_sha256": "264994ad0d0cdbb964cf8667f0113114136327b106efb4bf0934a20f20834097",
+          "annotation": {
+            "id": "taodescribe-30c3e8ef97b553277299",
+            "expected": {
+              "fields": {
+                "category": "美妆服饰与周边",
+                "price": null
+              }
+            },
+            "rationale": "标题与文案描述服饰、鞋或手表；原文未给出实际售价。校园和成色没有来源证据，本轮不将应用默认值当作标准答案。只评价分类与价格，不评价文案事实完整性。",
+            "annotator": "Codex依据原文预标注，待团队复核",
+            "label_status": "draft",
+            "split": "dev",
+            "enabled": true
+          },
+          "case_file_sha256": "9532c09d519ca69286acf1709af519fb18c0f15b33d24c2347bb1b8996885a31"
+        },
+        {
+          "id": "taodescribe-748a2baffa0a1adfcd77",
+          "task": "item_parse",
+          "family": "taodescribe-62c7ca264ca68098fbb5",
+          "source_id": "738",
+          "content_sha256": "8af87241be5f0f5a16d8d8f6bd6b1f937578f37240e11072dc5e9205f711b423",
+          "annotation": {
+            "id": "taodescribe-748a2baffa0a1adfcd77",
+            "expected": {
+              "fields": {
+                "category": "美妆服饰与周边",
+                "price": null
+              }
+            },
+            "rationale": "标题与文案描述服饰、鞋或手表；原文未给出实际售价。校园和成色没有来源证据，本轮不将应用默认值当作标准答案。只评价分类与价格，不评价文案事实完整性。",
+            "annotator": "Codex依据原文预标注，待团队复核",
+            "label_status": "draft",
+            "split": "dev",
+            "enabled": true
+          },
+          "case_file_sha256": "be5de858b8aed1050c59c2b7d85321a610d1c86d0cdfee658550576985a8256d"
+        },
+        {
+          "id": "taodescribe-1e58f86a8fdca83d990d",
+          "task": "item_parse",
+          "family": "taodescribe-8e13db4484c40e43a6ee",
+          "source_id": "2226",
+          "content_sha256": "399252aef7d80b5191aee25f880741fa5c534c4c6ff2f40c51c15b94f1fd93d9",
+          "annotation": {
+            "id": "taodescribe-1e58f86a8fdca83d990d",
+            "expected": {
+              "fields": {
+                "category": "美妆服饰与周边",
+                "price": null
+              }
+            },
+            "rationale": "标题与文案描述服饰、鞋或手表；原文未给出实际售价。校园和成色没有来源证据，本轮不将应用默认值当作标准答案。只评价分类与价格，不评价文案事实完整性。",
+            "annotator": "Codex依据原文预标注，待团队复核",
+            "label_status": "draft",
+            "split": "dev",
+            "enabled": true
+          },
+          "case_file_sha256": "93e8bab8eb6d3ce9b93026fce9bf66884fc6f05cfd43499bd8326db7e209d17f"
+        },
+        {
+          "id": "taodescribe-2b562060b6cb2a3489bd",
+          "task": "item_parse",
+          "family": "taodescribe-116e944abdf16ba61b5e",
+          "source_id": "2310",
+          "content_sha256": "cfb950aaf61281bbd01607f97d17038e1d8a24d670003ce9bc2fcbe282e24060",
+          "annotation": {
+            "id": "taodescribe-2b562060b6cb2a3489bd",
+            "expected": {
+              "fields": {
+                "category": "美妆服饰与周边",
+                "price": null
+              }
+            },
+            "rationale": "标题与文案描述服饰、鞋或手表；原文未给出实际售价。校园和成色没有来源证据，本轮不将应用默认值当作标准答案。只评价分类与价格，不评价文案事实完整性。",
+            "annotator": "Codex依据原文预标注，待团队复核",
+            "label_status": "draft",
+            "split": "dev",
+            "enabled": true
+          },
+          "case_file_sha256": "e9cf9ea5aa64c0ee3920153d75b22b9a918fab92de0dc030b17a03cb6e60cc9e"
+        }
+      ]
+    },
+    {
+      "local_package": "data/public-eval/products10k-pilot",
+      "metadata": {
+        "dataset": "products10k",
+        "source_url": "https://huggingface.co/datasets/nyris/products10k-v1",
+        "source_version": "nyris/products10k-v1@c3a10717605bab88bc195deb987d3d3ffd072698; train; 8-row seed=20261115 subset",
+        "seed": 20261115,
+        "sampling": "sha256 order; one sample per title/SKU; no label inference",
+        "source_files": [
+          {
+            "name": "products10k.csv",
+            "sha256": "cff41d636fcc4d3762bfafd23101b0b5edafb1e7fa92e90979d0493d16fefc3e"
+          }
+        ],
+        "sample_count": 8,
+        "eligible_families": 8,
+        "indexed_images": 8,
+        "upstream_sampling": {
+          "seed": 20261115,
+          "row_indices": [
+            6643,
+            42329,
+            46498,
+            50425,
+            78862,
+            92174,
+            118563,
+            124700
+          ],
+          "population_rows": 141931
+        }
+      },
+      "build": {
+        "samples_hash": "f83f2906324b2c9ff75c264161d730e629540b949411ba6de9c1dc8df7b41006",
+        "annotations_hash": "a4d681d526a139654ecbee3a3b4d5b83fc463a2539b2b6a704460a368c450ba6",
+        "case_count": 8,
+        "cases_hash": "18d87e0a48b5804c765d4500972b54281e569f92ff9a5437287219dcf0995bae"
+      },
+      "samples": [
+        {
+          "id": "products10k-0f6c491df7aabb262792",
+          "task": "vision_draft",
+          "family": "products10k-sku-ac91d2981d1a3d8b5f0b",
+          "source_id": "6644.jpg",
+          "source_sku": "903",
+          "source_group": null,
+          "content_sha256": "8b034b0f10f80a5c83c4ffcd8ae503d7b6fbf5a6c19d19cb7969682814f06041",
+          "annotation": {
+            "id": "products10k-0f6c491df7aabb262792",
+            "expected": {
+              "fields": {
+                "status": "ready",
+                "category": "美妆服饰与周边"
+              },
+              "required_mentions": [
+                [
+                  "外套",
+                  "夹克",
+                  "上衣",
+                  "衣服"
+                ],
+                [
+                  "蓝"
+                ]
+              ],
+              "forbidden_mentions": [
+                "功能正常",
+                "全新",
+                "九成新",
+                "95新",
+                "医学部",
+                "万柳",
+                "售价"
+              ]
+            },
+            "rationale": "主体是蓝色带帽外套，忽略背景栏杆和植物。 可见事实词组在模型调用前确定；未全面判定生成描述的所有事实。",
+            "annotator": "Codex逐图查看后预标注，待团队复核",
+            "label_status": "draft",
+            "split": "dev",
+            "enabled": true
+          },
+          "case_file_sha256": "a5794727fcf6859642ffd925300ebf35e7f75334926ee37756215f9ba43d026d",
+          "assets": [
+            {
+              "path": "images/8b034b0f10f80a5c83c4ffcd8ae503d7b6fbf5a6c19d19cb7969682814f06041.jpg",
+              "sha256": "8b034b0f10f80a5c83c4ffcd8ae503d7b6fbf5a6c19d19cb7969682814f06041"
+            }
+          ]
+        },
+        {
+          "id": "products10k-fe46720ea1a78d111119",
+          "task": "vision_draft",
+          "family": "products10k-sku-b4ee23acd6187852c39b",
+          "source_id": "42330.jpg",
+          "source_sku": "3856",
+          "source_group": null,
+          "content_sha256": "da2c4aca889c50cd91cbfd8e460a7153176d6bda3329695d05624a7369ffa858",
+          "annotation": {
+            "id": "products10k-fe46720ea1a78d111119",
+            "expected": {
+              "fields": {
+                "status": "ready",
+                "category": "宿舍生活与家电"
+              },
+              "required_mentions": [
+                [
+                  "空调"
+                ],
+                [
+                  "白"
+                ]
+              ],
+              "forbidden_mentions": [
+                "功能正常",
+                "全新",
+                "九成新",
+                "95新",
+                "医学部",
+                "万柳",
+                "售价"
+              ]
+            },
+            "rationale": "墙上白色分体式空调；不根据照片推断制冷能力或功能正常。 可见事实词组在模型调用前确定；未全面判定生成描述的所有事实。",
+            "annotator": "Codex逐图查看后预标注，待团队复核",
+            "label_status": "draft",
+            "split": "dev",
+            "enabled": true
+          },
+          "case_file_sha256": "5d6034666d9e4a9042ed94652f13e47f81b9bfea33ba219d9003f6bab6918aad",
+          "assets": [
+            {
+              "path": "images/da2c4aca889c50cd91cbfd8e460a7153176d6bda3329695d05624a7369ffa858.jpg",
+              "sha256": "da2c4aca889c50cd91cbfd8e460a7153176d6bda3329695d05624a7369ffa858"
+            }
+          ]
+        },
+        {
+          "id": "products10k-336c9fd67703426a0dcd",
+          "task": "vision_draft",
+          "family": "products10k-sku-76963ae1e2be19d72fbe",
+          "source_id": "118564.jpg",
+          "source_sku": "8227",
+          "source_group": null,
+          "content_sha256": "d04b16921ce44c6cc81e799501f8d48bb2ab428f7ba917796e1b5a1af089cf04",
+          "annotation": {
+            "id": "products10k-336c9fd67703426a0dcd",
+            "expected": {
+              "fields": {
+                "status": "ready",
+                "category": "美妆服饰与周边"
+              },
+              "required_mentions": [
+                [
+                  "粉底",
+                  "化妆品"
+                ],
+                [
+                  "瓶"
+                ]
+              ],
+              "forbidden_mentions": [
+                "功能正常",
+                "全新",
+                "九成新",
+                "95新",
+                "医学部",
+                "万柳",
+                "售价"
+              ]
+            },
+            "rationale": "商品截图中的粉底液瓶，背景手机状态栏不属于商品事实。 可见事实词组在模型调用前确定；未全面判定生成描述的所有事实。",
+            "annotator": "Codex逐图查看后预标注，待团队复核",
+            "label_status": "draft",
+            "split": "dev",
+            "enabled": true
+          },
+          "case_file_sha256": "c0ca324287c7f08709886a604ecbe41a692e35b737b191a590f047e55d8e184a",
+          "assets": [
+            {
+              "path": "images/d04b16921ce44c6cc81e799501f8d48bb2ab428f7ba917796e1b5a1af089cf04.jpg",
+              "sha256": "d04b16921ce44c6cc81e799501f8d48bb2ab428f7ba917796e1b5a1af089cf04"
+            }
+          ]
+        },
+        {
+          "id": "products10k-7607f257dadd06ef4e22",
+          "task": "vision_draft",
+          "family": "products10k-sku-30b382932724ab818e31",
+          "source_id": "92175.jpg",
+          "source_sku": "6423",
+          "source_group": null,
+          "content_sha256": "d7ea653b333ea1ad4f04acf39e032e1533bf796485ece7a3ac9457604e497f5d",
+          "annotation": {
+            "id": "products10k-7607f257dadd06ef4e22",
+            "expected": {
+              "fields": {
+                "status": "ready",
+                "category": "美妆服饰与周边"
+              },
+              "required_mentions": [
+                [
+                  "玩具",
+                  "积木",
+                  "模型"
+                ],
+                [
+                  "绿"
+                ]
+              ],
+              "forbidden_mentions": [
+                "功能正常",
+                "全新",
+                "九成新",
+                "95新",
+                "医学部",
+                "万柳",
+                "售价"
+              ]
+            },
+            "rationale": "绿色积木玩具巴士；本轮将玩具归周边，待团队复核分类约定。 可见事实词组在模型调用前确定；未全面判定生成描述的所有事实。",
+            "annotator": "Codex逐图查看后预标注，待团队复核",
+            "label_status": "draft",
+            "split": "dev",
+            "enabled": true
+          },
+          "case_file_sha256": "6b0c5a7fa08dd4c1efc61047d5aba5172bec7fd42035731be00d8d264a58cd9c",
+          "assets": [
+            {
+              "path": "images/d7ea653b333ea1ad4f04acf39e032e1533bf796485ece7a3ac9457604e497f5d.jpg",
+              "sha256": "d7ea653b333ea1ad4f04acf39e032e1533bf796485ece7a3ac9457604e497f5d"
+            }
+          ]
+        },
+        {
+          "id": "products10k-5f1326f2aa0cb9a6b63f",
+          "task": "vision_draft",
+          "family": "products10k-sku-80b6178c0fcc12d06708",
+          "source_id": "124701.jpg",
+          "source_sku": "8577",
+          "source_group": null,
+          "content_sha256": "955344f53b70d7f2c95250b055b2cf73ee66b97266b5bf3eba4519dd8742da6a",
+          "annotation": {
+            "id": "products10k-5f1326f2aa0cb9a6b63f",
+            "expected": {
+              "fields": {
+                "status": "ready",
+                "category": "宿舍生活与家电"
+              },
+              "required_mentions": [
+                [
+                  "牙刷"
+                ],
+                [
+                  "蓝"
+                ]
+              ],
+              "forbidden_mentions": [
+                "功能正常",
+                "全新",
+                "九成新",
+                "95新",
+                "医学部",
+                "万柳",
+                "售价"
+              ]
+            },
+            "rationale": "同类牙刷包装合照，按同款商品识别；个人清洁日用品归宿舍生活。 可见事实词组在模型调用前确定；未全面判定生成描述的所有事实。",
+            "annotator": "Codex逐图查看后预标注，待团队复核",
+            "label_status": "draft",
+            "split": "dev",
+            "enabled": true
+          },
+          "case_file_sha256": "2585583d659f6558d90ef3bcf4805a38386517a32979c27a8667931fbf0c75e9",
+          "assets": [
+            {
+              "path": "images/955344f53b70d7f2c95250b055b2cf73ee66b97266b5bf3eba4519dd8742da6a.jpg",
+              "sha256": "955344f53b70d7f2c95250b055b2cf73ee66b97266b5bf3eba4519dd8742da6a"
+            }
+          ]
+        },
+        {
+          "id": "products10k-3e0c072d347985719aaf",
+          "task": "vision_draft",
+          "family": "products10k-sku-bbc802655720b64c4e6f",
+          "source_id": "78863.jpg",
+          "source_sku": "5573",
+          "source_group": null,
+          "content_sha256": "578adef15e6fe4ed62916d913f4c880056b2f3020a398b347f31a405e4b555db",
+          "annotation": {
+            "id": "products10k-3e0c072d347985719aaf",
+            "expected": {
+              "fields": {
+                "status": "ready",
+                "category": null
+              },
+              "required_mentions": [
+                [
+                  "活络油"
+                ],
+                [
+                  "瓶"
+                ]
+              ],
+              "forbidden_mentions": [
+                "功能正常",
+                "全新",
+                "九成新",
+                "95新",
+                "医学部",
+                "万柳",
+                "售价"
+              ]
+            },
+            "rationale": "药油瓶主体及文字清楚；现有六类没有药品分类，类别留空，不强映射为美妆。 可见事实词组在模型调用前确定；未全面判定生成描述的所有事实。",
+            "annotator": "Codex逐图查看后预标注，待团队复核",
+            "label_status": "draft",
+            "split": "dev",
+            "enabled": true
+          },
+          "case_file_sha256": "6b6075d6c82a394a88b4e27f50c6b8b93faee3b23f6b9f062c3ba2ebb15a0d44",
+          "assets": [
+            {
+              "path": "images/578adef15e6fe4ed62916d913f4c880056b2f3020a398b347f31a405e4b555db.jpg",
+              "sha256": "578adef15e6fe4ed62916d913f4c880056b2f3020a398b347f31a405e4b555db"
+            }
+          ]
+        },
+        {
+          "id": "products10k-f0f91c155a18abb2f0db",
+          "task": "vision_draft",
+          "family": "products10k-sku-771d084fd5714fd899b5",
+          "source_id": "46499.jpg",
+          "source_sku": "4036",
+          "source_group": null,
+          "content_sha256": "6269cb58c84de83957a87ddd08feca77cdba8070ece21c6966f407e1236c7045",
+          "annotation": {
+            "id": "products10k-f0f91c155a18abb2f0db",
+            "expected": {
+              "fields": {
+                "status": "ready",
+                "category": "数码与影音"
+              },
+              "required_mentions": [
+                [
+                  "电视"
+                ],
+                [
+                  "黑"
+                ]
+              ],
+              "forbidden_mentions": [
+                "功能正常",
+                "全新",
+                "九成新",
+                "95新",
+                "医学部",
+                "万柳",
+                "售价"
+              ]
+            },
+            "rationale": "黑色边框电视，屏幕有图像；电视归入影音类别，屏幕亮不等于全部功能正常。 可见事实词组在模型调用前确定；未全面判定生成描述的所有事实。",
+            "annotator": "Codex逐图查看后预标注，待团队复核",
+            "label_status": "draft",
+            "split": "dev",
+            "enabled": true
+          },
+          "case_file_sha256": "8035c568b1c3e1dee96d227f504713ac8ec905703036c6a82cabbf8c34b802f7",
+          "assets": [
+            {
+              "path": "images/6269cb58c84de83957a87ddd08feca77cdba8070ece21c6966f407e1236c7045.jpg",
+              "sha256": "6269cb58c84de83957a87ddd08feca77cdba8070ece21c6966f407e1236c7045"
+            }
+          ]
+        },
+        {
+          "id": "products10k-8cf21be3f3a8cce8ec22",
+          "task": "vision_draft",
+          "family": "products10k-sku-c31d5be12df22c278d4d",
+          "source_id": "50426.jpg",
+          "source_sku": "4206",
+          "source_group": null,
+          "content_sha256": "d1f8965e5be085d5ecf63a00cfcfa1088526a89e3464b428ad1d0dd73bb55351",
+          "annotation": {
+            "id": "products10k-8cf21be3f3a8cce8ec22",
+            "expected": {
+              "fields": {
+                "status": "ready",
+                "category": "宿舍生活与家电"
+              },
+              "required_mentions": [
+                [
+                  "电饭煲",
+                  "电饭锅"
+                ],
+                [
+                  "白"
+                ]
+              ],
+              "forbidden_mentions": [
+                "功能正常",
+                "全新",
+                "九成新",
+                "95新",
+                "医学部",
+                "万柳",
+                "售价"
+              ]
+            },
+            "rationale": "电饭煲外壳以白色为主，品牌可见；不推断容量和工作状态。 可见事实词组在模型调用前确定；未全面判定生成描述的所有事实。",
+            "annotator": "Codex逐图查看后预标注，待团队复核",
+            "label_status": "draft",
+            "split": "dev",
+            "enabled": true
+          },
+          "case_file_sha256": "deebe72ef207f3a29458c18b937f14d43012ebfa9c31b459bcb91f5d850ff93d",
+          "assets": [
+            {
+              "path": "images/d1f8965e5be085d5ecf63a00cfcfa1088526a89e3464b428ad1d0dd73bb55351.jpg",
+              "sha256": "d1f8965e5be085d5ecf63a00cfcfa1088526a89e3464b428ad1d0dd73bb55351"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "runs": [
+    {
+      "local_run": "test-results/public-pilot-text",
+      "manifest": {
+        "run_id": "20261115T093543Z-d01f8aaf",
+        "created_at": "2026-11-15T09:35:43.874976+00:00",
+        "git_sha": "1bbf607f99f7378e57e13b390dea8d02e86bbe12",
+        "dirty": true,
+        "implementation_hash": "c3a9d8021f1bfd7afa94dd6ab1c87e82c0a72fd5a777e611aa8c1bf6f2cb5dff",
+        "dataset_hash": "85983f3048251150d41b601a1b26eec3e1007fee30301d89809af3cc87254986",
+        "scorer_version": "1.1.0",
+        "policy_hash": "069041535083d95812c6f2fdd1168e3dd8b94f3ab80fece2f22578385975d0ef",
+        "models": [
+          {
+            "id": "deepseek-pilot",
+            "mode": "remote",
+            "tasks": [
+              "item_parse"
+            ],
+            "model": "deepseek-chat",
+            "base_url": "https://api.deepseek.com/v1",
+            "thinking": null,
+            "temperature": 0.1,
+            "max_tokens": null,
+            "timeout": 60.0,
+            "retries": 0,
+            "pricing": null
+          }
+        ],
+        "cases": [
+          {
+            "id": "taodescribe-1e58f86a8fdca83d990d",
+            "hash": "e3ec143eb60710bf64b4bec15f6492a766c4644fe273dc85a53199bcf64bdfd3",
+            "task": "item_parse",
+            "split": "dev",
+            "label_status": "draft"
+          },
+          {
+            "id": "taodescribe-2b562060b6cb2a3489bd",
+            "hash": "02e1e58c44344943b070caa2074d38b9fbed921646ef33abcd789d4a3fbab82e",
+            "task": "item_parse",
+            "split": "dev",
+            "label_status": "draft"
+          },
+          {
+            "id": "taodescribe-30c3e8ef97b553277299",
+            "hash": "1d29b25a7ba540ae506b73ca506ffdf9c9806fffd070c7b2f309eccf1c45a310",
+            "task": "item_parse",
+            "split": "dev",
+            "label_status": "draft"
+          },
+          {
+            "id": "taodescribe-30e5538f5215f2c29a5f",
+            "hash": "a2be992877757ad0d7b49e3998102e6e96b5a1f6dbdafc21cea8aa80356f1218",
+            "task": "item_parse",
+            "split": "dev",
+            "label_status": "draft"
+          },
+          {
+            "id": "taodescribe-748a2baffa0a1adfcd77",
+            "hash": "0ad92d627956b269cc4c47513c2c13a04b3e232334ee507b059976db19a66374",
+            "task": "item_parse",
+            "split": "dev",
+            "label_status": "draft"
+          },
+          {
+            "id": "taodescribe-8a98325890ea9cc5a561",
+            "hash": "06748b84e18b476ef94a1157e28eeb15d8a06c1680a9ca1cf6a656d720ceb098",
+            "task": "item_parse",
+            "split": "dev",
+            "label_status": "draft"
+          },
+          {
+            "id": "taodescribe-b771fafe8751e76817d8",
+            "hash": "ed9691fa1d0626a0d61ea44a90b13b2974349dce0d22f864606bd709c3d91a9c",
+            "task": "item_parse",
+            "split": "dev",
+            "label_status": "draft"
+          },
+          {
+            "id": "taodescribe-eecff3ae0c12eeb9b206",
+            "hash": "5b426fb2cc150f83f1e31807af23f207326d4c9cfed61f395be883a186cce5a1",
+            "task": "item_parse",
+            "split": "dev",
+            "label_status": "draft"
+          }
+        ],
+        "repeats": 1,
+        "seed": 20261115,
+        "concurrency": 1,
+        "max_remote_requests": 8,
+        "worst_case_remote_requests": 8,
+        "complete": true,
+        "completed_records": 8,
+        "expected_records": 8
+      },
+      "summary": {
+        "run_id": "20261115T093543Z-d01f8aaf",
+        "complete": true,
+        "record_count": 8,
+        "policy_version": "1.0",
+        "groups": [
+          {
+            "model": "deepseek-pilot",
+            "task": "item_parse",
+            "split": "dev",
+            "count": 8,
+            "case_count": 8,
+            "expected_count": 8,
+            "complete": true,
+            "passed_count": 8,
+            "pass_rate": 1.0,
+            "mean_score": 1.0,
+            "error_count": 0,
+            "error_rate": 0.0,
+            "fallback_count": 0,
+            "raw_pass_rate": 1.0,
+            "raw_mean_score": 1.0,
+            "application_pass_rate": 1.0,
+            "schema_valid_rate": 1.0,
+            "latency_samples": 8,
+            "mean_latency_ms": 1613.210125,
+            "p50_latency_ms": 1642.609,
+            "p95_latency_ms": 1969.7953499999999,
+            "attempt_count": 8,
+            "unknown_cost_count": 8,
+            "known_cost_subtotal_cny": 0,
+            "total_cost_cny": null,
+            "mean_cost_cny": null,
+            "errors": {},
+            "prompt_hashes": [
+              "247e77a1d712461b6947480a5837ed575e6f0726b1a6656d12db9a264995d10e"
+            ],
+            "cost_per_pass_cny": null,
+            "macro_f1": null,
+            "false_match_rate": null,
+            "verdict_count": 0,
+            "confusion_matrix": {},
+            "raw_classification": {
+              "macro_f1": null,
+              "false_match_rate": null,
+              "verdict_count": 0,
+              "confusion_matrix": {}
+            }
+          }
+        ],
+        "selection": [
+          {
+            "task": "item_parse",
+            "status": "insufficient_evidence",
+            "selected_model": null,
+            "reasons": [
+              "选型规则仍为草案；团队须在保留集评测前确认并设为 confirmed 或 locked。",
+              "当前为开发集或本地基线诊断，尚无保留集对照。",
+              "保留集 0 例，少于预设的 20 例。",
+              "同一任务至少需要两个远程候选模型的完整对照。"
+            ],
+            "candidates": []
+          }
+        ]
+      },
+      "artifact_sha256": {
+        "manifest.json": "2bae0e00e3c7878f55309e8e795928ec19d1328930568866aa1887e8bdaba0e3",
+        "cases.json": "d7d393d072cbedcade0fa47aec52a69c8753a7ab93b7099f08dde06a345caf0e",
+        "records.jsonl": "234ffab5f87ddb86d4ea9aead2b287537893fddfac30d4d3e9355a034b8c2a4e",
+        "summary.json": "a11bf8ad44a9b809050eadfebcb29933a436031a9fc76789ed98660033780ad6",
+        "report.md": "ff1f4bd4b8646a18d7098dded30856786a74b51f325f545b73ca76f72b4b8b8d"
+      },
+      "results": [
+        {
+          "case_id": "taodescribe-30c3e8ef97b553277299",
+          "status": "ok",
+          "passed": true,
+          "failed_checks": []
+        },
+        {
+          "case_id": "taodescribe-b771fafe8751e76817d8",
+          "status": "ok",
+          "passed": true,
+          "failed_checks": []
+        },
+        {
+          "case_id": "taodescribe-8a98325890ea9cc5a561",
+          "status": "ok",
+          "passed": true,
+          "failed_checks": []
+        },
+        {
+          "case_id": "taodescribe-2b562060b6cb2a3489bd",
+          "status": "ok",
+          "passed": true,
+          "failed_checks": []
+        },
+        {
+          "case_id": "taodescribe-eecff3ae0c12eeb9b206",
+          "status": "ok",
+          "passed": true,
+          "failed_checks": []
+        },
+        {
+          "case_id": "taodescribe-30e5538f5215f2c29a5f",
+          "status": "ok",
+          "passed": true,
+          "failed_checks": []
+        },
+        {
+          "case_id": "taodescribe-1e58f86a8fdca83d990d",
+          "status": "ok",
+          "passed": true,
+          "failed_checks": []
+        },
+        {
+          "case_id": "taodescribe-748a2baffa0a1adfcd77",
+          "status": "ok",
+          "passed": true,
+          "failed_checks": []
+        }
+      ]
+    },
+    {
+      "local_run": "test-results/public-pilot-vision",
+      "manifest": {
+        "run_id": "20261115T093544Z-146de110",
+        "created_at": "2026-11-15T09:35:44.081341+00:00",
+        "git_sha": "1bbf607f99f7378e57e13b390dea8d02e86bbe12",
+        "dirty": true,
+        "implementation_hash": "c3a9d8021f1bfd7afa94dd6ab1c87e82c0a72fd5a777e611aa8c1bf6f2cb5dff",
+        "dataset_hash": "7e92249f464603282e39df5d0ee7dc92756da67e945d54d3fff28c991b37d3fb",
+        "scorer_version": "1.1.0",
+        "policy_hash": "069041535083d95812c6f2fdd1168e3dd8b94f3ab80fece2f22578385975d0ef",
+        "models": [
+          {
+            "id": "qwen-vl-pilot",
+            "mode": "remote",
+            "tasks": [
+              "vision_draft"
+            ],
+            "model": "qwen3-vl-plus",
+            "base_url": "https://api.openlux.ai/v1",
+            "thinking": null,
+            "temperature": 0.1,
+            "max_tokens": null,
+            "timeout": 60.0,
+            "retries": 0,
+            "pricing": null
+          }
+        ],
+        "cases": [
+          {
+            "id": "products10k-0f6c491df7aabb262792",
+            "hash": "269aa347963bc7220d2522dfab59f38fa7ee122f8e6aa1d7f51326164010caed",
+            "task": "vision_draft",
+            "split": "dev",
+            "label_status": "draft"
+          },
+          {
+            "id": "products10k-336c9fd67703426a0dcd",
+            "hash": "5e4a4bdf6690f75e6cd9a616c2eb25215932de687203b3b90c22af993c8c02f7",
+            "task": "vision_draft",
+            "split": "dev",
+            "label_status": "draft"
+          },
+          {
+            "id": "products10k-3e0c072d347985719aaf",
+            "hash": "28b2b463e7197b0cfbae3ffbbf2458ac7e52c4da10d7a362d714cc19f00518f3",
+            "task": "vision_draft",
+            "split": "dev",
+            "label_status": "draft"
+          },
+          {
+            "id": "products10k-5f1326f2aa0cb9a6b63f",
+            "hash": "37aacbc0dfdec13f859fc96b7b213874b5fb2fb33c4b31e1f00f1133dd0ce04c",
+            "task": "vision_draft",
+            "split": "dev",
+            "label_status": "draft"
+          },
+          {
+            "id": "products10k-7607f257dadd06ef4e22",
+            "hash": "ef0ba58aa0bb03366f275ebb2681ecb0f5fb3f047735de8d924f982ef79934db",
+            "task": "vision_draft",
+            "split": "dev",
+            "label_status": "draft"
+          },
+          {
+            "id": "products10k-8cf21be3f3a8cce8ec22",
+            "hash": "bfbc9d9986c57ea510723b56673232d8ca3e1820a2555c7a733cce10931ef7e5",
+            "task": "vision_draft",
+            "split": "dev",
+            "label_status": "draft"
+          },
+          {
+            "id": "products10k-f0f91c155a18abb2f0db",
+            "hash": "b18b608d7eb1795365bdfde65f741175108ee0e3b9209a3bba5f0d69b58200f1",
+            "task": "vision_draft",
+            "split": "dev",
+            "label_status": "draft"
+          },
+          {
+            "id": "products10k-fe46720ea1a78d111119",
+            "hash": "f98dc1a4787cd306f71c1cf803a596af72a8cbc1718ada5ccfe05f75b63c139a",
+            "task": "vision_draft",
+            "split": "dev",
+            "label_status": "draft"
+          }
+        ],
+        "repeats": 1,
+        "seed": 20261115,
+        "concurrency": 1,
+        "max_remote_requests": 8,
+        "worst_case_remote_requests": 8,
+        "complete": true,
+        "completed_records": 8,
+        "expected_records": 8
+      },
+      "summary": {
+        "run_id": "20261115T093544Z-146de110",
+        "complete": true,
+        "record_count": 8,
+        "policy_version": "1.0",
+        "groups": [
+          {
+            "model": "qwen-vl-pilot",
+            "task": "vision_draft",
+            "split": "dev",
+            "count": 8,
+            "case_count": 8,
+            "expected_count": 8,
+            "complete": true,
+            "passed_count": 6,
+            "pass_rate": 0.75,
+            "mean_score": 0.9772727272727273,
+            "error_count": 0,
+            "error_rate": 0.0,
+            "fallback_count": 0,
+            "raw_pass_rate": 0.75,
+            "raw_mean_score": 0.9772727272727273,
+            "application_pass_rate": 0.75,
+            "schema_valid_rate": 1.0,
+            "latency_samples": 8,
+            "mean_latency_ms": 10093.954,
+            "p50_latency_ms": 8527.434,
+            "p95_latency_ms": 18224.769149999996,
+            "attempt_count": 8,
+            "unknown_cost_count": 8,
+            "known_cost_subtotal_cny": 0,
+            "total_cost_cny": null,
+            "mean_cost_cny": null,
+            "errors": {},
+            "prompt_hashes": [
+              "ba9c15b3e10bc5ee3c7d1b1c32f2234feecf8681e65ffeb9ded6533bd6a38ea1"
+            ],
+            "cost_per_pass_cny": null,
+            "macro_f1": null,
+            "false_match_rate": null,
+            "verdict_count": 0,
+            "confusion_matrix": {},
+            "raw_classification": {
+              "macro_f1": null,
+              "false_match_rate": null,
+              "verdict_count": 0,
+              "confusion_matrix": {}
+            },
+            "category_accuracy": 0.75,
+            "status_accuracy": 1.0
+          }
+        ],
+        "selection": [
+          {
+            "task": "vision_draft",
+            "status": "insufficient_evidence",
+            "selected_model": null,
+            "reasons": [
+              "选型规则仍为草案；团队须在保留集评测前确认并设为 confirmed 或 locked。",
+              "当前为开发集或本地基线诊断，尚无保留集对照。",
+              "保留集 0 例，少于预设的 20 例。",
+              "同一任务至少需要两个远程候选模型的完整对照。",
+              "未配置该任务的选型门槛。"
+            ],
+            "candidates": []
+          }
+        ]
+      },
+      "artifact_sha256": {
+        "manifest.json": "502f37224d5579eeceb95a2331ab07be918419a78e6fc48d380442ee716c59dd",
+        "cases.json": "35f8272c04247055d2c8eb809bd306d2f2289f76d85cce0e3874fa5afb5c532c",
+        "records.jsonl": "23619879d639debc9ad473a6b08200fd6117ad9469a3c2b9cc5ed6f5c0323fcb",
+        "summary.json": "3980e4c871693dec311407c6309f2a08b1ad809a960bdea9727b118b0a180423",
+        "report.md": "ccc58fd3c9585edab7fcfcab22e1c48f8ae6b4f1a68ea25586d134f42a571db4"
+      },
+      "results": [
+        {
+          "case_id": "products10k-3e0c072d347985719aaf",
+          "status": "ok",
+          "passed": false,
+          "failed_checks": [
+            "category"
+          ]
+        },
+        {
+          "case_id": "products10k-f0f91c155a18abb2f0db",
+          "status": "ok",
+          "passed": true,
+          "failed_checks": []
+        },
+        {
+          "case_id": "products10k-8cf21be3f3a8cce8ec22",
+          "status": "ok",
+          "passed": true,
+          "failed_checks": []
+        },
+        {
+          "case_id": "products10k-336c9fd67703426a0dcd",
+          "status": "ok",
+          "passed": true,
+          "failed_checks": []
+        },
+        {
+          "case_id": "products10k-fe46720ea1a78d111119",
+          "status": "ok",
+          "passed": true,
+          "failed_checks": []
+        },
+        {
+          "case_id": "products10k-5f1326f2aa0cb9a6b63f",
+          "status": "ok",
+          "passed": true,
+          "failed_checks": []
+        },
+        {
+          "case_id": "products10k-0f6c491df7aabb262792",
+          "status": "ok",
+          "passed": true,
+          "failed_checks": []
+        },
+        {
+          "case_id": "products10k-7607f257dadd06ef4e22",
+          "status": "ok",
+          "passed": false,
+          "failed_checks": [
+            "category"
+          ]
+        }
+      ]
+    }
+  ]
+}

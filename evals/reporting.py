@@ -14,9 +14,11 @@ from pathlib import Path
 
 
 VERDICTS = ("MATCH", "NO_MATCH", "UNCERTAIN")
-TASKS = {"intent_parse", "wanted_parse", "item_parse", "candidate_review"}
+TASKS = {"intent_parse", "wanted_parse", "item_parse", "candidate_review", "vision_draft", "smart_search"}
 RATE_METRICS = {"pass_rate", "mean_score", "error_rate", "schema_valid_rate", "macro_f1", "false_match_rate",
-                "raw_pass_rate", "raw_mean_score", "application_pass_rate"}
+                "raw_pass_rate", "raw_mean_score", "application_pass_rate", "mrr", "map_at_5", "recall_at_10",
+                "zero_result_error_rate", "consistency_rate", "first_schema_valid_rate", "metamorphic_pass_rate"}
+LATENCY_METRICS = {"p95_latency_ms", "p95_parse_latency_ms"}
 
 
 def validate_policy(policy):
@@ -42,10 +44,10 @@ def validate_policy(policy):
         if not isinstance(rules, dict) or not rules:
             raise ValueError(f"{task} 的选型门槛不能为空")
         for name, value in rules.items():
-            if not name.startswith(("min_", "max_")) or name[4:] not in RATE_METRICS:
+            if not name.startswith(("min_", "max_")) or name[4:] not in RATE_METRICS | LATENCY_METRICS:
                 raise ValueError(f"未知选型指标：{task}.{name}")
-            if not _number(value) or not 0 <= value <= 1:
-                raise ValueError(f"{task}.{name} 必须是 0 到 1 之间的有限数值")
+            if not _number(value) or value < 0 or (name[4:] in RATE_METRICS and value > 1):
+                raise ValueError(f"{task}.{name} 必须是非负有限数值，比例指标不能超过 1")
     return policy
 
 
@@ -162,6 +164,14 @@ def _group_summary(rows, manifest):
                                     if summary["total_cost_cny"] is not None and summary["passed_count"] else None)
     summary.update(_classification(rows, "score"))
     summary["raw_classification"] = _classification(rows, "raw_score")
+    if task == 'vision_draft':
+        for field, metric in [('category', 'category_accuracy'), ('status', 'status_accuracy')]:
+            # Execution/schema failures are included as failures when all cases assert these fields.
+            success = sum(r.get('status') == 'ok' and any(c['field'] == field and c['passed']
+                          for c in r['score']['checks']) for r in rows)
+            summary[metric] = success / n
+    from .extended_reporting import group_diagnostics
+    summary.update(group_diagnostics(rows, manifest))
     return summary
 
 
@@ -216,6 +226,8 @@ def _select(groups, records, manifest, policy):
             decision["reasons"].append("逐例结果中仍有未复核标签。")
         if task not in policy.get("tasks", {}):
             decision["reasons"].append("未配置该任务的选型门槛。")
+        if task == 'smart_search' and (manifest.get('catalog') or {}).get('label_status') != 'reviewed':
+            decision['reasons'].append('固定商品库尚未人工复核。')
         for group in candidates:
             failures = _gate(group, policy.get("tasks", {}).get(task, {}))
             decision["candidates"].append({"model": group["model"], "meets_gates": not failures, "failures": failures})
@@ -249,9 +261,27 @@ def summarize(records, manifest, policy):
     for record in records:
         grouped[record["model"], record["task"], record["split"]].append(record)
     groups = [_group_summary(rows, manifest) for _, rows in sorted(grouped.items())]
+    from .diagnostics import baseline_comparisons
+    from .search_eval import evaluate_relations
+    metamorphic = evaluate_relations(records, manifest)
+    case_splits = {c['id']: c['split'] for c in manifest['cases']}
+    relation_splits = {r['id']: case_splits[r['base']] for r in manifest.get('relations', [])}
+    for g in groups:
+        pairs = [r for r in metamorphic if r['model'] == g['model'] and g['task'] == 'smart_search'
+                 and relation_splits[r['id']] == g['split']]
+        g['metamorphic_pass_rate'] = _mean([r['passed'] for r in pairs])
+    slices = []
+    for (model, task, split), rows in sorted(grouped.items()):
+        for tag in sorted({t for r in rows for t in r.get('tags', []) if t.startswith('slice:')}):
+            selected = [r for r in rows if tag in r.get('tags', [])]
+            ids = {r['case_id'] for r in selected}
+            subset = {**manifest, 'cases': [c for c in manifest['cases'] if c['id'] in ids]}
+            slices.append({'slice': tag.removeprefix('slice:'), **_group_summary(selected, subset)})
     return {"run_id": manifest.get("run_id"), "complete": manifest.get("complete") is True,
             "record_count": len(records), "policy_version": policy.get("version"),
-            "groups": groups, "selection": _select(groups, records, manifest, policy)}
+            "groups": groups, "slices": slices, "metamorphic": metamorphic,
+            "baseline_comparisons": baseline_comparisons(records, manifest),
+            "selection": _select(groups, records, manifest, policy)}
 
 
 def _cell(value):
@@ -295,6 +325,12 @@ def _report_markdown(summary, manifest, policy, records):
         if g["macro_f1"] is not None or g["raw_pass_rate"] is not None or g["application_pass_rate"] is not None:
             lines.append(f"- `{_cell(g['model'])}`／{g['task']}／{g['split']}：原始结果通过率 {_pct(g['raw_pass_rate'])}，应用结果通过率 {_pct(g['application_pass_rate'])}，macro-F1 {_fmt(g['macro_f1'])}，错误推荐率 {_pct(g['false_match_rate'])}，回退 {g['fallback_count']} 次。")
     failed = [r for r in records if not _passed(r) or r.get("status") != "ok"]
+    if any(g['task'] == 'vision_draft' for g in summary['groups']):
+        lines.extend(['', '## 图片测评', '',
+            '复用线上图片预处理、提示词和输出校验；每次执行直接调用模型，不使用业务缓存。可见事实按预先标注的词组匹配，无法覆盖所有语义错误，仍需人工检查描述与图片是否一致。', ''])
+        for g in summary['groups']:
+            if g['task'] == 'vision_draft':
+                lines.append(f"- `{_cell(g['model'])}`：类别准确率 {_pct(g.get('category_accuracy'))}；状态准确率 {_pct(g.get('status_accuracy'))}。")
     lines.extend(["", "## 失败用例", "", "完整结果与输出见 records.jsonl；下表列出最多 100 条失败记录。", "",
                   "| 用例 | 模型 | 重复 | 原因 |", "| --- | --- | ---: | --- |"])
     for row in failed[:100]:
@@ -302,7 +338,8 @@ def _report_markdown(summary, manifest, policy, records):
         lines.append(f"| {_cell(row['case_id'])} | {_cell(row['model'])} | {row['repeat']} | {_cell(reason or '未通过评分')} |")
     if not failed:
         lines.append("| 无 | — | — | 本次已执行用例均通过 |")
-    return "\n".join(lines) + "\n"
+    from .extended_reporting import report_extension
+    return "\n".join(lines) + "\n" + report_extension(summary)
 
 
 def write_reports(output_dir, records, manifest, policy):
@@ -315,10 +352,34 @@ def write_reports(output_dir, records, manifest, policy):
     _write_json(output_dir / "selection_policy.json", policy)
     (output_dir / "records.jsonl").write_text("".join(_json(r) + "\n" for r in records), encoding="utf-8")
     fields = ["model", "task", "split", "case_count", "count", "expected_count", "complete", "pass_rate", "mean_score", "error_rate", "schema_valid_rate", "raw_pass_rate", "application_pass_rate", "macro_f1", "false_match_rate", "p50_latency_ms", "p95_latency_ms", "attempt_count", "total_cost_cny", "mean_cost_cny", "unknown_cost_count"]
+    fields += ['mrr', 'map_at_5', 'recall_at_10', 'retrieval_positive_count', 'zero_result_error_rate',
+               'zero_result_evaluated_count', 'first_schema_valid_rate', 'consistency_rate',
+               'metamorphic_pass_rate', 'p95_parse_latency_ms', 'p95_search_latency_ms', 'category_accuracy', 'status_accuracy']
     with (output_dir / "summary.csv").open("w", newline="", encoding="utf-8-sig") as stream:
         writer = csv.DictWriter(stream, fields, extrasaction="ignore")
         writer.writeheader()
         writer.writerows(summary["groups"])
+    with (output_dir / 'slices.csv').open('w', newline='', encoding='utf-8-sig') as stream:
+        writer = csv.DictWriter(stream, ['slice', *fields], extrasaction='ignore')
+        writer.writeheader()
+        writer.writerows(summary['slices'])
+    _write_json(output_dir / 'metamorphic.json', summary['metamorphic'])
+    diagnostic_rows = []
+    for group in summary['groups']:
+        identity = {k: group[k] for k in ('model', 'task', 'split')}
+        diagnostics = group.get('parse_diagnostics', {})
+        for kind in ('fields', 'sets'):
+            for field, metrics in diagnostics.get(kind, {}).items():
+                for metric, value in metrics.items():
+                    if _number(value):
+                        diagnostic_rows.append({**identity, 'field': field, 'kind': kind, 'metric': metric, 'value': value})
+        for metric, value in (diagnostics.get('clarification') or {}).items():
+            if _number(value):
+                diagnostic_rows.append({**identity, 'field': 'clarification', 'kind': 'trigger', 'metric': metric, 'value': value})
+    with (output_dir / 'parse_metrics.csv').open('w', newline='', encoding='utf-8-sig') as stream:
+        writer = csv.DictWriter(stream, ['model', 'task', 'split', 'field', 'kind', 'metric', 'value'])
+        writer.writeheader()
+        writer.writerows(diagnostic_rows)
     (output_dir / "report.md").write_text(_report_markdown(summary, manifest, policy, records), encoding="utf-8")
     return summary
 
@@ -337,6 +398,11 @@ def compare_runs(baseline_dir, current_dir, output_dir):
     for field in ("scorer_version", "repeats"):
         if baseline.get(field) != current.get(field) or baseline.get(field) is None:
             errors.append(f"{field} 不一致或缺失")
+    for field in ('catalog_hash', 'relations_hash'):
+        if baseline.get(field) != current.get(field):
+            errors.append(f'{field} 不一致，固定商品库和关系集须相同')
+    if baseline.get('concurrency', 1) != current.get('concurrency', 1):
+        errors.append('concurrency 不一致；运行负载条件须相同')
     old_models = {p["id"]: p for p in baseline.get("models", [])}
     new_models = {p["id"]: p for p in current.get("models", [])}
     if old_models != new_models or not old_models:
@@ -376,6 +442,7 @@ def compare_runs(baseline_dir, current_dir, output_dir):
     if any(key not in old or key not in new for key in expected):
         raise ValueError("无法比较：共有用例存在缺失记录，不能静默排除失败或未运行样本")
     regressions, score_regressions, improvements, prompt_changes = [], [], [], []
+    ranking_regressions = []
     grouped = defaultdict(list)
     for key in sorted(expected):
         a, b = old[key], new[key]
@@ -386,17 +453,28 @@ def compare_runs(baseline_dir, current_dir, output_dir):
             regressions.append(detail)
         if detail["after_score"] < detail["before_score"] - 1e-9:
             score_regressions.append(detail)
+        for metric in ('mrr', 'ap_at_5', 'recall_at_10'):
+            old_metric = a.get('score', {}).get('metrics', {}).get(metric)
+            new_metric = b.get('score', {}).get('metrics', {}).get(metric)
+            if _number(old_metric) and _number(new_metric) and new_metric < old_metric - 1e-9:
+                ranking_regressions.append({**detail, 'metric': metric, 'before': old_metric, 'after': new_metric})
         if not a_pass and b_pass:
             improvements.append(detail)
         if a.get("prompt_hash") != b.get("prompt_hash"):
             prompt_changes.append({"case_id": key[0], "model": key[1], "before": a.get("prompt_hash"), "after": b.get("prompt_hash")})
         grouped[key[1:4]].append((a_pass, b_pass))
+    from .search_eval import evaluate_relations
+    old_pairs = {(r['id'], r['model'], r['repeat']): r for r in evaluate_relations(before, baseline)}
+    stable_relations = {r['id'] for r in current.get('relations', []) if {r['base'], r['mutated']} <= stable}
+    relation_regressions = [r for r in evaluate_relations(after, current) if r['id'] in stable_relations
+        and old_pairs.get((r['id'], r['model'], r['repeat']), {}).get('passed') and not r['passed']]
     comparison = {"baseline_run": baseline.get("run_id"), "current_run": current.get("run_id"),
                   "comparable_record_count": len(expected), "unchanged_cases": sorted(stable),
                   "added_cases": sorted(set(new_cases) - set(old_cases)), "removed_cases": sorted(set(old_cases) - set(new_cases)),
                   "changed_cases": changed, "regressions": regressions, "improvements": improvements,
                   "score_regressions": score_regressions,
-                  "has_regressions": bool(regressions or score_regressions), "prompt_changes": prompt_changes,
+                  "ranking_regressions": ranking_regressions, 'relation_regressions': relation_regressions,
+                  "has_regressions": bool(regressions or score_regressions or ranking_regressions or relation_regressions), "prompt_changes": prompt_changes,
                   "policy_changed": baseline.get("policy_hash") != current.get("policy_hash"),
                   "groups": [{"model": key[0], "task": key[1], "split": key[2], "count": len(pairs),
                               "before_pass_rate": sum(a for a, _ in pairs) / len(pairs),
@@ -418,5 +496,6 @@ def compare_runs(baseline_dir, current_dir, output_dir):
             lines.append("无。")
     for title, cases in (("新增用例", comparison["added_cases"]), ("删除用例", comparison["removed_cases"]), ("修改用例", comparison["changed_cases"])):
         lines.extend(["", f"## {title}", "", ", ".join(f"`{_cell(cid)}`" for cid in cases) or "无。"])
+    lines.extend(['', '## 排名与关系回归', '', f'排名指标下降 {len(ranking_regressions)} 条，蜕变关系退化 {len(relation_regressions)} 条；详细字段见 comparison.json。'])
     (output_dir / "comparison.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
     return comparison

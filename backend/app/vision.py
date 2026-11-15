@@ -155,6 +155,14 @@ def image_data(path):
         raise HTTPException(422, '照片无法读取，请重新上传后再识别') from None
 
 
+def vision_content(images, note):
+    """Build the multimodal input shared by serving and offline evaluation."""
+    content = [{'type': 'text', 'text': '请生成待确认的商品建议。用户补充说明：' + json.dumps(note, ensure_ascii=False)}]
+    content.extend({'type': 'image_url', 'image_url': {
+        'url': 'data:image/jpeg;base64,' + base64.b64encode(image).decode()}} for image in images)
+    return content
+
+
 class VisionService:
     def __init__(self, settings):
         self.settings = settings
@@ -231,9 +239,7 @@ class VisionService:
         return result
 
     async def _complete(self, images, note, prompt, schema, max_tokens):
-        content = [{'type': 'text', 'text': '请生成待确认的商品建议。用户补充说明：' + json.dumps(note, ensure_ascii=False)}]
-        content.extend({'type': 'image_url', 'image_url': {
-            'url': 'data:image/jpeg;base64,' + base64.b64encode(image).decode()}} for image in images)
+        content = vision_content(images, note)
         payload = {'model': self.settings.vision_model, 'stream': False, 'temperature': 0.1,
                    'max_tokens': max_tokens, 'response_format': {'type': 'json_object'},
                    'messages': [{'role': 'system', 'content': prompt}, {'role': 'user', 'content': content}]}

@@ -1,0 +1,15 @@
+{
+  "window_start": "2026-11-15T11:18:13.818521+00:00",
+  "window_end": "2026-11-15T12:04:11.846529+00:00",
+  "token_usage_quota_delta": 1231900,
+  "quota_units_per_usd": 500000,
+  "usd_equivalent_at_public_unit_rate": 2.4638,
+  "per_model_cost_known": false,
+  "notes": [
+    "Window-level token usage counter; other concurrent calls with the same key, if any, are included.",
+    "This is platform metering, not a verified payment invoice or a per-model billing allocation.",
+    "Provider usage counts are preserved without correction."
+  ],
+  "unit_source": "https://api.openlux.ai/api/status",
+  "usage_source": "https://api.openlux.ai/api/usage/token/"
+}

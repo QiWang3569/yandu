@@ -1,0 +1,443 @@
+{
+  "run_id": "20261115T105146Z-c5167287",
+  "complete": true,
+  "record_count": 40,
+  "policy_version": "1.0",
+  "groups": [
+    {
+      "model": "local-rules",
+      "task": "intent_parse",
+      "split": "dev",
+      "count": 24,
+      "case_count": 24,
+      "expected_count": 24,
+      "complete": true,
+      "passed_count": 14,
+      "pass_rate": 0.5833333333333334,
+      "mean_score": 0.9337797619047619,
+      "error_count": 0,
+      "error_rate": 0.0,
+      "fallback_count": 0,
+      "raw_pass_rate": null,
+      "raw_mean_score": null,
+      "application_pass_rate": 0.5833333333333334,
+      "schema_valid_rate": 1.0,
+      "latency_samples": 24,
+      "mean_latency_ms": 0.06783333333333334,
+      "p50_latency_ms": 0.04,
+      "p95_latency_ms": 0.06094999999999998,
+      "attempt_count": 0,
+      "unknown_cost_count": 0,
+      "known_cost_subtotal_cny": 0.0,
+      "total_cost_cny": 0.0,
+      "mean_cost_cny": 0.0,
+      "errors": {},
+      "prompt_hashes": [],
+      "cost_per_pass_cny": 0.0,
+      "macro_f1": null,
+      "false_match_rate": null,
+      "verdict_count": 0,
+      "confusion_matrix": {},
+      "raw_classification": {
+        "macro_f1": null,
+        "false_match_rate": null,
+        "verdict_count": 0,
+        "confusion_matrix": {}
+      },
+      "parse_diagnostics": {
+        "fields": {
+          "category": {
+            "count": 24,
+            "accuracy": 1.0,
+            "macro_f1": 1.0,
+            "label_support": {
+              "\"人员招募\"": 1,
+              "\"宿舍生活与家电\"": 4,
+              "\"数码与影音\"": 12,
+              "\"校园出行与运动\"": 4,
+              "\"美妆服饰与周边\"": 1,
+              "\"课程资料与书籍\"": 1,
+              "null": 1
+            }
+          },
+          "max_price": {
+            "count": 24,
+            "accuracy": 0.875,
+            "macro_f1": null,
+            "label_support": {
+              "\"0\"": 1,
+              "\"1.2E+2\"": 1,
+              "\"1E+2\"": 6,
+              "\"2E+2\"": 2,
+              "\"2E+3\"": 1,
+              "\"3.5E+2\"": 1,
+              "\"3E+1\"": 1,
+              "\"3E+2\"": 1,
+              "\"4E+2\"": 1,
+              "\"5E+1\"": 1,
+              "\"5E+2\"": 1,
+              "\"6E+1\"": 1,
+              "\"8E+1\"": 3,
+              "\"99.5\"": 1,
+              "null": 2
+            }
+          },
+          "campus": {
+            "count": 24,
+            "accuracy": 0.9583333333333334,
+            "macro_f1": 0.9623931623931623,
+            "label_support": {
+              "\"万柳学区\"": 4,
+              "\"不限校区\"": 2,
+              "\"医学部\"": 7,
+              "\"昌平新校区\"": 4,
+              "\"燕园校本部\"": 7
+            }
+          },
+          "condition_grade": {
+            "count": 23,
+            "accuracy": 1.0,
+            "macro_f1": 1.0,
+            "label_support": {
+              "\"95新\"": 1,
+              "\"9成新\"": 1,
+              "\"全新\"": 1,
+              "null": 20
+            }
+          }
+        },
+        "sets": {
+          "keywords": {
+            "count": 23,
+            "tp": 25,
+            "fp": 3,
+            "fn": 2,
+            "micro_precision": 0.8928571428571429,
+            "micro_recall": 0.9259259259259259,
+            "micro_f1": 0.9090909090909091,
+            "macro_f1": 0.8840579710144927
+          },
+          "excluded_keywords": {
+            "count": 23,
+            "tp": 4,
+            "fp": 0,
+            "fn": 1,
+            "micro_precision": 1.0,
+            "micro_recall": 0.8,
+            "micro_f1": 0.8888888888888888,
+            "macro_f1": 0.9565217391304348
+          },
+          "preferences": {
+            "count": 23,
+            "tp": 3,
+            "fp": 0,
+            "fn": 0,
+            "micro_precision": 1.0,
+            "micro_recall": 1.0,
+            "micro_f1": 1.0,
+            "macro_f1": 1.0
+          }
+        },
+        "clarification": {
+          "count": 2,
+          "tp": 1,
+          "fp": 0,
+          "fn": 1,
+          "f1": 0.6666666666666666,
+          "positive_count": 2,
+          "invalid_count": 0,
+          "accuracy": 0.5
+        }
+      },
+      "consistency_rate": null,
+      "consistency_case_count": 0,
+      "first_schema_valid_rate": null,
+      "mean_parse_latency_ms": null,
+      "p95_parse_latency_ms": null,
+      "mean_search_latency_ms": null,
+      "p95_search_latency_ms": null,
+      "mrr": null,
+      "map_at_5": null,
+      "recall_at_10": null,
+      "retrieval_positive_count": 0,
+      "zero_result_evaluated_count": 0,
+      "zero_result_error_rate": null,
+      "metamorphic_pass_rate": null
+    },
+    {
+      "model": "local-rules",
+      "task": "item_parse",
+      "split": "dev",
+      "count": 8,
+      "case_count": 8,
+      "expected_count": 8,
+      "complete": true,
+      "passed_count": 2,
+      "pass_rate": 0.25,
+      "mean_score": 0.8416666666666667,
+      "error_count": 0,
+      "error_rate": 0.0,
+      "fallback_count": 0,
+      "raw_pass_rate": null,
+      "raw_mean_score": null,
+      "application_pass_rate": 0.25,
+      "schema_valid_rate": 1.0,
+      "latency_samples": 8,
+      "mean_latency_ms": 0.17975,
+      "p50_latency_ms": 0.041999999999999996,
+      "p95_latency_ms": 0.5650499999999998,
+      "attempt_count": 0,
+      "unknown_cost_count": 0,
+      "known_cost_subtotal_cny": 0.0,
+      "total_cost_cny": 0.0,
+      "mean_cost_cny": 0.0,
+      "errors": {},
+      "prompt_hashes": [],
+      "cost_per_pass_cny": 0.0,
+      "macro_f1": null,
+      "false_match_rate": null,
+      "verdict_count": 0,
+      "confusion_matrix": {},
+      "raw_classification": {
+        "macro_f1": null,
+        "false_match_rate": null,
+        "verdict_count": 0,
+        "confusion_matrix": {}
+      },
+      "parse_diagnostics": {
+        "fields": {
+          "category": {
+            "count": 8,
+            "accuracy": 1.0,
+            "macro_f1": 1.0,
+            "label_support": {
+              "\"宿舍生活与家电\"": 2,
+              "\"数码与影音\"": 3,
+              "\"校园出行与运动\"": 1,
+              "\"美妆服饰与周边\"": 1,
+              "\"课程资料与书籍\"": 1
+            }
+          },
+          "price": {
+            "count": 8,
+            "accuracy": 0.25,
+            "macro_f1": null,
+            "label_support": {
+              "\"1.2E+2\"": 2,
+              "\"2E+1\"": 1,
+              "\"39.9\"": 1,
+              "\"3E+1\"": 1,
+              "\"8E+1\"": 1,
+              "null": 2
+            }
+          },
+          "campus": {
+            "count": 7,
+            "accuracy": 1.0,
+            "macro_f1": 1.0,
+            "label_support": {
+              "\"万柳学区\"": 2,
+              "\"医学部\"": 3,
+              "\"昌平新校区\"": 1,
+              "\"燕园校本部\"": 1
+            }
+          },
+          "condition_grade": {
+            "count": 7,
+            "accuracy": 1.0,
+            "macro_f1": 1.0,
+            "label_support": {
+              "\"8成新\"": 2,
+              "\"95新\"": 1,
+              "\"9成新\"": 3,
+              "\"全新\"": 1
+            }
+          }
+        },
+        "sets": {
+          "tags": {
+            "count": 8,
+            "tp": 10,
+            "fp": 0,
+            "fn": 0,
+            "micro_precision": 1.0,
+            "micro_recall": 1.0,
+            "micro_f1": 1.0,
+            "macro_f1": 1.0
+          }
+        },
+        "clarification": {
+          "count": 1,
+          "tp": 0,
+          "fp": 0,
+          "fn": 1,
+          "f1": 0.0,
+          "positive_count": 1,
+          "invalid_count": 0,
+          "accuracy": 0.0
+        }
+      },
+      "consistency_rate": null,
+      "consistency_case_count": 0,
+      "first_schema_valid_rate": null,
+      "mean_parse_latency_ms": null,
+      "p95_parse_latency_ms": null,
+      "mean_search_latency_ms": null,
+      "p95_search_latency_ms": null,
+      "mrr": null,
+      "map_at_5": null,
+      "recall_at_10": null,
+      "retrieval_positive_count": 0,
+      "zero_result_evaluated_count": 0,
+      "zero_result_error_rate": null,
+      "metamorphic_pass_rate": null
+    },
+    {
+      "model": "local-rules",
+      "task": "wanted_parse",
+      "split": "dev",
+      "count": 8,
+      "case_count": 8,
+      "expected_count": 8,
+      "complete": true,
+      "passed_count": 5,
+      "pass_rate": 0.625,
+      "mean_score": 0.8854166666666666,
+      "error_count": 0,
+      "error_rate": 0.0,
+      "fallback_count": 0,
+      "raw_pass_rate": null,
+      "raw_mean_score": null,
+      "application_pass_rate": 0.625,
+      "schema_valid_rate": 1.0,
+      "latency_samples": 8,
+      "mean_latency_ms": 0.08275,
+      "p50_latency_ms": 0.0485,
+      "p95_latency_ms": 0.20429999999999993,
+      "attempt_count": 0,
+      "unknown_cost_count": 0,
+      "known_cost_subtotal_cny": 0.0,
+      "total_cost_cny": 0.0,
+      "mean_cost_cny": 0.0,
+      "errors": {},
+      "prompt_hashes": [],
+      "cost_per_pass_cny": 0.0,
+      "macro_f1": null,
+      "false_match_rate": null,
+      "verdict_count": 0,
+      "confusion_matrix": {},
+      "raw_classification": {
+        "macro_f1": null,
+        "false_match_rate": null,
+        "verdict_count": 0,
+        "confusion_matrix": {}
+      },
+      "parse_diagnostics": {
+        "fields": {
+          "category": {
+            "count": 8,
+            "accuracy": 1.0,
+            "macro_f1": 1.0,
+            "label_support": {
+              "\"宿舍生活与家电\"": 2,
+              "\"数码与影音\"": 3,
+              "\"校园出行与运动\"": 2,
+              "null": 1
+            }
+          },
+          "budget": {
+            "count": 8,
+            "accuracy": 0.75,
+            "macro_f1": null,
+            "label_support": {
+              "\"1E+2\"": 2,
+              "\"2E+3\"": 1,
+              "\"3.5E+2\"": 1,
+              "\"5E+1\"": 1,
+              "\"8E+1\"": 2,
+              "null": 1
+            }
+          },
+          "campus": {
+            "count": 8,
+            "accuracy": 1.0,
+            "macro_f1": 1.0,
+            "label_support": {
+              "\"万柳学区\"": 1,
+              "\"不限校区\"": 1,
+              "\"医学部\"": 3,
+              "\"昌平新校区\"": 1,
+              "\"燕园校本部\"": 2
+            }
+          }
+        },
+        "sets": {},
+        "clarification": {
+          "count": 2,
+          "tp": 1,
+          "fp": 0,
+          "fn": 1,
+          "f1": 0.6666666666666666,
+          "positive_count": 2,
+          "invalid_count": 0,
+          "accuracy": 0.5
+        }
+      },
+      "consistency_rate": null,
+      "consistency_case_count": 0,
+      "first_schema_valid_rate": null,
+      "mean_parse_latency_ms": null,
+      "p95_parse_latency_ms": null,
+      "mean_search_latency_ms": null,
+      "p95_search_latency_ms": null,
+      "mrr": null,
+      "map_at_5": null,
+      "recall_at_10": null,
+      "retrieval_positive_count": 0,
+      "zero_result_evaluated_count": 0,
+      "zero_result_error_rate": null,
+      "metamorphic_pass_rate": null
+    }
+  ],
+  "slices": [],
+  "metamorphic": [],
+  "baseline_comparisons": [],
+  "selection": [
+    {
+      "task": "intent_parse",
+      "status": "insufficient_evidence",
+      "selected_model": null,
+      "reasons": [
+        "选型规则仍为草案；团队须在保留集评测前确认并设为 confirmed 或 locked。",
+        "当前为开发集或本地基线诊断，尚无保留集对照。",
+        "保留集 0 例，少于预设的 20 例。",
+        "同一任务至少需要两个远程候选模型的完整对照。"
+      ],
+      "candidates": []
+    },
+    {
+      "task": "item_parse",
+      "status": "insufficient_evidence",
+      "selected_model": null,
+      "reasons": [
+        "选型规则仍为草案；团队须在保留集评测前确认并设为 confirmed 或 locked。",
+        "当前为开发集或本地基线诊断，尚无保留集对照。",
+        "保留集 0 例，少于预设的 20 例。",
+        "同一任务至少需要两个远程候选模型的完整对照。"
+      ],
+      "candidates": []
+    },
+    {
+      "task": "wanted_parse",
+      "status": "insufficient_evidence",
+      "selected_model": null,
+      "reasons": [
+        "选型规则仍为草案；团队须在保留集评测前确认并设为 confirmed 或 locked。",
+        "当前为开发集或本地基线诊断，尚无保留集对照。",
+        "保留集 0 例，少于预设的 20 例。",
+        "同一任务至少需要两个远程候选模型的完整对照。"
+      ],
+      "candidates": []
+    }
+  ]
+}

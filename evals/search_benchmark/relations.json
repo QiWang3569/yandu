@@ -1,0 +1,105 @@
+{
+  "version": 1,
+  "relations": [
+    {
+      "id": "inv-core-01",
+      "base": "search-core-01",
+      "mutated": "search-core-01-rewrite",
+      "relation": "invariant",
+      "rationale": "语序、礼貌表达或数字写法变化，保留全部语义约束。"
+    },
+    {
+      "id": "inv-core-05",
+      "base": "search-core-05",
+      "mutated": "search-core-05-rewrite",
+      "relation": "invariant",
+      "rationale": "语序、礼貌表达或数字写法变化，保留全部语义约束。"
+    },
+    {
+      "id": "inv-price-02",
+      "base": "search-price-02",
+      "mutated": "search-price-02-rewrite",
+      "relation": "invariant",
+      "rationale": "语序、礼貌表达或数字写法变化，保留全部语义约束。"
+    },
+    {
+      "id": "inv-price-08",
+      "base": "search-price-08",
+      "mutated": "search-price-08-rewrite",
+      "relation": "invariant",
+      "rationale": "语序、礼貌表达或数字写法变化，保留全部语义约束。"
+    },
+    {
+      "id": "inv-preference-01",
+      "base": "search-preference-01",
+      "mutated": "search-preference-01-rewrite",
+      "relation": "invariant",
+      "rationale": "语序、礼貌表达或数字写法变化，保留全部语义约束。"
+    },
+    {
+      "id": "inv-negation-01",
+      "base": "search-negation-01",
+      "mutated": "search-negation-01-rewrite",
+      "relation": "invariant",
+      "rationale": "语序、礼貌表达或数字写法变化，保留全部语义约束。"
+    },
+    {
+      "id": "inv-confusable-03",
+      "base": "search-confusable-03",
+      "mutated": "search-confusable-03-rewrite",
+      "relation": "invariant",
+      "rationale": "语序、礼貌表达或数字写法变化，保留全部语义约束。"
+    },
+    {
+      "id": "inv-core-08",
+      "base": "search-core-08",
+      "mutated": "search-core-08-rewrite",
+      "relation": "invariant",
+      "rationale": "语序、礼貌表达或数字写法变化，保留全部语义约束。"
+    },
+    {
+      "id": "dir-negation-01-negation-03",
+      "base": "search-negation-01",
+      "mutated": "search-negation-03",
+      "relation": "subset",
+      "rationale": "增加硬约束；比较完整结果集合，并检查新增限制。",
+      "forbidden_item_ids": [
+        "m08"
+      ],
+      "max_price_cents": null
+    },
+    {
+      "id": "dir-preference-03-preference-04",
+      "base": "search-preference-03",
+      "mutated": "search-preference-04",
+      "relation": "subset",
+      "rationale": "增加硬约束；比较完整结果集合，并检查新增限制。",
+      "forbidden_item_ids": [
+        "m03",
+        "m05",
+        "m06",
+        "m08",
+        "d05"
+      ],
+      "max_price_cents": null
+    },
+    {
+      "id": "dir-price-08-price-08-budget",
+      "base": "search-price-08",
+      "mutated": "search-price-08-budget",
+      "relation": "subset",
+      "rationale": "增加硬约束；比较完整结果集合，并检查新增限制。",
+      "forbidden_item_ids": [],
+      "max_price_cents": 20000
+    },
+    {
+      "id": "dir-core-10-core-10-budget",
+      "base": "search-core-10",
+      "mutated": "search-core-10-budget",
+      "relation": "subset",
+      "rationale": "增加硬约束；比较完整结果集合，并检查新增限制。",
+      "forbidden_item_ids": [],
+      "max_price_cents": 40000
+    }
+  ]
+}
