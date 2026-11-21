@@ -1,0 +1,1535 @@
+{
+  "model": "deepseek-v4.1-flash",
+  "platform": "OpenLux",
+  "prompt": "根据买家的整句查询，从给定商品中选出符合需求的商品，按推荐顺序最多返回三件。区分主体与配件、必须项、排除项和偏好。没有合适商品返回空数组。只使用提供的商品信息，只返回 JSON 对象 {\"ranked\":[\"商品编号\"]}。",
+  "summary": {
+    "text": {
+      "top1": 24,
+      "hit3": 24,
+      "empty_ok": 3,
+      "errors": 0,
+      "exact": 25
+    },
+    "with_price": {
+      "top1": 24,
+      "hit3": 24,
+      "empty_ok": 4,
+      "errors": 0,
+      "exact": 28
+    }
+  },
+  "records": [
+    {
+      "arm": "text",
+      "id": "pair-9-1",
+      "query": "想买网球拍",
+      "ranked": [
+        "n9"
+      ],
+      "attempts": [
+        {
+          "error": null,
+          "seconds": 13.032
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 767,
+        "completion_tokens": 9,
+        "total_tokens": 776
+      },
+      "gold": [
+        "n9"
+      ],
+      "expected_titles": [
+        "网球训练拍"
+      ],
+      "returned_titles": [
+        "网球训练拍"
+      ]
+    },
+    {
+      "arm": "text",
+      "id": "pair-9-2",
+      "query": "网球课要用，缺一支能上场的拍子",
+      "ranked": [
+        "n9"
+      ],
+      "attempts": [
+        {
+          "error": null,
+          "seconds": 15.047
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 733,
+        "completion_tokens": 9,
+        "total_tokens": 742
+      },
+      "gold": [
+        "n9"
+      ],
+      "expected_titles": [
+        "网球训练拍"
+      ],
+      "returned_titles": [
+        "网球训练拍"
+      ]
+    },
+    {
+      "arm": "text",
+      "id": "pair-1-2",
+      "query": "想在宿舍白墙上放电影，缺一台投画面的机器",
+      "ranked": [
+        "n1"
+      ],
+      "attempts": [
+        {
+          "error": null,
+          "seconds": 13.875
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 734,
+        "completion_tokens": 9,
+        "total_tokens": 743
+      },
+      "gold": [
+        "n1"
+      ],
+      "expected_titles": [
+        "便携投影仪"
+      ],
+      "returned_titles": [
+        "便携投影仪"
+      ]
+    },
+    {
+      "arm": "text",
+      "id": "pair-11-1",
+      "query": "我想买车锁",
+      "ranked": [
+        "n11",
+        "n12"
+      ],
+      "attempts": [
+        {
+          "error": null,
+          "seconds": 7.047
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 725,
+        "completion_tokens": 12,
+        "total_tokens": 737
+      },
+      "gold": [
+        "n11"
+      ],
+      "expected_titles": [
+        "自行车 U 型锁"
+      ],
+      "returned_titles": [
+        "自行车 U 型锁",
+        "折叠通勤自行车"
+      ]
+    },
+    {
+      "arm": "with_price",
+      "id": "pair-3-2",
+      "query": "找盏夹在桌边看课本用的灯",
+      "ranked": [
+        "n3"
+      ],
+      "attempts": [
+        {
+          "error": null,
+          "seconds": 6.907
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 894,
+        "completion_tokens": 9,
+        "total_tokens": 903
+      },
+      "gold": [
+        "n3"
+      ],
+      "expected_titles": [
+        "桌面阅读灯"
+      ],
+      "returned_titles": [
+        "桌面阅读灯"
+      ]
+    },
+    {
+      "arm": "with_price",
+      "id": "pair-11-2",
+      "query": "学校里锁单车用的 U 形防盗锁还有吗",
+      "ranked": [
+        "n11"
+      ],
+      "attempts": [
+        {
+          "error": null,
+          "seconds": 4.032
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 895,
+        "completion_tokens": 9,
+        "total_tokens": 904
+      },
+      "gold": [
+        "n11"
+      ],
+      "expected_titles": [
+        "自行车 U 型锁"
+      ],
+      "returned_titles": [
+        "自行车 U 型锁"
+      ]
+    },
+    {
+      "arm": "text",
+      "id": "pair-10-1",
+      "query": "想找保温杯",
+      "ranked": [
+        "n10"
+      ],
+      "attempts": [
+        {
+          "error": null,
+          "seconds": 3.0
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 767,
+        "completion_tokens": 9,
+        "total_tokens": 776
+      },
+      "gold": [
+        "n10"
+      ],
+      "expected_titles": [
+        "保温水杯"
+      ],
+      "returned_titles": [
+        "保温水杯"
+      ]
+    },
+    {
+      "arm": "text",
+      "id": "empty-0",
+      "query": "40元以内收投影仪整机",
+      "ranked": [
+        "n1"
+      ],
+      "attempts": [
+        {
+          "error": null,
+          "seconds": 5.453
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 730,
+        "completion_tokens": 9,
+        "total_tokens": 739
+      },
+      "gold": [],
+      "expected_titles": [],
+      "returned_titles": [
+        "便携投影仪"
+      ]
+    },
+    {
+      "arm": "with_price",
+      "id": "pair-4-2",
+      "query": "想给电脑配个不拖线的滑鼠，预算五十",
+      "ranked": [
+        "n4"
+      ],
+      "attempts": [
+        {
+          "error": null,
+          "seconds": 3.5
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 897,
+        "completion_tokens": 9,
+        "total_tokens": 906
+      },
+      "gold": [
+        "n4"
+      ],
+      "expected_titles": [
+        "无线办公鼠标"
+      ],
+      "returned_titles": [
+        "无线办公鼠标"
+      ]
+    },
+    {
+      "arm": "text",
+      "id": "pair-6-2",
+      "query": "地铁上听歌，想要一副能压住环境噪音的耳麦",
+      "ranked": [
+        "n6"
+      ],
+      "attempts": [
+        {
+          "error": null,
+          "seconds": 16.046
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 778,
+        "completion_tokens": 9,
+        "total_tokens": 787
+      },
+      "gold": [
+        "n6"
+      ],
+      "expected_titles": [
+        "头戴降噪耳机"
+      ],
+      "returned_titles": [
+        "头戴降噪耳机"
+      ]
+    },
+    {
+      "arm": "with_price",
+      "id": "pair-9-2",
+      "query": "网球课要用，缺一支能上场的拍子",
+      "ranked": [
+        "n9"
+      ],
+      "attempts": [
+        {
+          "error": null,
+          "seconds": 7.531
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 895,
+        "completion_tokens": 9,
+        "total_tokens": 904
+      },
+      "gold": [
+        "n9"
+      ],
+      "expected_titles": [
+        "网球训练拍"
+      ],
+      "returned_titles": [
+        "网球训练拍"
+      ]
+    },
+    {
+      "arm": "text",
+      "id": "pair-11-2",
+      "query": "学校里锁单车用的 U 形防盗锁还有吗",
+      "ranked": [
+        "n11"
+      ],
+      "attempts": [
+        {
+          "error": null,
+          "seconds": 3.203
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 733,
+        "completion_tokens": 9,
+        "total_tokens": 742
+      },
+      "gold": [
+        "n11"
+      ],
+      "expected_titles": [
+        "自行车 U 型锁"
+      ],
+      "returned_titles": [
+        "自行车 U 型锁"
+      ]
+    },
+    {
+      "arm": "with_price",
+      "id": "pair-7-2",
+      "query": "想收副普通耳麦，带主动降噪的就算了",
+      "ranked": [
+        "n7"
+      ],
+      "attempts": [
+        {
+          "error": null,
+          "seconds": 5.312
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 897,
+        "completion_tokens": 9,
+        "total_tokens": 906
+      },
+      "gold": [
+        "n7"
+      ],
+      "expected_titles": [
+        "有线平头耳机"
+      ],
+      "returned_titles": [
+        "有线平头耳机"
+      ]
+    },
+    {
+      "arm": "with_price",
+      "id": "pair-8-2",
+      "query": "和舍友打羽球，想买支已经穿好线的拍子",
+      "ranked": [
+        "n8"
+      ],
+      "attempts": [
+        {
+          "error": null,
+          "seconds": 7.641
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 900,
+        "completion_tokens": 9,
+        "total_tokens": 909
+      },
+      "gold": [
+        "n8"
+      ],
+      "expected_titles": [
+        "入门羽毛球拍"
+      ],
+      "returned_titles": [
+        "入门羽毛球拍"
+      ]
+    },
+    {
+      "arm": "text",
+      "id": "pair-7-2",
+      "query": "想收副普通耳麦，带主动降噪的就算了",
+      "ranked": [
+        "n7"
+      ],
+      "attempts": [
+        {
+          "error": null,
+          "seconds": 5.422
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 735,
+        "completion_tokens": 9,
+        "total_tokens": 744
+      },
+      "gold": [
+        "n7"
+      ],
+      "expected_titles": [
+        "有线平头耳机"
+      ],
+      "returned_titles": [
+        "有线平头耳机"
+      ]
+    },
+    {
+      "arm": "text",
+      "id": "pair-8-2",
+      "query": "和舍友打羽球，想买支已经穿好线的拍子",
+      "ranked": [
+        "n8"
+      ],
+      "attempts": [
+        {
+          "error": null,
+          "seconds": 6.563
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 738,
+        "completion_tokens": 9,
+        "total_tokens": 747
+      },
+      "gold": [
+        "n8"
+      ],
+      "expected_titles": [
+        "入门羽毛球拍"
+      ],
+      "returned_titles": [
+        "入门羽毛球拍"
+      ]
+    },
+    {
+      "arm": "text",
+      "id": "pair-7-1",
+      "query": "不要降噪的耳机",
+      "ranked": [
+        "n7"
+      ],
+      "attempts": [
+        {
+          "error": null,
+          "seconds": 8.296
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 727,
+        "completion_tokens": 9,
+        "total_tokens": 736
+      },
+      "gold": [
+        "n7"
+      ],
+      "expected_titles": [
+        "有线平头耳机"
+      ],
+      "returned_titles": [
+        "有线平头耳机"
+      ]
+    },
+    {
+      "arm": "text",
+      "id": "pair-10-2",
+      "query": "早上灌热茶，到教室还想喝热的，想买个杯子",
+      "ranked": [
+        "n10"
+      ],
+      "attempts": [
+        {
+          "error": null,
+          "seconds": 5.219
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 736,
+        "completion_tokens": 9,
+        "total_tokens": 745
+      },
+      "gold": [
+        "n10"
+      ],
+      "expected_titles": [
+        "保温水杯"
+      ],
+      "returned_titles": [
+        "保温水杯"
+      ]
+    },
+    {
+      "arm": "with_price",
+      "id": "pair-9-1",
+      "query": "想买网球拍",
+      "ranked": [
+        "n9"
+      ],
+      "attempts": [
+        {
+          "error": null,
+          "seconds": 3.828
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 888,
+        "completion_tokens": 9,
+        "total_tokens": 897
+      },
+      "gold": [
+        "n9"
+      ],
+      "expected_titles": [
+        "网球训练拍"
+      ],
+      "returned_titles": [
+        "网球训练拍"
+      ]
+    },
+    {
+      "arm": "with_price",
+      "id": "pair-10-2",
+      "query": "早上灌热茶，到教室还想喝热的，想买个杯子",
+      "ranked": [
+        "n10"
+      ],
+      "attempts": [
+        {
+          "error": null,
+          "seconds": 3.422
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 898,
+        "completion_tokens": 9,
+        "total_tokens": 907
+      },
+      "gold": [
+        "n10"
+      ],
+      "expected_titles": [
+        "保温水杯"
+      ],
+      "returned_titles": [
+        "保温水杯"
+      ]
+    },
+    {
+      "arm": "with_price",
+      "id": "pair-10-1",
+      "query": "想找保温杯",
+      "ranked": [
+        "n10"
+      ],
+      "attempts": [
+        {
+          "error": null,
+          "seconds": 3.282
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 888,
+        "completion_tokens": 9,
+        "total_tokens": 897
+      },
+      "gold": [
+        "n10"
+      ],
+      "expected_titles": [
+        "保温水杯"
+      ],
+      "returned_titles": [
+        "保温水杯"
+      ]
+    },
+    {
+      "arm": "with_price",
+      "id": "pair-8-1",
+      "query": "收羽毛球拍",
+      "ranked": [
+        "n8"
+      ],
+      "attempts": [
+        {
+          "error": null,
+          "seconds": 9.156
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 887,
+        "completion_tokens": 9,
+        "total_tokens": 896
+      },
+      "gold": [
+        "n8"
+      ],
+      "expected_titles": [
+        "入门羽毛球拍"
+      ],
+      "returned_titles": [
+        "入门羽毛球拍"
+      ]
+    },
+    {
+      "arm": "text",
+      "id": "pair-5-2",
+      "query": "找个插线用的滑鼠，蓝牙款不要",
+      "ranked": [
+        "n5"
+      ],
+      "attempts": [
+        {
+          "error": null,
+          "seconds": 5.938
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 732,
+        "completion_tokens": 9,
+        "total_tokens": 741
+      },
+      "gold": [
+        "n5"
+      ],
+      "expected_titles": [
+        "有线办公鼠标"
+      ],
+      "returned_titles": [
+        "有线办公鼠标"
+      ]
+    },
+    {
+      "arm": "with_price",
+      "id": "pair-2-1",
+      "query": "投影仪支架",
+      "ranked": [
+        "n2"
+      ],
+      "attempts": [
+        {
+          "error": null,
+          "seconds": 6.687
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 887,
+        "completion_tokens": 9,
+        "total_tokens": 896
+      },
+      "gold": [
+        "n2"
+      ],
+      "expected_titles": [
+        "三脚投影仪支架"
+      ],
+      "returned_titles": [
+        "三脚投影仪支架"
+      ]
+    },
+    {
+      "arm": "with_price",
+      "id": "empty-2",
+      "query": "求一箱没开封的羽毛球，只要球",
+      "ranked": [],
+      "attempts": [
+        {
+          "error": null,
+          "seconds": 4.687
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 894,
+        "completion_tokens": 6,
+        "total_tokens": 900
+      },
+      "gold": [],
+      "expected_titles": [],
+      "returned_titles": []
+    },
+    {
+      "arm": "with_price",
+      "id": "pair-11-1",
+      "query": "我想买车锁",
+      "ranked": [
+        "n11"
+      ],
+      "attempts": [
+        {
+          "error": null,
+          "seconds": 26.734
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 928,
+        "completion_tokens": 10,
+        "total_tokens": 938
+      },
+      "gold": [
+        "n11"
+      ],
+      "expected_titles": [
+        "自行车 U 型锁"
+      ],
+      "returned_titles": [
+        "自行车 U 型锁"
+      ]
+    },
+    {
+      "arm": "with_price",
+      "id": "pair-5-1",
+      "query": "有线鼠标",
+      "ranked": [
+        "n5"
+      ],
+      "attempts": [
+        {
+          "error": null,
+          "seconds": 5.141
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 886,
+        "completion_tokens": 9,
+        "total_tokens": 895
+      },
+      "gold": [
+        "n5"
+      ],
+      "expected_titles": [
+        "有线办公鼠标"
+      ],
+      "returned_titles": [
+        "有线办公鼠标"
+      ]
+    },
+    {
+      "arm": "text",
+      "id": "pair-8-1",
+      "query": "收羽毛球拍",
+      "ranked": [
+        "n8"
+      ],
+      "attempts": [
+        {
+          "error": null,
+          "seconds": 5.516
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 725,
+        "completion_tokens": 9,
+        "total_tokens": 734
+      },
+      "gold": [
+        "n8"
+      ],
+      "expected_titles": [
+        "入门羽毛球拍"
+      ],
+      "returned_titles": [
+        "入门羽毛球拍"
+      ]
+    },
+    {
+      "arm": "with_price",
+      "id": "empty-1",
+      "query": "想买个机械键盘",
+      "ranked": [],
+      "attempts": [
+        {
+          "error": null,
+          "seconds": 11.359
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 888,
+        "completion_tokens": 6,
+        "total_tokens": 894
+      },
+      "gold": [],
+      "expected_titles": [],
+      "returned_titles": []
+    },
+    {
+      "arm": "with_price",
+      "id": "pair-12-2",
+      "query": "预算三百，想收辆能折起来带回宿舍的单车",
+      "ranked": [
+        "n12"
+      ],
+      "attempts": [
+        {
+          "error": null,
+          "seconds": 8.14
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 897,
+        "completion_tokens": 9,
+        "total_tokens": 906
+      },
+      "gold": [
+        "n12"
+      ],
+      "expected_titles": [
+        "折叠通勤自行车"
+      ],
+      "returned_titles": [
+        "折叠通勤自行车"
+      ]
+    },
+    {
+      "arm": "with_price",
+      "id": "pair-4-1",
+      "query": "50以内无线鼠标",
+      "ranked": [
+        "n4"
+      ],
+      "attempts": [
+        {
+          "error": null,
+          "seconds": 5.282
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 888,
+        "completion_tokens": 9,
+        "total_tokens": 897
+      },
+      "gold": [
+        "n4"
+      ],
+      "expected_titles": [
+        "无线办公鼠标"
+      ],
+      "returned_titles": [
+        "无线办公鼠标"
+      ]
+    },
+    {
+      "arm": "with_price",
+      "id": "pair-5-2",
+      "query": "找个插线用的滑鼠，蓝牙款不要",
+      "ranked": [
+        "n5"
+      ],
+      "attempts": [
+        {
+          "error": null,
+          "seconds": 8.313
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 894,
+        "completion_tokens": 9,
+        "total_tokens": 903
+      },
+      "gold": [
+        "n5"
+      ],
+      "expected_titles": [
+        "有线办公鼠标"
+      ],
+      "returned_titles": [
+        "有线办公鼠标"
+      ]
+    },
+    {
+      "arm": "text",
+      "id": "pair-12-1",
+      "query": "300以内自行车",
+      "ranked": [
+        "n12"
+      ],
+      "attempts": [
+        {
+          "error": null,
+          "seconds": 4.796
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 725,
+        "completion_tokens": 9,
+        "total_tokens": 734
+      },
+      "gold": [
+        "n12"
+      ],
+      "expected_titles": [
+        "折叠通勤自行车"
+      ],
+      "returned_titles": [
+        "折叠通勤自行车"
+      ]
+    },
+    {
+      "arm": "text",
+      "id": "pair-6-1",
+      "query": "想买降噪耳机",
+      "ranked": [
+        "n6"
+      ],
+      "attempts": [
+        {
+          "error": null,
+          "seconds": 12.047
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 727,
+        "completion_tokens": 9,
+        "total_tokens": 736
+      },
+      "gold": [
+        "n6"
+      ],
+      "expected_titles": [
+        "头戴降噪耳机"
+      ],
+      "returned_titles": [
+        "头戴降噪耳机"
+      ]
+    },
+    {
+      "arm": "text",
+      "id": "empty-1",
+      "query": "想买个机械键盘",
+      "ranked": [],
+      "attempts": [
+        {
+          "error": null,
+          "seconds": 7.141
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 726,
+        "completion_tokens": 6,
+        "total_tokens": 732
+      },
+      "gold": [],
+      "expected_titles": [],
+      "returned_titles": []
+    },
+    {
+      "arm": "text",
+      "id": "pair-5-1",
+      "query": "有线鼠标",
+      "ranked": [
+        "n5"
+      ],
+      "attempts": [
+        {
+          "error": null,
+          "seconds": 7.688
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 724,
+        "completion_tokens": 9,
+        "total_tokens": 733
+      },
+      "gold": [
+        "n5"
+      ],
+      "expected_titles": [
+        "有线办公鼠标"
+      ],
+      "returned_titles": [
+        "有线办公鼠标"
+      ]
+    },
+    {
+      "arm": "text",
+      "id": "empty-3",
+      "query": "想找给耳机换的海绵耳罩",
+      "ranked": [],
+      "attempts": [
+        {
+          "error": null,
+          "seconds": 6.063
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 731,
+        "completion_tokens": 6,
+        "total_tokens": 737
+      },
+      "gold": [],
+      "expected_titles": [],
+      "returned_titles": []
+    },
+    {
+      "arm": "with_price",
+      "id": "pair-1-2",
+      "query": "想在宿舍白墙上放电影，缺一台投画面的机器",
+      "ranked": [
+        "n1"
+      ],
+      "attempts": [
+        {
+          "error": null,
+          "seconds": 8.562
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 896,
+        "completion_tokens": 9,
+        "total_tokens": 905
+      },
+      "gold": [
+        "n1"
+      ],
+      "expected_titles": [
+        "便携投影仪"
+      ],
+      "returned_titles": [
+        "便携投影仪"
+      ]
+    },
+    {
+      "arm": "with_price",
+      "id": "pair-6-2",
+      "query": "地铁上听歌，想要一副能压住环境噪音的耳麦",
+      "ranked": [
+        "n6"
+      ],
+      "attempts": [
+        {
+          "error": null,
+          "seconds": 7.25
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 899,
+        "completion_tokens": 9,
+        "total_tokens": 908
+      },
+      "gold": [
+        "n6"
+      ],
+      "expected_titles": [
+        "头戴降噪耳机"
+      ],
+      "returned_titles": [
+        "头戴降噪耳机"
+      ]
+    },
+    {
+      "arm": "text",
+      "id": "empty-2",
+      "query": "求一箱没开封的羽毛球，只要球",
+      "ranked": [],
+      "attempts": [
+        {
+          "error": null,
+          "seconds": 5.39
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 732,
+        "completion_tokens": 6,
+        "total_tokens": 738
+      },
+      "gold": [],
+      "expected_titles": [],
+      "returned_titles": []
+    },
+    {
+      "arm": "text",
+      "id": "pair-2-1",
+      "query": "投影仪支架",
+      "ranked": [
+        "n2"
+      ],
+      "attempts": [
+        {
+          "error": null,
+          "seconds": 9.329
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 725,
+        "completion_tokens": 9,
+        "total_tokens": 734
+      },
+      "gold": [
+        "n2"
+      ],
+      "expected_titles": [
+        "三脚投影仪支架"
+      ],
+      "returned_titles": [
+        "三脚投影仪支架"
+      ]
+    },
+    {
+      "arm": "with_price",
+      "id": "pair-2-2",
+      "query": "放映设备有了，想买个能把它架起来的三脚底座",
+      "ranked": [
+        "n2"
+      ],
+      "attempts": [
+        {
+          "error": null,
+          "seconds": 23.36
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 897,
+        "completion_tokens": 9,
+        "total_tokens": 906
+      },
+      "gold": [
+        "n2"
+      ],
+      "expected_titles": [
+        "三脚投影仪支架"
+      ],
+      "returned_titles": [
+        "三脚投影仪支架"
+      ]
+    },
+    {
+      "arm": "with_price",
+      "id": "pair-3-1",
+      "query": "想买台灯",
+      "ranked": [
+        "n3"
+      ],
+      "attempts": [
+        {
+          "error": null,
+          "seconds": 9.093
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 888,
+        "completion_tokens": 9,
+        "total_tokens": 897
+      },
+      "gold": [
+        "n3"
+      ],
+      "expected_titles": [
+        "桌面阅读灯"
+      ],
+      "returned_titles": [
+        "桌面阅读灯"
+      ]
+    },
+    {
+      "arm": "text",
+      "id": "pair-2-2",
+      "query": "放映设备有了，想买个能把它架起来的三脚底座",
+      "ranked": [
+        "n2"
+      ],
+      "attempts": [
+        {
+          "error": null,
+          "seconds": 10.453
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 735,
+        "completion_tokens": 9,
+        "total_tokens": 744
+      },
+      "gold": [
+        "n2"
+      ],
+      "expected_titles": [
+        "三脚投影仪支架"
+      ],
+      "returned_titles": [
+        "三脚投影仪支架"
+      ]
+    },
+    {
+      "arm": "text",
+      "id": "pair-3-2",
+      "query": "找盏夹在桌边看课本用的灯",
+      "ranked": [
+        "n3"
+      ],
+      "attempts": [
+        {
+          "error": null,
+          "seconds": 8.594
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 732,
+        "completion_tokens": 9,
+        "total_tokens": 741
+      },
+      "gold": [
+        "n3"
+      ],
+      "expected_titles": [
+        "桌面阅读灯"
+      ],
+      "returned_titles": [
+        "桌面阅读灯"
+      ]
+    },
+    {
+      "arm": "with_price",
+      "id": "empty-3",
+      "query": "想找给耳机换的海绵耳罩",
+      "ranked": [],
+      "attempts": [
+        {
+          "error": null,
+          "seconds": 11.969
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 893,
+        "completion_tokens": 6,
+        "total_tokens": 899
+      },
+      "gold": [],
+      "expected_titles": [],
+      "returned_titles": []
+    },
+    {
+      "arm": "text",
+      "id": "pair-3-1",
+      "query": "想买台灯",
+      "ranked": [
+        "n3"
+      ],
+      "attempts": [
+        {
+          "error": null,
+          "seconds": 9.156
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 726,
+        "completion_tokens": 9,
+        "total_tokens": 735
+      },
+      "gold": [
+        "n3"
+      ],
+      "expected_titles": [
+        "桌面阅读灯"
+      ],
+      "returned_titles": [
+        "桌面阅读灯"
+      ]
+    },
+    {
+      "arm": "with_price",
+      "id": "pair-12-1",
+      "query": "300以内自行车",
+      "ranked": [
+        "n12"
+      ],
+      "attempts": [
+        {
+          "error": null,
+          "seconds": 12.453
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 887,
+        "completion_tokens": 9,
+        "total_tokens": 896
+      },
+      "gold": [
+        "n12"
+      ],
+      "expected_titles": [
+        "折叠通勤自行车"
+      ],
+      "returned_titles": [
+        "折叠通勤自行车"
+      ]
+    },
+    {
+      "arm": "text",
+      "id": "pair-1-1",
+      "query": "收一台投影仪",
+      "ranked": [
+        "n1"
+      ],
+      "attempts": [
+        {
+          "error": null,
+          "seconds": 7.484
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 726,
+        "completion_tokens": 9,
+        "total_tokens": 735
+      },
+      "gold": [
+        "n1"
+      ],
+      "expected_titles": [
+        "便携投影仪"
+      ],
+      "returned_titles": [
+        "便携投影仪"
+      ]
+    },
+    {
+      "arm": "with_price",
+      "id": "pair-6-1",
+      "query": "想买降噪耳机",
+      "ranked": [
+        "n6"
+      ],
+      "attempts": [
+        {
+          "error": null,
+          "seconds": 5.797
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 930,
+        "completion_tokens": 9,
+        "total_tokens": 939
+      },
+      "gold": [
+        "n6"
+      ],
+      "expected_titles": [
+        "头戴降噪耳机"
+      ],
+      "returned_titles": [
+        "头戴降噪耳机"
+      ]
+    },
+    {
+      "arm": "with_price",
+      "id": "pair-7-1",
+      "query": "不要降噪的耳机",
+      "ranked": [
+        "n7"
+      ],
+      "attempts": [
+        {
+          "error": null,
+          "seconds": 5.219
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 889,
+        "completion_tokens": 9,
+        "total_tokens": 898
+      },
+      "gold": [
+        "n7"
+      ],
+      "expected_titles": [
+        "有线平头耳机"
+      ],
+      "returned_titles": [
+        "有线平头耳机"
+      ]
+    },
+    {
+      "arm": "text",
+      "id": "pair-4-2",
+      "query": "想给电脑配个不拖线的滑鼠，预算五十",
+      "ranked": [
+        "n4"
+      ],
+      "attempts": [
+        {
+          "error": null,
+          "seconds": 9.14
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 735,
+        "completion_tokens": 9,
+        "total_tokens": 744
+      },
+      "gold": [
+        "n4"
+      ],
+      "expected_titles": [
+        "无线办公鼠标"
+      ],
+      "returned_titles": [
+        "无线办公鼠标"
+      ]
+    },
+    {
+      "arm": "with_price",
+      "id": "empty-0",
+      "query": "40元以内收投影仪整机",
+      "ranked": [],
+      "attempts": [
+        {
+          "error": null,
+          "seconds": 5.89
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 892,
+        "completion_tokens": 6,
+        "total_tokens": 898
+      },
+      "gold": [],
+      "expected_titles": [],
+      "returned_titles": []
+    },
+    {
+      "arm": "text",
+      "id": "pair-12-2",
+      "query": "预算三百，想收辆能折起来带回宿舍的单车",
+      "ranked": [
+        "n12"
+      ],
+      "attempts": [
+        {
+          "error": null,
+          "seconds": 3.859
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 735,
+        "completion_tokens": 9,
+        "total_tokens": 744
+      },
+      "gold": [
+        "n12"
+      ],
+      "expected_titles": [
+        "折叠通勤自行车"
+      ],
+      "returned_titles": [
+        "折叠通勤自行车"
+      ]
+    },
+    {
+      "arm": "text",
+      "id": "pair-4-1",
+      "query": "50以内无线鼠标",
+      "ranked": [
+        "n4",
+        "n18"
+      ],
+      "attempts": [
+        {
+          "error": null,
+          "seconds": 3.25
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 745,
+        "completion_tokens": 13,
+        "total_tokens": 758
+      },
+      "gold": [
+        "n4"
+      ],
+      "expected_titles": [
+        "无线办公鼠标"
+      ],
+      "returned_titles": [
+        "无线办公鼠标",
+        "无线游戏鼠标"
+      ]
+    },
+    {
+      "arm": "with_price",
+      "id": "pair-1-1",
+      "query": "收一台投影仪",
+      "ranked": [
+        "n1"
+      ],
+      "attempts": [
+        {
+          "error": null,
+          "seconds": 7.422
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 888,
+        "completion_tokens": 9,
+        "total_tokens": 897
+      },
+      "gold": [
+        "n1"
+      ],
+      "expected_titles": [
+        "便携投影仪"
+      ],
+      "returned_titles": [
+        "便携投影仪"
+      ]
+    }
+  ]
+}

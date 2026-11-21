@@ -1,0 +1,438 @@
+{
+  "items": [
+    {
+      "id": "n1",
+      "title": "便携投影仪",
+      "description": "可将电脑画面投到宿舍白墙，附 HDMI 线。",
+      "price_cents": 38000,
+      "category": "数码与影音",
+      "tags": [],
+      "condition_grade": "9成新",
+      "campus": "燕园校本部",
+      "status": "ACTIVE",
+      "created_at": "2026-11-01T08:00:00"
+    },
+    {
+      "id": "n2",
+      "title": "三脚投影仪支架",
+      "description": "调角度的三脚架，仅出售架子，适配投影设备。",
+      "price_cents": 6000,
+      "category": "数码与影音",
+      "tags": [],
+      "condition_grade": "9成新",
+      "campus": "燕园校本部",
+      "status": "ACTIVE",
+      "created_at": "2026-11-01T08:00:01"
+    },
+    {
+      "id": "n3",
+      "title": "桌面阅读灯",
+      "description": "夹在书桌边，插电照明，三档亮度。",
+      "price_cents": 3500,
+      "category": "宿舍生活与家电",
+      "tags": [],
+      "condition_grade": "9成新",
+      "campus": "燕园校本部",
+      "status": "ACTIVE",
+      "created_at": "2026-11-01T08:00:02"
+    },
+    {
+      "id": "n4",
+      "title": "无线办公鼠标",
+      "description": "蓝牙连接，无接收器，适合自习室办公。",
+      "price_cents": 4500,
+      "category": "数码与影音",
+      "tags": [],
+      "condition_grade": "9成新",
+      "campus": "燕园校本部",
+      "status": "ACTIVE",
+      "created_at": "2026-11-01T08:00:03"
+    },
+    {
+      "id": "n5",
+      "title": "有线办公鼠标",
+      "description": "USB 接线，普通按键。",
+      "price_cents": 2500,
+      "category": "数码与影音",
+      "tags": [],
+      "condition_grade": "9成新",
+      "campus": "燕园校本部",
+      "status": "ACTIVE",
+      "created_at": "2026-11-01T08:00:04"
+    },
+    {
+      "id": "n6",
+      "title": "头戴降噪耳机",
+      "description": "主动降噪，可折叠，带收纳盒。",
+      "price_cents": 12000,
+      "category": "数码与影音",
+      "tags": [],
+      "condition_grade": "9成新",
+      "campus": "燕园校本部",
+      "status": "ACTIVE",
+      "created_at": "2026-11-01T08:00:05"
+    },
+    {
+      "id": "n7",
+      "title": "有线平头耳机",
+      "description": "3.5mm 插头，普通款，无降噪。",
+      "price_cents": 2200,
+      "category": "数码与影音",
+      "tags": [],
+      "condition_grade": "9成新",
+      "campus": "燕园校本部",
+      "status": "ACTIVE",
+      "created_at": "2026-11-01T08:00:06"
+    },
+    {
+      "id": "n8",
+      "title": "入门羽毛球拍",
+      "description": "单支，已穿线，附拍套。",
+      "price_cents": 7000,
+      "category": "校园出行与运动",
+      "tags": [],
+      "condition_grade": "9成新",
+      "campus": "燕园校本部",
+      "status": "ACTIVE",
+      "created_at": "2026-11-01T08:00:07"
+    },
+    {
+      "id": "n9",
+      "title": "网球训练拍",
+      "description": "硬式网球单拍，含避震器。",
+      "price_cents": 8500,
+      "category": "校园出行与运动",
+      "tags": [],
+      "condition_grade": "9成新",
+      "campus": "燕园校本部",
+      "status": "ACTIVE",
+      "created_at": "2026-11-01T08:00:08"
+    },
+    {
+      "id": "n10",
+      "title": "保温水杯",
+      "description": "不锈钢真空双层，可装热饮。",
+      "price_cents": 3000,
+      "category": "宿舍生活与家电",
+      "tags": [],
+      "condition_grade": "9成新",
+      "campus": "燕园校本部",
+      "status": "ACTIVE",
+      "created_at": "2026-11-01T08:00:09"
+    },
+    {
+      "id": "n11",
+      "title": "自行车 U 型锁",
+      "description": "钢制防盗锁配两把钥匙，单卖锁具。",
+      "price_cents": 2000,
+      "category": "校园出行与运动",
+      "tags": [],
+      "condition_grade": "9成新",
+      "campus": "燕园校本部",
+      "status": "ACTIVE",
+      "created_at": "2026-11-01T08:00:10"
+    },
+    {
+      "id": "n12",
+      "title": "折叠通勤自行车",
+      "description": "整车出售，可折叠，附赠链条锁。",
+      "price_cents": 24000,
+      "category": "校园出行与运动",
+      "tags": [],
+      "condition_grade": "9成新",
+      "campus": "燕园校本部",
+      "status": "ACTIVE",
+      "created_at": "2026-11-01T08:00:11"
+    },
+    {
+      "id": "n13",
+      "title": "高数习题集",
+      "description": "数学复习题，附答案，无手写笔记。",
+      "price_cents": 1500,
+      "category": "课程资料与书籍",
+      "tags": [],
+      "condition_grade": "9成新",
+      "campus": "燕园校本部",
+      "status": "ACTIVE",
+      "created_at": "2026-11-01T08:00:12"
+    },
+    {
+      "id": "n14",
+      "title": "耳机收纳盒",
+      "description": "只卖空盒，不含耳机。",
+      "price_cents": 800,
+      "category": "数码与影音",
+      "tags": [],
+      "condition_grade": "9成新",
+      "campus": "燕园校本部",
+      "status": "ACTIVE",
+      "created_at": "2026-11-01T08:00:13"
+    },
+    {
+      "id": "n15",
+      "title": "羽毛球拍保护套",
+      "description": "单卖布袋，不含球拍。",
+      "price_cents": 1200,
+      "category": "校园出行与运动",
+      "tags": [],
+      "condition_grade": "9成新",
+      "campus": "燕园校本部",
+      "status": "ACTIVE",
+      "created_at": "2026-11-01T08:00:14"
+    },
+    {
+      "id": "n16",
+      "title": "玻璃冷水杯",
+      "description": "单层玻璃杯，无保温功能。",
+      "price_cents": 600,
+      "category": "宿舍生活与家电",
+      "tags": [],
+      "condition_grade": "9成新",
+      "campus": "燕园校本部",
+      "status": "ACTIVE",
+      "created_at": "2026-11-01T08:00:15"
+    },
+    {
+      "id": "n17",
+      "title": "投影遥控器",
+      "description": "控制投影仪的替换遥控器，非投影主机。",
+      "price_cents": 1800,
+      "category": "数码与影音",
+      "tags": [],
+      "condition_grade": "9成新",
+      "campus": "燕园校本部",
+      "status": "ACTIVE",
+      "created_at": "2026-11-01T08:00:16"
+    },
+    {
+      "id": "n18",
+      "title": "无线游戏鼠标",
+      "description": "无线接收器连接，售价较高。",
+      "price_cents": 15000,
+      "category": "数码与影音",
+      "tags": [],
+      "condition_grade": "9成新",
+      "campus": "燕园校本部",
+      "status": "ACTIVE",
+      "created_at": "2026-11-01T08:00:17"
+    }
+  ],
+  "queries": [
+    {
+      "id": "pair-1-1",
+      "group": "直接",
+      "query": "收一台投影仪",
+      "gold": [
+        "n1"
+      ]
+    },
+    {
+      "id": "pair-1-2",
+      "group": "口语",
+      "query": "想在宿舍白墙上放电影，缺一台投画面的机器",
+      "gold": [
+        "n1"
+      ]
+    },
+    {
+      "id": "pair-2-1",
+      "group": "直接",
+      "query": "投影仪支架",
+      "gold": [
+        "n2"
+      ]
+    },
+    {
+      "id": "pair-2-2",
+      "group": "口语",
+      "query": "放映设备有了，想买个能把它架起来的三脚底座",
+      "gold": [
+        "n2"
+      ]
+    },
+    {
+      "id": "pair-3-1",
+      "group": "直接",
+      "query": "想买台灯",
+      "gold": [
+        "n3"
+      ]
+    },
+    {
+      "id": "pair-3-2",
+      "group": "口语",
+      "query": "找盏夹在桌边看课本用的灯",
+      "gold": [
+        "n3"
+      ]
+    },
+    {
+      "id": "pair-4-1",
+      "group": "直接",
+      "query": "50以内无线鼠标",
+      "gold": [
+        "n4"
+      ]
+    },
+    {
+      "id": "pair-4-2",
+      "group": "口语",
+      "query": "想给电脑配个不拖线的滑鼠，预算五十",
+      "gold": [
+        "n4"
+      ]
+    },
+    {
+      "id": "pair-5-1",
+      "group": "直接",
+      "query": "有线鼠标",
+      "gold": [
+        "n5"
+      ]
+    },
+    {
+      "id": "pair-5-2",
+      "group": "口语",
+      "query": "找个插线用的滑鼠，蓝牙款不要",
+      "gold": [
+        "n5"
+      ]
+    },
+    {
+      "id": "pair-6-1",
+      "group": "直接",
+      "query": "想买降噪耳机",
+      "gold": [
+        "n6"
+      ]
+    },
+    {
+      "id": "pair-6-2",
+      "group": "口语",
+      "query": "地铁上听歌，想要一副能压住环境噪音的耳麦",
+      "gold": [
+        "n6"
+      ]
+    },
+    {
+      "id": "pair-7-1",
+      "group": "直接",
+      "query": "不要降噪的耳机",
+      "gold": [
+        "n7"
+      ]
+    },
+    {
+      "id": "pair-7-2",
+      "group": "口语",
+      "query": "想收副普通耳麦，带主动降噪的就算了",
+      "gold": [
+        "n7"
+      ]
+    },
+    {
+      "id": "pair-8-1",
+      "group": "直接",
+      "query": "收羽毛球拍",
+      "gold": [
+        "n8"
+      ]
+    },
+    {
+      "id": "pair-8-2",
+      "group": "口语",
+      "query": "和舍友打羽球，想买支已经穿好线的拍子",
+      "gold": [
+        "n8"
+      ]
+    },
+    {
+      "id": "pair-9-1",
+      "group": "直接",
+      "query": "想买网球拍",
+      "gold": [
+        "n9"
+      ]
+    },
+    {
+      "id": "pair-9-2",
+      "group": "口语",
+      "query": "网球课要用，缺一支能上场的拍子",
+      "gold": [
+        "n9"
+      ]
+    },
+    {
+      "id": "pair-10-1",
+      "group": "直接",
+      "query": "想找保温杯",
+      "gold": [
+        "n10"
+      ]
+    },
+    {
+      "id": "pair-10-2",
+      "group": "口语",
+      "query": "早上灌热茶，到教室还想喝热的，想买个杯子",
+      "gold": [
+        "n10"
+      ]
+    },
+    {
+      "id": "pair-11-1",
+      "group": "直接",
+      "query": "我想买车锁",
+      "gold": [
+        "n11"
+      ]
+    },
+    {
+      "id": "pair-11-2",
+      "group": "口语",
+      "query": "学校里锁单车用的 U 形防盗锁还有吗",
+      "gold": [
+        "n11"
+      ]
+    },
+    {
+      "id": "pair-12-1",
+      "group": "直接",
+      "query": "300以内自行车",
+      "gold": [
+        "n12"
+      ]
+    },
+    {
+      "id": "pair-12-2",
+      "group": "口语",
+      "query": "预算三百，想收辆能折起来带回宿舍的单车",
+      "gold": [
+        "n12"
+      ]
+    },
+    {
+      "id": "empty-0",
+      "group": "无货",
+      "query": "40元以内收投影仪整机",
+      "gold": []
+    },
+    {
+      "id": "empty-1",
+      "group": "无货",
+      "query": "想买个机械键盘",
+      "gold": []
+    },
+    {
+      "id": "empty-2",
+      "group": "无货",
+      "query": "求一箱没开封的羽毛球，只要球",
+      "gold": []
+    },
+    {
+      "id": "empty-3",
+      "group": "无货",
+      "query": "想找给耳机换的海绵耳罩",
+      "gold": []
+    }
+  ]
+}

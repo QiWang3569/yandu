@@ -1,0 +1,990 @@
+{
+  "model": [
+    "gpt-4.1-nano"
+  ],
+  "platform": "OpenLux",
+  "prompt": "根据买家的整句查询，从给定商品中选出符合需求的商品，按推荐顺序最多返回三件。区分主体与配件、必须项、排除项和偏好。没有合适商品返回空数组。只使用提供的商品信息，只返回 JSON 对象 {\"ranked\":[\"商品编号\"]}。逐件核对实际卖的东西、必需属性和排除项，兼容或附带不等于出售用户要的主体。商品说明中否认某项功能表示它没有该功能。可只选一件，不凑数。",
+  "summary": {
+    "gpt-4.1-nano": {
+      "top1": 23,
+      "hit3": 23,
+      "empty_ok": 4,
+      "errors": 0,
+      "exact": 27
+    }
+  },
+  "records": [
+    {
+      "arm": "gpt-4.1-nano",
+      "id": "pair-5-2",
+      "query": "找个插线用的滑鼠，蓝牙款不要",
+      "ranked": [
+        "n5"
+      ],
+      "attempts": [
+        {
+          "error": null,
+          "seconds": 2.406
+        }
+      ],
+      "retrieved": [
+        "n4",
+        "n7",
+        "n5",
+        "n18",
+        "n6"
+      ],
+      "usage": {
+        "prompt_tokens": 402,
+        "completion_tokens": 8,
+        "total_tokens": 410
+      },
+      "call_seconds": 2.406,
+      "gold": [
+        "n5"
+      ],
+      "expected_titles": [
+        "有线办公鼠标"
+      ],
+      "returned_titles": [
+        "有线办公鼠标"
+      ]
+    },
+    {
+      "arm": "gpt-4.1-nano",
+      "id": "empty-2",
+      "query": "求一箱没开封的羽毛球，只要球",
+      "ranked": [],
+      "attempts": [
+        {
+          "error": null,
+          "seconds": 1.812
+        }
+      ],
+      "retrieved": [
+        "n15",
+        "n8",
+        "n9",
+        "n14",
+        "n13"
+      ],
+      "usage": {
+        "prompt_tokens": 395,
+        "completion_tokens": 5,
+        "total_tokens": 400
+      },
+      "call_seconds": 1.812,
+      "gold": [],
+      "expected_titles": [],
+      "returned_titles": []
+    },
+    {
+      "arm": "gpt-4.1-nano",
+      "id": "pair-12-1",
+      "query": "300以内自行车",
+      "ranked": [
+        "n12"
+      ],
+      "attempts": [
+        {
+          "error": null,
+          "seconds": 3.047
+        }
+      ],
+      "retrieved": [
+        "n12",
+        "n11",
+        "n7",
+        "n6",
+        "n3"
+      ],
+      "usage": {
+        "prompt_tokens": 409,
+        "completion_tokens": 8,
+        "total_tokens": 417
+      },
+      "call_seconds": 3.047,
+      "gold": [
+        "n12"
+      ],
+      "expected_titles": [
+        "折叠通勤自行车"
+      ],
+      "returned_titles": [
+        "折叠通勤自行车"
+      ]
+    },
+    {
+      "arm": "gpt-4.1-nano",
+      "id": "pair-7-2",
+      "query": "想收副普通耳麦，带主动降噪的就算了",
+      "ranked": [],
+      "attempts": [
+        {
+          "error": null,
+          "seconds": 1.266
+        }
+      ],
+      "retrieved": [
+        "n6",
+        "n7",
+        "n14",
+        "n5",
+        "n4"
+      ],
+      "usage": {
+        "prompt_tokens": 405,
+        "completion_tokens": 5,
+        "total_tokens": 410
+      },
+      "call_seconds": 1.266,
+      "gold": [
+        "n7"
+      ],
+      "expected_titles": [
+        "有线平头耳机"
+      ],
+      "returned_titles": []
+    },
+    {
+      "arm": "gpt-4.1-nano",
+      "id": "empty-1",
+      "query": "想买个机械键盘",
+      "ranked": [],
+      "attempts": [
+        {
+          "error": null,
+          "seconds": 1.313
+        }
+      ],
+      "retrieved": [
+        "n5",
+        "n18",
+        "n4",
+        "n6",
+        "n14"
+      ],
+      "usage": {
+        "prompt_tokens": 389,
+        "completion_tokens": 5,
+        "total_tokens": 394
+      },
+      "call_seconds": 1.313,
+      "gold": [],
+      "expected_titles": [],
+      "returned_titles": []
+    },
+    {
+      "arm": "gpt-4.1-nano",
+      "id": "pair-2-1",
+      "query": "投影仪支架",
+      "ranked": [
+        "n2"
+      ],
+      "attempts": [
+        {
+          "error": null,
+          "seconds": 1.109
+        }
+      ],
+      "retrieved": [
+        "n2",
+        "n17",
+        "n1",
+        "n3",
+        "n6"
+      ],
+      "usage": {
+        "prompt_tokens": 417,
+        "completion_tokens": 8,
+        "total_tokens": 425
+      },
+      "call_seconds": 1.109,
+      "gold": [
+        "n2"
+      ],
+      "expected_titles": [
+        "三脚投影仪支架"
+      ],
+      "returned_titles": [
+        "三脚投影仪支架"
+      ]
+    },
+    {
+      "arm": "gpt-4.1-nano",
+      "id": "pair-5-1",
+      "query": "有线鼠标",
+      "ranked": [
+        "n5"
+      ],
+      "attempts": [
+        {
+          "error": null,
+          "seconds": 1.062
+        }
+      ],
+      "retrieved": [
+        "n5",
+        "n18",
+        "n4",
+        "n7",
+        "n3"
+      ],
+      "usage": {
+        "prompt_tokens": 392,
+        "completion_tokens": 8,
+        "total_tokens": 400
+      },
+      "call_seconds": 1.062,
+      "gold": [
+        "n5"
+      ],
+      "expected_titles": [
+        "有线办公鼠标"
+      ],
+      "returned_titles": [
+        "有线办公鼠标"
+      ]
+    },
+    {
+      "arm": "gpt-4.1-nano",
+      "id": "pair-8-2",
+      "query": "和舍友打羽球，想买支已经穿好线的拍子",
+      "ranked": [
+        "n8"
+      ],
+      "attempts": [
+        {
+          "error": null,
+          "seconds": 1.578
+        }
+      ],
+      "retrieved": [
+        "n8",
+        "n15",
+        "n5",
+        "n9",
+        "n7"
+      ],
+      "usage": {
+        "prompt_tokens": 400,
+        "completion_tokens": 8,
+        "total_tokens": 408
+      },
+      "call_seconds": 1.578,
+      "gold": [
+        "n8"
+      ],
+      "expected_titles": [
+        "入门羽毛球拍"
+      ],
+      "returned_titles": [
+        "入门羽毛球拍"
+      ]
+    },
+    {
+      "arm": "gpt-4.1-nano",
+      "id": "pair-9-1",
+      "query": "想买网球拍",
+      "ranked": [
+        "n9"
+      ],
+      "attempts": [
+        {
+          "error": null,
+          "seconds": 1.157
+        }
+      ],
+      "retrieved": [
+        "n9",
+        "n15",
+        "n8",
+        "n7",
+        "n14"
+      ],
+      "usage": {
+        "prompt_tokens": 389,
+        "completion_tokens": 9,
+        "total_tokens": 398
+      },
+      "call_seconds": 1.157,
+      "gold": [
+        "n9"
+      ],
+      "expected_titles": [
+        "网球训练拍"
+      ],
+      "returned_titles": [
+        "网球训练拍"
+      ]
+    },
+    {
+      "arm": "gpt-4.1-nano",
+      "id": "pair-10-1",
+      "query": "想找保温杯",
+      "ranked": [
+        "n10"
+      ],
+      "attempts": [
+        {
+          "error": null,
+          "seconds": 1.688
+        }
+      ],
+      "retrieved": [
+        "n10",
+        "n16",
+        "n13",
+        "n3",
+        "n1"
+      ],
+      "usage": {
+        "prompt_tokens": 399,
+        "completion_tokens": 8,
+        "total_tokens": 407
+      },
+      "call_seconds": 1.688,
+      "gold": [
+        "n10"
+      ],
+      "expected_titles": [
+        "保温水杯"
+      ],
+      "returned_titles": [
+        "保温水杯"
+      ]
+    },
+    {
+      "arm": "gpt-4.1-nano",
+      "id": "pair-6-2",
+      "query": "地铁上听歌，想要一副能压住环境噪音的耳麦",
+      "ranked": [
+        "n6"
+      ],
+      "attempts": [
+        {
+          "error": null,
+          "seconds": 1.562
+        }
+      ],
+      "retrieved": [
+        "n6",
+        "n7",
+        "n14",
+        "n4",
+        "n13"
+      ],
+      "usage": {
+        "prompt_tokens": 414,
+        "completion_tokens": 8,
+        "total_tokens": 422
+      },
+      "call_seconds": 1.562,
+      "gold": [
+        "n6"
+      ],
+      "expected_titles": [
+        "头戴降噪耳机"
+      ],
+      "returned_titles": [
+        "头戴降噪耳机"
+      ]
+    },
+    {
+      "arm": "gpt-4.1-nano",
+      "id": "pair-9-2",
+      "query": "网球课要用，缺一支能上场的拍子",
+      "ranked": [
+        "n9"
+      ],
+      "attempts": [
+        {
+          "error": null,
+          "seconds": 2.093
+        }
+      ],
+      "retrieved": [
+        "n9",
+        "n8",
+        "n15",
+        "n2",
+        "n17"
+      ],
+      "usage": {
+        "prompt_tokens": 412,
+        "completion_tokens": 8,
+        "total_tokens": 420
+      },
+      "call_seconds": 2.093,
+      "gold": [
+        "n9"
+      ],
+      "expected_titles": [
+        "网球训练拍"
+      ],
+      "returned_titles": [
+        "网球训练拍"
+      ]
+    },
+    {
+      "arm": "gpt-4.1-nano",
+      "id": "pair-11-2",
+      "query": "学校里锁单车用的 U 形防盗锁还有吗",
+      "ranked": [
+        "n11"
+      ],
+      "attempts": [
+        {
+          "error": null,
+          "seconds": 1.484
+        }
+      ],
+      "retrieved": [
+        "n11",
+        "n12",
+        "n1",
+        "n13",
+        "n5"
+      ],
+      "usage": {
+        "prompt_tokens": 412,
+        "completion_tokens": 8,
+        "total_tokens": 420
+      },
+      "call_seconds": 1.484,
+      "gold": [
+        "n11"
+      ],
+      "expected_titles": [
+        "自行车 U 型锁"
+      ],
+      "returned_titles": [
+        "自行车 U 型锁"
+      ]
+    },
+    {
+      "arm": "gpt-4.1-nano",
+      "id": "pair-8-1",
+      "query": "收羽毛球拍",
+      "ranked": [
+        "n8"
+      ],
+      "attempts": [
+        {
+          "error": null,
+          "seconds": 1.922
+        }
+      ],
+      "retrieved": [
+        "n15",
+        "n8",
+        "n9",
+        "n5",
+        "n4"
+      ],
+      "usage": {
+        "prompt_tokens": 387,
+        "completion_tokens": 8,
+        "total_tokens": 395
+      },
+      "call_seconds": 1.922,
+      "gold": [
+        "n8"
+      ],
+      "expected_titles": [
+        "入门羽毛球拍"
+      ],
+      "returned_titles": [
+        "入门羽毛球拍"
+      ]
+    },
+    {
+      "arm": "gpt-4.1-nano",
+      "id": "pair-1-2",
+      "query": "想在宿舍白墙上放电影，缺一台投画面的机器",
+      "ranked": [
+        "n1"
+      ],
+      "attempts": [
+        {
+          "error": null,
+          "seconds": 1.469
+        }
+      ],
+      "retrieved": [
+        "n1",
+        "n17",
+        "n3",
+        "n2",
+        "n4"
+      ],
+      "usage": {
+        "prompt_tokens": 427,
+        "completion_tokens": 8,
+        "total_tokens": 435
+      },
+      "call_seconds": 1.469,
+      "gold": [
+        "n1"
+      ],
+      "expected_titles": [
+        "便携投影仪"
+      ],
+      "returned_titles": [
+        "便携投影仪"
+      ]
+    },
+    {
+      "arm": "gpt-4.1-nano",
+      "id": "pair-10-2",
+      "query": "早上灌热茶，到教室还想喝热的，想买个杯子",
+      "ranked": [
+        "n10"
+      ],
+      "attempts": [
+        {
+          "error": null,
+          "seconds": 1.875
+        }
+      ],
+      "retrieved": [
+        "n10",
+        "n16",
+        "n13",
+        "n3",
+        "n14"
+      ],
+      "usage": {
+        "prompt_tokens": 406,
+        "completion_tokens": 8,
+        "total_tokens": 414
+      },
+      "call_seconds": 1.875,
+      "gold": [
+        "n10"
+      ],
+      "expected_titles": [
+        "保温水杯"
+      ],
+      "returned_titles": [
+        "保温水杯"
+      ]
+    },
+    {
+      "arm": "gpt-4.1-nano",
+      "id": "pair-2-2",
+      "query": "放映设备有了，想买个能把它架起来的三脚底座",
+      "ranked": [
+        "n2"
+      ],
+      "attempts": [
+        {
+          "error": null,
+          "seconds": 1.125
+        }
+      ],
+      "retrieved": [
+        "n2",
+        "n7",
+        "n3",
+        "n6",
+        "n1"
+      ],
+      "usage": {
+        "prompt_tokens": 429,
+        "completion_tokens": 8,
+        "total_tokens": 437
+      },
+      "call_seconds": 1.125,
+      "gold": [
+        "n2"
+      ],
+      "expected_titles": [
+        "三脚投影仪支架"
+      ],
+      "returned_titles": [
+        "三脚投影仪支架"
+      ]
+    },
+    {
+      "arm": "gpt-4.1-nano",
+      "id": "pair-3-2",
+      "query": "找盏夹在桌边看课本用的灯",
+      "ranked": [
+        "n3"
+      ],
+      "attempts": [
+        {
+          "error": null,
+          "seconds": 0.953
+        }
+      ],
+      "retrieved": [
+        "n3",
+        "n13",
+        "n1",
+        "n4",
+        "n5"
+      ],
+      "usage": {
+        "prompt_tokens": 407,
+        "completion_tokens": 8,
+        "total_tokens": 415
+      },
+      "call_seconds": 0.953,
+      "gold": [
+        "n3"
+      ],
+      "expected_titles": [
+        "桌面阅读灯"
+      ],
+      "returned_titles": [
+        "桌面阅读灯"
+      ]
+    },
+    {
+      "arm": "gpt-4.1-nano",
+      "id": "pair-11-1",
+      "query": "我想买车锁",
+      "ranked": [
+        "n11"
+      ],
+      "attempts": [
+        {
+          "error": null,
+          "seconds": 1.641
+        }
+      ],
+      "retrieved": [
+        "n11",
+        "n12",
+        "n14",
+        "n5",
+        "n6"
+      ],
+      "usage": {
+        "prompt_tokens": 397,
+        "completion_tokens": 8,
+        "total_tokens": 405
+      },
+      "call_seconds": 1.641,
+      "gold": [
+        "n11"
+      ],
+      "expected_titles": [
+        "自行车 U 型锁"
+      ],
+      "returned_titles": [
+        "自行车 U 型锁"
+      ]
+    },
+    {
+      "arm": "gpt-4.1-nano",
+      "id": "pair-3-1",
+      "query": "想买台灯",
+      "ranked": [
+        "n3"
+      ],
+      "attempts": [
+        {
+          "error": null,
+          "seconds": 1.25
+        }
+      ],
+      "retrieved": [
+        "n3",
+        "n7",
+        "n2",
+        "n14",
+        "n6"
+      ],
+      "usage": {
+        "prompt_tokens": 406,
+        "completion_tokens": 8,
+        "total_tokens": 414
+      },
+      "call_seconds": 1.25,
+      "gold": [
+        "n3"
+      ],
+      "expected_titles": [
+        "桌面阅读灯"
+      ],
+      "returned_titles": [
+        "桌面阅读灯"
+      ]
+    },
+    {
+      "arm": "gpt-4.1-nano",
+      "id": "empty-3",
+      "query": "想找给耳机换的海绵耳罩",
+      "ranked": [],
+      "attempts": [
+        {
+          "error": null,
+          "seconds": 1.453
+        }
+      ],
+      "retrieved": [
+        "n6",
+        "n14",
+        "n7",
+        "n4",
+        "n18"
+      ],
+      "usage": {
+        "prompt_tokens": 402,
+        "completion_tokens": 5,
+        "total_tokens": 407
+      },
+      "call_seconds": 1.453,
+      "gold": [],
+      "expected_titles": [],
+      "returned_titles": []
+    },
+    {
+      "arm": "gpt-4.1-nano",
+      "id": "pair-6-1",
+      "query": "想买降噪耳机",
+      "ranked": [
+        "n6"
+      ],
+      "attempts": [
+        {
+          "error": null,
+          "seconds": 1.0
+        }
+      ],
+      "retrieved": [
+        "n6",
+        "n7",
+        "n14",
+        "n5",
+        "n18"
+      ],
+      "usage": {
+        "prompt_tokens": 391,
+        "completion_tokens": 8,
+        "total_tokens": 399
+      },
+      "call_seconds": 1.0,
+      "gold": [
+        "n6"
+      ],
+      "expected_titles": [
+        "头戴降噪耳机"
+      ],
+      "returned_titles": [
+        "头戴降噪耳机"
+      ]
+    },
+    {
+      "arm": "gpt-4.1-nano",
+      "id": "pair-7-1",
+      "query": "不要降噪的耳机",
+      "ranked": [
+        "n7"
+      ],
+      "attempts": [
+        {
+          "error": null,
+          "seconds": 1.015
+        }
+      ],
+      "retrieved": [
+        "n6",
+        "n7",
+        "n14",
+        "n5",
+        "n17"
+      ],
+      "usage": {
+        "prompt_tokens": 399,
+        "completion_tokens": 8,
+        "total_tokens": 407
+      },
+      "call_seconds": 1.015,
+      "gold": [
+        "n7"
+      ],
+      "expected_titles": [
+        "有线平头耳机"
+      ],
+      "returned_titles": [
+        "有线平头耳机"
+      ]
+    },
+    {
+      "arm": "gpt-4.1-nano",
+      "id": "pair-4-2",
+      "query": "想给电脑配个不拖线的滑鼠，预算五十",
+      "ranked": [
+        "n4"
+      ],
+      "attempts": [
+        {
+          "error": null,
+          "seconds": 1.203
+        }
+      ],
+      "retrieved": [
+        "n18",
+        "n4",
+        "n5",
+        "n6",
+        "n7"
+      ],
+      "usage": {
+        "prompt_tokens": 404,
+        "completion_tokens": 9,
+        "total_tokens": 413
+      },
+      "call_seconds": 1.203,
+      "gold": [
+        "n4"
+      ],
+      "expected_titles": [
+        "无线办公鼠标"
+      ],
+      "returned_titles": [
+        "无线办公鼠标"
+      ]
+    },
+    {
+      "arm": "gpt-4.1-nano",
+      "id": "empty-0",
+      "query": "40元以内收投影仪整机",
+      "ranked": [],
+      "attempts": [
+        {
+          "error": null,
+          "seconds": 0.766
+        }
+      ],
+      "retrieved": [
+        "n17",
+        "n2",
+        "n1",
+        "n6",
+        "n7"
+      ],
+      "usage": {
+        "prompt_tokens": 421,
+        "completion_tokens": 5,
+        "total_tokens": 426
+      },
+      "call_seconds": 0.766,
+      "gold": [],
+      "expected_titles": [],
+      "returned_titles": []
+    },
+    {
+      "arm": "gpt-4.1-nano",
+      "id": "pair-12-2",
+      "query": "预算三百，想收辆能折起来带回宿舍的单车",
+      "ranked": [
+        "n12"
+      ],
+      "attempts": [
+        {
+          "error": null,
+          "seconds": 0.969
+        }
+      ],
+      "retrieved": [
+        "n12",
+        "n6",
+        "n1",
+        "n14",
+        "n7"
+      ],
+      "usage": {
+        "prompt_tokens": 417,
+        "completion_tokens": 8,
+        "total_tokens": 425
+      },
+      "call_seconds": 0.969,
+      "gold": [
+        "n12"
+      ],
+      "expected_titles": [
+        "折叠通勤自行车"
+      ],
+      "returned_titles": [
+        "折叠通勤自行车"
+      ]
+    },
+    {
+      "arm": "gpt-4.1-nano",
+      "id": "pair-4-1",
+      "query": "50以内无线鼠标",
+      "ranked": [
+        "n4"
+      ],
+      "attempts": [
+        {
+          "error": null,
+          "seconds": 1.11
+        }
+      ],
+      "retrieved": [
+        "n18",
+        "n5",
+        "n4",
+        "n7",
+        "n1"
+      ],
+      "usage": {
+        "prompt_tokens": 395,
+        "completion_tokens": 8,
+        "total_tokens": 403
+      },
+      "call_seconds": 1.11,
+      "gold": [
+        "n4"
+      ],
+      "expected_titles": [
+        "无线办公鼠标"
+      ],
+      "returned_titles": [
+        "无线办公鼠标"
+      ]
+    },
+    {
+      "arm": "gpt-4.1-nano",
+      "id": "pair-1-1",
+      "query": "收一台投影仪",
+      "ranked": [
+        "n1"
+      ],
+      "attempts": [
+        {
+          "error": null,
+          "seconds": 1.14
+        }
+      ],
+      "retrieved": [
+        "n1",
+        "n17",
+        "n2",
+        "n14",
+        "n5"
+      ],
+      "usage": {
+        "prompt_tokens": 404,
+        "completion_tokens": 8,
+        "total_tokens": 412
+      },
+      "call_seconds": 1.14,
+      "gold": [
+        "n1"
+      ],
+      "expected_titles": [
+        "便携投影仪"
+      ],
+      "returned_titles": [
+        "便携投影仪"
+      ]
+    }
+  ]
+}
