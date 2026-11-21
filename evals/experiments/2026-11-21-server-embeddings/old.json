@@ -1,0 +1,910 @@
+{
+  "original": {
+    "search-ambiguity-07": {
+      "ranked": [
+        "d05",
+        "m08",
+        "m07",
+        "m06",
+        "m05",
+        "m04",
+        "m03",
+        "m01",
+        "h09",
+        "d07",
+        "m02"
+      ],
+      "score": null
+    },
+    "search-ambiguity-08": {
+      "ranked": [
+        "b03",
+        "b01",
+        "b05"
+      ],
+      "score": null
+    },
+    "search-ambiguity-09": {
+      "ranked": [
+        "s04"
+      ],
+      "score": null
+    },
+    "search-ambiguity-10": {
+      "ranked": [],
+      "score": null
+    },
+    "search-confusable-01": {
+      "ranked": [
+        "s04"
+      ],
+      "score": null
+    },
+    "search-confusable-02": {
+      "ranked": [
+        "s05"
+      ],
+      "score": null
+    },
+    "search-confusable-03-rewrite": {
+      "ranked": [
+        "x02",
+        "d03",
+        "d02",
+        "d01"
+      ],
+      "score": null
+    },
+    "search-confusable-03": {
+      "ranked": [
+        "x02",
+        "d03",
+        "d02",
+        "d01"
+      ],
+      "score": null
+    },
+    "search-confusable-04": {
+      "ranked": [
+        "x02",
+        "d03",
+        "d02",
+        "d01"
+      ],
+      "score": null
+    },
+    "search-confusable-05": {
+      "ranked": [
+        "x02",
+        "d03",
+        "d02",
+        "d01"
+      ],
+      "score": null
+    },
+    "search-confusable-06": {
+      "ranked": [
+        "x02",
+        "d03",
+        "d02",
+        "d01"
+      ],
+      "score": null
+    },
+    "search-confusable-07": {
+      "ranked": [
+        "x03",
+        "d07",
+        "d06"
+      ],
+      "score": null
+    },
+    "search-confusable-08": {
+      "ranked": [
+        "x03",
+        "d07",
+        "d06"
+      ],
+      "score": null
+    },
+    "search-confusable-09": {
+      "ranked": [
+        "f01"
+      ],
+      "score": null
+    },
+    "search-confusable-10": {
+      "ranked": [
+        "f05"
+      ],
+      "score": null
+    },
+    "search-core-01-rewrite": {
+      "ranked": [
+        "m08",
+        "m01",
+        "h09"
+      ],
+      "score": null
+    },
+    "search-core-01": {
+      "ranked": [
+        "m08",
+        "m01",
+        "h09"
+      ],
+      "score": null
+    },
+    "search-core-02": {
+      "ranked": [
+        "b01",
+        "b05"
+      ],
+      "score": null
+    },
+    "search-core-03": {
+      "ranked": [
+        "h04"
+      ],
+      "score": null
+    },
+    "search-core-04": {
+      "ranked": [],
+      "score": null
+    },
+    "search-core-05-rewrite": {
+      "ranked": [
+        "s04"
+      ],
+      "score": null
+    },
+    "search-core-05": {
+      "ranked": [],
+      "score": null
+    },
+    "search-core-06": {
+      "ranked": [
+        "b04"
+      ],
+      "score": null
+    },
+    "search-core-07": {
+      "ranked": [],
+      "score": null
+    },
+    "search-core-08-rewrite": {
+      "ranked": [
+        "f01"
+      ],
+      "score": null
+    },
+    "search-core-08": {
+      "ranked": [
+        "f01"
+      ],
+      "score": null
+    },
+    "search-core-09": {
+      "ranked": [],
+      "score": null
+    },
+    "search-core-10-budget": {
+      "ranked": [
+        "s01"
+      ],
+      "score": null
+    },
+    "search-core-10": {
+      "ranked": [
+        "s02",
+        "s01"
+      ],
+      "score": null
+    },
+    "search-negation-01-rewrite": {
+      "ranked": [
+        "m08",
+        "m07",
+        "m06",
+        "m01",
+        "h09",
+        "d07"
+      ],
+      "score": null
+    },
+    "search-negation-01": {
+      "ranked": [
+        "m08",
+        "m07",
+        "m06",
+        "m01",
+        "h09",
+        "d07"
+      ],
+      "score": null
+    },
+    "search-negation-02": {
+      "ranked": [
+        "m07",
+        "m06",
+        "m03",
+        "m01",
+        "h09",
+        "d07"
+      ],
+      "score": null
+    },
+    "search-negation-03": {
+      "ranked": [
+        "m07",
+        "m06",
+        "m01",
+        "h09",
+        "d07"
+      ],
+      "score": null
+    },
+    "search-negation-04": {
+      "ranked": [
+        "m07"
+      ],
+      "score": null
+    },
+    "search-negation-05": {
+      "ranked": [
+        "d09"
+      ],
+      "score": null
+    },
+    "search-negation-06": {
+      "ranked": [
+        "s02",
+        "s01"
+      ],
+      "score": null
+    },
+    "search-negation-07": {
+      "ranked": [
+        "x04",
+        "x03",
+        "x02",
+        "x01",
+        "r02",
+        "r01",
+        "f06",
+        "f05",
+        "f04",
+        "f03",
+        "f01",
+        "h09",
+        "h08",
+        "h07",
+        "h06",
+        "h04",
+        "h03",
+        "h02",
+        "h01",
+        "s06",
+        "s05",
+        "s04",
+        "d12",
+        "d11",
+        "d10",
+        "d09",
+        "d08",
+        "d07",
+        "d06",
+        "d02",
+        "b05",
+        "b04",
+        "b03",
+        "b02",
+        "b01",
+        "m08",
+        "m05",
+        "m02",
+        "m01"
+      ],
+      "score": null
+    },
+    "search-negation-08": {
+      "ranked": [
+        "x03",
+        "d06"
+      ],
+      "score": null
+    },
+    "search-negation-09": {
+      "ranked": [
+        "m07",
+        "m06",
+        "m05",
+        "m04",
+        "m02",
+        "m01"
+      ],
+      "score": null
+    },
+    "search-negation-10": {
+      "ranked": [],
+      "score": null
+    },
+    "search-negation-11": {
+      "ranked": [],
+      "score": null
+    },
+    "search-ood-01": {
+      "ranked": [
+        "d04"
+      ],
+      "score": null
+    },
+    "search-ood-02": {
+      "ranked": [
+        "d05"
+      ],
+      "score": null
+    },
+    "search-ood-03": {
+      "ranked": [
+        "d12"
+      ],
+      "score": null
+    },
+    "search-ood-04": {
+      "ranked": [
+        "d11"
+      ],
+      "score": null
+    },
+    "search-ood-05": {
+      "ranked": [],
+      "score": null
+    },
+    "search-ood-06": {
+      "ranked": [
+        "x02",
+        "d03",
+        "d02",
+        "d01"
+      ],
+      "score": null
+    },
+    "search-ood-07": {
+      "ranked": [
+        "d10"
+      ],
+      "score": null
+    },
+    "search-ood-08": {
+      "ranked": [
+        "x03"
+      ],
+      "score": null
+    },
+    "search-ood-09": {
+      "ranked": [],
+      "score": null
+    },
+    "search-ood-10": {
+      "ranked": [],
+      "score": null
+    },
+    "search-preference-01-rewrite": {
+      "ranked": [
+        "s02",
+        "s01"
+      ],
+      "score": null
+    },
+    "search-preference-01": {
+      "ranked": [
+        "s02",
+        "s01"
+      ],
+      "score": null
+    },
+    "search-preference-02": {
+      "ranked": [
+        "s02",
+        "s01"
+      ],
+      "score": null
+    },
+    "search-preference-03": {
+      "ranked": [
+        "d05",
+        "m08",
+        "m07",
+        "m06",
+        "m05",
+        "m04",
+        "m03",
+        "m02",
+        "m01"
+      ],
+      "score": null
+    },
+    "search-preference-04": {
+      "ranked": [
+        "m07",
+        "m04",
+        "m02",
+        "m01",
+        "d05",
+        "m08",
+        "m06",
+        "m05",
+        "m03"
+      ],
+      "score": null
+    },
+    "search-preference-05": {
+      "ranked": [
+        "h02",
+        "h01"
+      ],
+      "score": null
+    },
+    "search-preference-06": {
+      "ranked": [
+        "h02",
+        "h01"
+      ],
+      "score": null
+    },
+    "search-preference-07": {
+      "ranked": [
+        "d09",
+        "d08"
+      ],
+      "score": null
+    },
+    "search-preference-08": {
+      "ranked": [
+        "d09",
+        "d08"
+      ],
+      "score": null
+    },
+    "search-preference-09": {
+      "ranked": [],
+      "score": null
+    },
+    "search-preference-10": {
+      "ranked": [],
+      "score": null
+    },
+    "search-preference-11": {
+      "ranked": [
+        "d05",
+        "m08",
+        "m07",
+        "m06",
+        "m05",
+        "m04",
+        "m03",
+        "m02",
+        "m01"
+      ],
+      "score": null
+    },
+    "search-preference-12": {
+      "ranked": [],
+      "score": null
+    },
+    "search-preference-13": {
+      "ranked": [],
+      "score": null
+    },
+    "search-price-01": {
+      "ranked": [
+        "d05",
+        "m08",
+        "m07",
+        "m06",
+        "m05",
+        "m04",
+        "m03",
+        "m02",
+        "m01"
+      ],
+      "score": null
+    },
+    "search-price-02-rewrite": {
+      "ranked": [
+        "x02",
+        "d02",
+        "d01"
+      ],
+      "score": null
+    },
+    "search-price-02": {
+      "ranked": [
+        "x02",
+        "d03",
+        "d02",
+        "d01"
+      ],
+      "score": null
+    },
+    "search-price-03": {
+      "ranked": [
+        "h02",
+        "h01"
+      ],
+      "score": null
+    },
+    "search-price-04": {
+      "ranked": [],
+      "score": null
+    },
+    "search-price-05": {
+      "ranked": [
+        "b04"
+      ],
+      "score": null
+    },
+    "search-price-06": {
+      "ranked": [
+        "x02",
+        "d02"
+      ],
+      "score": null
+    },
+    "search-price-07": {
+      "ranked": [
+        "d05",
+        "m08",
+        "m07",
+        "m06",
+        "m05",
+        "m04",
+        "m03",
+        "m02",
+        "m01"
+      ],
+      "score": null
+    },
+    "search-price-08-budget": {
+      "ranked": [
+        "m08",
+        "m05",
+        "m01",
+        "h09",
+        "d07",
+        "m02"
+      ],
+      "score": null
+    },
+    "search-price-08-rewrite": {
+      "ranked": [
+        "m08",
+        "m07",
+        "m06",
+        "m05",
+        "m03",
+        "m01",
+        "h09",
+        "d07",
+        "m02"
+      ],
+      "score": null
+    },
+    "search-price-08": {
+      "ranked": [
+        "m08",
+        "m07",
+        "m06",
+        "m05",
+        "m03",
+        "m01",
+        "h09",
+        "d07",
+        "m02"
+      ],
+      "score": null
+    },
+    "search-price-09": {
+      "ranked": [
+        "m04"
+      ],
+      "score": null
+    },
+    "search-price-10": {
+      "ranked": [],
+      "score": null
+    }
+  },
+  "diagnostic": {
+    "sense-1-1": {
+      "ranked": [
+        "v05",
+        "x02",
+        "d03",
+        "d02",
+        "d01"
+      ],
+      "score": null
+    },
+    "sense-1-2": {
+      "ranked": [],
+      "score": null
+    },
+    "sense-1-3": {
+      "ranked": [],
+      "score": null
+    },
+    "sense-1-4": {
+      "ranked": [],
+      "score": null
+    },
+    "sense-2-1": {
+      "ranked": [
+        "v05",
+        "x02",
+        "d03",
+        "d02",
+        "d01"
+      ],
+      "score": null
+    },
+    "sense-2-2": {
+      "ranked": [],
+      "score": null
+    },
+    "sense-2-3": {
+      "ranked": [],
+      "score": null
+    },
+    "sense-2-4": {
+      "ranked": [],
+      "score": null
+    },
+    "sense-3-1": {
+      "ranked": [
+        "v05",
+        "x02",
+        "d03",
+        "d02",
+        "d01"
+      ],
+      "score": null
+    },
+    "sense-3-2": {
+      "ranked": [],
+      "score": null
+    },
+    "sense-3-3": {
+      "ranked": [
+        "v02"
+      ],
+      "score": null
+    },
+    "sense-3-4": {
+      "ranked": [],
+      "score": null
+    },
+    "sense-4-1": {
+      "ranked": [
+        "v05",
+        "x02",
+        "d03",
+        "d02",
+        "d01"
+      ],
+      "score": null
+    },
+    "sense-4-2": {
+      "ranked": [],
+      "score": null
+    },
+    "sense-4-3": {
+      "ranked": [
+        "v05",
+        "x02",
+        "d03",
+        "d02",
+        "d01"
+      ],
+      "score": null
+    },
+    "sense-4-4": {
+      "ranked": [
+        "v05",
+        "x02",
+        "d03",
+        "d02",
+        "d01"
+      ],
+      "score": null
+    },
+    "sense-5-1": {
+      "ranked": [],
+      "score": null
+    },
+    "sense-5-2": {
+      "ranked": [
+        "v05",
+        "x02",
+        "d03",
+        "d02",
+        "d01"
+      ],
+      "score": null
+    }
+  },
+  "holdout": {
+    "pair-1-1": {
+      "ranked": [],
+      "score": null
+    },
+    "pair-1-2": {
+      "ranked": [],
+      "score": null
+    },
+    "pair-2-1": {
+      "ranked": [
+        "n2"
+      ],
+      "score": null
+    },
+    "pair-2-2": {
+      "ranked": [],
+      "score": null
+    },
+    "pair-3-1": {
+      "ranked": [
+        "n3"
+      ],
+      "score": null
+    },
+    "pair-3-2": {
+      "ranked": [],
+      "score": null
+    },
+    "pair-4-1": {
+      "ranked": [
+        "n4",
+        "n5"
+      ],
+      "score": null
+    },
+    "pair-4-2": {
+      "ranked": [
+        "n18",
+        "n5",
+        "n4",
+        "n1"
+      ],
+      "score": null
+    },
+    "pair-5-1": {
+      "ranked": [
+        "n18",
+        "n5",
+        "n4"
+      ],
+      "score": null
+    },
+    "pair-5-2": {
+      "ranked": [
+        "n18",
+        "n4",
+        "n5"
+      ],
+      "score": null
+    },
+    "pair-6-1": {
+      "ranked": [
+        "n14",
+        "n7",
+        "n6"
+      ],
+      "score": null
+    },
+    "pair-6-2": {
+      "ranked": [],
+      "score": null
+    },
+    "pair-7-1": {
+      "ranked": [
+        "n18",
+        "n17",
+        "n16",
+        "n15",
+        "n14",
+        "n13",
+        "n12",
+        "n11",
+        "n10",
+        "n9",
+        "n8",
+        "n7",
+        "n6",
+        "n5",
+        "n4",
+        "n3",
+        "n2",
+        "n1"
+      ],
+      "score": null
+    },
+    "pair-7-2": {
+      "ranked": [],
+      "score": null
+    },
+    "pair-8-1": {
+      "ranked": [
+        "n15",
+        "n8"
+      ],
+      "score": null
+    },
+    "pair-8-2": {
+      "ranked": [],
+      "score": null
+    },
+    "pair-9-1": {
+      "ranked": [],
+      "score": null
+    },
+    "pair-9-2": {
+      "ranked": [],
+      "score": null
+    },
+    "pair-10-1": {
+      "ranked": [],
+      "score": null
+    },
+    "pair-10-2": {
+      "ranked": [],
+      "score": null
+    },
+    "pair-11-1": {
+      "ranked": [],
+      "score": null
+    },
+    "pair-11-2": {
+      "ranked": [
+        "n12",
+        "n11"
+      ],
+      "score": null
+    },
+    "pair-12-1": {
+      "ranked": [
+        "n12",
+        "n11"
+      ],
+      "score": null
+    },
+    "pair-12-2": {
+      "ranked": [
+        "n12",
+        "n11"
+      ],
+      "score": null
+    },
+    "empty-0": {
+      "ranked": [],
+      "score": null
+    },
+    "empty-1": {
+      "ranked": [],
+      "score": null
+    },
+    "empty-2": {
+      "ranked": [],
+      "score": null
+    },
+    "empty-3": {
+      "ranked": [
+        "n14",
+        "n7",
+        "n6"
+      ],
+      "score": null
+    }
+  }
+}

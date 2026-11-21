@@ -1,0 +1,57 @@
+{
+  "id": "search-price-01",
+  "task": "smart_search",
+  "enabled": true,
+  "split": "dev",
+  "family": "search-price-01",
+  "tags": [
+    "campus-search",
+    "slice:price"
+  ],
+  "source": "synthetic-campus-v1; authored before model evaluation",
+  "rationale": "按项目确定的价位段筛选，200至300元均可，包含两端。",
+  "label_status": "draft",
+  "input": {
+    "text": "两百多买鼠标"
+  },
+  "expected": {
+    "parse": {
+      "fields": {
+        "category": "数码与影音",
+        "max_price": 300,
+        "campus": "不限校区",
+        "condition_grade": null
+      },
+      "sets": {
+        "keywords": [
+          [
+            "鼠标"
+          ]
+        ],
+        "excluded_keywords": [],
+        "preferences": []
+      },
+      "clarification": false
+    },
+    "oracle_intent": {
+      "category": "数码与影音",
+      "max_price": 300,
+      "campus": "不限校区",
+      "condition_grade": null,
+      "keywords": [
+        "鼠标"
+      ],
+      "excluded_keywords": [],
+      "preferences": [],
+      "clarification": null
+    },
+    "relevant_item_ids": [
+      "m03",
+      "m06",
+      "m07"
+    ],
+    "retrieval_applicable": true,
+    "around_price": false,
+    "min_price": 200
+  }
+}

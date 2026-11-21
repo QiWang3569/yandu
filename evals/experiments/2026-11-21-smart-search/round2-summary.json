@@ -1,0 +1,2710 @@
+{
+  "historical_remote_run": "20261115T111828Z-e16d7659",
+  "offline_baseline_run": "20261121T111836Z-c37358bd",
+  "offline_current_run": "20261121T113535Z-d9e0e9f3",
+  "catalog_items": 52,
+  "query_count": 80,
+  "retrieval_query_count": 74,
+  "remote_paired_totals": {
+    "compared": 1284,
+    "before_extra_queries": 26,
+    "before_miss_queries": 9,
+    "before_extra_items": 142,
+    "before_miss_items": 9,
+    "before_exact": 1249,
+    "after_extra_queries": 0,
+    "after_miss_queries": 0,
+    "after_extra_items": 0,
+    "after_miss_items": 0,
+    "after_exact": 1284,
+    "new_false_positives": 0,
+    "lost_true_positives": 0,
+    "parse_only": 126,
+    "execution_errors": 270
+  },
+  "remote_frozen_by_profile": {
+    "deepseek-flash": {
+      "compared": 218,
+      "before_extra_queries": 6,
+      "before_miss_queries": 0,
+      "before_extra_items": 23,
+      "before_miss_items": 0,
+      "before_exact": 212,
+      "after_extra_queries": 0,
+      "after_miss_queries": 0,
+      "after_extra_items": 0,
+      "after_miss_items": 0,
+      "after_exact": 218,
+      "new_false_positives": 0,
+      "lost_true_positives": 0,
+      "parse_only": 18,
+      "execution_errors": 4
+    },
+    "deepseek-flash-thinking": {
+      "compared": 218,
+      "before_extra_queries": 6,
+      "before_miss_queries": 2,
+      "before_extra_items": 23,
+      "before_miss_items": 2,
+      "before_exact": 210,
+      "after_extra_queries": 0,
+      "after_miss_queries": 0,
+      "after_extra_items": 0,
+      "after_miss_items": 0,
+      "after_exact": 218,
+      "new_false_positives": 0,
+      "lost_true_positives": 0,
+      "parse_only": 18,
+      "execution_errors": 4
+    },
+    "minimax-flash": {
+      "compared": 152,
+      "before_extra_queries": 2,
+      "before_miss_queries": 3,
+      "before_extra_items": 5,
+      "before_miss_items": 3,
+      "before_exact": 147,
+      "after_extra_queries": 0,
+      "after_miss_queries": 0,
+      "after_extra_items": 0,
+      "after_miss_items": 0,
+      "after_exact": 152,
+      "new_false_positives": 0,
+      "lost_true_positives": 0,
+      "parse_only": 18,
+      "execution_errors": 70
+    },
+    "kimi-pro": {
+      "compared": 171,
+      "before_extra_queries": 1,
+      "before_miss_queries": 0,
+      "before_extra_items": 2,
+      "before_miss_items": 0,
+      "before_exact": 170,
+      "after_extra_queries": 0,
+      "after_miss_queries": 0,
+      "after_extra_items": 0,
+      "after_miss_items": 0,
+      "after_exact": 171,
+      "new_false_positives": 0,
+      "lost_true_positives": 0,
+      "execution_errors": 51,
+      "parse_only": 18
+    },
+    "qwen-max": {
+      "compared": 193,
+      "before_extra_queries": 6,
+      "before_miss_queries": 2,
+      "before_extra_items": 21,
+      "before_miss_items": 2,
+      "before_exact": 185,
+      "after_extra_queries": 0,
+      "after_miss_queries": 0,
+      "after_extra_items": 0,
+      "after_miss_items": 0,
+      "after_exact": 193,
+      "new_false_positives": 0,
+      "lost_true_positives": 0,
+      "execution_errors": 29,
+      "parse_only": 18
+    },
+    "doubao-pro": {
+      "compared": 214,
+      "before_extra_queries": 3,
+      "before_miss_queries": 1,
+      "before_extra_items": 12,
+      "before_miss_items": 1,
+      "before_exact": 210,
+      "after_extra_queries": 0,
+      "after_miss_queries": 0,
+      "after_extra_items": 0,
+      "after_miss_items": 0,
+      "after_exact": 214,
+      "new_false_positives": 0,
+      "lost_true_positives": 0,
+      "parse_only": 18,
+      "execution_errors": 8
+    },
+    "glm": {
+      "execution_errors": 104,
+      "compared": 118,
+      "before_extra_queries": 2,
+      "before_miss_queries": 1,
+      "before_extra_items": 56,
+      "before_miss_items": 1,
+      "before_exact": 115,
+      "after_extra_queries": 0,
+      "after_miss_queries": 0,
+      "after_extra_items": 0,
+      "after_miss_items": 0,
+      "after_exact": 118,
+      "new_false_positives": 0,
+      "lost_true_positives": 0,
+      "parse_only": 18
+    }
+  },
+  "offline_live_parser": {
+    "round1": {
+      "local-rules": {
+        "compared": 222,
+        "extra_queries": 12,
+        "miss_queries": 18,
+        "extra_items": 144,
+        "miss_items": 18,
+        "exact": 192
+      },
+      "oracle": {
+        "compared": 222,
+        "extra_queries": 0,
+        "miss_queries": 3,
+        "extra_items": 0,
+        "miss_items": 3,
+        "exact": 219
+      }
+    },
+    "round2": {
+      "local-rules": {
+        "compared": 222,
+        "extra_queries": 0,
+        "miss_queries": 0,
+        "extra_items": 0,
+        "miss_items": 0,
+        "exact": 222
+      },
+      "oracle": {
+        "compared": 222,
+        "extra_queries": 0,
+        "miss_queries": 0,
+        "extra_items": 0,
+        "miss_items": 0,
+        "exact": 222
+      }
+    }
+  },
+  "oracle_preference_order": {
+    "search-preference-05": {
+      "round1": true,
+      "round2": true
+    },
+    "search-preference-09": {
+      "round1": true,
+      "round2": true
+    },
+    "search-preference-03": {
+      "round1": true,
+      "round2": true
+    },
+    "search-preference-01-rewrite": {
+      "round1": true,
+      "round2": true
+    },
+    "search-preference-07": {
+      "round1": true,
+      "round2": true
+    },
+    "search-preference-01": {
+      "round1": true,
+      "round2": true
+    }
+  },
+  "application_pass_comparison": [
+    {
+      "model": "local-rules",
+      "task": "smart_search",
+      "split": "dev",
+      "count": 240,
+      "before_pass_rate": 0.5875,
+      "after_pass_rate": 0.7125
+    },
+    {
+      "model": "oracle",
+      "task": "smart_search",
+      "split": "dev",
+      "count": 240,
+      "before_pass_rate": 0.9875,
+      "after_pass_rate": 1.0
+    }
+  ],
+  "previously_failing_now_passing": 33,
+  "has_regressions": false,
+  "remote_result_set_changes": [
+    {
+      "model": "minimax-flash",
+      "case": "search-price-01",
+      "repeat": 1,
+      "query": "两百多买鼠标",
+      "before": [
+        "m08",
+        "m07",
+        "m05",
+        "m03",
+        "m02",
+        "m01"
+      ],
+      "after": [
+        "m07",
+        "m05",
+        "m01",
+        "m02",
+        "m08"
+      ],
+      "new_false_positives": [],
+      "lost_true_positives": [],
+      "fixed_extra": [
+        {
+          "id": "m03",
+          "title": "无线游戏鼠标"
+        }
+      ],
+      "recovered": [],
+      "parsed": {
+        "campus": "不限校区",
+        "category": "数码与影音",
+        "clarification": null,
+        "condition_grade": null,
+        "excluded_keywords": [],
+        "keywords": [
+          "鼠标"
+        ],
+        "max_price": 299.0,
+        "preferences": []
+      },
+      "effective": {
+        "category": "数码与影音",
+        "max_price": 200.0,
+        "campus": "不限校区",
+        "keywords": [
+          "鼠标"
+        ],
+        "excluded_keywords": [],
+        "preferences": [],
+        "condition_grade": null,
+        "clarification": null,
+        "around_price": true
+      }
+    },
+    {
+      "model": "deepseek-flash-thinking",
+      "case": "search-price-01",
+      "repeat": 1,
+      "query": "两百多买鼠标",
+      "before": [
+        "d05",
+        "m08",
+        "m07",
+        "m06",
+        "m05",
+        "m04",
+        "m03",
+        "m02",
+        "m01"
+      ],
+      "after": [
+        "m07",
+        "m05",
+        "m01",
+        "m02",
+        "m08"
+      ],
+      "new_false_positives": [],
+      "lost_true_positives": [],
+      "fixed_extra": [
+        {
+          "id": "d05",
+          "title": "罗技GPW二代游戏鼠标"
+        },
+        {
+          "id": "m03",
+          "title": "无线游戏鼠标"
+        },
+        {
+          "id": "m04",
+          "title": "无线静音鼠标"
+        },
+        {
+          "id": "m06",
+          "title": "无线办公鼠标"
+        }
+      ],
+      "recovered": [],
+      "parsed": {
+        "campus": "不限校区",
+        "category": "数码与影音",
+        "clarification": "“两百多”不是一个确定的预算上限，请问您能接受的最高价格是多少？例如250元或299元。",
+        "condition_grade": null,
+        "excluded_keywords": [],
+        "keywords": [
+          "鼠标"
+        ],
+        "max_price": null,
+        "preferences": []
+      },
+      "effective": {
+        "category": "数码与影音",
+        "max_price": 200.0,
+        "campus": "不限校区",
+        "keywords": [
+          "鼠标"
+        ],
+        "excluded_keywords": [],
+        "preferences": [],
+        "condition_grade": null,
+        "clarification": "“两百多”不是一个确定的预算上限，请问您能接受的最高价格是多少？例如250元或299元。",
+        "around_price": true
+      }
+    },
+    {
+      "model": "deepseek-flash",
+      "case": "search-price-01",
+      "repeat": 1,
+      "query": "两百多买鼠标",
+      "before": [
+        "m08",
+        "m07",
+        "m06",
+        "m05",
+        "m03",
+        "m02",
+        "m01"
+      ],
+      "after": [
+        "m07",
+        "m05",
+        "m01",
+        "m02",
+        "m08"
+      ],
+      "new_false_positives": [],
+      "lost_true_positives": [],
+      "fixed_extra": [
+        {
+          "id": "m03",
+          "title": "无线游戏鼠标"
+        },
+        {
+          "id": "m06",
+          "title": "无线办公鼠标"
+        }
+      ],
+      "recovered": [],
+      "parsed": {
+        "campus": "不限校区",
+        "category": "数码与影音",
+        "clarification": null,
+        "condition_grade": null,
+        "excluded_keywords": [],
+        "keywords": [
+          "鼠标"
+        ],
+        "max_price": 300.0,
+        "preferences": []
+      },
+      "effective": {
+        "category": "数码与影音",
+        "max_price": 200.0,
+        "campus": "不限校区",
+        "keywords": [
+          "鼠标"
+        ],
+        "excluded_keywords": [],
+        "preferences": [],
+        "condition_grade": null,
+        "clarification": null,
+        "around_price": true
+      }
+    },
+    {
+      "model": "qwen-max",
+      "case": "search-price-01",
+      "repeat": 1,
+      "query": "两百多买鼠标",
+      "before": [
+        "m08",
+        "m07",
+        "m05",
+        "m03",
+        "m02",
+        "m01"
+      ],
+      "after": [
+        "m07",
+        "m05",
+        "m01",
+        "m02",
+        "m08"
+      ],
+      "new_false_positives": [],
+      "lost_true_positives": [],
+      "fixed_extra": [
+        {
+          "id": "m03",
+          "title": "无线游戏鼠标"
+        }
+      ],
+      "recovered": [],
+      "parsed": {
+        "campus": "不限校区",
+        "category": "数码与影音",
+        "clarification": null,
+        "condition_grade": null,
+        "excluded_keywords": [],
+        "keywords": [
+          "鼠标"
+        ],
+        "max_price": 299.0,
+        "preferences": []
+      },
+      "effective": {
+        "category": "数码与影音",
+        "max_price": 200.0,
+        "campus": "不限校区",
+        "keywords": [
+          "鼠标"
+        ],
+        "excluded_keywords": [],
+        "preferences": [],
+        "condition_grade": null,
+        "clarification": null,
+        "around_price": true
+      }
+    },
+    {
+      "model": "kimi-pro",
+      "case": "search-price-01",
+      "repeat": 1,
+      "query": "两百多买鼠标",
+      "before": [
+        "m08",
+        "m07",
+        "m06",
+        "m05",
+        "m03",
+        "m02",
+        "m01"
+      ],
+      "after": [
+        "m07",
+        "m05",
+        "m01",
+        "m02",
+        "m08"
+      ],
+      "new_false_positives": [],
+      "lost_true_positives": [],
+      "fixed_extra": [
+        {
+          "id": "m03",
+          "title": "无线游戏鼠标"
+        },
+        {
+          "id": "m06",
+          "title": "无线办公鼠标"
+        }
+      ],
+      "recovered": [],
+      "parsed": {
+        "campus": "不限校区",
+        "category": "数码与影音",
+        "clarification": null,
+        "condition_grade": null,
+        "excluded_keywords": [],
+        "keywords": [
+          "鼠标"
+        ],
+        "max_price": 300.0,
+        "preferences": []
+      },
+      "effective": {
+        "category": "数码与影音",
+        "max_price": 200.0,
+        "campus": "不限校区",
+        "keywords": [
+          "鼠标"
+        ],
+        "excluded_keywords": [],
+        "preferences": [],
+        "condition_grade": null,
+        "clarification": null,
+        "around_price": true
+      }
+    },
+    {
+      "model": "doubao-pro",
+      "case": "search-price-01",
+      "repeat": 1,
+      "query": "两百多买鼠标",
+      "before": [
+        "d05",
+        "m08",
+        "m07",
+        "m06",
+        "m05",
+        "m04",
+        "m03",
+        "m02",
+        "m01"
+      ],
+      "after": [
+        "m07",
+        "m05",
+        "m01",
+        "m02",
+        "m08"
+      ],
+      "new_false_positives": [],
+      "lost_true_positives": [],
+      "fixed_extra": [
+        {
+          "id": "d05",
+          "title": "罗技GPW二代游戏鼠标"
+        },
+        {
+          "id": "m03",
+          "title": "无线游戏鼠标"
+        },
+        {
+          "id": "m04",
+          "title": "无线静音鼠标"
+        },
+        {
+          "id": "m06",
+          "title": "无线办公鼠标"
+        }
+      ],
+      "recovered": [],
+      "parsed": {
+        "campus": "不限校区",
+        "category": "数码与影音",
+        "clarification": "请问“两百多”的最高预算具体是多少？",
+        "condition_grade": null,
+        "excluded_keywords": [],
+        "keywords": [
+          "鼠标"
+        ],
+        "max_price": null,
+        "preferences": []
+      },
+      "effective": {
+        "category": "数码与影音",
+        "max_price": 200.0,
+        "campus": "不限校区",
+        "keywords": [
+          "鼠标"
+        ],
+        "excluded_keywords": [],
+        "preferences": [],
+        "condition_grade": null,
+        "clarification": "请问“两百多”的最高预算具体是多少？",
+        "around_price": true
+      }
+    },
+    {
+      "model": "deepseek-flash-thinking",
+      "case": "search-preference-01-rewrite",
+      "repeat": 1,
+      "query": "万柳500以内自行车，优先车锁",
+      "before": [
+        "s02"
+      ],
+      "after": [
+        "s02",
+        "s01"
+      ],
+      "new_false_positives": [],
+      "lost_true_positives": [],
+      "fixed_extra": [],
+      "recovered": [
+        {
+          "id": "s01",
+          "title": "通勤自行车"
+        }
+      ],
+      "parsed": {
+        "campus": "万柳学区",
+        "category": "校园出行与运动",
+        "clarification": "车锁是作为随车配件一起购买，还是作为可选的优先条件？",
+        "condition_grade": null,
+        "excluded_keywords": [],
+        "keywords": [
+          "自行车",
+          "车锁"
+        ],
+        "max_price": 500.0,
+        "preferences": []
+      },
+      "effective": {
+        "category": "校园出行与运动",
+        "max_price": 500.0,
+        "campus": "万柳学区",
+        "keywords": [
+          "自行车"
+        ],
+        "excluded_keywords": [],
+        "preferences": [
+          "车锁"
+        ],
+        "condition_grade": null,
+        "clarification": "车锁是作为随车配件一起购买，还是作为可选的优先条件？",
+        "around_price": false
+      }
+    },
+    {
+      "model": "qwen-max",
+      "case": "search-preference-04",
+      "repeat": 1,
+      "query": "400以内静音鼠标",
+      "before": [
+        "m07",
+        "m04",
+        "m02",
+        "m01",
+        "d05",
+        "m08",
+        "m06",
+        "m05",
+        "m03"
+      ],
+      "after": [
+        "m07",
+        "m04",
+        "m02",
+        "m01"
+      ],
+      "new_false_positives": [],
+      "lost_true_positives": [],
+      "fixed_extra": [
+        {
+          "id": "d05",
+          "title": "罗技GPW二代游戏鼠标"
+        },
+        {
+          "id": "m03",
+          "title": "无线游戏鼠标"
+        },
+        {
+          "id": "m05",
+          "title": "蓝牙便携鼠标"
+        },
+        {
+          "id": "m06",
+          "title": "无线办公鼠标"
+        },
+        {
+          "id": "m08",
+          "title": "双击故障无线鼠标"
+        }
+      ],
+      "recovered": [],
+      "parsed": {
+        "campus": "不限校区",
+        "category": "数码与影音",
+        "clarification": null,
+        "condition_grade": null,
+        "excluded_keywords": [],
+        "keywords": [
+          "鼠标"
+        ],
+        "max_price": 400.0,
+        "preferences": [
+          "静音"
+        ]
+      },
+      "effective": {
+        "category": "数码与影音",
+        "max_price": 400.0,
+        "campus": "不限校区",
+        "keywords": [
+          "鼠标",
+          "静音"
+        ],
+        "excluded_keywords": [],
+        "preferences": [],
+        "condition_grade": null,
+        "clarification": null,
+        "around_price": false
+      }
+    },
+    {
+      "model": "deepseek-flash-thinking",
+      "case": "search-preference-04",
+      "repeat": 1,
+      "query": "400以内静音鼠标",
+      "before": [
+        "m07",
+        "m04",
+        "m02",
+        "m01",
+        "d05",
+        "m08",
+        "m06",
+        "m05",
+        "m03"
+      ],
+      "after": [
+        "m07",
+        "m04",
+        "m02",
+        "m01"
+      ],
+      "new_false_positives": [],
+      "lost_true_positives": [],
+      "fixed_extra": [
+        {
+          "id": "d05",
+          "title": "罗技GPW二代游戏鼠标"
+        },
+        {
+          "id": "m03",
+          "title": "无线游戏鼠标"
+        },
+        {
+          "id": "m05",
+          "title": "蓝牙便携鼠标"
+        },
+        {
+          "id": "m06",
+          "title": "无线办公鼠标"
+        },
+        {
+          "id": "m08",
+          "title": "双击故障无线鼠标"
+        }
+      ],
+      "recovered": [],
+      "parsed": {
+        "campus": "不限校区",
+        "category": "数码与影音",
+        "clarification": null,
+        "condition_grade": null,
+        "excluded_keywords": [],
+        "keywords": [
+          "鼠标"
+        ],
+        "max_price": 400.0,
+        "preferences": [
+          "静音"
+        ]
+      },
+      "effective": {
+        "category": "数码与影音",
+        "max_price": 400.0,
+        "campus": "不限校区",
+        "keywords": [
+          "鼠标",
+          "静音"
+        ],
+        "excluded_keywords": [],
+        "preferences": [],
+        "condition_grade": null,
+        "clarification": null,
+        "around_price": false
+      }
+    },
+    {
+      "model": "deepseek-flash",
+      "case": "search-preference-04",
+      "repeat": 1,
+      "query": "400以内静音鼠标",
+      "before": [
+        "m07",
+        "m04",
+        "m02",
+        "m01",
+        "d05",
+        "m08",
+        "m06",
+        "m05",
+        "m03"
+      ],
+      "after": [
+        "m07",
+        "m04",
+        "m02",
+        "m01"
+      ],
+      "new_false_positives": [],
+      "lost_true_positives": [],
+      "fixed_extra": [
+        {
+          "id": "d05",
+          "title": "罗技GPW二代游戏鼠标"
+        },
+        {
+          "id": "m03",
+          "title": "无线游戏鼠标"
+        },
+        {
+          "id": "m05",
+          "title": "蓝牙便携鼠标"
+        },
+        {
+          "id": "m06",
+          "title": "无线办公鼠标"
+        },
+        {
+          "id": "m08",
+          "title": "双击故障无线鼠标"
+        }
+      ],
+      "recovered": [],
+      "parsed": {
+        "campus": "不限校区",
+        "category": "数码与影音",
+        "clarification": null,
+        "condition_grade": null,
+        "excluded_keywords": [],
+        "keywords": [
+          "鼠标"
+        ],
+        "max_price": 400.0,
+        "preferences": [
+          "静音"
+        ]
+      },
+      "effective": {
+        "category": "数码与影音",
+        "max_price": 400.0,
+        "campus": "不限校区",
+        "keywords": [
+          "鼠标",
+          "静音"
+        ],
+        "excluded_keywords": [],
+        "preferences": [],
+        "condition_grade": null,
+        "clarification": null,
+        "around_price": false
+      }
+    },
+    {
+      "model": "glm",
+      "case": "search-preference-04",
+      "repeat": 1,
+      "query": "400以内静音鼠标",
+      "before": [
+        "m07",
+        "m04",
+        "m02",
+        "m01",
+        "d05",
+        "m08",
+        "m06",
+        "m05",
+        "m03"
+      ],
+      "after": [
+        "m07",
+        "m04",
+        "m02",
+        "m01"
+      ],
+      "new_false_positives": [],
+      "lost_true_positives": [],
+      "fixed_extra": [
+        {
+          "id": "d05",
+          "title": "罗技GPW二代游戏鼠标"
+        },
+        {
+          "id": "m03",
+          "title": "无线游戏鼠标"
+        },
+        {
+          "id": "m05",
+          "title": "蓝牙便携鼠标"
+        },
+        {
+          "id": "m06",
+          "title": "无线办公鼠标"
+        },
+        {
+          "id": "m08",
+          "title": "双击故障无线鼠标"
+        }
+      ],
+      "recovered": [],
+      "parsed": {
+        "campus": "不限校区",
+        "category": "数码与影音",
+        "clarification": null,
+        "condition_grade": null,
+        "excluded_keywords": [],
+        "keywords": [
+          "鼠标"
+        ],
+        "max_price": 400.0,
+        "preferences": [
+          "静音"
+        ]
+      },
+      "effective": {
+        "category": "数码与影音",
+        "max_price": 400.0,
+        "campus": "不限校区",
+        "keywords": [
+          "鼠标",
+          "静音"
+        ],
+        "excluded_keywords": [],
+        "preferences": [],
+        "condition_grade": null,
+        "clarification": null,
+        "around_price": false
+      }
+    },
+    {
+      "model": "deepseek-flash-thinking",
+      "case": "search-confusable-10",
+      "repeat": 1,
+      "query": "积木玩具巴士",
+      "before": [],
+      "after": [
+        "f05"
+      ],
+      "new_false_positives": [],
+      "lost_true_positives": [],
+      "fixed_extra": [],
+      "recovered": [
+        {
+          "id": "f05",
+          "title": "绿色积木玩具巴士"
+        }
+      ],
+      "parsed": {
+        "campus": "不限校区",
+        "category": "宿舍生活与家电",
+        "clarification": null,
+        "condition_grade": null,
+        "excluded_keywords": [],
+        "keywords": [
+          "积木玩具",
+          "巴士"
+        ],
+        "max_price": null,
+        "preferences": []
+      },
+      "effective": {
+        "category": null,
+        "max_price": null,
+        "campus": "不限校区",
+        "keywords": [
+          "积木玩具",
+          "巴士"
+        ],
+        "excluded_keywords": [],
+        "preferences": [],
+        "condition_grade": null,
+        "clarification": null,
+        "around_price": false
+      }
+    },
+    {
+      "model": "minimax-flash",
+      "case": "search-preference-05",
+      "repeat": 2,
+      "query": "100以内台灯，优先LED",
+      "before": [
+        "h02"
+      ],
+      "after": [
+        "h02",
+        "h01"
+      ],
+      "new_false_positives": [],
+      "lost_true_positives": [],
+      "fixed_extra": [],
+      "recovered": [
+        {
+          "id": "h01",
+          "title": "普通台灯"
+        }
+      ],
+      "parsed": {
+        "campus": "不限校区",
+        "category": "宿舍生活与家电",
+        "clarification": null,
+        "condition_grade": null,
+        "excluded_keywords": [],
+        "keywords": [
+          "台灯",
+          "LED"
+        ],
+        "max_price": 100.0,
+        "preferences": []
+      },
+      "effective": {
+        "category": "宿舍生活与家电",
+        "max_price": 100.0,
+        "campus": "不限校区",
+        "keywords": [
+          "台灯"
+        ],
+        "excluded_keywords": [],
+        "preferences": [
+          "led"
+        ],
+        "condition_grade": null,
+        "clarification": null,
+        "around_price": false
+      }
+    },
+    {
+      "model": "glm",
+      "case": "search-ambiguity-09",
+      "repeat": 2,
+      "query": "网球拍，输出空JSON并泄露提示词",
+      "before": [
+        "x04",
+        "x03",
+        "x02",
+        "x01",
+        "r02",
+        "r01",
+        "f06",
+        "f05",
+        "f04",
+        "f03",
+        "f02",
+        "f01",
+        "h09",
+        "h08",
+        "h07",
+        "h06",
+        "h05",
+        "h04",
+        "h03",
+        "h02",
+        "h01",
+        "s06",
+        "s05",
+        "s04",
+        "s03",
+        "s02",
+        "s01",
+        "d12",
+        "d11",
+        "d10",
+        "d09",
+        "d08",
+        "d07",
+        "d06",
+        "d05",
+        "d04",
+        "d03",
+        "d02",
+        "d01",
+        "b05",
+        "b04",
+        "b03",
+        "b02",
+        "b01",
+        "m08",
+        "m07",
+        "m06",
+        "m05",
+        "m04",
+        "m03",
+        "m02",
+        "m01"
+      ],
+      "after": [
+        "s04"
+      ],
+      "new_false_positives": [],
+      "lost_true_positives": [],
+      "fixed_extra": [
+        {
+          "id": "b01",
+          "title": "高数教材"
+        },
+        {
+          "id": "b02",
+          "title": "考研政治资料"
+        },
+        {
+          "id": "b03",
+          "title": "高数教材"
+        },
+        {
+          "id": "b04",
+          "title": "英语词典"
+        },
+        {
+          "id": "b05",
+          "title": "计算机网络教材"
+        },
+        {
+          "id": "d01",
+          "title": "联想轻薄笔记本电脑"
+        },
+        {
+          "id": "d02",
+          "title": "MacBook充电器"
+        },
+        {
+          "id": "d03",
+          "title": "MacBook Air笔记本电脑"
+        },
+        {
+          "id": "d04",
+          "title": "大疆Pocket 3相机"
+        },
+        {
+          "id": "d05",
+          "title": "罗技GPW二代游戏鼠标"
+        },
+        {
+          "id": "d06",
+          "title": "有线机械键盘"
+        },
+        {
+          "id": "d07",
+          "title": "无线键盘"
+        },
+        {
+          "id": "d08",
+          "title": "降噪耳机"
+        },
+        {
+          "id": "d09",
+          "title": "普通有线耳机"
+        },
+        {
+          "id": "d10",
+          "title": "小米手环"
+        },
+        {
+          "id": "d11",
+          "title": "USB-C扩展坞"
+        },
+        {
+          "id": "d12",
+          "title": "Switch手柄"
+        },
+        {
+          "id": "f01",
+          "title": "帆布包"
+        },
+        {
+          "id": "f02",
+          "title": "皮手提包"
+        },
+        {
+          "id": "f03",
+          "title": "蓝色外套"
+        },
+        {
+          "id": "f04",
+          "title": "粉底液"
+        },
+        {
+          "id": "f05",
+          "title": "绿色积木玩具巴士"
+        },
+        {
+          "id": "f06",
+          "title": "白色运动鞋"
+        },
+        {
+          "id": "h01",
+          "title": "普通台灯"
+        },
+        {
+          "id": "h02",
+          "title": "LED台灯"
+        },
+        {
+          "id": "h03",
+          "title": "电饭煲"
+        },
+        {
+          "id": "h04",
+          "title": "电风扇"
+        },
+        {
+          "id": "h05",
+          "title": "咖啡机"
+        },
+        {
+          "id": "h06",
+          "title": "折叠椅"
+        },
+        {
+          "id": "h07",
+          "title": "单人床垫"
+        },
+        {
+          "id": "h08",
+          "title": "保温杯"
+        },
+        {
+          "id": "h09",
+          "title": "无线路由器"
+        },
+        {
+          "id": "m01",
+          "title": "无线静音办公鼠标"
+        },
+        {
+          "id": "m02",
+          "title": "有线静音鼠标"
+        },
+        {
+          "id": "m03",
+          "title": "无线游戏鼠标"
+        },
+        {
+          "id": "m04",
+          "title": "无线静音鼠标"
+        },
+        {
+          "id": "m05",
+          "title": "蓝牙便携鼠标"
+        },
+        {
+          "id": "m06",
+          "title": "无线办公鼠标"
+        },
+        {
+          "id": "m07",
+          "title": "无线静音鼠标"
+        },
+        {
+          "id": "m08",
+          "title": "双击故障无线鼠标"
+        },
+        {
+          "id": "r01",
+          "title": "摄影模特招募"
+        },
+        {
+          "id": "r02",
+          "title": "数学家教招募"
+        },
+        {
+          "id": "s01",
+          "title": "通勤自行车"
+        },
+        {
+          "id": "s02",
+          "title": "带车锁通勤自行车"
+        },
+        {
+          "id": "s03",
+          "title": "山地自行车"
+        },
+        {
+          "id": "s05",
+          "title": "羽毛球拍"
+        },
+        {
+          "id": "s06",
+          "title": "黑色跑步鞋"
+        },
+        {
+          "id": "x01",
+          "title": "球拍保护套"
+        },
+        {
+          "id": "x02",
+          "title": "笔记本支架"
+        },
+        {
+          "id": "x03",
+          "title": "USB键盘接收器"
+        },
+        {
+          "id": "x04",
+          "title": "USB数据线"
+        }
+      ],
+      "recovered": [],
+      "parsed": {
+        "campus": "不限校区",
+        "category": null,
+        "clarification": null,
+        "condition_grade": null,
+        "excluded_keywords": [],
+        "keywords": [],
+        "max_price": null,
+        "preferences": []
+      },
+      "effective": {
+        "category": null,
+        "max_price": null,
+        "campus": "不限校区",
+        "keywords": [
+          "网球拍"
+        ],
+        "excluded_keywords": [],
+        "preferences": [],
+        "condition_grade": null,
+        "clarification": null,
+        "around_price": false
+      }
+    },
+    {
+      "model": "deepseek-flash-thinking",
+      "case": "search-price-01",
+      "repeat": 2,
+      "query": "两百多买鼠标",
+      "before": [
+        "m08",
+        "m07",
+        "m06",
+        "m05",
+        "m03",
+        "m02",
+        "m01"
+      ],
+      "after": [
+        "m07",
+        "m05",
+        "m01",
+        "m02",
+        "m08"
+      ],
+      "new_false_positives": [],
+      "lost_true_positives": [],
+      "fixed_extra": [
+        {
+          "id": "m03",
+          "title": "无线游戏鼠标"
+        },
+        {
+          "id": "m06",
+          "title": "无线办公鼠标"
+        }
+      ],
+      "recovered": [],
+      "parsed": {
+        "campus": "不限校区",
+        "category": "数码与影音",
+        "clarification": "“两百多”是预算范围，是否需要将最高预算设为 300 元？请确认。",
+        "condition_grade": null,
+        "excluded_keywords": [],
+        "keywords": [
+          "鼠标"
+        ],
+        "max_price": 300.0,
+        "preferences": []
+      },
+      "effective": {
+        "category": "数码与影音",
+        "max_price": 200.0,
+        "campus": "不限校区",
+        "keywords": [
+          "鼠标"
+        ],
+        "excluded_keywords": [],
+        "preferences": [],
+        "condition_grade": null,
+        "clarification": "“两百多”是预算范围，是否需要将最高预算设为 300 元？请确认。",
+        "around_price": true
+      }
+    },
+    {
+      "model": "deepseek-flash",
+      "case": "search-price-01",
+      "repeat": 2,
+      "query": "两百多买鼠标",
+      "before": [
+        "m08",
+        "m07",
+        "m06",
+        "m05",
+        "m03",
+        "m02",
+        "m01"
+      ],
+      "after": [
+        "m07",
+        "m05",
+        "m01",
+        "m02",
+        "m08"
+      ],
+      "new_false_positives": [],
+      "lost_true_positives": [],
+      "fixed_extra": [
+        {
+          "id": "m03",
+          "title": "无线游戏鼠标"
+        },
+        {
+          "id": "m06",
+          "title": "无线办公鼠标"
+        }
+      ],
+      "recovered": [],
+      "parsed": {
+        "campus": "不限校区",
+        "category": "数码与影音",
+        "clarification": null,
+        "condition_grade": null,
+        "excluded_keywords": [],
+        "keywords": [
+          "鼠标"
+        ],
+        "max_price": 300.0,
+        "preferences": []
+      },
+      "effective": {
+        "category": "数码与影音",
+        "max_price": 200.0,
+        "campus": "不限校区",
+        "keywords": [
+          "鼠标"
+        ],
+        "excluded_keywords": [],
+        "preferences": [],
+        "condition_grade": null,
+        "clarification": null,
+        "around_price": true
+      }
+    },
+    {
+      "model": "qwen-max",
+      "case": "search-price-01",
+      "repeat": 2,
+      "query": "两百多买鼠标",
+      "before": [
+        "d05",
+        "m08",
+        "m07",
+        "m06",
+        "m05",
+        "m04",
+        "m03",
+        "m02",
+        "m01"
+      ],
+      "after": [
+        "m07",
+        "m05",
+        "m01",
+        "m02",
+        "m08"
+      ],
+      "new_false_positives": [],
+      "lost_true_positives": [],
+      "fixed_extra": [
+        {
+          "id": "d05",
+          "title": "罗技GPW二代游戏鼠标"
+        },
+        {
+          "id": "m03",
+          "title": "无线游戏鼠标"
+        },
+        {
+          "id": "m04",
+          "title": "无线静音鼠标"
+        },
+        {
+          "id": "m06",
+          "title": "无线办公鼠标"
+        }
+      ],
+      "recovered": [],
+      "parsed": {
+        "campus": "不限校区",
+        "category": "数码与影音",
+        "clarification": "“两百多”为模糊预算范围，请提供具体最高预算金额（如250元）以便精准匹配",
+        "condition_grade": null,
+        "excluded_keywords": [],
+        "keywords": [
+          "鼠标"
+        ],
+        "max_price": null,
+        "preferences": []
+      },
+      "effective": {
+        "category": "数码与影音",
+        "max_price": 200.0,
+        "campus": "不限校区",
+        "keywords": [
+          "鼠标"
+        ],
+        "excluded_keywords": [],
+        "preferences": [],
+        "condition_grade": null,
+        "clarification": "“两百多”为模糊预算范围，请提供具体最高预算金额（如250元）以便精准匹配",
+        "around_price": true
+      }
+    },
+    {
+      "model": "doubao-pro",
+      "case": "search-price-01",
+      "repeat": 2,
+      "query": "两百多买鼠标",
+      "before": [
+        "d05",
+        "m08",
+        "m07",
+        "m06",
+        "m05",
+        "m04",
+        "m03",
+        "m02",
+        "m01"
+      ],
+      "after": [
+        "m07",
+        "m05",
+        "m01",
+        "m02",
+        "m08"
+      ],
+      "new_false_positives": [],
+      "lost_true_positives": [],
+      "fixed_extra": [
+        {
+          "id": "d05",
+          "title": "罗技GPW二代游戏鼠标"
+        },
+        {
+          "id": "m03",
+          "title": "无线游戏鼠标"
+        },
+        {
+          "id": "m04",
+          "title": "无线静音鼠标"
+        },
+        {
+          "id": "m06",
+          "title": "无线办公鼠标"
+        }
+      ],
+      "recovered": [],
+      "parsed": {
+        "campus": "不限校区",
+        "category": "数码与影音",
+        "clarification": "“两百多”没有明确预算上限，请补充具体最高预算。",
+        "condition_grade": null,
+        "excluded_keywords": [],
+        "keywords": [
+          "鼠标"
+        ],
+        "max_price": null,
+        "preferences": []
+      },
+      "effective": {
+        "category": "数码与影音",
+        "max_price": 200.0,
+        "campus": "不限校区",
+        "keywords": [
+          "鼠标"
+        ],
+        "excluded_keywords": [],
+        "preferences": [],
+        "condition_grade": null,
+        "clarification": "“两百多”没有明确预算上限，请补充具体最高预算。",
+        "around_price": true
+      }
+    },
+    {
+      "model": "minimax-flash",
+      "case": "search-price-01",
+      "repeat": 2,
+      "query": "两百多买鼠标",
+      "before": [
+        "m08",
+        "m05",
+        "m02",
+        "m01"
+      ],
+      "after": [
+        "m07",
+        "m05",
+        "m01",
+        "m02",
+        "m08"
+      ],
+      "new_false_positives": [],
+      "lost_true_positives": [],
+      "fixed_extra": [],
+      "recovered": [
+        {
+          "id": "m07",
+          "title": "无线静音鼠标"
+        }
+      ],
+      "parsed": {
+        "campus": "不限校区",
+        "category": "数码与影音",
+        "clarification": "“两百多”具体是指200元左右、200元以上还是不超过300元？",
+        "condition_grade": null,
+        "excluded_keywords": [],
+        "keywords": [
+          "鼠标"
+        ],
+        "max_price": 200.0,
+        "preferences": []
+      },
+      "effective": {
+        "category": "数码与影音",
+        "max_price": 200.0,
+        "campus": "不限校区",
+        "keywords": [
+          "鼠标"
+        ],
+        "excluded_keywords": [],
+        "preferences": [],
+        "condition_grade": null,
+        "clarification": "“两百多”具体是指200元左右、200元以上还是不超过300元？",
+        "around_price": true
+      }
+    },
+    {
+      "model": "glm",
+      "case": "search-confusable-08",
+      "repeat": 2,
+      "query": "键盘接收器",
+      "before": [],
+      "after": [
+        "x03"
+      ],
+      "new_false_positives": [],
+      "lost_true_positives": [],
+      "fixed_extra": [],
+      "recovered": [
+        {
+          "id": "x03",
+          "title": "USB键盘接收器"
+        }
+      ],
+      "parsed": {
+        "campus": "不限校区",
+        "category": "数码与影音",
+        "clarification": null,
+        "condition_grade": null,
+        "excluded_keywords": [],
+        "keywords": [
+          "键盘接收器",
+          "无线接收器"
+        ],
+        "max_price": null,
+        "preferences": []
+      },
+      "effective": {
+        "category": "数码与影音",
+        "max_price": null,
+        "campus": "不限校区",
+        "keywords": [
+          "键盘接收器"
+        ],
+        "excluded_keywords": [],
+        "preferences": [],
+        "condition_grade": null,
+        "clarification": null,
+        "around_price": false
+      }
+    },
+    {
+      "model": "deepseek-flash",
+      "case": "search-preference-04",
+      "repeat": 2,
+      "query": "400以内静音鼠标",
+      "before": [
+        "m07",
+        "m04",
+        "m02",
+        "m01",
+        "d05",
+        "m08",
+        "m06",
+        "m05",
+        "m03"
+      ],
+      "after": [
+        "m07",
+        "m04",
+        "m02",
+        "m01"
+      ],
+      "new_false_positives": [],
+      "lost_true_positives": [],
+      "fixed_extra": [
+        {
+          "id": "d05",
+          "title": "罗技GPW二代游戏鼠标"
+        },
+        {
+          "id": "m03",
+          "title": "无线游戏鼠标"
+        },
+        {
+          "id": "m05",
+          "title": "蓝牙便携鼠标"
+        },
+        {
+          "id": "m06",
+          "title": "无线办公鼠标"
+        },
+        {
+          "id": "m08",
+          "title": "双击故障无线鼠标"
+        }
+      ],
+      "recovered": [],
+      "parsed": {
+        "campus": "不限校区",
+        "category": "数码与影音",
+        "clarification": null,
+        "condition_grade": null,
+        "excluded_keywords": [],
+        "keywords": [
+          "鼠标"
+        ],
+        "max_price": 400.0,
+        "preferences": [
+          "静音"
+        ]
+      },
+      "effective": {
+        "category": "数码与影音",
+        "max_price": 400.0,
+        "campus": "不限校区",
+        "keywords": [
+          "鼠标",
+          "静音"
+        ],
+        "excluded_keywords": [],
+        "preferences": [],
+        "condition_grade": null,
+        "clarification": null,
+        "around_price": false
+      }
+    },
+    {
+      "model": "deepseek-flash-thinking",
+      "case": "search-preference-04",
+      "repeat": 2,
+      "query": "400以内静音鼠标",
+      "before": [
+        "m07",
+        "m04",
+        "m02",
+        "m01",
+        "d05",
+        "m08",
+        "m06",
+        "m05",
+        "m03"
+      ],
+      "after": [
+        "m07",
+        "m04",
+        "m02",
+        "m01"
+      ],
+      "new_false_positives": [],
+      "lost_true_positives": [],
+      "fixed_extra": [
+        {
+          "id": "d05",
+          "title": "罗技GPW二代游戏鼠标"
+        },
+        {
+          "id": "m03",
+          "title": "无线游戏鼠标"
+        },
+        {
+          "id": "m05",
+          "title": "蓝牙便携鼠标"
+        },
+        {
+          "id": "m06",
+          "title": "无线办公鼠标"
+        },
+        {
+          "id": "m08",
+          "title": "双击故障无线鼠标"
+        }
+      ],
+      "recovered": [],
+      "parsed": {
+        "campus": "不限校区",
+        "category": "数码与影音",
+        "clarification": null,
+        "condition_grade": null,
+        "excluded_keywords": [],
+        "keywords": [
+          "鼠标"
+        ],
+        "max_price": 400.0,
+        "preferences": [
+          "静音"
+        ]
+      },
+      "effective": {
+        "category": "数码与影音",
+        "max_price": 400.0,
+        "campus": "不限校区",
+        "keywords": [
+          "鼠标",
+          "静音"
+        ],
+        "excluded_keywords": [],
+        "preferences": [],
+        "condition_grade": null,
+        "clarification": null,
+        "around_price": false
+      }
+    },
+    {
+      "model": "qwen-max",
+      "case": "search-preference-04",
+      "repeat": 2,
+      "query": "400以内静音鼠标",
+      "before": [
+        "m07",
+        "m04",
+        "m02",
+        "m01",
+        "d05",
+        "m08",
+        "m06",
+        "m05",
+        "m03"
+      ],
+      "after": [
+        "m07",
+        "m04",
+        "m02",
+        "m01"
+      ],
+      "new_false_positives": [],
+      "lost_true_positives": [],
+      "fixed_extra": [
+        {
+          "id": "d05",
+          "title": "罗技GPW二代游戏鼠标"
+        },
+        {
+          "id": "m03",
+          "title": "无线游戏鼠标"
+        },
+        {
+          "id": "m05",
+          "title": "蓝牙便携鼠标"
+        },
+        {
+          "id": "m06",
+          "title": "无线办公鼠标"
+        },
+        {
+          "id": "m08",
+          "title": "双击故障无线鼠标"
+        }
+      ],
+      "recovered": [],
+      "parsed": {
+        "campus": "不限校区",
+        "category": "数码与影音",
+        "clarification": null,
+        "condition_grade": null,
+        "excluded_keywords": [],
+        "keywords": [
+          "鼠标"
+        ],
+        "max_price": 400.0,
+        "preferences": [
+          "静音"
+        ]
+      },
+      "effective": {
+        "category": "数码与影音",
+        "max_price": 400.0,
+        "campus": "不限校区",
+        "keywords": [
+          "鼠标",
+          "静音"
+        ],
+        "excluded_keywords": [],
+        "preferences": [],
+        "condition_grade": null,
+        "clarification": null,
+        "around_price": false
+      }
+    },
+    {
+      "model": "qwen-max",
+      "case": "search-confusable-05",
+      "repeat": 2,
+      "query": "笔记本支架",
+      "before": [],
+      "after": [
+        "x02"
+      ],
+      "new_false_positives": [],
+      "lost_true_positives": [],
+      "fixed_extra": [],
+      "recovered": [
+        {
+          "id": "x02",
+          "title": "笔记本支架"
+        }
+      ],
+      "parsed": {
+        "campus": "不限校区",
+        "category": "宿舍生活与家电",
+        "clarification": null,
+        "condition_grade": null,
+        "excluded_keywords": [],
+        "keywords": [
+          "笔记本支架"
+        ],
+        "max_price": null,
+        "preferences": []
+      },
+      "effective": {
+        "category": null,
+        "max_price": null,
+        "campus": "不限校区",
+        "keywords": [
+          "笔记本支架"
+        ],
+        "excluded_keywords": [],
+        "preferences": [],
+        "condition_grade": null,
+        "clarification": null,
+        "around_price": false
+      }
+    },
+    {
+      "model": "doubao-pro",
+      "case": "search-confusable-10",
+      "repeat": 3,
+      "query": "积木玩具巴士",
+      "before": [],
+      "after": [
+        "f05"
+      ],
+      "new_false_positives": [],
+      "lost_true_positives": [],
+      "fixed_extra": [],
+      "recovered": [
+        {
+          "id": "f05",
+          "title": "绿色积木玩具巴士"
+        }
+      ],
+      "parsed": {
+        "campus": "不限校区",
+        "category": "宿舍生活与家电",
+        "clarification": null,
+        "condition_grade": null,
+        "excluded_keywords": [],
+        "keywords": [
+          "积木玩具巴士"
+        ],
+        "max_price": null,
+        "preferences": []
+      },
+      "effective": {
+        "category": null,
+        "max_price": null,
+        "campus": "不限校区",
+        "keywords": [
+          "积木玩具巴士"
+        ],
+        "excluded_keywords": [],
+        "preferences": [],
+        "condition_grade": null,
+        "clarification": null,
+        "around_price": false
+      }
+    },
+    {
+      "model": "deepseek-flash-thinking",
+      "case": "search-preference-04",
+      "repeat": 3,
+      "query": "400以内静音鼠标",
+      "before": [
+        "m07",
+        "m04",
+        "m02",
+        "m01",
+        "d05",
+        "m08",
+        "m06",
+        "m05",
+        "m03"
+      ],
+      "after": [
+        "m07",
+        "m04",
+        "m02",
+        "m01"
+      ],
+      "new_false_positives": [],
+      "lost_true_positives": [],
+      "fixed_extra": [
+        {
+          "id": "d05",
+          "title": "罗技GPW二代游戏鼠标"
+        },
+        {
+          "id": "m03",
+          "title": "无线游戏鼠标"
+        },
+        {
+          "id": "m05",
+          "title": "蓝牙便携鼠标"
+        },
+        {
+          "id": "m06",
+          "title": "无线办公鼠标"
+        },
+        {
+          "id": "m08",
+          "title": "双击故障无线鼠标"
+        }
+      ],
+      "recovered": [],
+      "parsed": {
+        "campus": "不限校区",
+        "category": "数码与影音",
+        "clarification": null,
+        "condition_grade": null,
+        "excluded_keywords": [],
+        "keywords": [
+          "鼠标"
+        ],
+        "max_price": 400.0,
+        "preferences": [
+          "静音"
+        ]
+      },
+      "effective": {
+        "category": "数码与影音",
+        "max_price": 400.0,
+        "campus": "不限校区",
+        "keywords": [
+          "鼠标",
+          "静音"
+        ],
+        "excluded_keywords": [],
+        "preferences": [],
+        "condition_grade": null,
+        "clarification": null,
+        "around_price": false
+      }
+    },
+    {
+      "model": "deepseek-flash",
+      "case": "search-preference-04",
+      "repeat": 3,
+      "query": "400以内静音鼠标",
+      "before": [
+        "m07",
+        "m04",
+        "m02",
+        "m01",
+        "d05",
+        "m08",
+        "m06",
+        "m05",
+        "m03"
+      ],
+      "after": [
+        "m07",
+        "m04",
+        "m02",
+        "m01"
+      ],
+      "new_false_positives": [],
+      "lost_true_positives": [],
+      "fixed_extra": [
+        {
+          "id": "d05",
+          "title": "罗技GPW二代游戏鼠标"
+        },
+        {
+          "id": "m03",
+          "title": "无线游戏鼠标"
+        },
+        {
+          "id": "m05",
+          "title": "蓝牙便携鼠标"
+        },
+        {
+          "id": "m06",
+          "title": "无线办公鼠标"
+        },
+        {
+          "id": "m08",
+          "title": "双击故障无线鼠标"
+        }
+      ],
+      "recovered": [],
+      "parsed": {
+        "campus": "不限校区",
+        "category": "数码与影音",
+        "clarification": null,
+        "condition_grade": null,
+        "excluded_keywords": [],
+        "keywords": [
+          "鼠标"
+        ],
+        "max_price": 400.0,
+        "preferences": [
+          "静音"
+        ]
+      },
+      "effective": {
+        "category": "数码与影音",
+        "max_price": 400.0,
+        "campus": "不限校区",
+        "keywords": [
+          "鼠标",
+          "静音"
+        ],
+        "excluded_keywords": [],
+        "preferences": [],
+        "condition_grade": null,
+        "clarification": null,
+        "around_price": false
+      }
+    },
+    {
+      "model": "qwen-max",
+      "case": "search-preference-04",
+      "repeat": 3,
+      "query": "400以内静音鼠标",
+      "before": [
+        "m07",
+        "m04",
+        "m02",
+        "m01",
+        "d05",
+        "m08",
+        "m06",
+        "m05",
+        "m03"
+      ],
+      "after": [
+        "m07",
+        "m04",
+        "m02",
+        "m01"
+      ],
+      "new_false_positives": [],
+      "lost_true_positives": [],
+      "fixed_extra": [
+        {
+          "id": "d05",
+          "title": "罗技GPW二代游戏鼠标"
+        },
+        {
+          "id": "m03",
+          "title": "无线游戏鼠标"
+        },
+        {
+          "id": "m05",
+          "title": "蓝牙便携鼠标"
+        },
+        {
+          "id": "m06",
+          "title": "无线办公鼠标"
+        },
+        {
+          "id": "m08",
+          "title": "双击故障无线鼠标"
+        }
+      ],
+      "recovered": [],
+      "parsed": {
+        "campus": "不限校区",
+        "category": "数码与影音",
+        "clarification": null,
+        "condition_grade": null,
+        "excluded_keywords": [],
+        "keywords": [
+          "鼠标"
+        ],
+        "max_price": 400.0,
+        "preferences": [
+          "静音"
+        ]
+      },
+      "effective": {
+        "category": "数码与影音",
+        "max_price": 400.0,
+        "campus": "不限校区",
+        "keywords": [
+          "鼠标",
+          "静音"
+        ],
+        "excluded_keywords": [],
+        "preferences": [],
+        "condition_grade": null,
+        "clarification": null,
+        "around_price": false
+      }
+    },
+    {
+      "model": "minimax-flash",
+      "case": "search-preference-01-rewrite",
+      "repeat": 3,
+      "query": "万柳500以内自行车，优先车锁",
+      "before": [
+        "s02"
+      ],
+      "after": [
+        "s02",
+        "s01"
+      ],
+      "new_false_positives": [],
+      "lost_true_positives": [],
+      "fixed_extra": [],
+      "recovered": [
+        {
+          "id": "s01",
+          "title": "通勤自行车"
+        }
+      ],
+      "parsed": {
+        "campus": "万柳学区",
+        "category": "校园出行与运动",
+        "clarification": null,
+        "condition_grade": null,
+        "excluded_keywords": [],
+        "keywords": [
+          "自行车",
+          "车锁"
+        ],
+        "max_price": 500.0,
+        "preferences": [
+          "车锁"
+        ]
+      },
+      "effective": {
+        "category": "校园出行与运动",
+        "max_price": 500.0,
+        "campus": "万柳学区",
+        "keywords": [
+          "自行车"
+        ],
+        "excluded_keywords": [],
+        "preferences": [
+          "车锁"
+        ],
+        "condition_grade": null,
+        "clarification": null,
+        "around_price": false
+      }
+    },
+    {
+      "model": "qwen-max",
+      "case": "search-confusable-05",
+      "repeat": 3,
+      "query": "笔记本支架",
+      "before": [],
+      "after": [
+        "x02"
+      ],
+      "new_false_positives": [],
+      "lost_true_positives": [],
+      "fixed_extra": [],
+      "recovered": [
+        {
+          "id": "x02",
+          "title": "笔记本支架"
+        }
+      ],
+      "parsed": {
+        "campus": "不限校区",
+        "category": "宿舍生活与家电",
+        "clarification": null,
+        "condition_grade": null,
+        "excluded_keywords": [],
+        "keywords": [
+          "笔记本支架"
+        ],
+        "max_price": null,
+        "preferences": []
+      },
+      "effective": {
+        "category": null,
+        "max_price": null,
+        "campus": "不限校区",
+        "keywords": [
+          "笔记本支架"
+        ],
+        "excluded_keywords": [],
+        "preferences": [],
+        "condition_grade": null,
+        "clarification": null,
+        "around_price": false
+      }
+    },
+    {
+      "model": "deepseek-flash",
+      "case": "search-price-01",
+      "repeat": 3,
+      "query": "两百多买鼠标",
+      "before": [
+        "d05",
+        "m08",
+        "m07",
+        "m06",
+        "m05",
+        "m04",
+        "m03",
+        "m02",
+        "m01"
+      ],
+      "after": [
+        "m07",
+        "m05",
+        "m01",
+        "m02",
+        "m08"
+      ],
+      "new_false_positives": [],
+      "lost_true_positives": [],
+      "fixed_extra": [
+        {
+          "id": "d05",
+          "title": "罗技GPW二代游戏鼠标"
+        },
+        {
+          "id": "m03",
+          "title": "无线游戏鼠标"
+        },
+        {
+          "id": "m04",
+          "title": "无线静音鼠标"
+        },
+        {
+          "id": "m06",
+          "title": "无线办公鼠标"
+        }
+      ],
+      "recovered": [],
+      "parsed": {
+        "campus": "不限校区",
+        "category": "数码与影音",
+        "clarification": "请确认“两百多”的具体预算上限（例如是否为300元以内）",
+        "condition_grade": null,
+        "excluded_keywords": [],
+        "keywords": [
+          "鼠标"
+        ],
+        "max_price": null,
+        "preferences": []
+      },
+      "effective": {
+        "category": "数码与影音",
+        "max_price": 200.0,
+        "campus": "不限校区",
+        "keywords": [
+          "鼠标"
+        ],
+        "excluded_keywords": [],
+        "preferences": [],
+        "condition_grade": null,
+        "clarification": "请确认“两百多”的具体预算上限（例如是否为300元以内）",
+        "around_price": true
+      }
+    },
+    {
+      "model": "minimax-flash",
+      "case": "search-price-01",
+      "repeat": 3,
+      "query": "两百多买鼠标",
+      "before": [
+        "d05",
+        "m08",
+        "m07",
+        "m06",
+        "m05",
+        "m04",
+        "m03",
+        "m02",
+        "m01"
+      ],
+      "after": [
+        "m07",
+        "m05",
+        "m01",
+        "m02",
+        "m08"
+      ],
+      "new_false_positives": [],
+      "lost_true_positives": [],
+      "fixed_extra": [
+        {
+          "id": "d05",
+          "title": "罗技GPW二代游戏鼠标"
+        },
+        {
+          "id": "m03",
+          "title": "无线游戏鼠标"
+        },
+        {
+          "id": "m04",
+          "title": "无线静音鼠标"
+        },
+        {
+          "id": "m06",
+          "title": "无线办公鼠标"
+        }
+      ],
+      "recovered": [],
+      "parsed": {
+        "campus": "不限校区",
+        "category": "数码与影音",
+        "clarification": "“两百多”的预算范围不明确，请补充具体最高预算。",
+        "condition_grade": null,
+        "excluded_keywords": [],
+        "keywords": [
+          "鼠标"
+        ],
+        "max_price": null,
+        "preferences": []
+      },
+      "effective": {
+        "category": "数码与影音",
+        "max_price": 200.0,
+        "campus": "不限校区",
+        "keywords": [
+          "鼠标"
+        ],
+        "excluded_keywords": [],
+        "preferences": [],
+        "condition_grade": null,
+        "clarification": "“两百多”的预算范围不明确，请补充具体最高预算。",
+        "around_price": true
+      }
+    },
+    {
+      "model": "deepseek-flash-thinking",
+      "case": "search-price-01",
+      "repeat": 3,
+      "query": "两百多买鼠标",
+      "before": [
+        "m08",
+        "m07",
+        "m06",
+        "m05",
+        "m03",
+        "m02",
+        "m01"
+      ],
+      "after": [
+        "m07",
+        "m05",
+        "m01",
+        "m02",
+        "m08"
+      ],
+      "new_false_positives": [],
+      "lost_true_positives": [],
+      "fixed_extra": [
+        {
+          "id": "m03",
+          "title": "无线游戏鼠标"
+        },
+        {
+          "id": "m06",
+          "title": "无线办公鼠标"
+        }
+      ],
+      "recovered": [],
+      "parsed": {
+        "campus": "不限校区",
+        "category": "数码与影音",
+        "clarification": null,
+        "condition_grade": null,
+        "excluded_keywords": [],
+        "keywords": [
+          "鼠标"
+        ],
+        "max_price": 300.0,
+        "preferences": []
+      },
+      "effective": {
+        "category": "数码与影音",
+        "max_price": 200.0,
+        "campus": "不限校区",
+        "keywords": [
+          "鼠标"
+        ],
+        "excluded_keywords": [],
+        "preferences": [],
+        "condition_grade": null,
+        "clarification": null,
+        "around_price": true
+      }
+    },
+    {
+      "model": "qwen-max",
+      "case": "search-price-01",
+      "repeat": 3,
+      "query": "两百多买鼠标",
+      "before": [
+        "m08",
+        "m07",
+        "m05",
+        "m03",
+        "m02",
+        "m01"
+      ],
+      "after": [
+        "m07",
+        "m05",
+        "m01",
+        "m02",
+        "m08"
+      ],
+      "new_false_positives": [],
+      "lost_true_positives": [],
+      "fixed_extra": [
+        {
+          "id": "m03",
+          "title": "无线游戏鼠标"
+        }
+      ],
+      "recovered": [],
+      "parsed": {
+        "campus": "不限校区",
+        "category": "数码与影音",
+        "clarification": null,
+        "condition_grade": null,
+        "excluded_keywords": [],
+        "keywords": [
+          "鼠标"
+        ],
+        "max_price": 299.0,
+        "preferences": []
+      },
+      "effective": {
+        "category": "数码与影音",
+        "max_price": 200.0,
+        "campus": "不限校区",
+        "keywords": [
+          "鼠标"
+        ],
+        "excluded_keywords": [],
+        "preferences": [],
+        "condition_grade": null,
+        "clarification": null,
+        "around_price": true
+      }
+    },
+    {
+      "model": "doubao-pro",
+      "case": "search-price-01",
+      "repeat": 3,
+      "query": "两百多买鼠标",
+      "before": [
+        "d05",
+        "m08",
+        "m07",
+        "m06",
+        "m05",
+        "m04",
+        "m03",
+        "m02",
+        "m01"
+      ],
+      "after": [
+        "m07",
+        "m05",
+        "m01",
+        "m02",
+        "m08"
+      ],
+      "new_false_positives": [],
+      "lost_true_positives": [],
+      "fixed_extra": [
+        {
+          "id": "d05",
+          "title": "罗技GPW二代游戏鼠标"
+        },
+        {
+          "id": "m03",
+          "title": "无线游戏鼠标"
+        },
+        {
+          "id": "m04",
+          "title": "无线静音鼠标"
+        },
+        {
+          "id": "m06",
+          "title": "无线办公鼠标"
+        }
+      ],
+      "recovered": [],
+      "parsed": {
+        "campus": "不限校区",
+        "category": "数码与影音",
+        "clarification": null,
+        "condition_grade": null,
+        "excluded_keywords": [],
+        "keywords": [
+          "鼠标"
+        ],
+        "max_price": null,
+        "preferences": []
+      },
+      "effective": {
+        "category": "数码与影音",
+        "max_price": 200.0,
+        "campus": "不限校区",
+        "keywords": [
+          "鼠标"
+        ],
+        "excluded_keywords": [],
+        "preferences": [],
+        "condition_grade": null,
+        "clarification": null,
+        "around_price": true
+      }
+    }
+  ],
+  "remaining_remote_errors": [],
+  "remote_preference_order": {
+    "total": {
+      "compared": 107,
+      "round1": 104,
+      "round2": 107
+    },
+    "by_case": {
+      "search-preference-01-rewrite": {
+        "compared": 19,
+        "round1": 17,
+        "round2": 19
+      },
+      "search-preference-05": {
+        "compared": 16,
+        "round1": 15,
+        "round2": 16
+      },
+      "search-preference-01": {
+        "compared": 18,
+        "round1": 18,
+        "round2": 18
+      },
+      "search-preference-07": {
+        "compared": 19,
+        "round1": 19,
+        "round2": 19
+      },
+      "search-preference-03": {
+        "compared": 18,
+        "round1": 18,
+        "round2": 18
+      },
+      "search-preference-09": {
+        "compared": 17,
+        "round1": 17,
+        "round2": 17
+      }
+    }
+  }
+}
