@@ -1,0 +1,42 @@
+{
+  "schema": 1,
+  "version": "2026-11-23-v1",
+  "frozen_at": "2026-11-23T02:20:00Z",
+  "git_sha_at_freeze": "f509672e14d5f5bea7593b7233ac5e3b7cfef3b6",
+  "primary_annotator": "A",
+  "reviewed_fraction": 0.2,
+  "double_annotated": [
+    "2.1 roles/quotes",
+    "2.4 verdicts"
+  ],
+  "splits": {
+    "dev": 0.4,
+    "sealed_test": 0.6
+  },
+  "files": {
+    "item_text_1_1.jsonl": {
+      "sha256": "635af35150a33a08447e7ac73c06c4f771e14e49f2defed4617e0481472a5869",
+      "rows": 20
+    },
+    "vision_1_2.jsonl": {
+      "sha256": "a3f5dca2ad5ee25b326dcd4fe4b09dcb21fba15021bb96c2799ddc1ab6b7a7e8",
+      "rows": 15
+    },
+    "intent_2_1.jsonl": {
+      "sha256": "e7c3ccede9c549674fc18012fbde008fdfbbed188dbce310d833d89bdb5f18cd",
+      "rows": 30
+    },
+    "recall_2_3.jsonl": {
+      "sha256": "1d8300c2cb6057fc603ea7aeabc217bf687ba7bfc0d39613240e402b33587e11",
+      "rows": 30
+    },
+    "review_2_4.jsonl": {
+      "sha256": "9815500bb8b9c20f609041a0a47c301802ef928271a7cb70eea79be2d02a2a0f",
+      "rows": 30
+    },
+    "items_pool_2_3.jsonl": {
+      "sha256": "1b42b244244b3b33997382075496b4eb08475da5efa888c5e1b209a8190e3e2c",
+      "rows": 60
+    }
+  }
+}

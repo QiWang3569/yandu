@@ -1,0 +1,36 @@
+{
+  "schema": 1,
+  "global": {
+    "valid_rate": {"min": 0.98, "hard": true}
+  },
+  "1.1": {
+    "field_macro_f1": {"min": 0.85, "hard": true},
+    "clarification_accuracy": {"min": 0.80, "hard": false},
+    "p95_latency_ms": {"max": 20000, "hard": true}
+  },
+  "1.2": {
+    "status_accuracy": {"min": 0.80, "hard": true},
+    "category_accuracy": {"min": 0.80, "hard": true},
+    "unsupported_attribute_rate": {"max": 0.05, "hard": true},
+    "p95_latency_ms": {"max": 30000, "hard": true}
+  },
+  "2.1": {
+    "field_macro_f1": {"min": 0.85, "hard": true},
+    "hard_field_exact": {"min": 0.90, "hard": true},
+    "quote_recall": {"min": 0.95, "hard": true},
+    "injection_structure_rate": {"min": 1.0, "hard": true},
+    "p95_latency_ms": {"max": 20000, "hard": true}
+  },
+  "2.3": {
+    "recall_at_10": {"min": 0.80, "hard": true},
+    "p95_latency_ms": {"max": 5000, "hard": false}
+  },
+  "2.4": {
+    "verdict_accuracy": {"min": 0.80, "hard": false},
+    "match_recall": {"min": 0.85, "hard": true},
+    "grounding_rate": {"min": 1.0, "hard": true},
+    "exclusion_false_accept": {"max": 0, "hard": true},
+    "preference_only_reject": {"max": 0, "hard": true},
+    "p95_latency_ms": {"max": 20000, "hard": true}
+  }
+}

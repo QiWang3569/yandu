@@ -1,0 +1,63 @@
+{
+  "schema": 1,
+  "text": [
+    {
+      "id": "text-primary",
+      "label": "Configured DeepSeek chat model",
+      "model_env": "DEEPSEEK_MODEL",
+      "base_url_env": "DEEPSEEK_BASE_URL",
+      "key_env": "DEEPSEEK_API_KEY",
+      "price_per_1k_input": null,
+      "price_per_1k_output": null
+    },
+    {
+      "id": "text-alt",
+      "label": "Alternate chat model (optional)",
+      "model_env": "EVAL_TEXT_MODEL_B",
+      "base_url_env": "EVAL_TEXT_BASE_URL_B",
+      "key_env": "EVAL_TEXT_API_KEY_B",
+      "price_per_1k_input": null,
+      "price_per_1k_output": null
+    }
+  ],
+  "vision": [
+    {
+      "id": "vision-primary",
+      "label": "Configured vision model",
+      "model_env": "VISION_MODEL",
+      "base_url_env": "VISION_BASE_URL",
+      "key_env": "VISION_API_KEY",
+      "price_per_1k_input": null,
+      "price_per_1k_output": null
+    },
+    {
+      "id": "vision-alt",
+      "label": "Alternate vision model (optional)",
+      "model_env": "EVAL_VISION_MODEL_B",
+      "base_url_env": "EVAL_VISION_BASE_URL_B",
+      "key_env": "EVAL_VISION_API_KEY_B",
+      "price_per_1k_input": null,
+      "price_per_1k_output": null
+    }
+  ],
+  "embedding": [
+    {
+      "id": "embedding-primary",
+      "label": "Configured embedding model",
+      "model_env": "EMBEDDING_MODEL",
+      "base_url_env": "EMBEDDING_BASE_URL",
+      "key_env": "EMBEDDING_API_KEY",
+      "price_per_1k_input": null,
+      "price_per_1k_output": null
+    },
+    {
+      "id": "embedding-alt",
+      "label": "Alternate embedding model (optional)",
+      "model_env": "EVAL_EMBEDDING_MODEL_B",
+      "base_url_env": "EVAL_EMBEDDING_BASE_URL_B",
+      "key_env": "EVAL_EMBEDDING_API_KEY_B",
+      "price_per_1k_input": null,
+      "price_per_1k_output": null
+    }
+  ]
+}

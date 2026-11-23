@@ -156,8 +156,9 @@ def image_data(path):
 
 
 class VisionService:
-    def __init__(self, settings):
+    def __init__(self, settings, observer=None):
         self.settings = settings
+        self.observer = observer
         self.lock = asyncio.Lock()
         self.pending = {}
         self.cache = OrderedDict()
@@ -231,6 +232,7 @@ class VisionService:
         return result
 
     async def _complete(self, images, note, prompt, schema, max_tokens):
+        started = time.monotonic()
         content = [{'type': 'text', 'text': '请生成待确认的商品建议。用户补充说明：' + json.dumps(note, ensure_ascii=False)}]
         content.extend({'type': 'image_url', 'image_url': {
             'url': 'data:image/jpeg;base64,' + base64.b64encode(image).decode()}} for image in images)
@@ -250,12 +252,26 @@ class VisionService:
                     raise HTTPException(502, '识图服务暂不可用，请稍后重试或手动填写')
                 break
         try:
-            choice = response.json()['choices'][0]
+            body = response.json()
+            self._observe({'node': 'vision', 'model': self.settings.vision_model,
+                           'elapsed_ms': (time.monotonic() - started) * 1000,
+                           'usage': body.get('usage') if isinstance(body, dict) else None})
+            choice = body['choices'][0]
             if choice.get('finish_reason') != 'stop':
                 raise ValueError('incomplete answer')
             return schema.model_validate_json(choice['message']['content'], strict=True)
         except (ValueError, TypeError, KeyError, IndexError, AttributeError, ValidationError):
+            self._observe({'node': 'vision', 'model': self.settings.vision_model, 'error': 'invalid_result',
+                           'elapsed_ms': (time.monotonic() - started) * 1000})
             raise HTTPException(502, '识图结果不完整，请重试或手动填写') from None
+
+    def _observe(self, data):
+        if self.observer is None:
+            return
+        try:
+            self.observer(data)
+        except Exception:
+            pass
 
 
 def register_vision(app, get_db, require_user, settings):

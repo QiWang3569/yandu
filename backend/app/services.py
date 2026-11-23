@@ -1,6 +1,7 @@
 import json
 import math
 import re
+import time
 from datetime import timedelta
 
 import httpx
@@ -12,6 +13,9 @@ from .buyer_agent import ModelUnavailable, chat_json
 from .config import Settings
 from .models import ActionLog, Announcement, Intent, Item, User, Wanted, now
 from .schemas import CAMPUSES, CATEGORIES, CONDITIONS, ParsedIntent, ParsedItem, ParsedWanted
+
+INTENT_PROMPT_VERSION = 'intent-2'
+ITEM_PROMPT_VERSION = 'item-2'
 
 # Canonical feature words keep local demo behavior explainable; this is not an LLM.
 FEATURES = {
@@ -83,7 +87,7 @@ def parse_local(query: str) -> ParsedIntent:
                         condition_grade=condition, clarification='可以补充具体物品名称或型号，并确认下方筛选条件。' if category is None else None)
 
 
-def parse_intent(query: str, settings: Settings) -> ParsedIntent:
+def parse_intent(query: str, settings: Settings, observer=None) -> ParsedIntent:
     if settings.ai_mode == 'local':
         return parse_local(query)
     schema = ParsedIntent.model_json_schema()
@@ -100,7 +104,7 @@ def parse_intent(query: str, settings: Settings) -> ParsedIntent:
               '"preferences":["静音"],"condition_grade":null,"clarification":null}。'
               f'严格遵循 JSON schema：{json.dumps(schema, ensure_ascii=False)}')
     try:
-        return ParsedIntent.model_validate(chat_json(system, {'query': query}, settings))
+        return ParsedIntent.model_validate(chat_json(system, {'query': query}, settings, observer=observer))
     except (ModelUnavailable, ValueError, TypeError):
         raise HTTPException(502, '需求解析服务暂时不可用或返回无效条件，请稍后重试。') from None
 
@@ -128,7 +132,7 @@ def parse_item_local(raw: str) -> ParsedItem:
                       campus=campus, condition_grade=condition, tags=tags[:8])
 
 
-def parse_item(raw: str, settings: Settings) -> ParsedItem:
+def parse_item(raw: str, settings: Settings, observer=None) -> ParsedItem:
     if settings.ai_mode == 'local':
         return parse_item_local(raw)
     schema = ParsedItem.model_json_schema()
@@ -139,7 +143,7 @@ def parse_item(raw: str, settings: Settings) -> ParsedItem:
               '不确定或描述冲突时填 clarification，否则为 null。'
               f'严格遵循 JSON schema：{json.dumps(schema, ensure_ascii=False)}')
     try:
-        return ParsedItem.model_validate(chat_json(system, {'description': raw}, settings))
+        return ParsedItem.model_validate(chat_json(system, {'description': raw}, settings, observer=observer))
     except (ModelUnavailable, ValueError, TypeError):
         return parse_item_local(raw)
 
@@ -158,9 +162,10 @@ def parse_wanted(raw: str, settings: Settings) -> ParsedWanted:
                         clarification=parsed.clarification)
 
 
-def embed(text: str, settings: Settings) -> list[float] | None:
+def embed(text: str, settings: Settings, observer=None) -> list[float] | None:
     if settings.embedding_mode == 'local':
         return None
+    started = time.monotonic()
     try:
         with httpx.Client(timeout=settings.model_timeout) as client:
             r = client.post(settings.embedding_url.rstrip('/') + '/embeddings',
@@ -170,6 +175,12 @@ def embed(text: str, settings: Settings) -> list[float] | None:
             vector = r.json()['data'][0]['embedding']
             if len(vector) != 1536 or not all(type(n) in (int, float) and math.isfinite(n) for n in vector):
                 raise ValueError('invalid embedding')
+            if observer is not None:
+                try:
+                    observer({'node': 'embedding', 'model': settings.embedding_model, 'dim': len(vector),
+                              'elapsed_ms': (time.monotonic() - started) * 1000})
+                except Exception:
+                    pass
             return vector
     except (httpx.HTTPError, ValueError, KeyError, IndexError, TypeError, AttributeError):
         raise HTTPException(502, '向量服务暂时不可用，本次操作尚未保存，请稍后重试。')

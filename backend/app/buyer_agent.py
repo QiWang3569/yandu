@@ -1,5 +1,6 @@
 """Bounded buyer workflow: read supplied candidates, never execute model instructions."""
 import json
+import time
 from typing import Literal
 
 import httpx
@@ -7,6 +8,18 @@ from pydantic import Field
 
 from .config import Settings
 from .schemas import StrictModel
+
+REVIEW_PROMPT_VERSION = 'review-1'
+
+
+def notify(observer, data):
+    """Observability hook; must never change request behavior."""
+    if observer is None:
+        return
+    try:
+        observer(data)
+    except Exception:
+        pass
 
 
 class ModelUnavailable(Exception):
@@ -48,7 +61,8 @@ class Assessment(StrictModel):
         return result
 
 
-def chat_json(system: str, payload, settings: Settings, max_tokens=2500):
+def chat_json(system: str, payload, settings: Settings, max_tokens=2500, observer=None):
+    started = time.monotonic()
     try:
         options = {'thinking': {'type': settings.model_thinking}} if settings.model_thinking else {}
         with httpx.Client(timeout=settings.model_timeout) as client:
@@ -60,6 +74,9 @@ def chat_json(system: str, payload, settings: Settings, max_tokens=2500):
                                    {'role': 'user', 'content': json.dumps(payload, ensure_ascii=False)}]})
             response.raise_for_status()
             body = response.json()
+            notify(observer, {'node': 'chat', 'model': settings.deepseek_model,
+                              'elapsed_ms': (time.monotonic() - started) * 1000,
+                              'usage': body.get('usage') if isinstance(body, dict) else None})
             if body['choices'][0].get('finish_reason') == 'length':
                 raise ValueError('Truncated JSON')
             result = json.loads(body['choices'][0]['message']['content'])
@@ -67,10 +84,12 @@ def chat_json(system: str, payload, settings: Settings, max_tokens=2500):
                 raise ValueError('Expected JSON object')
             return result
     except (httpx.HTTPError, ValueError, KeyError, IndexError, TypeError, AttributeError):
+        notify(observer, {'node': 'chat', 'model': settings.deepseek_model, 'error': 'model_unavailable',
+                          'elapsed_ms': (time.monotonic() - started) * 1000})
         raise ModelUnavailable('model_unavailable') from None
 
 
-def review_candidates(intent: dict, items: list[dict], settings: Settings) -> list[Assessment]:
+def review_candidates(intent: dict, items: list[dict], settings: Settings, observer=None) -> list[Assessment]:
     if not items:
         return []
     system = (
@@ -91,7 +110,7 @@ def review_candidates(intent: dict, items: list[dict], settings: Settings) -> li
         '"evidence":[{"criterion":"静音","quote":"静音无线鼠标"}],'
         '"questions":["是否包含接收器？"]}]}。'
     )
-    response = chat_json(system, {'intent': intent, 'items': items}, settings, max_tokens=5000)
+    response = chat_json(system, {'intent': intent, 'items': items}, settings, max_tokens=5000, observer=observer)
     try:
         if set(response) != {'assessments'} or not isinstance(response['assessments'], list):
             raise ValueError('Invalid batch')

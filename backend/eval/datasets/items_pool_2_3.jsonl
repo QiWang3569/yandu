@@ -1,0 +1,60 @@
+{"id":"m1","title":"静音无线鼠标","description":"静音无线鼠标，附接收器","tags":["鼠标","静音","无线"],"price":260,"campus":"万柳学区","condition_grade":"95新","category":"数码与影音"}
+{"id":"m2","title":"游戏鼠标","description":"游戏鼠标，RGB 灯效","tags":["鼠标","游戏鼠标"],"price":150,"campus":"燕园校本部","condition_grade":"9成新","category":"数码与影音"}
+{"id":"m3","title":"有线静音鼠标","description":"静音鼠标，有线连接","tags":["鼠标","静音"],"price":80,"campus":"万柳学区","condition_grade":"9成新","category":"数码与影音"}
+{"id":"m4","title":"普通无线鼠标","description":"普通无线鼠标，功能正常","tags":["鼠标","无线"],"price":60,"campus":"医学部","condition_grade":"95新","category":"数码与影音"}
+{"id":"m5","title":"人体工学鼠标","description":"人体工学鼠标，有线","tags":["鼠标","人体工学"],"price":300,"campus":"燕园校本部","condition_grade":"8成新","category":"数码与影音"}
+{"id":"m6","title":"蓝牙鼠标","description":"蓝牙鼠标，便携","tags":["鼠标","无线"],"price":99,"campus":"昌平新校区","condition_grade":"95新","category":"数码与影音"}
+{"id":"m7","title":"机械键盘","description":"机械键盘，青轴","tags":["键盘"],"price":200,"campus":"燕园校本部","condition_grade":"9成新","category":"数码与影音"}
+{"id":"m8","title":"鼠标垫","description":"大号鼠标垫","tags":[],"price":20,"campus":"万柳学区","condition_grade":"全新","category":"数码与影音"}
+{"id":"b1","title":"高等数学同济第七版","description":"高数教材上下册，少量笔记","tags":["高等数学","教材"],"price":35,"campus":"燕园校本部","condition_grade":"9成新","category":"课程资料与书籍"}
+{"id":"b2","title":"高等数学辅导书","description":"高等数学同步辅导","tags":["高等数学"],"price":25,"campus":"万柳学区","condition_grade":"9成新","category":"课程资料与书籍"}
+{"id":"b3","title":"线性代数教材","description":"线性代数课本","tags":["教材"],"price":30,"campus":"燕园校本部","condition_grade":"95新","category":"课程资料与书籍"}
+{"id":"b4","title":"GRE 词汇书","description":"GRE 英语词汇书","tags":["英语"],"price":22,"campus":"万柳学区","condition_grade":"9成新","category":"课程资料与书籍"}
+{"id":"b5","title":"大学英语教材","description":"大学英语教材，有笔记","tags":["教材","英语"],"price":18,"campus":"医学部","condition_grade":"8成新","category":"课程资料与书籍"}
+{"id":"b6","title":"离散数学教材","description":"离散数学课本","tags":["教材"],"price":40,"campus":"昌平新校区","condition_grade":"9成新","category":"课程资料与书籍"}
+{"id":"c1","title":"捷安特山地自行车","description":"山地自行车，八成新","tags":["自行车"],"price":480,"campus":"燕园校本部","condition_grade":"8成新","category":"校园出行与运动"}
+{"id":"c2","title":"通勤自行车","description":"通勤自行车，刚换轮胎","tags":["自行车"],"price":300,"campus":"医学部","condition_grade":"95新","category":"校园出行与运动"}
+{"id":"c3","title":"电动自行车","description":"电动自行车，续航好","tags":["电动车"],"price":1200,"campus":"万柳学区","condition_grade":"9成新","category":"校园出行与运动"}
+{"id":"c4","title":"滑板","description":"四轮滑板","tags":["滑板"],"price":150,"campus":"燕园校本部","condition_grade":"9成新","category":"校园出行与运动"}
+{"id":"c5","title":"网球拍","description":"网球拍，适合初学者","tags":["网球拍"],"price":120,"campus":"燕园校本部","condition_grade":"8成新","category":"校园出行与运动"}
+{"id":"c6","title":"羽毛球拍","description":"羽毛球拍，含拍套","tags":["羽毛球拍"],"price":80,"campus":"万柳学区","condition_grade":"9成新","category":"校园出行与运动"}
+{"id":"l1","title":"护眼台灯","description":"无频闪护眼台灯","tags":["台灯"],"price":65,"campus":"燕园校本部","condition_grade":"95新","category":"宿舍生活与家电"}
+{"id":"l2","title":"宿舍台灯","description":"宿舍台灯，亮度可调","tags":["台灯"],"price":40,"campus":"万柳学区","condition_grade":"9成新","category":"宿舍生活与家电"}
+{"id":"l3","title":"落地灯","description":"客厅落地灯","tags":["台灯"],"price":90,"campus":"医学部","condition_grade":"95新","category":"宿舍生活与家电"}
+{"id":"l4","title":"阅读灯","description":"阅读灯，可夹床头","tags":["台灯"],"price":35,"campus":"昌平新校区","condition_grade":"95新","category":"宿舍生活与家电"}
+{"id":"l5","title":"小风扇","description":"宿舍小风扇","tags":["风扇"],"price":30,"campus":"燕园校本部","condition_grade":"基本可用","category":"宿舍生活与家电"}
+{"id":"d1","title":"24 寸显示器","description":"24 寸 1080P 显示器","tags":["显示器"],"price":320,"campus":"燕园校本部","condition_grade":"9成新","category":"数码与影音"}
+{"id":"d2","title":"27 寸曲面屏显示器","description":"27 寸曲面屏显示器","tags":["显示器"],"price":600,"campus":"万柳学区","condition_grade":"95新","category":"数码与影音"}
+{"id":"d3","title":"27 寸平面显示器","description":"27 寸平面显示器","tags":["显示器"],"price":450,"campus":"医学部","condition_grade":"9成新","category":"数码与影音"}
+{"id":"d4","title":"便携显示器","description":"便携显示器，15 寸","tags":["显示器"],"price":500,"campus":"昌平新校区","condition_grade":"95新","category":"数码与影音"}
+{"id":"d5","title":"iPad 平板","description":"iPad 平板，适合记笔记","tags":["平板"],"price":1500,"campus":"燕园校本部","condition_grade":"9成新","category":"数码与影音"}
+{"id":"h1","title":"头戴式降噪耳机","description":"头戴耳机，降噪正常","tags":["耳机","无线"],"price":650,"campus":"燕园校本部","condition_grade":"9成新","category":"数码与影音"}
+{"id":"h2","title":"入耳式耳机","description":"入耳式有线耳机","tags":["耳机"],"price":50,"campus":"万柳学区","condition_grade":"95新","category":"数码与影音"}
+{"id":"h3","title":"蓝牙耳机","description":"蓝牙无线耳机","tags":["耳机","无线"],"price":120,"campus":"医学部","condition_grade":"9成新","category":"数码与影音"}
+{"id":"h4","title":"有线耳机","description":"有线耳机，功能正常","tags":["耳机"],"price":30,"campus":"昌平新校区","condition_grade":"8成新","category":"数码与影音"}
+{"id":"h5","title":"蓝牙音箱","description":"蓝牙音箱，音质正常","tags":[],"price":200,"campus":"燕园校本部","condition_grade":"95新","category":"数码与影音"}
+{"id":"x1","title":"宿舍收纳架","description":"两层置物架","tags":["收纳"],"price":30,"campus":"燕园校本部","condition_grade":"95新","category":"宿舍生活与家电"}
+{"id":"x2","title":"帆布包","description":"校庆帆布包","tags":["帆布包"],"price":28,"campus":"万柳学区","condition_grade":"全新","category":"美妆服饰与周边"}
+{"id":"x3","title":"正装西服","description":"黑色正装西服","tags":["正装"],"price":200,"campus":"医学部","condition_grade":"9成新","category":"美妆服饰与周边"}
+{"id":"x4","title":"机械键盘 87 键","description":"机械键盘，无线","tags":["键盘"],"price":180,"campus":"昌平新校区","condition_grade":"95新","category":"数码与影音"}
+{"id":"x5","title":"冰箱","description":"小冰箱，宿舍可用","tags":["冰箱"],"price":400,"campus":"燕园校本部","condition_grade":"9成新","category":"宿舍生活与家电"}
+{"id":"m9","title":"游戏鼠标垫（加大）","description":"游戏鼠标垫，静音表面","tags":[],"price":30,"campus":"燕园校本部","condition_grade":"全新","category":"数码与影音"}
+{"id":"m10","title":"鼠标脚贴","description":"鼠标脚贴，顺滑耐磨","tags":[],"price":10,"campus":"万柳学区","condition_grade":"全新","category":"数码与影音"}
+{"id":"m11","title":"无线鼠标接收器","description":"无线鼠标接收器，适配多款","tags":[],"price":25,"campus":"医学部","condition_grade":"全新","category":"数码与影音"}
+{"id":"m12","title":"鼠标线夹","description":"鼠标线夹，固定线材","tags":[],"price":15,"campus":"昌平新校区","condition_grade":"全新","category":"数码与影音"}
+{"id":"m14","title":"静音鼠标垫","description":"静音鼠标垫，桌面防滑","tags":[],"price":20,"campus":"燕园校本部","condition_grade":"全新","category":"数码与影音"}
+{"id":"k1","title":"键盘保护膜","description":"键盘保护膜，防尘","tags":[],"price":10,"campus":"万柳学区","condition_grade":"全新","category":"数码与影音"}
+{"id":"k2","title":"键盘腕托","description":"键盘腕托，人体工学","tags":[],"price":20,"campus":"医学部","condition_grade":"95新","category":"数码与影音"}
+{"id":"d6","title":"显示器支架","description":"显示器支架臂，可升降","tags":[],"price":100,"campus":"燕园校本部","condition_grade":"95新","category":"数码与影音"}
+{"id":"d7","title":"显示器清洁套装","description":"显示器屏幕清洁套装","tags":[],"price":15,"campus":"昌平新校区","condition_grade":"全新","category":"数码与影音"}
+{"id":"b7","title":"高数教材配套笔记","description":"高数教材配套笔记，手写","tags":[],"price":15,"campus":"燕园校本部","condition_grade":"9成新","category":"课程资料与书籍"}
+{"id":"b8","title":"高等数学教材答案册","description":"高等数学教材答案册","tags":[],"price":12,"campus":"万柳学区","condition_grade":"9成新","category":"课程资料与书籍"}
+{"id":"l6","title":"台灯替换灯泡","description":"台灯替换灯泡，暖光","tags":[],"price":10,"campus":"燕园校本部","condition_grade":"全新","category":"宿舍生活与家电"}
+{"id":"l7","title":"台灯支架配件","description":"台灯支架配件，金属","tags":[],"price":15,"campus":"万柳学区","condition_grade":"95新","category":"宿舍生活与家电"}
+{"id":"h6","title":"耳机替换耳罩","description":"耳机替换耳罩，柔软","tags":[],"price":15,"campus":"燕园校本部","condition_grade":"全新","category":"数码与影音"}
+{"id":"h7","title":"耳机音频线","description":"耳机音频线，3.5mm","tags":[],"price":10,"campus":"医学部","condition_grade":"全新","category":"数码与影音"}
+{"id":"c7","title":"自行车密码锁","description":"自行车密码锁，四位","tags":[],"price":20,"campus":"燕园校本部","condition_grade":"95新","category":"校园出行与运动"}
+{"id":"c8","title":"自行车前灯","description":"自行车前灯，USB 充电","tags":[],"price":25,"campus":"万柳学区","condition_grade":"全新","category":"校园出行与运动"}
+{"id":"x6","title":"宿舍收纳袋","description":"宿舍收纳袋，可折叠","tags":[],"price":15,"campus":"燕园校本部","condition_grade":"全新","category":"宿舍生活与家电"}
+{"id":"d8","title":"平板支架","description":"平板支架，可调节","tags":[],"price":30,"campus":"昌平新校区","condition_grade":"95新","category":"数码与影音"}
+{"id":"b9","title":"英语词汇卡片","description":"英语词汇卡片，便携","tags":[],"price":12,"campus":"医学部","condition_grade":"全新","category":"课程资料与书籍"}
