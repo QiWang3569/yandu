@@ -67,7 +67,7 @@ def validate_rows(node, rows):
     for row in rows:
         for key in ('id', 'node', 'split', 'input', 'gold'):
             if key not in row:
-                errors.append(f'{node}:{row.get("id", row["_line"])} missing {key}')
+                errors.append(f'{node}:{row.get("id") or row.get("_line", "?")} missing {key}')
         if row.get('node') != node:
             errors.append(f'{node}:{row.get("id")} node mismatch {row.get("node")}')
         if row.get('split') not in SPLITS:

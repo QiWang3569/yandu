@@ -100,8 +100,8 @@ def run_node(node, split, settings, candidate, fixture=False, attempts=3, sleep=
     return {
         'node': node,
         'split': split,
-        'candidate': candidate['id'] if candidate else 'fixture',
-        'model': candidate.get('model') if candidate else 'fixture',
+        'candidate': candidate['id'] if candidate else ('fixture' if fixture else 'program'),
+        'model': candidate.get('model') if candidate else ('fixture' if fixture else 'lexical-alias-1'),
         'fixture': fixture,
         'started_at': now_iso(),
         'samples': results,
