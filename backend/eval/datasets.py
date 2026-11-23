@@ -15,6 +15,7 @@ NODE_FILES = {
     '2.4': 'review_2_4.jsonl',
 }
 POOL_FILE = 'items_pool_2_3.jsonl'
+IMAGES_DIR = DATASET_DIR / 'images'
 SPLITS = ('dev', 'sealed_test')
 
 
@@ -74,6 +75,11 @@ def validate_rows(node, rows):
         if row.get('id') in seen:
             errors.append(f'{node}:{row.get("id")} duplicate id')
         seen.add(row.get('id'))
+        if node == '1.2':
+            for image in row.get('input', {}).get('images', []):
+                name = image.get('file')
+                if name and not (DATASET_DIR / name).is_file():
+                    errors.append(f'{node}:{row.get("id")} missing image {name}')
     return errors
 
 
@@ -85,6 +91,8 @@ def build_manifest(version, frozen_at, annotator):
             raise FileNotFoundError(path)
         rows = read_rows(path)
         files[name] = {'sha256': file_sha256(path), 'rows': len(rows)}
+    for path in sorted(IMAGES_DIR.glob('*.jpg')):
+        files[f'images/{path.name}'] = {'sha256': file_sha256(path), 'bytes': path.stat().st_size}
     return {
         'schema': 1,
         'version': version,

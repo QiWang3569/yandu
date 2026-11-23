@@ -9,6 +9,8 @@ from app import buyer_agent, services
 from app.schemas import CATEGORIES
 from app.vision import SYSTEM_PROMPT, VisionDraft, VisionService
 
+from .datasets import DATASET_DIR
+
 
 def text_settings(settings, model, url, key):
     return dataclasses.replace(settings, ai_mode='remote', deepseek_model=model,
@@ -66,7 +68,9 @@ def run_review(intent, item, settings, sink):
 
 
 def render_image(spec):
-    """Deterministic synthetic photo; ASCII labels avoid font dependencies."""
+    """Load a frozen photo when named; otherwise draw a deterministic synthetic one."""
+    if spec.get('file'):
+        return (DATASET_DIR / spec['file']).read_bytes()
     image = Image.new('RGB', (480, 360), tuple(spec.get('background', [255, 255, 255])))
     draw = ImageDraw.Draw(image)
     color = tuple(spec.get('color', [180, 190, 200]))
