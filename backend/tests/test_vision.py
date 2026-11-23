@@ -97,6 +97,24 @@ def test_origin_and_missing_file_and_ownership_rechecked_on_cache(client, app, p
     assert len(provider[0]) == 1
 
 
+def test_two_photos_share_one_request(client, provider):
+    login(client)
+    first, second = photo(client), photo(client)
+    response = client.post('/api/v1/items/vision-draft', json={'images': [first, second]})
+    assert response.status_code == 200, response.text
+    assert response.json()['status'] == 'ready'
+    assert len(provider[0]) == 1
+    content = json.loads(provider[0][0].content)['messages'][1]['content']
+    assert len([part for part in content if part['type'] == 'image_url']) == 2
+
+
+def test_ready_without_any_evidence_degrades_to_unclear():
+    result = VisionDraft.model_validate({'status': 'ready', 'title': None, 'category': None,
+                                         'description': None, 'tags': [], 'uncertainties': []})
+    assert result.status == 'unclear'
+    assert result.title is None and result.uncertainties
+
+
 def test_corrupt_photo(client, app, provider):
     login(client)
     url = photo(client)

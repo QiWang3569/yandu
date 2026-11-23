@@ -13,7 +13,7 @@ from sqlalchemy.exc import IntegrityError
 from .buyer_agent import Assessment, Evidence, ModelUnavailable, review_candidates
 from .models import Intent, Item, MatchJob, Notification, now
 from .schemas import CONDITIONS
-from .services import embed, model_name, normalize, similarity
+from .services import embed, model_name, normalize, similarity, tokens_contain
 
 
 def item_data(item):
@@ -48,24 +48,26 @@ def local_review(intent, item):
         normalized = normalize(term)
         # A negated exclusion is not positive evidence that the item has it.
         positive = re.sub(r'(?:不是|并非|不属于|不含|没有|非|无)' + re.escape(normalized), '', text)
-        if normalized in positive:
+        if tokens_contain(positive, normalized):
             quote = next((s[:160] for s in source if term in s), None)
             # Pick an exact slice even when the term occurs late in a long description.
             if quote is None:
                 quote = source[0][:160]
             return Assessment(item_id=item['id'], verdict='NO_MATCH', evidence=[Evidence(criterion=term, quote=quote)], questions=[])
-        if normalized not in text:
+        if not tokens_contain(text, normalized):
             verdict = 'UNCERTAIN'
             questions.append(f'请确认商品是否具有“{term}”这一不接受的特征？')
     for term in intent['keywords']:
-        if re.search(r'(?:不是|并非|不支持|不具备|不含|没有|非|无|不)' + re.escape(normalize(term)), text):
-            quote = next(s for s in source if normalize(term) in normalize(s))
+        normalized = normalize(term)
+        if re.search(r'(?:不是|并非|不支持|不具备|不含|没有|非|无|不)' + re.escape(normalized), text):
+            quote = next((s for s in source if tokens_contain(normalize(s), normalized)), source[0])
             return Assessment(item_id=item['id'], verdict='NO_MATCH', evidence=[Evidence(criterion=term, quote=quote[:160])], questions=[])
-        if normalize(term) in text:
-            quote = next((s for s in source if normalize(term) in normalize(s)), '')
+        if tokens_contain(text, normalized):
+            quote = next((s for s in source if tokens_contain(normalize(s), normalized)), '')
             evidence.append(Evidence(criterion=term, quote=quote[:160]))
     for term in intent['preferences']:
-        if normalize(term) not in text or re.search(r'(?:不是|并非|不支持|不具备|不含|没有|非|无|不)' + re.escape(normalize(term)), text):
+        normalized = normalize(term)
+        if not tokens_contain(text, normalized) or re.search(r'(?:不是|并非|不支持|不具备|不含|没有|非|无|不)' + re.escape(normalized), text):
             questions.append(f'请问商品是否满足“{term}”这一偏好？')
     return Assessment(item_id=item['id'], verdict=verdict, evidence=evidence[:12], questions=questions[:6])
 

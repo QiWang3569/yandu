@@ -1,8 +1,11 @@
 import json
 
+import pytest
+from fastapi import HTTPException
 from fastapi.testclient import TestClient
 
 from app import services
+from app.buyer_agent import ModelUnavailable
 from app.config import Settings
 from app.main import create_app
 from app.schemas import ParsedIntent
@@ -116,3 +119,46 @@ def test_local_mode_returns_no_quotes():
     parsed, quotes = services.parse_intent_with_quotes('万柳 300 以内无线鼠标',
                                                        Settings(ai_mode='local', embedding_mode='local'))
     assert quotes == [] and parsed.keywords == ['鼠标', '无线']
+
+
+def test_conditions_are_deduplicated_and_capped_at_twelve(monkeypatch):
+    terms = [f'词{i}' for i in range(14)]
+    conditions = [{'role': 'required', 'term': term, 'quote': term} for term in terms]
+    conditions.append({'role': 'required', 'term': terms[0], 'quote': terms[0]})
+    use_reply(monkeypatch, structured(conditions=conditions))
+    parsed, quotes = services.parse_intent_with_quotes(' '.join(terms), remote_settings())
+    assert parsed.keywords == terms[:12]
+    assert quotes == terms
+
+
+def test_blank_query_local_parse_does_not_crash():
+    parsed, quotes = services.parse_intent_with_quotes(
+        '，。！？ ', Settings(ai_mode='local', embedding_mode='local'))
+    assert quotes == []
+    assert parsed.keywords == []
+    assert parsed.clarification
+
+
+def test_model_unavailable_is_sanitized_502(monkeypatch):
+    def provider_down(*args, **kwargs):
+        raise ModelUnavailable('provider down')
+    monkeypatch.setattr(services, 'chat_json', provider_down)
+    with pytest.raises(HTTPException) as error:
+        services.parse_intent_with_quotes('想要鼠标', remote_settings())
+    assert error.value.status_code == 502
+    assert 'provider down' not in error.value.detail
+
+
+def test_non_object_payload_is_sanitized_502(monkeypatch):
+    use_reply(monkeypatch, ['不是对象'])
+    with pytest.raises(HTTPException) as error:
+        services.parse_intent_with_quotes('想要鼠标', remote_settings())
+    assert error.value.status_code == 502
+
+
+def test_malformed_price_is_sanitized_502(monkeypatch):
+    use_reply(monkeypatch, structured(max_price='很贵', budget_quote='很贵'))
+    with pytest.raises(HTTPException) as error:
+        services.parse_intent_with_quotes('预算很贵', remote_settings())
+    assert error.value.status_code == 502
+    assert '很贵' not in error.value.detail

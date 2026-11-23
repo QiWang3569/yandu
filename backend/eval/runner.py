@@ -32,6 +32,8 @@ def dispatch(node, row, settings, sink):
         return adapters.run_recall(row, datasets.load_pool(), sink)
     if node == '2.4':
         return adapters.run_review(row['input']['intent'], row['input']['item'], settings, sink)
+    if node == '1.4':
+        return adapters.run_concept(row['input'], settings, sink)
     raise KeyError(node)
 
 
@@ -64,6 +66,12 @@ def fixture_output(node, row):
             evidence = [{'criterion': term, 'quote': source[:160]}]
         return {'item_id': item['id'], 'verdict': verdict, 'evidence': evidence,
                 'questions': [] if verdict != 'UNCERTAIN' else ['请确认商品是否满足要求？']}
+    if node == '1.4':
+        return {'decision': gold['decision'], 'reason': gold.get('reason'),
+                'families': gold.get('families', []),
+                'aliases': [alias for family in gold.get('families', [])
+                            for alias in family.get('aliases', [])],
+                'evidence_grounded': True, 'schema_valid': True}
     raise KeyError(node)
 
 
@@ -130,6 +138,8 @@ def summarize(node, rows, results):
         return summarize_recall(rows, results)
     if node == '1.2':
         return summarize_vision(rows, results)
+    if node == '1.4':
+        return summarize_concept(rows, results)
     return {}
 
 
@@ -229,6 +239,34 @@ def summarize_vision(rows, results):
         'p95_latency_ms': _latency(results),
     }
     return summary
+
+
+def summarize_concept(rows, results):
+    valid, schema, decisions, grounded = [], [], [], []
+    families, aliases = [], []
+    for row, result in zip(rows, results):
+        gold = row['gold']
+        out = result['output'] or {}
+        valid.append(result['ok'])
+        schema.append(bool(out.get('schema_valid')))
+        decisions.append((gold['decision'], out.get('decision')))
+        grounded.append(bool(out.get('evidence_grounded')))
+        if gold['decision'] == 'apply':
+            families.append(({family['name'] for family in gold.get('families', [])},
+                             {family['name'] for family in out.get('families') or []}))
+            gold_aliases = {alias for family in gold.get('families', [])
+                            for alias in family.get('aliases', [])}
+            if gold_aliases:
+                aliases.append((gold_aliases, set(out.get('aliases') or [])))
+    return {
+        'valid_rate': metrics.rate(valid),
+        'schema_valid_rate': metrics.rate(schema),
+        'accept_accuracy': metrics.exact_rate(decisions),
+        'family_f1': metrics.macro_f1(families) if families else None,
+        'alias_f1': metrics.macro_f1(aliases) if aliases else None,
+        'evidence_grounded_rate': metrics.rate(grounded),
+        'p95_latency_ms': _latency(results),
+    }
 
 
 def summarize_review(rows, results):

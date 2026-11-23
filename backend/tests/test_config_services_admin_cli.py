@@ -69,6 +69,117 @@ def test_parse_item_remote_success_and_local_fallback(monkeypatch):
     assert float(fallback.price) == 300.0
 
 
+def test_parse_item_local_extracts_every_field(monkeypatch):
+    from app import concepts, services
+
+    monkeypatch.setattr(concepts, 'concepts_in_text', lambda text: [])
+    monkeypatch.setattr(concepts, 'legacy_enabled', lambda: True)
+    parsed = services.parse_item_local('静音无线鼠标，¥280，万柳学区，九五新')
+    assert parsed.title == '静音无线鼠标'
+    assert parsed.category == '数码与影音'
+    assert float(parsed.price) == 280.0
+    assert parsed.campus == '万柳学区'
+    assert parsed.condition_grade == '95新'
+    assert parsed.tags == ['鼠标', '静音', '无线']
+
+
+def test_parse_item_invalid_remote_fields_fall_back_to_local(monkeypatch):
+    from app import services
+
+    settings = Settings(ai_mode='remote', deepseek_key='test-key', embedding_mode='local')
+    monkeypatch.setattr(services, 'chat_json', lambda *a, **k: {
+        'title': '不存在的商品', 'category': '不存在的分类', 'price': '-50',
+        'campus': '火星', 'condition_grade': '十成新', 'tags': []})
+    parsed = services.parse_item('卖 300 元静音鼠标', settings)
+    assert float(parsed.price) == 300.0
+    assert parsed.campus == '燕园校本部'
+
+
+def test_parse_item_blank_or_punctuation_input_does_not_crash(monkeypatch):
+    from app import concepts, services
+
+    monkeypatch.setattr(concepts, 'concepts_in_text', lambda text: [])
+    monkeypatch.setattr(concepts, 'legacy_enabled', lambda: True)
+    parsed = services.parse_item('，。！？ ', Settings(ai_mode='local', embedding_mode='local'))
+    assert parsed.title is None
+    assert parsed.price is None
+    assert parsed.tags == []
+
+
+def test_parse_item_local_reads_chinese_price_condition_and_campus(monkeypatch):
+    from app import concepts, services
+
+    monkeypatch.setattr(concepts, 'concepts_in_text', lambda text: [])
+    monkeypatch.setattr(concepts, 'legacy_enabled', lambda: True)
+    parsed = services.parse_item_local('台灯，售价120元，昌平新校区，八成新')
+    assert float(parsed.price) == 120.0
+    assert parsed.campus == '昌平新校区'
+    assert parsed.condition_grade == '8成新'
+
+
+def test_parse_item_remote_accepts_numeric_price_and_eight_tags(monkeypatch):
+    from app import services
+
+    settings = Settings(ai_mode='remote', deepseek_key='test-key', embedding_mode='local')
+    tags = ['教材', '高数', '同济', '第七版', '笔记', '考研', '数学', '二手']
+    monkeypatch.setattr(services, 'chat_json', lambda *a, **k: {
+        'title': '高数教材', 'description': '同济第七版，少量笔记', 'category': '课程资料与书籍',
+        'price': 35, 'campus': '医学部', 'condition_grade': '9成新',
+        'tags': tags, 'clarification': None})
+    parsed = services.parse_item('高数教材 35 元', settings)
+    assert float(parsed.price) == 35.0
+    assert parsed.campus == '医学部'
+    assert parsed.condition_grade == '9成新'
+    assert parsed.tags == tags
+
+
+def test_parse_item_remote_keeps_a_full_length_description(monkeypatch):
+    from app import services
+
+    settings = Settings(ai_mode='remote', deepseek_key='test-key', embedding_mode='local')
+    description = '九成新。' * 750
+    monkeypatch.setattr(services, 'chat_json', lambda *a, **k: {
+        'title': '静音鼠标', 'description': description, 'category': '数码与影音',
+        'price': '199.99', 'campus': '万柳学区', 'condition_grade': '9成新',
+        'tags': ['鼠标'], 'clarification': None})
+    parsed = services.parse_item('静音鼠标，¥199.99', settings)
+    assert len(parsed.description) == 3000
+    assert float(parsed.price) == 199.99
+
+
+def test_parse_item_remote_non_object_payload_falls_back(monkeypatch):
+    from app import services
+
+    settings = Settings(ai_mode='remote', deepseek_key='test-key', embedding_mode='local')
+    monkeypatch.setattr(services, 'chat_json', lambda *a, **k: ['not', 'an', 'object'])
+    parsed = services.parse_item('卖 300 元静音鼠标', settings)
+    assert float(parsed.price) == 300.0
+
+
+def test_parse_item_remote_out_of_range_price_falls_back(monkeypatch):
+    from app import services
+
+    settings = Settings(ai_mode='remote', deepseek_key='test-key', embedding_mode='local')
+    monkeypatch.setattr(services, 'chat_json', lambda *a, **k: {
+        'title': '鼠标', 'description': '静音鼠标', 'category': '数码与影音',
+        'price': 1000000, 'campus': '燕园校本部', 'condition_grade': '95新',
+        'tags': ['鼠标'], 'clarification': None})
+    parsed = services.parse_item('卖 250 元静音鼠标', settings)
+    assert float(parsed.price) == 250.0
+
+
+def test_parse_item_remote_unknown_field_falls_back(monkeypatch):
+    from app import services
+
+    settings = Settings(ai_mode='remote', deepseek_key='test-key', embedding_mode='local')
+    monkeypatch.setattr(services, 'chat_json', lambda *a, **k: {
+        'title': '台灯', 'description': '护眼台灯', 'category': '宿舍生活与家电',
+        'price': '280', 'campus': '燕园校本部', 'condition_grade': '95新',
+        'tags': ['台灯'], 'clarification': None, 'seller_phone': '12345678901'})
+    parsed = services.parse_item('卖 280 元台灯', settings)
+    assert float(parsed.price) == 280.0
+
+
 def test_embed_remote_returns_vector_and_sanitizes_bad_payload(monkeypatch):
     from app import services
 

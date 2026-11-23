@@ -2,10 +2,14 @@
 import asyncio
 import dataclasses
 import io
+from types import SimpleNamespace
 
 from PIL import Image, ImageDraw
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+from sqlalchemy.pool import StaticPool
 
-from app import buyer_agent, services
+from app import buyer_agent, concept_learning, models, services
 from app.schemas import CATEGORIES
 from app.vision import SYSTEM_PROMPT, VisionDraft, VisionService
 
@@ -65,6 +69,91 @@ def run_review(intent, item, settings, sink):
         'evidence': [evidence.model_dump() for evidence in result.evidence],
         'questions': list(result.questions),
     }
+
+
+def concept_catalog(rows):
+    """Turn name-based dataset rows into the id/parent form production prompts use."""
+    ids = {row['name']: concept_learning._slug(row['name']) for row in rows}
+    catalog = []
+    for row in rows:
+        parent = (row.get('parent') or '').strip()
+        catalog.append({
+            'id': ids[row['name']],
+            'name': row['name'],
+            'definition': row.get('definition', ''),
+            'parent': ids.get(parent),
+            'category': row.get('category'),
+            'aliases': list(row.get('aliases', [])),
+        })
+    return catalog
+
+
+def _concept_db(catalog):
+    """Fresh in-memory catalog per sample so rows cannot leak into each other."""
+    engine = create_engine('sqlite://', connect_args={'check_same_thread': False},
+                           poolclass=StaticPool)
+    models.Base.metadata.create_all(engine)
+    db = sessionmaker(bind=engine)()
+    for row in catalog:
+        db.add(models.Concept(id=row['id'], name=row['name'], definition=row['definition'],
+                              parent_id=row['parent'], category=row['category'], source='fixture'))
+        for alias in row.get('aliases', []):
+            db.add(models.ConceptAlias(alias=alias.lower(), concept_id=row['id'], source='fixture'))
+    db.flush()
+    return db
+
+
+def _family_names(plan, catalog):
+    by_id = {row['id']: row for row in catalog}
+    names = {concept_id: row['name'] for concept_id, row in by_id.items()}
+    names.update({concept_id: row['name'] for concept_id, row in plan.new.items()})
+    parents = {concept_id: row['parent'] for concept_id, row in by_id.items()}
+    parents.update({concept_id: row['parent'] for concept_id, row in plan.new.items()})
+    return [{'name': names.get(concept_id, concept_id),
+             'parent': names.get(parents.get(concept_id)) if parents.get(concept_id) else None,
+             'aliases': list(plan.aliases.get(concept_id, []))}
+            for concept_id in plan.links]
+
+
+def _evidence_grounded(payload, item):
+    text = ' '.join(filter(None, [item.title, item.description, *(item.tags or [])])).lower()
+    if not isinstance(payload, dict):
+        return False
+    assignments = payload.get('assignments')
+    if not isinstance(assignments, list) or not assignments:
+        return True
+    return all(isinstance(entry, dict) and str(entry.get('evidence') or '').strip()
+               and str(entry['evidence']).strip().lower() in text for entry in assignments)
+
+
+def run_concept(input, settings, sink):
+    """Propose + validate against a throwaway catalog; never writes or refreshes."""
+    item = SimpleNamespace(title=input['item'].get('title', ''),
+                           description=input['item'].get('description', ''),
+                           tags=list(input['item'].get('tags') or []),
+                           category=input['item'].get('category'))
+    catalog = concept_catalog(input.get('catalog', []))
+    db = _concept_db(catalog)
+    payload = concept_learning.propose(item, catalog, settings, observer=sink.append)
+    try:
+        concept_learning.Proposal.model_validate(payload)
+        schema_valid = True
+    except (ValueError, TypeError):
+        schema_valid = False
+    grounded = _evidence_grounded(payload, item)
+    try:
+        plan = concept_learning.validate(db, item, payload)
+    except concept_learning.Rejected as error:
+        return {'decision': 'reject', 'reason': error.reason, 'families': [], 'aliases': [],
+                'evidence_grounded': grounded, 'schema_valid': schema_valid}
+    except (ValueError, TypeError):
+        return {'decision': 'reject', 'reason': 'invalid_schema', 'families': [], 'aliases': [],
+                'evidence_grounded': grounded, 'schema_valid': schema_valid}
+    families = _family_names(plan, catalog)
+    return {'decision': 'apply', 'reason': 'learned' if plan.links else 'no_family',
+            'families': families,
+            'aliases': [alias for family in families for alias in family['aliases']],
+            'evidence_grounded': grounded, 'schema_valid': schema_valid}
 
 
 def render_image(spec):
@@ -132,7 +221,7 @@ def lexical_rank(parsed, excluded, pool, k=10):
     ranked = []
     for item in pool:
         text = _normalized(' '.join([item['title'], item['description'], *item.get('tags', [])]))
-        if any(term and term in text for term in excluded):
+        if any(term and services.tokens_contain(text, term) for term in excluded):
             continue
         if parsed.get('category') and item['category'] != parsed['category']:
             continue
@@ -144,7 +233,7 @@ def lexical_rank(parsed, excluded, pool, k=10):
             order = ['全新', '95新', '9成新', '8成新', '基本可用']
             if order.index(item['condition_grade']) > order.index(parsed['condition_grade']):
                 continue
-        score = sum(term in text for term in keywords) / len(keywords) if keywords else 0.0
+        score = sum(services.tokens_contain(text, term) for term in keywords) / len(keywords) if keywords else 0.0
         if score > 0:
             ranked.append((item['id'], score, item['price']))
     ranked.sort(key=lambda row: (-row[1], row[2], row[0]))

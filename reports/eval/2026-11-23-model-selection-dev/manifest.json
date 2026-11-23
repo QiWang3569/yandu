@@ -1,11 +1,12 @@
 {
-  "dataset_version": "2026-11-23-v2",
+  "dataset_version": "2026-11-23-v3",
   "dataset_sha": {
     "item_text_1_1.jsonl": "635af35150a33a08447e7ac73c06c4f771e14e49f2defed4617e0481472a5869",
     "vision_1_2.jsonl": "48edfae22c9827d9595a601bccbc8b628dedcf6fb271f5123c77b0d099ce3d46",
     "intent_2_1.jsonl": "e7c3ccede9c549674fc18012fbde008fdfbbed188dbce310d833d89bdb5f18cd",
     "recall_2_3.jsonl": "1d8300c2cb6057fc603ea7aeabc217bf687ba7bfc0d39613240e402b33587e11",
     "review_2_4.jsonl": "9815500bb8b9c20f609041a0a47c301802ef928271a7cb70eea79be2d02a2a0f",
+    "concepts_1_4.jsonl": "8697ba090a20a710f501aaf27f88dc0a9dd4584b58ef85e03b9b8926fa970011",
     "items_pool_2_3.jsonl": "1b42b244244b3b33997382075496b4eb08475da5efa888c5e1b209a8190e3e2c",
     "images/1.2-001.jpg": "c0d3c5070700e6a53bfaab8b3e8f555b79836417c5adf44f1f2d8373db54f644",
     "images/1.2-002.jpg": "35c869968a93bc6dab0436742531e75c17129ea40692b791564995235aa445d4",
@@ -24,35 +25,46 @@
     "images/1.2-015.jpg": "428f8368b3a3766bd4d049bcd835e71c8cc1ec383b5833029601ec7a1c86508a"
   },
   "dataset_verified": true,
-  "git_sha": "54df454fcb45ef7726bf43f24fffae3d287a157c",
+  "git_sha": "d5b5bb65ebafc5abddaedc4d7d4190986d40b69b",
+  "git_dirty": true,
   "prompt_versions": {
     "1.1": "item-2",
     "1.2": "vision-publish-3",
     "2.1": "intent-3",
     "2.3": "lexical-alias-1",
-    "2.4": "review-1"
+    "2.4": "review-1",
+    "1.4": "concept-1"
   },
   "models": {
     "text": [
       {
         "id": "text-primary",
         "model": "deepseek/deepseek-v4.1-flash"
+      },
+      {
+        "id": "text-alt",
+        "model": "deepseek/deepseek-v4-pro-0813"
+      },
+      {
+        "id": "text-alt-2",
+        "model": "z-ai/glm-5.3-flash"
       }
     ],
     "vision": [
       {
         "id": "vision-primary",
         "model": "qwen/qwen3.7-flash"
+      },
+      {
+        "id": "vision-alt",
+        "model": "deepseek/deepseek-v4-flash-vision-exp"
       }
     ]
   },
-  "unavailable": [
-    "text-alt",
-    "vision-alt"
-  ],
+  "unavailable": [],
   "fixture": false,
-  "split": "sealed_test",
-  "generated_at": "2026-11-23T03:31:59.232249+00:00",
+  "split": "dev",
+  "generated_at": "2026-11-23T08:29:59.571310+00:00",
   "thresholds": {
     "schema": 1,
     "global": {
@@ -123,6 +135,32 @@
       "p95_latency_ms": {
         "max": 5000,
         "hard": false
+      }
+    },
+    "1.4": {
+      "schema_valid_rate": {
+        "min": 0.98,
+        "hard": true
+      },
+      "accept_accuracy": {
+        "min": 0.8,
+        "hard": true
+      },
+      "family_f1": {
+        "min": 0.7,
+        "hard": true
+      },
+      "alias_f1": {
+        "min": 0.7,
+        "hard": true
+      },
+      "evidence_grounded_rate": {
+        "min": 1.0,
+        "hard": true
+      },
+      "p95_latency_ms": {
+        "max": 20000,
+        "hard": true
       }
     },
     "2.4": {

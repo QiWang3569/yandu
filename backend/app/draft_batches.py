@@ -9,6 +9,7 @@ from pydantic import Field, ValidationError, field_validator
 from sqlalchemy import func, select
 from sqlalchemy.orm import Session
 
+from . import concepts
 from .models import ActionLog, Item, ItemDraft, Upload, User
 from .schemas import ItemCreate, ItemDraftUpdate, StrictModel
 from .services import embed, log, model_name
@@ -45,7 +46,7 @@ class PublishBatch(StrictModel):
         return drafts
 
 
-def register_draft_batches(app, get_db, require_user, settings, mutation_lock, draft_out, item_out, matching):
+def register_draft_batches(app, get_db, require_user, settings, mutation_lock, draft_out, item_out, matching, concept_learning):
     def fingerprint(data):
         return hashlib.sha256(data.model_dump_json(exclude={'request_id'}).encode()).hexdigest()
 
@@ -146,6 +147,8 @@ def register_draft_batches(app, get_db, require_user, settings, mutation_lock, d
                 db.delete(row)
                 db.add(item)
                 db.flush()
+                concepts.link_item(db, item)
+                concept_learning.enqueue(db, item.id)
                 jobs.extend(matching.enqueue_item(db, item))
                 log(db, user, 'item.publish', item.id)
                 published.append(item)
@@ -153,4 +156,5 @@ def register_draft_batches(app, get_db, require_user, settings, mutation_lock, d
             db.commit()
         for job_id in jobs:
             matching.run_or_wake(job_id)
+        concept_learning.run_or_wake()
         return [item_out(item, db, user) for item in published]

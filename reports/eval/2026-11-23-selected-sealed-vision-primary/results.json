@@ -1,0 +1,636 @@
+{
+  "manifest": {
+    "dataset_version": "2026-11-23-v3",
+    "dataset_sha": {
+      "item_text_1_1.jsonl": "635af35150a33a08447e7ac73c06c4f771e14e49f2defed4617e0481472a5869",
+      "vision_1_2.jsonl": "48edfae22c9827d9595a601bccbc8b628dedcf6fb271f5123c77b0d099ce3d46",
+      "intent_2_1.jsonl": "e7c3ccede9c549674fc18012fbde008fdfbbed188dbce310d833d89bdb5f18cd",
+      "recall_2_3.jsonl": "1d8300c2cb6057fc603ea7aeabc217bf687ba7bfc0d39613240e402b33587e11",
+      "review_2_4.jsonl": "9815500bb8b9c20f609041a0a47c301802ef928271a7cb70eea79be2d02a2a0f",
+      "concepts_1_4.jsonl": "8697ba090a20a710f501aaf27f88dc0a9dd4584b58ef85e03b9b8926fa970011",
+      "items_pool_2_3.jsonl": "1b42b244244b3b33997382075496b4eb08475da5efa888c5e1b209a8190e3e2c",
+      "images/1.2-001.jpg": "c0d3c5070700e6a53bfaab8b3e8f555b79836417c5adf44f1f2d8373db54f644",
+      "images/1.2-002.jpg": "35c869968a93bc6dab0436742531e75c17129ea40692b791564995235aa445d4",
+      "images/1.2-003.jpg": "3e4030f41ef0d855947ba8f5e61f45c72517740fe6d4e6941082ad1794980ea7",
+      "images/1.2-004.jpg": "16d0d0395a84352feafc3dc7040d37b79a255fe202783eed3cdbee7c71609f0b",
+      "images/1.2-005.jpg": "428f7983f7dec3b34c816eed198577c8ddcfa6d6275f3086eed5742769e09a29",
+      "images/1.2-006.jpg": "076794e2216243af2a34f5312826b89aea481edf7c184b33a0c5fb54765dd8d6",
+      "images/1.2-007.jpg": "c0e98253d98272852d5849979234578997590f0a5a0fd298b38b389fa33be38a",
+      "images/1.2-008.jpg": "5ef198259c70d915d2a0382089f3db07499a606fe76c2851a0ae1e512b675522",
+      "images/1.2-009.jpg": "1f368e3c7da26f25fe782fff0b0691bdca56612bfa219ca3ed72174a46e68569",
+      "images/1.2-010.jpg": "cf6f680b17f639fdbed4abb5fda8ff14c87f2821fd4cc359a7d801cd71baae1b",
+      "images/1.2-011.jpg": "7d5761d6b59ea99974c7023421e43b32514ee6a591764d3eb6e79d169205887c",
+      "images/1.2-012.jpg": "cffb9619b88b312a9d0a0a9ca5559d868fc2de62ee47164be8c450ab2c2363cf",
+      "images/1.2-013.jpg": "6e4d5427bf1f0aab7ff3d8590c18ecfd21685187323c17a4e93efcdcdbd3b989",
+      "images/1.2-014.jpg": "5e5d6cda8393120f2e5a5a68802b8f46b1c2e5745e756461e97965a4f888cd0b",
+      "images/1.2-015.jpg": "428f8368b3a3766bd4d049bcd835e71c8cc1ec383b5833029601ec7a1c86508a"
+    },
+    "dataset_verified": true,
+    "git_sha": "d5b5bb65ebafc5abddaedc4d7d4190986d40b69b",
+    "git_dirty": true,
+    "prompt_versions": {
+      "1.1": "item-2",
+      "1.2": "vision-publish-3",
+      "2.1": "intent-3",
+      "2.3": "lexical-alias-1",
+      "2.4": "review-1",
+      "1.4": "concept-1"
+    },
+    "models": {
+      "text": [],
+      "vision": [
+        {
+          "id": "vision-primary",
+          "model": "qwen/qwen3.7-flash"
+        }
+      ]
+    },
+    "unavailable": [],
+    "fixture": false,
+    "split": "sealed_test",
+    "generated_at": "2026-11-23T08:34:38.950762+00:00",
+    "thresholds": {
+      "schema": 1,
+      "global": {
+        "valid_rate": {
+          "min": 0.98,
+          "hard": true
+        }
+      },
+      "1.1": {
+        "field_macro_f1": {
+          "min": 0.85,
+          "hard": true
+        },
+        "clarification_accuracy": {
+          "min": 0.8,
+          "hard": false
+        },
+        "p95_latency_ms": {
+          "max": 20000,
+          "hard": true
+        }
+      },
+      "1.2": {
+        "status_accuracy": {
+          "min": 0.8,
+          "hard": true
+        },
+        "category_accuracy": {
+          "min": 0.8,
+          "hard": true
+        },
+        "unsupported_attribute_rate": {
+          "max": 0.05,
+          "hard": true
+        },
+        "p95_latency_ms": {
+          "max": 30000,
+          "hard": true
+        }
+      },
+      "2.1": {
+        "field_macro_f1": {
+          "min": 0.85,
+          "hard": true
+        },
+        "hard_field_exact": {
+          "min": 0.9,
+          "hard": true
+        },
+        "quote_recall": {
+          "min": 0.95,
+          "hard": true
+        },
+        "injection_structure_rate": {
+          "min": 1.0,
+          "hard": true
+        },
+        "p95_latency_ms": {
+          "max": 20000,
+          "hard": true
+        }
+      },
+      "2.3": {
+        "recall_at_10": {
+          "min": 0.8,
+          "hard": true
+        },
+        "p95_latency_ms": {
+          "max": 5000,
+          "hard": false
+        }
+      },
+      "1.4": {
+        "schema_valid_rate": {
+          "min": 0.98,
+          "hard": true
+        },
+        "accept_accuracy": {
+          "min": 0.8,
+          "hard": true
+        },
+        "family_f1": {
+          "min": 0.7,
+          "hard": true
+        },
+        "alias_f1": {
+          "min": 0.7,
+          "hard": true
+        },
+        "evidence_grounded_rate": {
+          "min": 1.0,
+          "hard": true
+        },
+        "p95_latency_ms": {
+          "max": 20000,
+          "hard": true
+        }
+      },
+      "2.4": {
+        "verdict_accuracy": {
+          "min": 0.8,
+          "hard": false
+        },
+        "match_recall": {
+          "min": 0.85,
+          "hard": true
+        },
+        "grounding_rate": {
+          "min": 1.0,
+          "hard": true
+        },
+        "exclusion_false_accept": {
+          "max": 0,
+          "hard": true
+        },
+        "preference_only_reject": {
+          "max": 0,
+          "hard": true
+        },
+        "p95_latency_ms": {
+          "max": 20000,
+          "hard": true
+        }
+      }
+    }
+  },
+  "runs": [
+    {
+      "node": "1.2",
+      "split": "sealed_test",
+      "candidate": "vision-primary",
+      "model": "qwen/qwen3.7-flash",
+      "fixture": false,
+      "started_at": "2026-11-23T08:34:38.904218+00:00",
+      "samples": [
+        {
+          "id": "1.2-004",
+          "split": "sealed_test",
+          "stratum": "home",
+          "ok": true,
+          "output": {
+            "status": "ready",
+            "title": "黄色台灯",
+            "category": "宿舍生活与家电",
+            "description": "黄色金属台灯，带有可调节的双关节支架和圆形底座，灯罩内部为白色，连接有一根黄色电源线。",
+            "tags": [
+              "黄色台灯",
+              "台灯",
+              "宿舍灯具"
+            ],
+            "uncertainties": [
+              "未看到品牌或型号标识，请补充具体品牌型号",
+              "无法确认是否包含开关及插头类型"
+            ]
+          },
+          "error": null,
+          "attempts": 1,
+          "latency_ms": 2000.0,
+          "events": [
+            {
+              "node": "vision",
+              "model": "qwen/qwen3.7-flash",
+              "elapsed_ms": 2000.0,
+              "usage": {
+                "prompt_tokens": 1448,
+                "completion_tokens": 130,
+                "total_tokens": 1578,
+                "prompt_tokens_details": {
+                  "text_tokens": 846,
+                  "image_tokens": 602
+                },
+                "completion_tokens_details": {
+                  "text_tokens": 130
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "1.2-005",
+          "split": "sealed_test",
+          "stratum": "electronics",
+          "ok": true,
+          "output": {
+            "status": "ready",
+            "title": "黑色显示器",
+            "category": "数码与影音",
+            "description": "黑色长方形电脑显示器，正面屏幕处于关闭状态，下边框中央有一个圆形电源按钮或传感器，配有黑色方形底座，后方连接有线缆。",
+            "tags": [
+              "显示器",
+              "黑色",
+              "电脑配件"
+            ],
+            "uncertainties": [
+              "图片未显示品牌、型号及具体尺寸参数",
+              "无法确认屏幕分辨率及接口类型"
+            ]
+          },
+          "error": null,
+          "attempts": 1,
+          "latency_ms": 1562.999999994645,
+          "events": [
+            {
+              "node": "vision",
+              "model": "qwen/qwen3.7-flash",
+              "elapsed_ms": 1547.000000020489,
+              "usage": {
+                "prompt_tokens": 1448,
+                "completion_tokens": 130,
+                "total_tokens": 1578,
+                "prompt_tokens_details": {
+                  "text_tokens": 846,
+                  "image_tokens": 602
+                },
+                "completion_tokens_details": {
+                  "text_tokens": 130
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "1.2-006",
+          "split": "sealed_test",
+          "stratum": "electronics",
+          "ok": true,
+          "output": {
+            "status": "ready",
+            "title": "黑色头戴式耳机",
+            "category": "数码与影音",
+            "description": "黑色头戴式耳机，耳罩为皮质包裹，头梁处有调节结构，侧面可见按键设计，放置于木质桌面上。",
+            "tags": [
+              "黑色耳机",
+              "头戴式耳机",
+              "数码设备"
+            ],
+            "uncertainties": [
+              "图片中未显示品牌Logo或型号文字，无法确认具体品牌和型号",
+              "无法从外观判断是否为无线、蓝牙或有线连接方式",
+              "无法确认材质具体成分（如皮革或人造革）"
+            ]
+          },
+          "error": null,
+          "attempts": 1,
+          "latency_ms": 2390.00000001397,
+          "events": [
+            {
+              "node": "vision",
+              "model": "qwen/qwen3.7-flash",
+              "elapsed_ms": 2390.00000001397,
+              "usage": {
+                "prompt_tokens": 1448,
+                "completion_tokens": 158,
+                "total_tokens": 1606,
+                "prompt_tokens_details": {
+                  "text_tokens": 846,
+                  "image_tokens": 602
+                },
+                "completion_tokens_details": {
+                  "text_tokens": 158
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "1.2-007",
+          "split": "sealed_test",
+          "stratum": "book",
+          "ok": true,
+          "output": {
+            "status": "ready",
+            "title": "棕色笔记本",
+            "category": "宿舍生活与家电",
+            "description": "一本合上的棕色硬皮笔记本，封面为纯色无文字，旁边放有一支黄色铅笔。",
+            "tags": [
+              "笔记本",
+              "棕色",
+              "文具"
+            ],
+            "uncertainties": [
+              "请补充笔记本的具体书名或用途（如手账本、草稿本）",
+              "请确认是否包含旁边的黄色铅笔"
+            ]
+          },
+          "error": null,
+          "attempts": 1,
+          "latency_ms": 1453.9999999979045,
+          "events": [
+            {
+              "node": "vision",
+              "model": "qwen/qwen3.7-flash",
+              "elapsed_ms": 1453.9999999979045,
+              "usage": {
+                "prompt_tokens": 1448,
+                "completion_tokens": 126,
+                "total_tokens": 1574,
+                "prompt_tokens_details": {
+                  "text_tokens": 846,
+                  "image_tokens": 602
+                },
+                "completion_tokens_details": {
+                  "text_tokens": 126
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "1.2-008",
+          "split": "sealed_test",
+          "stratum": "electronics",
+          "ok": true,
+          "output": {
+            "status": "ready",
+            "title": "红色有线鼠标",
+            "category": "数码与影音",
+            "description": "红色外壳电脑鼠标，连接黑色线缆，顶部可见黑色滚轮及左右按键，机身两侧各有一个侧键，放置在浅色木纹桌面上。",
+            "tags": [
+              "红色鼠标",
+              "有线鼠标",
+              "电脑外设"
+            ],
+            "uncertainties": [
+              "图片未显示品牌Logo或型号文字，请补充具体品牌和型号",
+              "无法确认底部脚贴磨损情况及接口类型"
+            ]
+          },
+          "error": null,
+          "attempts": 1,
+          "latency_ms": 1905.9999999881256,
+          "events": [
+            {
+              "node": "vision",
+              "model": "qwen/qwen3.7-flash",
+              "elapsed_ms": 1905.9999999881256,
+              "usage": {
+                "prompt_tokens": 1448,
+                "completion_tokens": 138,
+                "total_tokens": 1586,
+                "prompt_tokens_details": {
+                  "text_tokens": 846,
+                  "image_tokens": 602
+                },
+                "completion_tokens_details": {
+                  "text_tokens": 138
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "1.2-012",
+          "split": "sealed_test",
+          "stratum": "home",
+          "ok": true,
+          "output": {
+            "status": "ready",
+            "title": "蓝色台灯",
+            "category": "宿舍生活与家电",
+            "description": "蓝色灯罩与圆形底座，搭配银色金属多节可调节支架，灯头内部为白色，放置在木质桌面上。",
+            "tags": [
+              "台灯",
+              "蓝色",
+              "折叠台灯"
+            ],
+            "uncertainties": [
+              "请补充具体品牌或型号",
+              "是否包含电源线及插头"
+            ]
+          },
+          "error": null,
+          "attempts": 1,
+          "latency_ms": 1890.0000000139698,
+          "events": [
+            {
+              "node": "vision",
+              "model": "qwen/qwen3.7-flash",
+              "elapsed_ms": 1875.0,
+              "usage": {
+                "prompt_tokens": 1448,
+                "completion_tokens": 120,
+                "total_tokens": 1568,
+                "prompt_tokens_details": {
+                  "text_tokens": 846,
+                  "image_tokens": 602
+                },
+                "completion_tokens_details": {
+                  "text_tokens": 120
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "1.2-013",
+          "split": "sealed_test",
+          "stratum": "sports",
+          "ok": true,
+          "output": {
+            "status": "ready",
+            "title": "绿色复古自行车",
+            "category": "校园出行与运动",
+            "description": "军绿色车架的复古风格自行车，配有棕色皮革车座、木质把套、银色弯把、前后挡泥板及后货架，停放在砖墙边。",
+            "tags": [
+              "自行车",
+              "绿色",
+              "复古"
+            ],
+            "uncertainties": [
+              "图片中未见清晰品牌或型号文字，请补充具体品牌型号",
+              "无法确认车辆尺寸及成色状况"
+            ]
+          },
+          "error": null,
+          "attempts": 1,
+          "latency_ms": 2032.0000000065193,
+          "events": [
+            {
+              "node": "vision",
+              "model": "qwen/qwen3.7-flash",
+              "elapsed_ms": 2032.0000000065193,
+              "usage": {
+                "prompt_tokens": 1448,
+                "completion_tokens": 141,
+                "total_tokens": 1589,
+                "prompt_tokens_details": {
+                  "text_tokens": 846,
+                  "image_tokens": 602
+                },
+                "completion_tokens_details": {
+                  "text_tokens": 141
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "1.2-014",
+          "split": "sealed_test",
+          "stratum": "electronics",
+          "ok": true,
+          "output": {
+            "status": "ready",
+            "title": "蓝色显示器",
+            "category": "数码与影音",
+            "description": "一台带有深蓝色边框和支架的电脑显示器，屏幕处于黑屏状态，放置在木质桌面上。",
+            "tags": [
+              "显示器",
+              "蓝色"
+            ],
+            "uncertainties": [
+              "请补充显示器的具体品牌、型号及屏幕尺寸",
+              "请确认该物品是否为待售主体（背景中的鼠标和键盘未包含在内）"
+            ]
+          },
+          "error": null,
+          "attempts": 1,
+          "latency_ms": 1733.9999999967404,
+          "events": [
+            {
+              "node": "vision",
+              "model": "qwen/qwen3.7-flash",
+              "elapsed_ms": 1733.9999999967404,
+              "usage": {
+                "prompt_tokens": 1448,
+                "completion_tokens": 126,
+                "total_tokens": 1574,
+                "prompt_tokens_details": {
+                  "text_tokens": 846,
+                  "image_tokens": 602
+                },
+                "completion_tokens_details": {
+                  "text_tokens": 126
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "1.2-015",
+          "split": "sealed_test",
+          "stratum": "book",
+          "ok": true,
+          "output": {
+            "status": "ready",
+            "title": "紫色硬壳书籍（书名待确认）",
+            "category": "课程资料与书籍",
+            "description": "一本竖立放置的紫色硬壳精装书，封面为纯色无文字设计，底部可见白色书页边缘。",
+            "tags": [
+              "紫色书籍",
+              "硬壳书",
+              "书籍"
+            ],
+            "uncertainties": [
+              "封面及书脊均无可见文字，请补充具体书名或作者信息",
+              "无法确认是否为教材、小说或其他类型书籍"
+            ]
+          },
+          "error": null,
+          "attempts": 1,
+          "latency_ms": 1655.9999999881256,
+          "events": [
+            {
+              "node": "vision",
+              "model": "qwen/qwen3.7-flash",
+              "elapsed_ms": 1655.9999999881256,
+              "usage": {
+                "prompt_tokens": 1448,
+                "completion_tokens": 141,
+                "total_tokens": 1589,
+                "prompt_tokens_details": {
+                  "text_tokens": 846,
+                  "image_tokens": 602
+                },
+                "completion_tokens_details": {
+                  "text_tokens": 141
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "usage": {
+        "calls": 9,
+        "input_tokens": 13032,
+        "output_tokens": 1210,
+        "failures": 0
+      },
+      "metrics": {
+        "valid_rate": 1.0,
+        "status_accuracy": 1.0,
+        "category_accuracy": 0.8888888888888888,
+        "unsupported_attribute_rate": 0.3333333333333333,
+        "p95_latency_ms": 2246.8000000109896
+      }
+    }
+  ],
+  "checks": {
+    "vision-primary": {
+      "1.2": {
+        "valid_rate": {
+          "value": 1.0,
+          "rule": {
+            "min": 0.98,
+            "hard": true
+          },
+          "pass": true
+        },
+        "status_accuracy": {
+          "value": 1.0,
+          "rule": {
+            "min": 0.8,
+            "hard": true
+          },
+          "pass": true
+        },
+        "category_accuracy": {
+          "value": 0.8888888888888888,
+          "rule": {
+            "min": 0.8,
+            "hard": true
+          },
+          "pass": true
+        },
+        "unsupported_attribute_rate": {
+          "value": 0.3333333333333333,
+          "rule": {
+            "max": 0.05,
+            "hard": true
+          },
+          "pass": false
+        },
+        "p95_latency_ms": {
+          "value": 2246.8000000109896,
+          "rule": {
+            "max": 30000,
+            "hard": true
+          },
+          "pass": true
+        }
+      }
+    }
+  }
+}

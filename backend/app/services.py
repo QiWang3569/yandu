@@ -10,6 +10,7 @@ from fastapi import HTTPException
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
+from . import concepts
 from .buyer_agent import ModelUnavailable, chat_json
 from .config import Settings
 from .models import ActionLog, Announcement, Intent, Item, User, Wanted, now
@@ -24,8 +25,16 @@ CONDITION_ALIASES = {
     '基本可用': '基本可用',
 }
 
-# Canonical feature words keep local demo behavior explainable; this is not an LLM.
-FEATURES = {
+# Attributes are not product families; they stay literal and are not learned.
+ATTRIBUTE_ALIASES = {
+    '静音': ['静音', '无声'], '无线': ['无线', '蓝牙'], '降噪': ['降噪', '主动降噪'],
+    '人体工学': ['人体工学'], '机械': ['机械'],
+}
+RECRUITMENT_WORDS = ['招募', '招聘', '兼职', '实习', '组队', '志愿者', '找人']
+
+# Deterministic offline fallback carried over from the pre-learning version.
+# It is used only when AI_MODE=local, where no model exists to learn families.
+LEGACY_FEATURES = {
     '鼠标': ['鼠标', '滑鼠', 'mouse', 'mx master'], '键盘': ['键盘', 'keyboard'],
     '显示器': ['显示器', '屏幕', 'monitor'], '平板': ['平板', 'ipad'],
     '耳机': ['耳机', 'airpods'], '电脑': ['电脑', '笔记本', 'macbook'],
@@ -36,24 +45,79 @@ FEATURES = {
     '球拍': ['球拍'], '台灯': ['台灯', '阅读灯'],
     '风扇': ['风扇'], '收纳': ['收纳', '置物架'], '冰箱': ['冰箱'],
     '帆布包': ['帆布包', '手提袋'], '正装': ['正装', '西服'],
-    '静音': ['静音', '无声'], '无线': ['无线', '蓝牙'], '人体工学': ['人体工学'],
 }
-CATEGORY_FEATURES = [
+LEGACY_CATEGORY_WORDS = [
     ['高等数学', '教材', '英语', '书', '笔记'],
     ['鼠标', '键盘', '显示器', '平板', '耳机', '电脑'],
     ['自行车', '球拍', '运动', '滑板'],
     ['台灯', '风扇', '收纳', '冰箱', '家电'],
     ['帆布包', '正装', '服饰', '美妆', '周边'],
-    ['招募', '招聘', '兼职', '实习', '组队', '志愿者', '找人'],
+    RECRUITMENT_WORDS,
 ]
 
 
-def normalize(text: str) -> str:
+def _legacy_normalize(text):
     text = text.lower()
-    for canonical, synonyms in FEATURES.items():
+    for canonical, synonyms in LEGACY_FEATURES.items():
         for synonym in synonyms:
             text = text.replace(synonym, canonical)
     return text
+
+
+def category_for(text: str) -> str | None:
+    for concept_id in concepts.concepts_in_text(text):
+        category = concepts.concept_category(concept_id)
+        if category in CATEGORIES:
+            return category
+    if concepts.legacy_enabled():
+        legacy = _legacy_normalize(text)
+        for category, words in zip(CATEGORIES, LEGACY_CATEGORY_WORDS):
+            if any(word in legacy for word in words):
+                return category
+    if any(word in text for word in RECRUITMENT_WORDS):
+        return CATEGORIES[5]
+    return None
+
+
+def _local_keywords(text):
+    normalized = normalize(text)
+    keywords = list(concepts.concept_names(text))
+    if concepts.legacy_enabled():
+        legacy = _legacy_normalize(text)
+        words = [word for word in LEGACY_FEATURES if word in legacy]
+        # Preserve specific product names: tennis and badminton rackets differ.
+        words = [word for word in words if not any(word != other and word in other for other in words)]
+        keywords = list(dict.fromkeys([*keywords, *words]))
+    attributes = [word for word in ATTRIBUTE_ALIASES if word in normalized]
+    return list(dict.fromkeys([*keywords, *attributes]))
+
+
+def normalize(text: str) -> str:
+    text = concepts.canonicalize(text)
+    if concepts.legacy_enabled():
+        text = _legacy_normalize(text)
+    for canonical, synonyms in ATTRIBUTE_ALIASES.items():
+        for synonym in synonyms:
+            text = text.replace(synonym, ' ' + canonical + ' ')
+    return text
+
+
+def tokens_contain(haystack: str, needle: str) -> bool:
+    """Whitespace-token subsequence check on already-normalized text.
+
+    Whole-token matching keeps '鼠标' from matching '鼠标配件' while still
+    matching the canonical '笔记本 电脑' emitted for a laptop.
+    """
+    needle_tokens = needle.split()
+    if not needle_tokens:
+        return False
+    haystack_tokens = haystack.split()
+    return any(haystack_tokens[i:i + len(needle_tokens)] == needle_tokens
+               for i in range(len(haystack_tokens) - len(needle_tokens) + 1))
+
+
+def normalized_contains(term: str, text: str) -> bool:
+    return tokens_contain(normalize(text), normalize(term))
 
 
 def parse_local(query: str) -> ParsedIntent:
@@ -67,11 +131,8 @@ def parse_local(query: str) -> ParsedIntent:
             if phrase:
                 target.append(phrase[:30])
         positive = re.sub(pattern, ' ', positive)
-    normalized = normalize(positive)
-    keywords = [word for word in FEATURES if word in normalized]
-    # Preserve specific product names: tennis and badminton rackets are not interchangeable.
-    keywords = [word for word in keywords if not any(word != other and word in other for other in keywords)]
-    category = next((CATEGORIES[i] for i, words in enumerate(CATEGORY_FEATURES) if any(w in normalized for w in words)), None)
+    keywords = _local_keywords(positive)
+    category = category_for(positive)
     campus = next((c for c in CAMPUSES[:-1] if c[:2] in query), '不限校区')
     patterns = [r'(?:不超过|最多|预算|低于|以内|上限|不高于|不到)\s*[¥￥]?\s*(\d+(?:\.\d{1,2})?)',
                 r'(\d+(?:\.\d{1,2})?)\s*(?:元|块|人民币)?\s*(?:以内|以下|内|左右)',
@@ -178,7 +239,6 @@ def parse_intent(query: str, settings: Settings, observer=None) -> ParsedIntent:
 
 
 def parse_item_local(raw: str) -> ParsedItem:
-    normalized = normalize(raw)
     price_patterns = [
         r'(?:卖|售价|价格|出|转让|只要)\s*[¥￥]?\s*(\d+(?:\.\d{1,2})?)\s*(?:元|块|人民币)?',
         r'[¥￥]\s*(\d+(?:\.\d{1,2})?)',
@@ -193,8 +253,8 @@ def parse_item_local(raw: str) -> ParsedItem:
         condition = '8成新'
     if '九五新' in raw:
         condition = '95新'
-    category = next((CATEGORIES[i] for i, words in enumerate(CATEGORY_FEATURES) if any(w in normalized for w in words)), None)
-    tags = list(dict.fromkeys(w for w in FEATURES if w in normalized))
+    category = category_for(raw)
+    tags = _local_keywords(raw)[:8]
     title = re.split(r'[，。；！？,.;!?]', raw.strip())[0].strip()[:120] or None
     return ParsedItem(title=title, description=raw, category=category, price=price,
                       campus=campus, condition_grade=condition, tags=tags[:8])
@@ -319,10 +379,14 @@ def seed(db: Session):
         ('宿舍桌面收纳架', '两层置物架，原木色，尺寸 40×20×35 厘米，毕业整理闲置。', 3, 30, 3, '95新', 'shelf', ['收纳', '宿舍']),
         ('尤尼克斯入门羽毛球拍', '球拍含拍套，球线完整，适合课余运动，新手友好。', 2, 80, 0, '9成新', 'racket', ['球拍', '运动']),
     ]
+    seeded_items = []
     for n, (title, desc, cat, price, campus, cond, art, tags) in enumerate(samples):
-        db.add(Item(id=f'sample-{n+1}', seller_id='demo-seller', title=title, description=desc,
+        item = Item(id=f'sample-{n+1}', seller_id='demo-seller', title=title, description=desc,
                     category=CATEGORIES[cat], price_cents=price*100, campus=CAMPUSES[campus],
-                    condition_grade=cond, art=art, tags=tags, images=[], created_at=now() - timedelta(hours=n*3+1)))
+                    condition_grade=cond, art=art, tags=tags, images=[], created_at=now() - timedelta(hours=n*3+1))
+        db.add(item)
+        seeded_items.append(item)
+    db.flush()
     db.add(Wanted(id='sample-wanted', buyer_id='demo-buyer', title='求一本离散数学教材',
                   description='这学期上课用，希望有少量笔记，燕园面交，版本可以商量。',
                   category=CATEGORIES[0], budget_cents=4000, campus=CAMPUSES[0]))

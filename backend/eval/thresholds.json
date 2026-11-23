@@ -25,6 +25,14 @@
     "recall_at_10": {"min": 0.80, "hard": true},
     "p95_latency_ms": {"max": 5000, "hard": false}
   },
+  "1.4": {
+    "schema_valid_rate": {"min": 0.98, "hard": true},
+    "accept_accuracy": {"min": 0.80, "hard": true},
+    "family_f1": {"min": 0.70, "hard": true},
+    "alias_f1": {"min": 0.70, "hard": true},
+    "evidence_grounded_rate": {"min": 1.0, "hard": true},
+    "p95_latency_ms": {"max": 20000, "hard": true}
+  },
   "2.4": {
     "verdict_accuracy": {"min": 0.80, "hard": false},
     "match_recall": {"min": 0.85, "hard": true},

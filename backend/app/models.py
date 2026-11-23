@@ -135,6 +135,61 @@ class Item(Base):
     __table_args__ = (Index('idx_items_filter', 'status', 'category', 'campus', 'price_cents'),)
 
 
+class Concept(Base):
+    """A product family learned from model judgments; no catalog content lives in code."""
+    __tablename__ = 'concepts'
+    id: Mapped[str] = mapped_column(String(40), primary_key=True)
+    name: Mapped[str] = mapped_column(String(40))
+    definition: Mapped[str] = mapped_column(Text, default='')
+    parent_id: Mapped[str | None] = mapped_column(ForeignKey('concepts.id'), nullable=True)
+    category: Mapped[str | None] = mapped_column(String(30), nullable=True)
+    source: Mapped[str] = mapped_column(String(20), default='model')
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=now)
+    __table_args__ = (UniqueConstraint('name'),)
+
+
+class ConceptAlias(Base):
+    __tablename__ = 'concept_aliases'
+    alias: Mapped[str] = mapped_column(String(60), primary_key=True)
+    concept_id: Mapped[str] = mapped_column(ForeignKey('concepts.id'), index=True)
+    source: Mapped[str] = mapped_column(String(20), default='model')
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=now)
+
+
+class ItemConcept(Base):
+    __tablename__ = 'item_concepts'
+    item_id: Mapped[str] = mapped_column(ForeignKey('items.id', ondelete='CASCADE'), primary_key=True)
+    concept_id: Mapped[str] = mapped_column(ForeignKey('concepts.id'), primary_key=True)
+    source: Mapped[str] = mapped_column(String(20), default='model')
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=now)
+    __table_args__ = (Index('idx_item_concepts_concept', 'concept_id'),)
+
+
+class ConceptProposal(Base):
+    """Audit trail for every model family assignment, applied or rejected."""
+    __tablename__ = 'concept_proposals'
+    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=uid)
+    item_id: Mapped[str] = mapped_column(ForeignKey('items.id', ondelete='CASCADE'))
+    model: Mapped[str] = mapped_column(String(100))
+    prompt_version: Mapped[str] = mapped_column(String(20))
+    payload: Mapped[dict] = mapped_column(JSON)
+    status: Mapped[str] = mapped_column(String(20))
+    reason: Mapped[str] = mapped_column(String(120), default='')
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=now)
+    __table_args__ = (Index('idx_concept_proposals_item', 'item_id', 'created_at'),)
+
+
+class ConceptJob(Base):
+    __tablename__ = 'concept_jobs'
+    item_id: Mapped[str] = mapped_column(ForeignKey('items.id', ondelete='CASCADE'), primary_key=True)
+    status: Mapped[str] = mapped_column(String(20), default='PENDING')
+    attempts: Mapped[int] = mapped_column(Integer, default=0)
+    available_at: Mapped[datetime] = mapped_column(DateTime, default=now)
+    error_code: Mapped[str] = mapped_column(String(40), default='')
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=now)
+    __table_args__ = (Index('idx_concept_jobs_pending', 'status', 'available_at'),)
+
+
 class ItemDraft(Base):
     __tablename__ = 'item_drafts'
     id: Mapped[str] = mapped_column(String(36), primary_key=True, default=uid)

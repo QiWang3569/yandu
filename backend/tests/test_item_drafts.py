@@ -12,7 +12,8 @@ def test_imported_items_remain_private_until_owner_reviews_and_publishes(client)
     assert drafts[0]['price'] == 50
     assert drafts[0]['images'] == []
     assert len(client.get('/api/v1/item-drafts/').json()) == 2
-    assert client.get('/api/v1/items/', params={'q': '罗技静音鼠标'}).json()['total'] == 0
+    # Use a phrase unique to the draft: concept expansion makes '鼠标' match demo mice.
+    assert client.get('/api/v1/items/', params={'q': '万柳面交'}).json()['total'] == 0
 
     draft_id = drafts[0]['id']
     login(client, 'buyer')
@@ -44,7 +45,7 @@ def test_imported_items_remain_private_until_owner_reviews_and_publishes(client)
     assert published.status_code == 201, published.text
     assert published.json()['status'] == 'ACTIVE'
     assert len(client.get('/api/v1/item-drafts/').json()) == 1
-    assert client.get('/api/v1/items/', params={'q': '罗技静音鼠标'}).json()['total'] == 1
+    assert client.get('/api/v1/items/', params={'q': '万柳面交'}).json()['total'] == 1
     assert client.post(f'/api/v1/item-drafts/{draft_id}/publish', json={
         key: saved.json()[key] for key in
         ('title', 'description', 'category', 'price', 'campus', 'condition_grade', 'tags', 'images')

@@ -231,6 +231,27 @@ def test_absent_exclusion_does_not_block_match(tmp_path, monkeypatch):
     assert result.verdict == 'MATCH'
 
 
+def test_empty_candidates_skip_provider(tmp_path):
+    assert review_candidates({'keywords': ['鼠标']}, [], remote_settings(tmp_path)) == []
+
+
+def test_assessment_rejects_criterion_outside_intent_whitelist():
+    item = {'id': 'one', 'title': '静音无线鼠标', 'description': '无线鼠标，功能正常。', 'tags': ['鼠标']}
+    with pytest.raises(ValueError):
+        buyer_agent.Assessment.checked(
+            {'item_id': 'one', 'verdict': 'MATCH', 'questions': [],
+             'evidence': [{'criterion': '静音', 'quote': '静音'}]},
+            item, {'keywords': ['鼠标'], 'excluded_keywords': [], 'preferences': []})
+
+
+def test_uncertain_assessment_requires_a_question():
+    item = {'id': 'one', 'title': '无线鼠标', 'description': '无线鼠标，功能正常。', 'tags': ['鼠标']}
+    with pytest.raises(ValueError):
+        buyer_agent.Assessment.checked(
+            {'item_id': 'one', 'verdict': 'UNCERTAIN', 'evidence': [], 'questions': []},
+            item, {'keywords': ['鼠标'], 'excluded_keywords': [], 'preferences': []})
+
+
 def test_exclusion_present_in_text_cannot_be_match(tmp_path, monkeypatch):
     item = {'id': 'one', 'title': '静音游戏鼠标', 'description': '静音游戏鼠标，RGB 灯效。', 'tags': ['鼠标']}
     fake_provider(monkeypatch, lambda request: json_reply({'assessments': [{'item_id': 'one', 'verdict': 'MATCH',
@@ -348,10 +369,13 @@ def test_transient_provider_failure_retries_automatically_and_new_item_triggers_
     calls = 0
     def handler(request):
         nonlocal calls
+        data = json.loads(json.loads(request.content)['messages'][1]['content'])
+        if 'catalog' in data:  # Concept learning is a separate async node.
+            return json_reply({'assignments': []})
         calls += 1
         if calls == 1:
             return httpx.Response(503)
-        return json_reply(sample_review(json.loads(json.loads(request.content)['messages'][1]['content'])))
+        return json_reply(sample_review(data))
     fake_provider(monkeypatch, handler)
     app = create_app(remote_settings(tmp_path))
     with TestClient(app) as client:

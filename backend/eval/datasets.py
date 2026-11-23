@@ -13,6 +13,7 @@ NODE_FILES = {
     '2.1': 'intent_2_1.jsonl',
     '2.3': 'recall_2_3.jsonl',
     '2.4': 'review_2_4.jsonl',
+    '1.4': 'concepts_1_4.jsonl',
 }
 POOL_FILE = 'items_pool_2_3.jsonl'
 IMAGES_DIR = DATASET_DIR / 'images'
@@ -99,7 +100,8 @@ def build_manifest(version, frozen_at, annotator):
         if not path.exists():
             raise FileNotFoundError(path)
         rows = read_rows(path)
-        files[name] = {'sha256': file_sha256(path), 'rows': len(rows)}
+        annotators = sorted({row.get('annotator') for row in rows if row.get('annotator')})
+        files[name] = {'sha256': file_sha256(path), 'rows': len(rows), 'annotators': annotators}
     for path in sorted(IMAGES_DIR.glob('*.jpg')):
         files[f'images/{path.name}'] = {'sha256': file_sha256(path), 'bytes': path.stat().st_size}
     return {

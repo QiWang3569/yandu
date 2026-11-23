@@ -10,15 +10,16 @@ import os
 import sys
 from pathlib import Path
 
-from app import buyer_agent, services
+from app import buyer_agent, concept_learning, services
 from app.config import Settings
 from app.vision import SYSTEM_PROMPT, VisionDraft, VisionService
 
 from . import adapters, datasets, report, runner
 
 HERE = Path(__file__).resolve().parent
-NODES = ('1.1', '1.2', '2.1', '2.3', '2.4')
-KIND = {'1.1': 'text', '2.1': 'text', '2.4': 'text', '1.2': 'vision', '2.3': 'program'}
+NODES = ('1.1', '1.2', '2.1', '2.3', '2.4', '1.4')
+KIND = {'1.1': 'text', '2.1': 'text', '2.4': 'text', '1.4': 'text',
+        '1.2': 'vision', '2.3': 'program'}
 
 
 def load_json(path):
@@ -36,7 +37,8 @@ def load_thresholds(path):
 def resolve_candidate(candidate):
     return {
         'id': candidate['id'],
-        'model': os.getenv(candidate.get('model_env', ''), ''),
+        # An env var (when set) overrides the ID committed in the config.
+        'model': os.getenv(candidate.get('model_env', ''), '') or candidate.get('model', ''),
         'url': os.getenv(candidate.get('base_url_env', ''), ''),
         'key': os.getenv(candidate.get('key_env', ''), ''),
         'label': candidate.get('label', candidate['id']),
@@ -79,13 +81,15 @@ def cmd_check_models(args):
         for raw in config.get(kind, []):
             candidate = resolve_candidate(raw)
             if not available(candidate):
-                missing = [raw.get('model_env'), raw.get('base_url_env'), raw.get('key_env')]
+                missing = [raw.get(name) for name in ('model_env', 'base_url_env', 'key_env')
+                           if name != 'model_env' or not raw.get('model')]
+                missing = [name for name in missing if not os.getenv(name or '', '')]
                 results[candidate['id']] = {'status': 'UNAVAILABLE', 'missing_env': missing}
                 continue
             settings = settings_for(kind, base, candidate)
             try:
                 if kind == 'text':
-                    buyer_agent.chat_json('只返回 JSON {"ok": true}', {'ping': '1'}, settings, max_tokens=32)
+                    buyer_agent.chat_json('只返回 JSON {"ok": true}', {'ping': '1'}, settings, max_tokens=256)
                 elif kind == 'vision':
                     image = adapters.render_image({'shape': 'lamp', 'label': 'Lamp'})
                     asyncio.run(VisionService(settings)._complete([image], '', SYSTEM_PROMPT, VisionDraft, 300))
@@ -140,6 +144,7 @@ def cmd_real(args):
         '2.1': services.INTENT_PROMPT_VERSION,
         '2.3': 'lexical-alias-1',
         '2.4': buyer_agent.REVIEW_PROMPT_VERSION,
+        '1.4': concept_learning.PROMPT_VERSION,
     }
     for kind in ('text', 'vision'):
         for raw in config.get(kind, []):
@@ -148,8 +153,10 @@ def cmd_real(args):
             candidate = resolve_candidate(raw)
             if not available(candidate):
                 unavailable.append(candidate['id'])
-                print(f"UNAVAILABLE {candidate['id']}: missing {raw.get('model_env')}/"
-                      f"{raw.get('base_url_env')}/{raw.get('key_env')}")
+                missing = [raw.get(name) for name in ('model_env', 'base_url_env', 'key_env')
+                           if name != 'model_env' or not raw.get('model')]
+                missing = [name for name in missing if not os.getenv(name or '', '')]
+                print(f"UNAVAILABLE {candidate['id']}: missing {missing}")
                 continue
             model_rows[kind].append({'id': candidate['id'], 'model': candidate['model']})
             settings = settings_for(kind, base, candidate)
@@ -163,8 +170,10 @@ def cmd_real(args):
         print('running 2.3 (programmatic lexical recall)', file=sys.stderr)
         runs.append(runner.run_node('2.3', args.split, base, None,
                                     fixture=args.fixture, attempts=1))
-    metrics_by_node = {run['node']: run['metrics'] for run in runs}
-    checks = runner.evaluate_checks(metrics_by_node, thresholds)
+    checks = {}
+    for run in runs:
+        node_checks = runner.evaluate_checks({run['node']: run['metrics']}, thresholds)
+        checks.setdefault(run['candidate'], {})[run['node']] = node_checks[run['node']]
     eval_manifest = {
         'dataset_version': manifest.get('version'),
         'dataset_sha': {name: meta['sha256'] for name, meta in manifest.get('files', {}).items()},
@@ -182,6 +191,30 @@ def cmd_real(args):
     report.write_report(args.out, eval_manifest, runs, checks)
     print(json.dumps({'out': str(args.out), 'runs': len(runs), 'unavailable': unavailable,
                       'checks': checks}, ensure_ascii=False, indent=2))
+    return 0
+
+
+def cmd_cases(args):
+    path = Path(args.report) / 'results.json'
+    if not path.exists():
+        print(f'missing results.json under {args.report}', file=sys.stderr)
+        return 2
+    data = json.loads(path.read_text(encoding='utf-8'))
+    rows = datasets.load_rows(args.node, 'all')
+    runs = [run for run in data.get('runs', [])
+            if run['node'] == args.node and (not args.candidate or run['candidate'] in args.candidate)]
+    if not runs:
+        print(f'no runs for node {args.node}', file=sys.stderr)
+        return 1
+    for run in runs:
+        cases = report.case_rows(run, rows)
+        print(f"## {run['node']} / {run['candidate']} / {run['model']} / {run['split']}")
+        print(report.render_cases(cases))
+        print(json.dumps({'node': run['node'], 'candidate': run['candidate'], 'split': run['split'],
+                          'correct': [case['id'] for case in cases if case['correct']],
+                          'wrong': [case['id'] for case in cases if not case['correct']]},
+                         ensure_ascii=False))
+        print()
     return 0
 
 
@@ -223,6 +256,12 @@ def build_parser():
     real.add_argument('--real', action='store_true')
     real.add_argument('--fixture', action='store_true')
     real.set_defaults(func=cmd_real)
+
+    cases = sub.add_parser('cases')
+    cases.add_argument('--report', required=True)
+    cases.add_argument('--node', required=True, choices=list(NODES))
+    cases.add_argument('--candidate', action='append', default=[])
+    cases.set_defaults(func=cmd_cases)
 
     verify = sub.add_parser('verify')
     verify.add_argument('path')

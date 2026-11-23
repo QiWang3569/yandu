@@ -12,10 +12,21 @@
     },
     {
       "id": "text-alt",
-      "label": "Alternate chat model (optional)",
+      "label": "Alternate chat model B (same gateway)",
+      "model": "deepseek/deepseek-v4-pro-0813",
       "model_env": "EVAL_TEXT_MODEL_B",
-      "base_url_env": "EVAL_TEXT_BASE_URL_B",
-      "key_env": "EVAL_TEXT_API_KEY_B",
+      "base_url_env": "DEEPSEEK_BASE_URL",
+      "key_env": "DEEPSEEK_API_KEY",
+      "price_per_1k_input": null,
+      "price_per_1k_output": null
+    },
+    {
+      "id": "text-alt-2",
+      "label": "Alternate chat model C (same gateway)",
+      "model": "z-ai/glm-5.3-flash",
+      "model_env": "EVAL_TEXT_MODEL_C",
+      "base_url_env": "DEEPSEEK_BASE_URL",
+      "key_env": "DEEPSEEK_API_KEY",
       "price_per_1k_input": null,
       "price_per_1k_output": null
     }
@@ -32,10 +43,11 @@
     },
     {
       "id": "vision-alt",
-      "label": "Alternate vision model (optional)",
+      "label": "Alternate vision model B (same gateway)",
+      "model": "deepseek/deepseek-v4-flash-vision-exp",
       "model_env": "EVAL_VISION_MODEL_B",
-      "base_url_env": "EVAL_VISION_BASE_URL_B",
-      "key_env": "EVAL_VISION_API_KEY_B",
+      "base_url_env": "VISION_BASE_URL",
+      "key_env": "VISION_API_KEY",
       "price_per_1k_input": null,
       "price_per_1k_output": null
     }
@@ -54,8 +66,8 @@
       "id": "embedding-alt",
       "label": "Alternate embedding model (optional)",
       "model_env": "EVAL_EMBEDDING_MODEL_B",
-      "base_url_env": "EVAL_EMBEDDING_BASE_URL_B",
-      "key_env": "EVAL_EMBEDDING_API_KEY_B",
+      "base_url_env": "EMBEDDING_BASE_URL",
+      "key_env": "EMBEDDING_API_KEY",
       "price_per_1k_input": null,
       "price_per_1k_output": null
     }

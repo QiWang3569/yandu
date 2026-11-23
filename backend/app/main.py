@@ -18,7 +18,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from PIL import Image, UnidentifiedImageError
-from sqlalchemy import case, create_engine, delete, distinct, event, func, or_, select, update
+from sqlalchemy import case, create_engine, delete, distinct, event, exists, func, or_, select, update
 from sqlalchemy.orm import Session, sessionmaker
 from starlette.middleware.trustedhost import TrustedHostMiddleware
 from prometheus_fastapi_instrumentator import Instrumentator
@@ -33,6 +33,8 @@ from .vision import register_vision
 from .draft_batches import register_draft_batches
 from .schemas import AnnouncementReadRequest
 from .chat_email import ChatEmailRunner
+from . import concepts
+from .concept_learning import ConceptRunner
 from .database import prepare_database, retire_demo_data
 from .email_auth import code_digest, new_code, normalize_email, send_verification_email
 from .matching import MatchingRunner, intent_data
@@ -41,10 +43,11 @@ from .item_lifecycle import (OPEN_DEAL_STATES, PUBLIC_ITEM_STATES, can_manage, c
 from .search import keyword_filters
 from .retention import prune_chat
 from .needs import apply_wanted, backfill_wanted, sync_wanted, wanted_query
-from .models import ActionLog, Announcement, AnnouncementRead, ChatAttachment, ChatMessage, ChatReport, Conversation, EmailChallenge, Favorite, Feedback, Intent, Item, ItemDraft, LoginSession, MatchJob, Notification, PageDwellLog, PasswordAttempt, Report, SaleFeedback, Upload, User, UserBlock, VisitorEvent, Wanted, now, uid
+from .models import ActionLog, Announcement, AnnouncementRead, ChatAttachment, ChatMessage, ChatReport, Conversation, EmailChallenge, Favorite, Feedback, Intent, Item, ItemConcept, ItemDraft, LoginSession, MatchJob, Notification, PageDwellLog, PasswordAttempt, Report, SaleFeedback, Upload, User, UserBlock, VisitorEvent, Wanted, now, uid
 from .password_auth import DUMMY_HASH, hash_password, new_password_error, verify_password
 from .schemas import CAMPUSES, CATEGORIES, CONDITIONS, AnnouncementCreate, AnnouncementUpdate, ChatMessageCreate, ChatReportCreate, ChatReviewAction, DealAction, DemoLogin, DwellReport, EmailCodeRequest, EmailCodeVerify, IntentChange, IntentComplete, IntentCreate, ItemCreate, ItemDraftImport, ItemDraftUpdate, ItemParseRequest, ItemUpdate, PasswordLogin, PasswordSet, ProfileUpdate, QueryIn, ReportCreate, ReviewAction, SmartSearchIn, StatusChange, WantedCreate, WantedParseRequest, WantedUpdate
-from .services import FEATURES, assess_report, embed, log, model_name, normalize, parse_intent, parse_item, parse_local, parse_wanted, seed
+from .services import (assess_report, embed, log, model_name, normalized_contains,
+                       parse_intent, parse_item, parse_local, parse_wanted, seed)
 
 SESSION_IDLE = timedelta(days=7)
 SESSION_MAX_AGE = timedelta(days=30)
@@ -56,11 +59,8 @@ def iso(value):
 
 
 def term_matches(term: str, text: str) -> bool:
-    """Whether a parsed term appears in item text after synonym normalization."""
-    needle = normalize(term).strip()
-    if not needle:
-        return False
-    return needle in normalize(text)
+    """Whether a normalized term appears as a token sequence in normalized item text."""
+    return normalized_contains(term, text)
 
 
 class VisitorTracker:
@@ -206,15 +206,29 @@ def create_app(settings: Settings | None = None):
     mutation_lock = threading.RLock()
     matching = MatchingRunner(factory, settings, mutation_lock)
     chat_email = ChatEmailRunner(factory, settings)
+    concept_runner = ConceptRunner(factory, settings, mutation_lock)
 
     @asynccontextmanager
     async def lifespan(app):
         prepare_database(engine)
+        with factory() as db:
+            concepts.configure(concepts.Catalog.load(db), legacy=settings.ai_mode == 'local')
+            concepts.relink_items(db)
+            db.commit()
         if settings.demo_mode:
             with factory() as db:
                 seed(db)
         else:
             retire_demo_data(factory)
+        # Seed fixtures are reproducible samples; only real pre-existing listings
+        # are worth spending model calls to learn on startup.
+        if settings.ai_mode == 'remote' and settings.deepseek_key and not settings.demo_mode:
+            with factory() as db:
+                unlinked = select(Item.id).where(~exists(
+                    select(ItemConcept.item_id).where(ItemConcept.item_id == Item.id)))
+                for item_id in db.scalars(unlinked):
+                    concept_runner.enqueue(db, item_id)
+                db.commit()
         await asyncio.to_thread(prune_chat, factory, mutation_lock, settings.chat_retention_days)
         async def retention_loop():
             while True:
@@ -224,6 +238,7 @@ def create_app(settings: Settings | None = None):
         backfill_wanted(factory, matching, settings)
         matching.start()
         chat_email.start()
+        concept_runner.start()
         try:
             yield
         finally:
@@ -234,6 +249,8 @@ def create_app(settings: Settings | None = None):
                 pass
             matching.stop()
             chat_email.stop()
+            concept_runner.stop()
+            concepts.reset()
             await app.state.vision.close()
             engine.dispose()
 
@@ -243,6 +260,7 @@ def create_app(settings: Settings | None = None):
     app.state.settings = settings
     app.state.matching = matching
     app.state.chat_email = chat_email
+    app.state.concept_learning = concept_runner
     app.state.mutation_lock = mutation_lock
     if settings.app_env == 'production':
         from urllib.parse import urlparse
@@ -459,7 +477,7 @@ def create_app(settings: Settings | None = None):
 
     register_notification_center(app, get_db, current_user, require_user, mutation_lock)
     register_vision(app, get_db, require_user, settings)
-    register_draft_batches(app, get_db, require_user, settings, mutation_lock, draft_out, item_out, matching)
+    register_draft_batches(app, get_db, require_user, settings, mutation_lock, draft_out, item_out, matching, concept_runner)
     register_reviews(app, get_db, require_user, mutation_lock)
 
     @app.get('/api/v1/announcements/unread')
@@ -971,7 +989,7 @@ def create_app(settings: Settings | None = None):
             query = query.where(Item.price_cents <= round(max_price * 100))
         if condition_grade:
             query = query.where(Item.condition_grade == condition_grade)
-        query = query.where(*keyword_filters(q, Item.title, Item.description))
+        query = query.where(*keyword_filters(q, Item.title, Item.description, item_model=Item))
         total = db.scalar(select(func.count()).select_from(query.subquery()))
         status_rank = case(
             (Item.status == 'ACTIVE', 0),
@@ -1174,11 +1192,14 @@ def create_app(settings: Settings | None = None):
                 db.delete(draft)
             db.add(item)
             db.flush()
+            concepts.link_item(db, item)
+            concept_runner.enqueue(db, item.id)
             jobs = matching.enqueue_item(db, item)
             log(db, user, 'item.publish', item.id)
             db.commit()
         for job_id in jobs:
             matching.run_or_wake(job_id)
+        concept_runner.run_or_wake()
         return item_out(item, db, user)
 
     @app.post('/api/v1/items/', status_code=201)

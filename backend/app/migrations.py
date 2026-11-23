@@ -56,6 +56,34 @@ def upgrade_buyer_agent(engine):
             conn.execute(text('ALTER TABLE users ALTER COLUMN email_notifications SET DEFAULT TRUE'))
 
 
+def upgrade_concepts(engine):
+    """Drop the previously seeded static catalog; families are now learned rows."""
+    with engine.begin() as conn:
+        tables = set(inspect(conn).get_table_names())
+        if 'concepts' not in tables:
+            return
+        columns = {column['name'] for column in inspect(conn).get_columns('concepts')}
+        if 'category' not in columns:
+            # The old tables only held the reviewed JSON catalog, never user data.
+            for table in ('item_concepts', 'concept_aliases', 'concepts'):
+                if table in tables:
+                    conn.execute(text(f'DELETE FROM {table}'))
+        additions = {
+            'concepts': {'category': 'VARCHAR(30)',
+                         'source': "VARCHAR(20) NOT NULL DEFAULT 'model'"},
+            'concept_aliases': {'source': "VARCHAR(20) NOT NULL DEFAULT 'model'",
+                                'created_at': 'TIMESTAMP'},
+            'item_concepts': {'source': "VARCHAR(20) NOT NULL DEFAULT 'model'"},
+        }
+        for table, fields in additions.items():
+            if table not in tables:
+                continue
+            existing = {column['name'] for column in inspect(conn).get_columns(table)}
+            for name, ddl in fields.items():
+                if name not in existing:
+                    conn.execute(text(f'ALTER TABLE {table} ADD COLUMN {name} {ddl}'))
+
+
 def upgrade_marketplace(engine):
     """Remove automatic expiry and link public wanted posts to persistent searches."""
     with engine.begin() as conn:

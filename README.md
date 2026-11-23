@@ -4,7 +4,7 @@
 
 燕渡是一个面向北大校园的二手交易平台：发布闲置、浏览好物、自然语言搜索、买家代蹲、站内聊天与完整交易状态流转，开箱即用，并配套 PostgreSQL + pgvector、HTTPS、监控与备份的部署能力。
 
-线上体验：[https://39.106.45.65/](https://39.106.45.65/)
+线上体验：[https://yandu2shou.cn/](https://yandu2shou.cn/)
 
 [![Application checks](https://github.com/QiWang3569/yandu/actions/workflows/checks.yml/badge.svg)](https://github.com/QiWang3569/yandu/actions/workflows/checks.yml)
 [![Python 3.12](https://img.shields.io/badge/Python-3.12-3776AB?logo=python&logoColor=white)](https://www.python.org/)
@@ -12,7 +12,7 @@
 [![Node.js 22](https://img.shields.io/badge/Node.js-22-339933?logo=node.js&logoColor=white)](https://nodejs.org/)
 [![React 19](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white)](https://react.dev/)
 [![PostgreSQL 16 + pgvector](https://img.shields.io/badge/PostgreSQL-16%2Bpgvector-4169E1?logo=postgresql&logoColor=white)](https://www.postgresql.org/)
-[![tests](https://img.shields.io/badge/tests-295%20passed-brightgreen)](#测试与覆盖率)
+[![tests](https://img.shields.io/badge/tests-377%20passed-brightgreen)](#测试与覆盖率)
 [![coverage](https://img.shields.io/badge/coverage-94%25-2ea44f)](#测试与覆盖率)
 
 > 本仓库已转为公开（public）。请勿把本地 `.env`、数据库、图片或密钥提交到仓库。
@@ -197,11 +197,11 @@ npm ci
 npm run build
 ```
 
-最新一次本地运行：295 项后端测试全部通过，整体行覆盖率 94%；前端通过 TypeScript 类型检查与 Vite 生产构建。GitHub Actions 会在推送与合并请求时，分别在 Windows 与 Linux 上执行后端测试和前端构建，结果见 [Actions](https://github.com/QiWang3569/yandu/actions)。
+最新一次本地运行：377 项后端测试全部通过，整体行覆盖率 94%；前端通过 TypeScript 类型检查与 Vite 生产构建。GitHub Actions 会在推送与合并请求时，分别在 Windows 与 Linux 上执行后端测试和前端构建，结果见 [Actions](https://github.com/QiWang3569/yandu/actions)。
 
 ## 部署
 
-当前公开站点：[https://39.106.45.65/](https://39.106.45.65/)。生产环境使用 PostgreSQL + pgvector、Caddy HTTPS、每日数据库备份与安全 Cookie，编排见 [compose.production.yaml](compose.production.yaml)。先按 [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md) 准备 `.env` 与站点域名，再启动：
+当前公开站点：[https://yandu2shou.cn/](https://yandu2shou.cn/)。生产环境使用 PostgreSQL + pgvector、Caddy HTTPS、每日数据库备份与安全 Cookie，编排见 [compose.production.yaml](compose.production.yaml)。先按 [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md) 准备 `.env` 与站点域名，再启动：
 
 ```sh
 docker compose -f compose.production.yaml up -d --build
@@ -235,6 +235,10 @@ data/                   数据库、图片、日志（不提交）
 - [站内意见反馈](docs/FEEDBACK.md)
 - [通知已读与商品图片查看](docs/NOTIFICATIONS_AND_GALLERY.md)
 - [识图辅助发布方案（调研）](docs/VISION_ASSISTED_PUBLISHING.md)
+- [AI 流水线说明](docs/AI_PIPELINES.md)
+- [AI 流水线评测报告](docs/AI_EVALUATION.md)
+- [AI 单元测试与用例报告](docs/AI_TEST_CASES.md)
+- [AI 模块选型与测试汇总](docs/AI_SELECTION_AND_TEST_REPORT.md)
 - [修改日志](docs/CHANGELOG.md) / [验证记录](docs/VALIDATION.md)
 
 ## 许可证与贡献
