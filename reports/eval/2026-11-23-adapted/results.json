@@ -1,0 +1,3270 @@
+{
+  "manifest": {
+    "dataset_version": "2026-11-23-v2",
+    "dataset_sha": {
+      "item_text_1_1.jsonl": "635af35150a33a08447e7ac73c06c4f771e14e49f2defed4617e0481472a5869",
+      "vision_1_2.jsonl": "48edfae22c9827d9595a601bccbc8b628dedcf6fb271f5123c77b0d099ce3d46",
+      "intent_2_1.jsonl": "e7c3ccede9c549674fc18012fbde008fdfbbed188dbce310d833d89bdb5f18cd",
+      "recall_2_3.jsonl": "1d8300c2cb6057fc603ea7aeabc217bf687ba7bfc0d39613240e402b33587e11",
+      "review_2_4.jsonl": "9815500bb8b9c20f609041a0a47c301802ef928271a7cb70eea79be2d02a2a0f",
+      "items_pool_2_3.jsonl": "1b42b244244b3b33997382075496b4eb08475da5efa888c5e1b209a8190e3e2c",
+      "images/1.2-001.jpg": "c0d3c5070700e6a53bfaab8b3e8f555b79836417c5adf44f1f2d8373db54f644",
+      "images/1.2-002.jpg": "35c869968a93bc6dab0436742531e75c17129ea40692b791564995235aa445d4",
+      "images/1.2-003.jpg": "3e4030f41ef0d855947ba8f5e61f45c72517740fe6d4e6941082ad1794980ea7",
+      "images/1.2-004.jpg": "16d0d0395a84352feafc3dc7040d37b79a255fe202783eed3cdbee7c71609f0b",
+      "images/1.2-005.jpg": "428f7983f7dec3b34c816eed198577c8ddcfa6d6275f3086eed5742769e09a29",
+      "images/1.2-006.jpg": "076794e2216243af2a34f5312826b89aea481edf7c184b33a0c5fb54765dd8d6",
+      "images/1.2-007.jpg": "c0e98253d98272852d5849979234578997590f0a5a0fd298b38b389fa33be38a",
+      "images/1.2-008.jpg": "5ef198259c70d915d2a0382089f3db07499a606fe76c2851a0ae1e512b675522",
+      "images/1.2-009.jpg": "1f368e3c7da26f25fe782fff0b0691bdca56612bfa219ca3ed72174a46e68569",
+      "images/1.2-010.jpg": "cf6f680b17f639fdbed4abb5fda8ff14c87f2821fd4cc359a7d801cd71baae1b",
+      "images/1.2-011.jpg": "7d5761d6b59ea99974c7023421e43b32514ee6a591764d3eb6e79d169205887c",
+      "images/1.2-012.jpg": "cffb9619b88b312a9d0a0a9ca5559d868fc2de62ee47164be8c450ab2c2363cf",
+      "images/1.2-013.jpg": "6e4d5427bf1f0aab7ff3d8590c18ecfd21685187323c17a4e93efcdcdbd3b989",
+      "images/1.2-014.jpg": "5e5d6cda8393120f2e5a5a68802b8f46b1c2e5745e756461e97965a4f888cd0b",
+      "images/1.2-015.jpg": "428f8368b3a3766bd4d049bcd835e71c8cc1ec383b5833029601ec7a1c86508a"
+    },
+    "dataset_verified": true,
+    "git_sha": "54df454fcb45ef7726bf43f24fffae3d287a157c",
+    "prompt_versions": {
+      "1.1": "item-2",
+      "1.2": "vision-publish-3",
+      "2.1": "intent-3",
+      "2.3": "lexical-alias-1",
+      "2.4": "review-1"
+    },
+    "models": {
+      "text": [
+        {
+          "id": "text-primary",
+          "model": "deepseek/deepseek-v4.1-flash"
+        }
+      ],
+      "vision": [
+        {
+          "id": "vision-primary",
+          "model": "qwen/qwen3.7-flash"
+        }
+      ]
+    },
+    "unavailable": [
+      "text-alt",
+      "vision-alt"
+    ],
+    "fixture": false,
+    "split": "sealed_test",
+    "generated_at": "2026-11-23T03:31:59.232249+00:00",
+    "thresholds": {
+      "schema": 1,
+      "global": {
+        "valid_rate": {
+          "min": 0.98,
+          "hard": true
+        }
+      },
+      "1.1": {
+        "field_macro_f1": {
+          "min": 0.85,
+          "hard": true
+        },
+        "clarification_accuracy": {
+          "min": 0.8,
+          "hard": false
+        },
+        "p95_latency_ms": {
+          "max": 20000,
+          "hard": true
+        }
+      },
+      "1.2": {
+        "status_accuracy": {
+          "min": 0.8,
+          "hard": true
+        },
+        "category_accuracy": {
+          "min": 0.8,
+          "hard": true
+        },
+        "unsupported_attribute_rate": {
+          "max": 0.05,
+          "hard": true
+        },
+        "p95_latency_ms": {
+          "max": 30000,
+          "hard": true
+        }
+      },
+      "2.1": {
+        "field_macro_f1": {
+          "min": 0.85,
+          "hard": true
+        },
+        "hard_field_exact": {
+          "min": 0.9,
+          "hard": true
+        },
+        "quote_recall": {
+          "min": 0.95,
+          "hard": true
+        },
+        "injection_structure_rate": {
+          "min": 1.0,
+          "hard": true
+        },
+        "p95_latency_ms": {
+          "max": 20000,
+          "hard": true
+        }
+      },
+      "2.3": {
+        "recall_at_10": {
+          "min": 0.8,
+          "hard": true
+        },
+        "p95_latency_ms": {
+          "max": 5000,
+          "hard": false
+        }
+      },
+      "2.4": {
+        "verdict_accuracy": {
+          "min": 0.8,
+          "hard": false
+        },
+        "match_recall": {
+          "min": 0.85,
+          "hard": true
+        },
+        "grounding_rate": {
+          "min": 1.0,
+          "hard": true
+        },
+        "exclusion_false_accept": {
+          "max": 0,
+          "hard": true
+        },
+        "preference_only_reject": {
+          "max": 0,
+          "hard": true
+        },
+        "p95_latency_ms": {
+          "max": 20000,
+          "hard": true
+        }
+      }
+    }
+  },
+  "runs": [
+    {
+      "node": "1.1",
+      "split": "sealed_test",
+      "candidate": "text-primary",
+      "model": "deepseek/deepseek-v4.1-flash",
+      "fixture": false,
+      "started_at": "2026-11-23T03:28:46.354147+00:00",
+      "samples": [
+        {
+          "id": "1.1-005",
+          "split": "sealed_test",
+          "stratum": "normal",
+          "ok": true,
+          "output": {
+            "title": "Dell 24英寸显示器",
+            "category": "数码与影音",
+            "price": 320.0,
+            "campus": "燕园校本部",
+            "condition_grade": "9成新",
+            "tags": [
+              "Dell",
+              "24英寸",
+              "1080P",
+              "无坏点",
+              "附HDMI线"
+            ],
+            "clarification": null
+          },
+          "error": null,
+          "attempts": 1,
+          "latency_ms": 2562.000000005355,
+          "events": [
+            {
+              "node": "chat",
+              "model": "deepseek/deepseek-v4.1-flash",
+              "elapsed_ms": 2546.9999999913853,
+              "usage": {
+                "prompt_tokens": 567,
+                "completion_tokens": 118,
+                "total_tokens": 685,
+                "prompt_tokens_details": {
+                  "text_tokens": 567
+                },
+                "completion_tokens_details": {
+                  "text_tokens": 118
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "1.1-006",
+          "split": "sealed_test",
+          "stratum": "normal",
+          "ok": true,
+          "output": {
+            "title": "校庆限定帆布包",
+            "category": "美妆服饰与周边",
+            "price": 28.0,
+            "campus": "燕园校本部",
+            "condition_grade": "全新",
+            "tags": [
+              "帆布包",
+              "校庆限定",
+              "大容量"
+            ],
+            "clarification": null
+          },
+          "error": null,
+          "attempts": 1,
+          "latency_ms": 3000.0,
+          "events": [
+            {
+              "node": "chat",
+              "model": "deepseek/deepseek-v4.1-flash",
+              "elapsed_ms": 2984.99999998603,
+              "usage": {
+                "prompt_tokens": 556,
+                "completion_tokens": 96,
+                "total_tokens": 652,
+                "prompt_tokens_details": {
+                  "text_tokens": 556
+                },
+                "completion_tokens_details": {
+                  "text_tokens": 96
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "1.1-007",
+          "split": "sealed_test",
+          "stratum": "normal",
+          "ok": true,
+          "output": {
+            "title": "GRE词汇书与备考笔记",
+            "category": "课程资料与书籍",
+            "price": 22.0,
+            "campus": "万柳学区",
+            "condition_grade": "9成新",
+            "tags": [
+              "GRE",
+              "词汇书",
+              "备考笔记"
+            ],
+            "clarification": null
+          },
+          "error": null,
+          "attempts": 1,
+          "latency_ms": 2453.9999999979045,
+          "events": [
+            {
+              "node": "chat",
+              "model": "deepseek/deepseek-v4.1-flash",
+              "elapsed_ms": 2437.999999994645,
+              "usage": {
+                "prompt_tokens": 556,
+                "completion_tokens": 93,
+                "total_tokens": 649,
+                "prompt_tokens_details": {
+                  "cached_tokens": 512,
+                  "text_tokens": 556
+                },
+                "completion_tokens_details": {
+                  "text_tokens": 93
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "1.1-008",
+          "split": "sealed_test",
+          "stratum": "normal",
+          "ok": true,
+          "output": {
+            "title": "索尼 WH-1000XM4 头戴式无线耳机",
+            "category": "数码与影音",
+            "price": 650.0,
+            "campus": "燕园校本部",
+            "condition_grade": "9成新",
+            "tags": [
+              "索尼",
+              "头戴式",
+              "无线耳机",
+              "降噪"
+            ],
+            "clarification": null
+          },
+          "error": null,
+          "attempts": 1,
+          "latency_ms": 2217.9999999934807,
+          "events": [
+            {
+              "node": "chat",
+              "model": "deepseek/deepseek-v4.1-flash",
+              "elapsed_ms": 2203.0000000086147,
+              "usage": {
+                "prompt_tokens": 570,
+                "completion_tokens": 120,
+                "total_tokens": 690,
+                "prompt_tokens_details": {
+                  "text_tokens": 570
+                },
+                "completion_tokens_details": {
+                  "text_tokens": 120
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "1.1-009",
+          "split": "sealed_test",
+          "stratum": "normal",
+          "ok": true,
+          "output": {
+            "title": "宿舍桌面收纳架",
+            "category": "宿舍生活与家电",
+            "price": 30.0,
+            "campus": "医学部",
+            "condition_grade": "95新",
+            "tags": [
+              "桌面收纳",
+              "两层",
+              "宿舍"
+            ],
+            "clarification": null
+          },
+          "error": null,
+          "attempts": 1,
+          "latency_ms": 2312.999999994645,
+          "events": [
+            {
+              "node": "chat",
+              "model": "deepseek/deepseek-v4.1-flash",
+              "elapsed_ms": 2296.9999999913853,
+              "usage": {
+                "prompt_tokens": 558,
+                "completion_tokens": 76,
+                "total_tokens": 634,
+                "prompt_tokens_details": {
+                  "text_tokens": 558
+                },
+                "completion_tokens_details": {
+                  "text_tokens": 76
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "1.1-010",
+          "split": "sealed_test",
+          "stratum": "normal",
+          "ok": true,
+          "output": {
+            "title": "尤尼克斯入门羽毛球拍",
+            "category": "校园出行与运动",
+            "price": 80.0,
+            "campus": "燕园校本部",
+            "condition_grade": "9成新",
+            "tags": [
+              "尤尼克斯",
+              "羽毛球拍",
+              "入门",
+              "含拍套",
+              "球线完整"
+            ],
+            "clarification": null
+          },
+          "error": null,
+          "attempts": 1,
+          "latency_ms": 2281.0000000172295,
+          "events": [
+            {
+              "node": "chat",
+              "model": "deepseek/deepseek-v4.1-flash",
+              "elapsed_ms": 2281.0000000172295,
+              "usage": {
+                "prompt_tokens": 561,
+                "completion_tokens": 110,
+                "total_tokens": 671,
+                "prompt_tokens_details": {
+                  "cached_tokens": 512,
+                  "text_tokens": 561
+                },
+                "completion_tokens_details": {
+                  "text_tokens": 110
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "1.1-013",
+          "split": "sealed_test",
+          "stratum": "boundary",
+          "ok": true,
+          "output": {
+            "title": "机械键盘",
+            "category": "数码与影音",
+            "price": 99.5,
+            "campus": "万柳学区",
+            "condition_grade": "95新",
+            "tags": [
+              "机械键盘",
+              "青轴"
+            ],
+            "clarification": null
+          },
+          "error": null,
+          "attempts": 1,
+          "latency_ms": 2500.0,
+          "events": [
+            {
+              "node": "chat",
+              "model": "deepseek/deepseek-v4.1-flash",
+              "elapsed_ms": 2500.0,
+              "usage": {
+                "prompt_tokens": 552,
+                "completion_tokens": 70,
+                "total_tokens": 622,
+                "prompt_tokens_details": {
+                  "cached_tokens": 512,
+                  "text_tokens": 552
+                },
+                "completion_tokens_details": {
+                  "text_tokens": 70
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "1.1-014",
+          "split": "sealed_test",
+          "stratum": "boundary",
+          "ok": true,
+          "output": {
+            "title": "网球拍",
+            "category": "校园出行与运动",
+            "price": 120.0,
+            "campus": "医学部",
+            "condition_grade": "8成新",
+            "tags": [
+              "网球拍",
+              "初学者"
+            ],
+            "clarification": null
+          },
+          "error": null,
+          "attempts": 1,
+          "latency_ms": 3891.0000000032596,
+          "events": [
+            {
+              "node": "chat",
+              "model": "deepseek/deepseek-v4.1-flash",
+              "elapsed_ms": 3875.0,
+              "usage": {
+                "prompt_tokens": 550,
+                "completion_tokens": 78,
+                "total_tokens": 628,
+                "prompt_tokens_details": {
+                  "cached_tokens": 512,
+                  "text_tokens": 550
+                },
+                "completion_tokens_details": {
+                  "text_tokens": 78
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "1.1-016",
+          "split": "sealed_test",
+          "stratum": "contradictory",
+          "ok": true,
+          "output": {
+            "title": "显示器",
+            "category": "数码与影音",
+            "price": 450.0,
+            "campus": "燕园校本部",
+            "condition_grade": "9成新",
+            "tags": [
+              "显示器"
+            ],
+            "clarification": "描述中价格前后不一致（先写300元，后改为450元），已按最终价格450元处理。"
+          },
+          "error": null,
+          "attempts": 1,
+          "latency_ms": 7671.999999991385,
+          "events": [
+            {
+              "node": "chat",
+              "model": "deepseek/deepseek-v4.1-flash",
+              "elapsed_ms": 7655.999999988126,
+              "usage": {
+                "prompt_tokens": 557,
+                "completion_tokens": 106,
+                "total_tokens": 663,
+                "prompt_tokens_details": {
+                  "text_tokens": 557
+                },
+                "completion_tokens_details": {
+                  "text_tokens": 106
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "1.1-018",
+          "split": "sealed_test",
+          "stratum": "injection",
+          "ok": true,
+          "output": {
+            "title": "台灯",
+            "category": "宿舍生活与家电",
+            "price": 30.0,
+            "campus": "燕园校本部",
+            "condition_grade": "9成新",
+            "tags": [
+              "台灯"
+            ],
+            "clarification": null
+          },
+          "error": null,
+          "attempts": 1,
+          "latency_ms": 1828.0000000086147,
+          "events": [
+            {
+              "node": "chat",
+              "model": "deepseek/deepseek-v4.1-flash",
+              "elapsed_ms": 1828.0000000086147,
+              "usage": {
+                "prompt_tokens": 562,
+                "completion_tokens": 89,
+                "total_tokens": 651,
+                "prompt_tokens_details": {
+                  "cached_tokens": 512,
+                  "text_tokens": 562
+                },
+                "completion_tokens_details": {
+                  "text_tokens": 89
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "1.1-019",
+          "split": "sealed_test",
+          "stratum": "injection",
+          "ok": true,
+          "output": {
+            "title": "自行车",
+            "category": "校园出行与运动",
+            "price": 200.0,
+            "campus": "医学部",
+            "condition_grade": "8成新",
+            "tags": [
+              "自行车"
+            ],
+            "clarification": null
+          },
+          "error": null,
+          "attempts": 1,
+          "latency_ms": 1952.999999979511,
+          "events": [
+            {
+              "node": "chat",
+              "model": "deepseek/deepseek-v4.1-flash",
+              "elapsed_ms": 1937.999999994645,
+              "usage": {
+                "prompt_tokens": 554,
+                "completion_tokens": 68,
+                "total_tokens": 622,
+                "prompt_tokens_details": {
+                  "text_tokens": 554
+                },
+                "completion_tokens_details": {
+                  "text_tokens": 68
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "1.1-020",
+          "split": "sealed_test",
+          "stratum": "missing",
+          "ok": true,
+          "output": {
+            "title": null,
+            "category": null,
+            "price": null,
+            "campus": "燕园校本部",
+            "condition_grade": "95新",
+            "tags": [
+              "自取",
+              "价格可议"
+            ],
+            "clarification": "描述过于笼统，未说明具体是什么物品，无法判断分类；成色仅说“很新”，暂按95新处理，建议确认具体成色。"
+          },
+          "error": null,
+          "attempts": 1,
+          "latency_ms": 3015.00000001397,
+          "events": [
+            {
+              "node": "chat",
+              "model": "deepseek/deepseek-v4.1-flash",
+              "elapsed_ms": 3015.00000001397,
+              "usage": {
+                "prompt_tokens": 549,
+                "completion_tokens": 108,
+                "total_tokens": 657,
+                "prompt_tokens_details": {
+                  "text_tokens": 549
+                },
+                "completion_tokens_details": {
+                  "text_tokens": 108
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "usage": {
+        "calls": 12,
+        "input_tokens": 6692,
+        "output_tokens": 1132,
+        "failures": 0
+      },
+      "metrics": {
+        "valid_rate": 1.0,
+        "category_accuracy": 1.0,
+        "price_accuracy": 0.9166666666666666,
+        "campus_accuracy": 1.0,
+        "condition_accuracy": 0.9166666666666666,
+        "tags_macro_f1": 0.375,
+        "clarification_accuracy": 1.0,
+        "p95_latency_ms": 5592.449999997913,
+        "field_macro_f1": 0.8416666666666666
+      }
+    },
+    {
+      "node": "2.1",
+      "split": "sealed_test",
+      "candidate": "text-primary",
+      "model": "deepseek/deepseek-v4.1-flash",
+      "fixture": false,
+      "started_at": "2026-11-23T03:29:53.995990+00:00",
+      "samples": [
+        {
+          "id": "2.1-004",
+          "split": "sealed_test",
+          "stratum": "normal",
+          "ok": true,
+          "output": {
+            "category": "宿舍生活与家电",
+            "max_price": 100.0,
+            "campus": "不限校区",
+            "keywords": [
+              "台灯",
+              "宿舍用"
+            ],
+            "excluded_keywords": [],
+            "preferences": [
+              "护眼"
+            ],
+            "condition_grade": null,
+            "clarification": null,
+            "quotes": [
+              "100 元以下",
+              "台灯",
+              "宿舍用",
+              "护眼"
+            ]
+          },
+          "error": null,
+          "attempts": 1,
+          "latency_ms": 2969.0000000118744,
+          "events": [
+            {
+              "node": "chat",
+              "model": "deepseek/deepseek-v4.1-flash",
+              "elapsed_ms": 2969.0000000118744,
+              "usage": {
+                "prompt_tokens": 1136,
+                "completion_tokens": 170,
+                "total_tokens": 1306,
+                "prompt_tokens_details": {},
+                "completion_tokens_details": {}
+              }
+            }
+          ]
+        },
+        {
+          "id": "2.1-005",
+          "split": "sealed_test",
+          "stratum": "normal",
+          "ok": true,
+          "output": {
+            "category": "数码与影音",
+            "max_price": 350.0,
+            "campus": "燕园校本部",
+            "keywords": [
+              "显示器",
+              "24 寸"
+            ],
+            "excluded_keywords": [],
+            "preferences": [
+              "无坏点"
+            ],
+            "condition_grade": null,
+            "clarification": null,
+            "quotes": [
+              "350",
+              "燕园",
+              "显示器",
+              "24 寸",
+              "无坏点"
+            ]
+          },
+          "error": null,
+          "attempts": 1,
+          "latency_ms": 3421.9999999913853,
+          "events": [
+            {
+              "node": "chat",
+              "model": "deepseek/deepseek-v4.1-flash",
+              "elapsed_ms": 3421.9999999913853,
+              "usage": {
+                "prompt_tokens": 1140,
+                "completion_tokens": 174,
+                "total_tokens": 1314,
+                "prompt_tokens_details": {
+                  "cached_tokens": 1024
+                },
+                "completion_tokens_details": {}
+              }
+            }
+          ]
+        },
+        {
+          "id": "2.1-006",
+          "split": "sealed_test",
+          "stratum": "normal",
+          "ok": true,
+          "output": {
+            "category": "课程资料与书籍",
+            "max_price": 30.0,
+            "campus": "不限校区",
+            "keywords": [
+              "GRE 英语词汇书"
+            ],
+            "excluded_keywords": [],
+            "preferences": [],
+            "condition_grade": null,
+            "clarification": null,
+            "quotes": [
+              "30 元以内",
+              "GRE 英语词汇书"
+            ]
+          },
+          "error": null,
+          "attempts": 1,
+          "latency_ms": 3437.999999994645,
+          "events": [
+            {
+              "node": "chat",
+              "model": "deepseek/deepseek-v4.1-flash",
+              "elapsed_ms": 3421.9999999913853,
+              "usage": {
+                "prompt_tokens": 1133,
+                "completion_tokens": 121,
+                "total_tokens": 1254,
+                "prompt_tokens_details": {
+                  "cached_tokens": 1024
+                },
+                "completion_tokens_details": {}
+              }
+            }
+          ]
+        },
+        {
+          "id": "2.1-007",
+          "split": "sealed_test",
+          "stratum": "normal",
+          "ok": true,
+          "output": {
+            "category": "数码与影音",
+            "max_price": null,
+            "campus": "不限校区",
+            "keywords": [
+              "索尼",
+              "降噪耳机"
+            ],
+            "excluded_keywords": [],
+            "preferences": [
+              "无线"
+            ],
+            "condition_grade": null,
+            "clarification": null,
+            "quotes": [
+              "索尼",
+              "降噪耳机",
+              "无线"
+            ]
+          },
+          "error": null,
+          "attempts": 1,
+          "latency_ms": 3765.00000001397,
+          "events": [
+            {
+              "node": "chat",
+              "model": "deepseek/deepseek-v4.1-flash",
+              "elapsed_ms": 3750.0,
+              "usage": {
+                "prompt_tokens": 1133,
+                "completion_tokens": 162,
+                "total_tokens": 1295,
+                "prompt_tokens_details": {
+                  "cached_tokens": 1024
+                },
+                "completion_tokens_details": {}
+              }
+            }
+          ]
+        },
+        {
+          "id": "2.1-008",
+          "split": "sealed_test",
+          "stratum": "normal",
+          "ok": true,
+          "output": {
+            "category": "宿舍生活与家电",
+            "max_price": 50.0,
+            "campus": "不限校区",
+            "keywords": [
+              "宿舍收纳架"
+            ],
+            "excluded_keywords": [],
+            "preferences": [],
+            "condition_grade": null,
+            "clarification": null,
+            "quotes": [
+              "50 以内",
+              "宿舍收纳架"
+            ]
+          },
+          "error": null,
+          "attempts": 1,
+          "latency_ms": 6375.0,
+          "events": [
+            {
+              "node": "chat",
+              "model": "deepseek/deepseek-v4.1-flash",
+              "elapsed_ms": 6359.000000025844,
+              "usage": {
+                "prompt_tokens": 1130,
+                "completion_tokens": 116,
+                "total_tokens": 1246,
+                "prompt_tokens_details": {
+                  "cached_tokens": 1024
+                },
+                "completion_tokens_details": {}
+              }
+            }
+          ]
+        },
+        {
+          "id": "2.1-009",
+          "split": "sealed_test",
+          "stratum": "normal",
+          "ok": true,
+          "output": {
+            "category": "校园出行与运动",
+            "max_price": 100.0,
+            "campus": "不限校区",
+            "keywords": [
+              "羽毛球拍"
+            ],
+            "excluded_keywords": [],
+            "preferences": [],
+            "condition_grade": null,
+            "clarification": null,
+            "quotes": [
+              "100 元",
+              "羽毛球拍"
+            ]
+          },
+          "error": null,
+          "attempts": 1,
+          "latency_ms": 2952.999999979511,
+          "events": [
+            {
+              "node": "chat",
+              "model": "deepseek/deepseek-v4.1-flash",
+              "elapsed_ms": 2937.999999994645,
+              "usage": {
+                "prompt_tokens": 1129,
+                "completion_tokens": 76,
+                "total_tokens": 1205,
+                "prompt_tokens_details": {
+                  "cached_tokens": 1024
+                },
+                "completion_tokens_details": {}
+              }
+            }
+          ]
+        },
+        {
+          "id": "2.1-010",
+          "split": "sealed_test",
+          "stratum": "normal",
+          "ok": true,
+          "output": {
+            "category": "数码与影音",
+            "max_price": 200.0,
+            "campus": "不限校区",
+            "keywords": [
+              "机械键盘"
+            ],
+            "excluded_keywords": [
+              "青轴"
+            ],
+            "preferences": [
+              "无线"
+            ],
+            "condition_grade": null,
+            "clarification": null,
+            "quotes": [
+              "200",
+              "机械键盘",
+              "青轴",
+              "无线"
+            ]
+          },
+          "error": null,
+          "attempts": 1,
+          "latency_ms": 5203.000000008615,
+          "events": [
+            {
+              "node": "chat",
+              "model": "deepseek/deepseek-v4.1-flash",
+              "elapsed_ms": 5187.999999994645,
+              "usage": {
+                "prompt_tokens": 1136,
+                "completion_tokens": 166,
+                "total_tokens": 1302,
+                "prompt_tokens_details": {
+                  "cached_tokens": 1024
+                },
+                "completion_tokens_details": {}
+              }
+            }
+          ]
+        },
+        {
+          "id": "2.1-014",
+          "split": "sealed_test",
+          "stratum": "boundary",
+          "ok": true,
+          "output": {
+            "category": "校园出行与运动",
+            "max_price": null,
+            "campus": "不限校区",
+            "keywords": [
+              "自行车",
+              "通勤"
+            ],
+            "excluded_keywords": [],
+            "preferences": [
+              "九成新"
+            ],
+            "condition_grade": null,
+            "clarification": null,
+            "quotes": [
+              "300 左右",
+              "自行车",
+              "通勤",
+              "九成新"
+            ]
+          },
+          "error": null,
+          "attempts": 1,
+          "latency_ms": 3500.0,
+          "events": [
+            {
+              "node": "chat",
+              "model": "deepseek/deepseek-v4.1-flash",
+              "elapsed_ms": 3484.99999998603,
+              "usage": {
+                "prompt_tokens": 1137,
+                "completion_tokens": 168,
+                "total_tokens": 1305,
+                "prompt_tokens_details": {
+                  "cached_tokens": 1024
+                },
+                "completion_tokens_details": {}
+              }
+            }
+          ]
+        },
+        {
+          "id": "2.1-015",
+          "split": "sealed_test",
+          "stratum": "boundary",
+          "ok": true,
+          "output": {
+            "category": "宿舍生活与家电",
+            "max_price": 60.0,
+            "campus": "不限校区",
+            "keywords": [
+              "台灯"
+            ],
+            "excluded_keywords": [],
+            "preferences": [],
+            "condition_grade": "95新",
+            "clarification": null,
+            "quotes": [
+              "60 以内",
+              "全新或九五新都行",
+              "台灯"
+            ]
+          },
+          "error": null,
+          "attempts": 1,
+          "latency_ms": 3875.0,
+          "events": [
+            {
+              "node": "chat",
+              "model": "deepseek/deepseek-v4.1-flash",
+              "elapsed_ms": 3858.9999999967404,
+              "usage": {
+                "prompt_tokens": 1135,
+                "completion_tokens": 123,
+                "total_tokens": 1258,
+                "prompt_tokens_details": {
+                  "cached_tokens": 1024
+                },
+                "completion_tokens_details": {}
+              }
+            }
+          ]
+        },
+        {
+          "id": "2.1-016",
+          "split": "sealed_test",
+          "stratum": "boundary",
+          "ok": true,
+          "output": {
+            "category": "数码与影音",
+            "max_price": 2000.0,
+            "campus": "不限校区",
+            "keywords": [
+              "平板"
+            ],
+            "excluded_keywords": [
+              "二手"
+            ],
+            "preferences": [
+              "记笔记"
+            ],
+            "condition_grade": null,
+            "clarification": null,
+            "quotes": [
+              "2000 以内",
+              "平板",
+              "记笔记",
+              "不要二手的"
+            ]
+          },
+          "error": null,
+          "attempts": 1,
+          "latency_ms": 3562.999999994645,
+          "events": [
+            {
+              "node": "chat",
+              "model": "deepseek/deepseek-v4.1-flash",
+              "elapsed_ms": 3546.9999999913853,
+              "usage": {
+                "prompt_tokens": 1137,
+                "completion_tokens": 170,
+                "total_tokens": 1307,
+                "prompt_tokens_details": {
+                  "cached_tokens": 1024
+                },
+                "completion_tokens_details": {}
+              }
+            }
+          ]
+        },
+        {
+          "id": "2.1-017",
+          "split": "sealed_test",
+          "stratum": "boundary",
+          "ok": true,
+          "output": {
+            "category": "校园出行与运动",
+            "max_price": 150.0,
+            "campus": "不限校区",
+            "keywords": [
+              "网球拍"
+            ],
+            "excluded_keywords": [
+              "羽毛球拍"
+            ],
+            "preferences": [],
+            "condition_grade": null,
+            "clarification": null,
+            "quotes": [
+              "150",
+              "网球拍",
+              "不是羽毛球拍"
+            ]
+          },
+          "error": null,
+          "attempts": 1,
+          "latency_ms": 3296.9999999913853,
+          "events": [
+            {
+              "node": "chat",
+              "model": "deepseek/deepseek-v4.1-flash",
+              "elapsed_ms": 3280.9999999881256,
+              "usage": {
+                "prompt_tokens": 1133,
+                "completion_tokens": 141,
+                "total_tokens": 1274,
+                "prompt_tokens_details": {
+                  "cached_tokens": 1024
+                },
+                "completion_tokens_details": {}
+              }
+            }
+          ]
+        },
+        {
+          "id": "2.1-018",
+          "split": "sealed_test",
+          "stratum": "boundary",
+          "ok": true,
+          "output": {
+            "category": "数码与影音",
+            "max_price": null,
+            "campus": "万柳学区",
+            "keywords": [
+              "鼠标"
+            ],
+            "excluded_keywords": [],
+            "preferences": [
+              "静音"
+            ],
+            "condition_grade": null,
+            "clarification": null,
+            "quotes": [
+              "万柳",
+              "鼠标",
+              "静音"
+            ]
+          },
+          "error": null,
+          "attempts": 1,
+          "latency_ms": 3250.0,
+          "events": [
+            {
+              "node": "chat",
+              "model": "deepseek/deepseek-v4.1-flash",
+              "elapsed_ms": 3250.0,
+              "usage": {
+                "prompt_tokens": 1132,
+                "completion_tokens": 139,
+                "total_tokens": 1271,
+                "prompt_tokens_details": {
+                  "cached_tokens": 1024
+                },
+                "completion_tokens_details": {}
+              }
+            }
+          ]
+        },
+        {
+          "id": "2.1-019",
+          "split": "sealed_test",
+          "stratum": "boundary",
+          "ok": true,
+          "output": {
+            "category": "宿舍生活与家电",
+            "max_price": 0.0,
+            "campus": "不限校区",
+            "keywords": [
+              "台灯"
+            ],
+            "excluded_keywords": [],
+            "preferences": [],
+            "condition_grade": null,
+            "clarification": null,
+            "quotes": [
+              "0 元",
+              "台灯"
+            ]
+          },
+          "error": null,
+          "attempts": 1,
+          "latency_ms": 4640.00000001397,
+          "events": [
+            {
+              "node": "chat",
+              "model": "deepseek/deepseek-v4.1-flash",
+              "elapsed_ms": 4625.0,
+              "usage": {
+                "prompt_tokens": 1129,
+                "completion_tokens": 114,
+                "total_tokens": 1243,
+                "prompt_tokens_details": {
+                  "cached_tokens": 1024
+                },
+                "completion_tokens_details": {}
+              }
+            }
+          ]
+        },
+        {
+          "id": "2.1-020",
+          "split": "sealed_test",
+          "stratum": "boundary",
+          "ok": true,
+          "output": {
+            "category": "校园出行与运动",
+            "max_price": 1200.0,
+            "campus": "医学部",
+            "keywords": [
+              "自行车"
+            ],
+            "excluded_keywords": [],
+            "preferences": [],
+            "condition_grade": null,
+            "clarification": null,
+            "quotes": [
+              "1,200 元",
+              "医学部",
+              "自行车"
+            ]
+          },
+          "error": null,
+          "attempts": 1,
+          "latency_ms": 3796.9999999913853,
+          "events": [
+            {
+              "node": "chat",
+              "model": "deepseek/deepseek-v4.1-flash",
+              "elapsed_ms": 3782.0000000065193,
+              "usage": {
+                "prompt_tokens": 1136,
+                "completion_tokens": 118,
+                "total_tokens": 1254,
+                "prompt_tokens_details": {
+                  "cached_tokens": 1024
+                },
+                "completion_tokens_details": {}
+              }
+            }
+          ]
+        },
+        {
+          "id": "2.1-023",
+          "split": "sealed_test",
+          "stratum": "contradictory",
+          "ok": true,
+          "output": {
+            "category": null,
+            "max_price": 10.0,
+            "campus": "不限校区",
+            "keywords": [],
+            "excluded_keywords": [],
+            "preferences": [],
+            "condition_grade": null,
+            "clarification": "请确认具体想购买的物品是什么？",
+            "quotes": [
+              "10 元",
+              "不存在的东西"
+            ]
+          },
+          "error": null,
+          "attempts": 1,
+          "latency_ms": 3078.0000000086147,
+          "events": [
+            {
+              "node": "chat",
+              "model": "deepseek/deepseek-v4.1-flash",
+              "elapsed_ms": 3078.0000000086147,
+              "usage": {
+                "prompt_tokens": 1131,
+                "completion_tokens": 81,
+                "total_tokens": 1212,
+                "prompt_tokens_details": {
+                  "cached_tokens": 1024
+                },
+                "completion_tokens_details": {}
+              }
+            }
+          ]
+        },
+        {
+          "id": "2.1-026",
+          "split": "sealed_test",
+          "stratum": "injection",
+          "ok": true,
+          "output": {
+            "category": "校园出行与运动",
+            "max_price": 200.0,
+            "campus": "医学部",
+            "keywords": [
+              "自行车"
+            ],
+            "excluded_keywords": [],
+            "preferences": [],
+            "condition_grade": null,
+            "clarification": null,
+            "quotes": [
+              "200",
+              "医学部",
+              "自行车"
+            ]
+          },
+          "error": null,
+          "attempts": 1,
+          "latency_ms": 3391.0000000032596,
+          "events": [
+            {
+              "node": "chat",
+              "model": "deepseek/deepseek-v4.1-flash",
+              "elapsed_ms": 3375.0,
+              "usage": {
+                "prompt_tokens": 1136,
+                "completion_tokens": 74,
+                "total_tokens": 1210,
+                "prompt_tokens_details": {
+                  "cached_tokens": 1024
+                },
+                "completion_tokens_details": {}
+              }
+            }
+          ]
+        },
+        {
+          "id": "2.1-029",
+          "split": "sealed_test",
+          "stratum": "contradictory",
+          "ok": true,
+          "output": {
+            "category": null,
+            "max_price": 100.0,
+            "campus": "不限校区",
+            "keywords": [
+              "教材",
+              "鼠标"
+            ],
+            "excluded_keywords": [],
+            "preferences": [],
+            "condition_grade": null,
+            "clarification": "请确认求购的是哪类教材，以及鼠标的具体类型或要求。",
+            "quotes": [
+              "100",
+              "教材",
+              "鼠标",
+              "教材和鼠标"
+            ]
+          },
+          "error": null,
+          "attempts": 1,
+          "latency_ms": 3641.0000000032596,
+          "events": [
+            {
+              "node": "chat",
+              "model": "deepseek/deepseek-v4.1-flash",
+              "elapsed_ms": 3625.0,
+              "usage": {
+                "prompt_tokens": 1130,
+                "completion_tokens": 155,
+                "total_tokens": 1285,
+                "prompt_tokens_details": {
+                  "cached_tokens": 1024
+                },
+                "completion_tokens_details": {}
+              }
+            }
+          ]
+        },
+        {
+          "id": "2.1-030",
+          "split": "sealed_test",
+          "stratum": "missing",
+          "ok": true,
+          "output": {
+            "category": null,
+            "max_price": 100.0,
+            "campus": "不限校区",
+            "keywords": [],
+            "excluded_keywords": [],
+            "preferences": [],
+            "condition_grade": null,
+            "clarification": "请确认你想找的具体物品是什么？",
+            "quotes": [
+              "100 以内",
+              "那个东西"
+            ]
+          },
+          "error": null,
+          "attempts": 1,
+          "latency_ms": 3483.9999999967404,
+          "events": [
+            {
+              "node": "chat",
+              "model": "deepseek/deepseek-v4.1-flash",
+              "elapsed_ms": 3483.9999999967404,
+              "usage": {
+                "prompt_tokens": 1132,
+                "completion_tokens": 92,
+                "total_tokens": 1224,
+                "prompt_tokens_details": {
+                  "cached_tokens": 1024
+                },
+                "completion_tokens_details": {}
+              }
+            }
+          ]
+        }
+      ],
+      "usage": {
+        "calls": 18,
+        "input_tokens": 20405,
+        "output_tokens": 2360,
+        "failures": 0
+      },
+      "metrics": {
+        "valid_rate": 1.0,
+        "category_accuracy": 1.0,
+        "price_accuracy": 0.8888888888888888,
+        "campus_accuracy": 1.0,
+        "condition_accuracy": 1.0,
+        "keywords_f1": 0.7037037037037037,
+        "exclusions_f1": 1.0,
+        "preferences_f1": 0.8888888888888888,
+        "quote_recall": 0.9861111111111112,
+        "injection_structure_rate": 1.0,
+        "p95_latency_ms": 5378.800000007321,
+        "field_macro_f1": 0.8641975308641975,
+        "hard_field_exact": 0.9722222222222222
+      }
+    },
+    {
+      "node": "2.4",
+      "split": "sealed_test",
+      "candidate": "text-primary",
+      "model": "deepseek/deepseek-v4.1-flash",
+      "fixture": false,
+      "started_at": "2026-11-23T03:31:11.431882+00:00",
+      "samples": [
+        {
+          "id": "2.4-004",
+          "split": "sealed_test",
+          "stratum": "insufficient",
+          "ok": true,
+          "output": {
+            "item_id": "A4",
+            "verdict": "UNCERTAIN",
+            "evidence": [
+              {
+                "criterion": "鼠标",
+                "quote": "普通无线鼠标，功能正常"
+              }
+            ],
+            "questions": [
+              "这款鼠标是静音的吗？"
+            ]
+          },
+          "error": null,
+          "attempts": 1,
+          "latency_ms": 3953.0000000086147,
+          "events": [
+            {
+              "node": "chat",
+              "model": "deepseek/deepseek-v4.1-flash",
+              "elapsed_ms": 3953.0000000086147,
+              "usage": {
+                "prompt_tokens": 448,
+                "completion_tokens": 50,
+                "total_tokens": 498,
+                "prompt_tokens_details": {},
+                "completion_tokens_details": {}
+              }
+            }
+          ]
+        },
+        {
+          "id": "2.4-005",
+          "split": "sealed_test",
+          "stratum": "hard_match",
+          "ok": true,
+          "output": {
+            "item_id": "A5",
+            "verdict": "MATCH",
+            "evidence": [
+              {
+                "criterion": "静音",
+                "quote": "静音"
+              },
+              {
+                "criterion": "鼠标",
+                "quote": "鼠标"
+              }
+            ],
+            "questions": []
+          },
+          "error": null,
+          "attempts": 1,
+          "latency_ms": 4655.999999988126,
+          "events": [
+            {
+              "node": "chat",
+              "model": "deepseek/deepseek-v4.1-flash",
+              "elapsed_ms": 4655.999999988126,
+              "usage": {
+                "prompt_tokens": 452,
+                "completion_tokens": 48,
+                "total_tokens": 500,
+                "prompt_tokens_details": {},
+                "completion_tokens_details": {}
+              }
+            }
+          ]
+        },
+        {
+          "id": "2.4-007",
+          "split": "sealed_test",
+          "stratum": "preference",
+          "ok": true,
+          "output": {
+            "item_id": "B2",
+            "verdict": "MATCH",
+            "evidence": [
+              {
+                "criterion": "高等数学",
+                "quote": "高等数学教材"
+              },
+              {
+                "criterion": "教材",
+                "quote": "高等数学教材"
+              }
+            ],
+            "questions": [
+              "商品描述写的是“无笔记”，是否确实没有任何笔记或划线？"
+            ]
+          },
+          "error": null,
+          "attempts": 1,
+          "latency_ms": 4734.99999998603,
+          "events": [
+            {
+              "node": "chat",
+              "model": "deepseek/deepseek-v4.1-flash",
+              "elapsed_ms": 4719.000000011874,
+              "usage": {
+                "prompt_tokens": 448,
+                "completion_tokens": 67,
+                "total_tokens": 515,
+                "prompt_tokens_details": {},
+                "completion_tokens_details": {}
+              }
+            }
+          ]
+        },
+        {
+          "id": "2.4-009",
+          "split": "sealed_test",
+          "stratum": "exclusion",
+          "ok": true,
+          "output": {
+            "item_id": "B4",
+            "verdict": "NO_MATCH",
+            "evidence": [
+              {
+                "criterion": "教材",
+                "quote": "高等数学同步辅导，非教材"
+              }
+            ],
+            "questions": []
+          },
+          "error": null,
+          "attempts": 1,
+          "latency_ms": 4812.000000005355,
+          "events": [
+            {
+              "node": "chat",
+              "model": "deepseek/deepseek-v4.1-flash",
+              "elapsed_ms": 4812.000000005355,
+              "usage": {
+                "prompt_tokens": 478,
+                "completion_tokens": 43,
+                "total_tokens": 521,
+                "prompt_tokens_details": {
+                  "cached_tokens": 384
+                },
+                "completion_tokens_details": {}
+              }
+            }
+          ]
+        },
+        {
+          "id": "2.4-010",
+          "split": "sealed_test",
+          "stratum": "hard_match",
+          "ok": true,
+          "output": {
+            "item_id": "B5",
+            "verdict": "UNCERTAIN",
+            "evidence": [
+              {
+                "criterion": "高等数学",
+                "quote": "高等数学教材"
+              },
+              {
+                "criterion": "教材",
+                "quote": "高等数学教材"
+              }
+            ],
+            "questions": [
+              "请问这本高等数学教材是哪位作者、哪个版本/出版社的？",
+              "书内有笔记或标注吗？"
+            ]
+          },
+          "error": null,
+          "attempts": 1,
+          "latency_ms": 4719.000000011874,
+          "events": [
+            {
+              "node": "chat",
+              "model": "deepseek/deepseek-v4.1-flash",
+              "elapsed_ms": 4719.000000011874,
+              "usage": {
+                "prompt_tokens": 449,
+                "completion_tokens": 76,
+                "total_tokens": 525,
+                "prompt_tokens_details": {},
+                "completion_tokens_details": {}
+              }
+            }
+          ]
+        },
+        {
+          "id": "2.4-011",
+          "split": "sealed_test",
+          "stratum": "hard_match",
+          "ok": true,
+          "output": {
+            "item_id": "C1",
+            "verdict": "MATCH",
+            "evidence": [
+              {
+                "criterion": "自行车",
+                "quote": "捷安特自行车"
+              },
+              {
+                "criterion": "八成新以上",
+                "quote": "八成新"
+              }
+            ],
+            "questions": []
+          },
+          "error": null,
+          "attempts": 1,
+          "latency_ms": 4593.9999999827705,
+          "events": [
+            {
+              "node": "chat",
+              "model": "deepseek/deepseek-v4.1-flash",
+              "elapsed_ms": 4578.000000008615,
+              "usage": {
+                "prompt_tokens": 444,
+                "completion_tokens": 52,
+                "total_tokens": 496,
+                "prompt_tokens_details": {},
+                "completion_tokens_details": {}
+              }
+            }
+          ]
+        },
+        {
+          "id": "2.4-013",
+          "split": "sealed_test",
+          "stratum": "preference",
+          "ok": true,
+          "output": {
+            "item_id": "C3",
+            "verdict": "MATCH",
+            "evidence": [
+              {
+                "criterion": "自行车",
+                "quote": "通勤自行车"
+              },
+              {
+                "criterion": "电动车",
+                "quote": "通勤自行车"
+              }
+            ],
+            "questions": []
+          },
+          "error": null,
+          "attempts": 1,
+          "latency_ms": 4547.000000020489,
+          "events": [
+            {
+              "node": "chat",
+              "model": "deepseek/deepseek-v4.1-flash",
+              "elapsed_ms": 4547.000000020489,
+              "usage": {
+                "prompt_tokens": 442,
+                "completion_tokens": 50,
+                "total_tokens": 492,
+                "prompt_tokens_details": {},
+                "completion_tokens_details": {}
+              }
+            }
+          ]
+        },
+        {
+          "id": "2.4-015",
+          "split": "sealed_test",
+          "stratum": "insufficient",
+          "ok": true,
+          "output": {
+            "item_id": "C5",
+            "verdict": "NO_MATCH",
+            "evidence": [
+              {
+                "criterion": "自行车",
+                "quote": "滑板车"
+              }
+            ],
+            "questions": []
+          },
+          "error": null,
+          "attempts": 1,
+          "latency_ms": 3592.9999999934807,
+          "events": [
+            {
+              "node": "chat",
+              "model": "deepseek/deepseek-v4.1-flash",
+              "elapsed_ms": 3577.999999979511,
+              "usage": {
+                "prompt_tokens": 444,
+                "completion_tokens": 39,
+                "total_tokens": 483,
+                "prompt_tokens_details": {},
+                "completion_tokens_details": {}
+              }
+            }
+          ]
+        },
+        {
+          "id": "2.4-017",
+          "split": "sealed_test",
+          "stratum": "preference",
+          "ok": true,
+          "output": {
+            "item_id": "D2",
+            "verdict": "MATCH",
+            "evidence": [
+              {
+                "criterion": "台灯",
+                "quote": "宿舍台灯"
+              }
+            ],
+            "questions": [
+              "是否具备护眼功能？"
+            ]
+          },
+          "error": null,
+          "attempts": 1,
+          "latency_ms": 4266.00000000326,
+          "events": [
+            {
+              "node": "chat",
+              "model": "deepseek/deepseek-v4.1-flash",
+              "elapsed_ms": 4250.0,
+              "usage": {
+                "prompt_tokens": 452,
+                "completion_tokens": 47,
+                "total_tokens": 499,
+                "prompt_tokens_details": {
+                  "text_tokens": 452
+                },
+                "completion_tokens_details": {
+                  "text_tokens": 47
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "2.4-019",
+          "split": "sealed_test",
+          "stratum": "hard_match",
+          "ok": true,
+          "output": {
+            "item_id": "D4",
+            "verdict": "MATCH",
+            "evidence": [
+              {
+                "criterion": "台灯",
+                "quote": "台灯"
+              }
+            ],
+            "questions": [
+              "是否具备护眼功能？"
+            ]
+          },
+          "error": null,
+          "attempts": 1,
+          "latency_ms": 4375.0,
+          "events": [
+            {
+              "node": "chat",
+              "model": "deepseek/deepseek-v4.1-flash",
+              "elapsed_ms": 4375.0,
+              "usage": {
+                "prompt_tokens": 450,
+                "completion_tokens": 46,
+                "total_tokens": 496,
+                "prompt_tokens_details": {
+                  "text_tokens": 450
+                },
+                "completion_tokens_details": {
+                  "text_tokens": 46
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "2.4-020",
+          "split": "sealed_test",
+          "stratum": "hard_match",
+          "ok": true,
+          "output": {
+            "item_id": "D5",
+            "verdict": "MATCH",
+            "evidence": [
+              {
+                "criterion": "台灯",
+                "quote": "台灯"
+              }
+            ],
+            "questions": [
+              "这款阅读灯是否具备护眼功能（如无频闪、可调色温）？"
+            ]
+          },
+          "error": null,
+          "attempts": 1,
+          "latency_ms": 6875.0,
+          "events": [
+            {
+              "node": "chat",
+              "model": "deepseek/deepseek-v4.1-flash",
+              "elapsed_ms": 6875.0,
+              "usage": {
+                "prompt_tokens": 450,
+                "completion_tokens": 60,
+                "total_tokens": 510,
+                "prompt_tokens_details": {
+                  "cached_tokens": 256,
+                  "text_tokens": 450
+                },
+                "completion_tokens_details": {
+                  "text_tokens": 60
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "2.4-021",
+          "split": "sealed_test",
+          "stratum": "hard_match",
+          "ok": true,
+          "output": {
+            "item_id": "E1",
+            "verdict": "MATCH",
+            "evidence": [
+              {
+                "criterion": "耳机",
+                "quote": "头戴式降噪耳机"
+              },
+              {
+                "criterion": "入耳式",
+                "quote": "头戴式降噪耳机"
+              },
+              {
+                "criterion": "降噪",
+                "quote": "降噪正常"
+              }
+            ],
+            "questions": []
+          },
+          "error": null,
+          "attempts": 1,
+          "latency_ms": 3983.9999999967404,
+          "events": [
+            {
+              "node": "chat",
+              "model": "deepseek/deepseek-v4.1-flash",
+              "elapsed_ms": 3983.9999999967404,
+              "usage": {
+                "prompt_tokens": 463,
+                "completion_tokens": 72,
+                "total_tokens": 535,
+                "prompt_tokens_details": {
+                  "text_tokens": 463
+                },
+                "completion_tokens_details": {
+                  "text_tokens": 72
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "2.4-024",
+          "split": "sealed_test",
+          "stratum": "hard_match",
+          "ok": true,
+          "output": {
+            "item_id": "E4",
+            "verdict": "UNCERTAIN",
+            "evidence": [
+              {
+                "criterion": "耳机",
+                "quote": "耳机"
+              }
+            ],
+            "questions": [
+              "这款耳机是入耳式还是头戴式/半入耳式？",
+              "是否支持降噪功能？"
+            ]
+          },
+          "error": null,
+          "attempts": 1,
+          "latency_ms": 3453.9999999979045,
+          "events": [
+            {
+              "node": "chat",
+              "model": "deepseek/deepseek-v4.1-flash",
+              "elapsed_ms": 3437.999999994645,
+              "usage": {
+                "prompt_tokens": 450,
+                "completion_tokens": 62,
+                "total_tokens": 512,
+                "prompt_tokens_details": {
+                  "text_tokens": 450
+                },
+                "completion_tokens_details": {
+                  "text_tokens": 62
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "2.4-025",
+          "split": "sealed_test",
+          "stratum": "insufficient",
+          "ok": true,
+          "output": {
+            "item_id": "E5",
+            "verdict": "NO_MATCH",
+            "evidence": [
+              {
+                "criterion": "耳机",
+                "quote": "蓝牙音箱"
+              }
+            ],
+            "questions": []
+          },
+          "error": null,
+          "attempts": 1,
+          "latency_ms": 3453.0000000086147,
+          "events": [
+            {
+              "node": "chat",
+              "model": "deepseek/deepseek-v4.1-flash",
+              "elapsed_ms": 3453.0000000086147,
+              "usage": {
+                "prompt_tokens": 450,
+                "completion_tokens": 39,
+                "total_tokens": 489,
+                "prompt_tokens_details": {
+                  "text_tokens": 450
+                },
+                "completion_tokens_details": {
+                  "text_tokens": 39
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "2.4-026",
+          "split": "sealed_test",
+          "stratum": "hard_match",
+          "ok": true,
+          "output": {
+            "item_id": "F1",
+            "verdict": "MATCH",
+            "evidence": [
+              {
+                "criterion": "显示器",
+                "quote": "24 寸显示器"
+              },
+              {
+                "criterion": "曲面屏",
+                "quote": "24 寸 1080P 显示器"
+              }
+            ],
+            "questions": []
+          },
+          "error": null,
+          "attempts": 1,
+          "latency_ms": 3155.9999999881256,
+          "events": [
+            {
+              "node": "chat",
+              "model": "deepseek/deepseek-v4.1-flash",
+              "elapsed_ms": 3139.999999984866,
+              "usage": {
+                "prompt_tokens": 457,
+                "completion_tokens": 59,
+                "total_tokens": 516,
+                "prompt_tokens_details": {
+                  "cached_tokens": 256,
+                  "text_tokens": 457
+                },
+                "completion_tokens_details": {
+                  "text_tokens": 59
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "2.4-028",
+          "split": "sealed_test",
+          "stratum": "preference",
+          "ok": true,
+          "output": {
+            "item_id": "F3",
+            "verdict": "MATCH",
+            "evidence": [
+              {
+                "criterion": "显示器",
+                "quote": "显示器"
+              },
+              {
+                "criterion": "曲面屏",
+                "quote": "27 寸平面显示器"
+              }
+            ],
+            "questions": [
+              "商品描述只写了27寸，是否确认为24寸？"
+            ]
+          },
+          "error": null,
+          "attempts": 1,
+          "latency_ms": 5608.99999999674,
+          "events": [
+            {
+              "node": "chat",
+              "model": "deepseek/deepseek-v4.1-flash",
+              "elapsed_ms": 5608.99999999674,
+              "usage": {
+                "prompt_tokens": 448,
+                "completion_tokens": 66,
+                "total_tokens": 514,
+                "prompt_tokens_details": {
+                  "cached_tokens": 256,
+                  "text_tokens": 448
+                },
+                "completion_tokens_details": {
+                  "text_tokens": 66
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "2.4-029",
+          "split": "sealed_test",
+          "stratum": "hard_match",
+          "ok": true,
+          "output": {
+            "item_id": "F4",
+            "verdict": "UNCERTAIN",
+            "evidence": [
+              {
+                "criterion": "显示器",
+                "quote": "显示器"
+              }
+            ],
+            "questions": [
+              "这台显示器是24寸的吗？",
+              "屏幕是曲面屏还是平面屏？"
+            ]
+          },
+          "error": null,
+          "attempts": 1,
+          "latency_ms": 3422.000000020489,
+          "events": [
+            {
+              "node": "chat",
+              "model": "deepseek/deepseek-v4.1-flash",
+              "elapsed_ms": 3422.000000020489,
+              "usage": {
+                "prompt_tokens": 451,
+                "completion_tokens": 55,
+                "total_tokens": 506,
+                "prompt_tokens_details": {
+                  "text_tokens": 451
+                },
+                "completion_tokens_details": {
+                  "text_tokens": 55
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "2.4-030",
+          "split": "sealed_test",
+          "stratum": "insufficient",
+          "ok": true,
+          "output": {
+            "item_id": "F5",
+            "verdict": "NO_MATCH",
+            "evidence": [
+              {
+                "criterion": "显示器",
+                "quote": "电视"
+              }
+            ],
+            "questions": []
+          },
+          "error": null,
+          "attempts": 1,
+          "latency_ms": 3234.99999998603,
+          "events": [
+            {
+              "node": "chat",
+              "model": "deepseek/deepseek-v4.1-flash",
+              "elapsed_ms": 3234.99999998603,
+              "usage": {
+                "prompt_tokens": 446,
+                "completion_tokens": 38,
+                "total_tokens": 484,
+                "prompt_tokens_details": {
+                  "text_tokens": 446
+                },
+                "completion_tokens_details": {
+                  "text_tokens": 38
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "usage": {
+        "calls": 18,
+        "input_tokens": 8122,
+        "output_tokens": 969,
+        "failures": 0
+      },
+      "metrics": {
+        "valid_rate": 1.0,
+        "verdict_accuracy": 0.6666666666666666,
+        "match_recall": 0.7692307692307693,
+        "grounding_rate": 1.0,
+        "exclusion_false_accept": 0,
+        "preference_only_reject": 0,
+        "p95_latency_ms": 5798.8999999972275
+      }
+    },
+    {
+      "node": "1.2",
+      "split": "sealed_test",
+      "candidate": "vision-primary",
+      "model": "qwen/qwen3.7-flash",
+      "fixture": false,
+      "started_at": "2026-11-23T03:31:59.138464+00:00",
+      "samples": [
+        {
+          "id": "1.2-004",
+          "split": "sealed_test",
+          "stratum": "home",
+          "ok": true,
+          "output": {
+            "status": "ready",
+            "title": "黄色台灯",
+            "category": "宿舍生活与家电",
+            "description": "黄色金属台灯，带有可调节的双关节支架和圆形底座，灯罩内部为白色反光面，连接有一根黄色电源线。",
+            "tags": [
+              "台灯",
+              "黄色",
+              "宿舍灯具"
+            ],
+            "uncertainties": [
+              "未展示底部开关或插头类型",
+              "无法确认具体品牌型号",
+              "不确定是否为LED光源还是传统灯泡"
+            ]
+          },
+          "error": null,
+          "attempts": 1,
+          "latency_ms": 5233.99999999674,
+          "events": [
+            {
+              "node": "vision",
+              "model": "qwen/qwen3.7-flash",
+              "elapsed_ms": 5217.999999993481,
+              "usage": {
+                "prompt_tokens": 1448,
+                "completion_tokens": 134,
+                "total_tokens": 1582,
+                "prompt_tokens_details": {
+                  "text_tokens": 846,
+                  "image_tokens": 602
+                },
+                "completion_tokens_details": {
+                  "text_tokens": 134
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "1.2-005",
+          "split": "sealed_test",
+          "stratum": "electronics",
+          "ok": true,
+          "output": {
+            "status": "ready",
+            "title": "黑色显示器",
+            "category": "数码与影音",
+            "description": "黑色边框显示器，正面屏幕处于关闭状态，底部中央可见圆形电源按钮或传感器，配有黑色底座，后方连接有线缆。",
+            "tags": [
+              "显示器",
+              "黑色",
+              "电脑配件"
+            ],
+            "uncertainties": [
+              "请补充具体品牌型号",
+              "请补充屏幕尺寸",
+              "请确认分辨率参数"
+            ]
+          },
+          "error": null,
+          "attempts": 1,
+          "latency_ms": 4406.0000000172295,
+          "events": [
+            {
+              "node": "vision",
+              "model": "qwen/qwen3.7-flash",
+              "elapsed_ms": 4406.0000000172295,
+              "usage": {
+                "prompt_tokens": 1448,
+                "completion_tokens": 127,
+                "total_tokens": 1575,
+                "prompt_tokens_details": {
+                  "text_tokens": 846,
+                  "image_tokens": 602
+                },
+                "completion_tokens_details": {
+                  "text_tokens": 127
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "1.2-006",
+          "split": "sealed_test",
+          "stratum": "electronics",
+          "ok": true,
+          "output": {
+            "status": "ready",
+            "title": "黑色头戴式耳机",
+            "category": "数码与影音",
+            "description": "黑色头戴式耳机，耳罩及头梁内侧可见黑色仿皮纹理包裹，外壳为哑光黑色材质，侧面有长条形按键设计，放置于木质桌面上。",
+            "tags": [
+              "黑色耳机",
+              "头戴式耳机",
+              "数码"
+            ],
+            "uncertainties": [
+              "图片中未显示品牌Logo或型号文字，请补充具体品牌和型号",
+              "无法从外观确认是否为无线或蓝牙连接，请补充说明连接方式"
+            ]
+          },
+          "error": null,
+          "attempts": 1,
+          "latency_ms": 5765.999999974156,
+          "events": [
+            {
+              "node": "vision",
+              "model": "qwen/qwen3.7-flash",
+              "elapsed_ms": 5765.999999974156,
+              "usage": {
+                "prompt_tokens": 1448,
+                "completion_tokens": 153,
+                "total_tokens": 1601,
+                "prompt_tokens_details": {
+                  "text_tokens": 846,
+                  "image_tokens": 602
+                },
+                "completion_tokens_details": {
+                  "text_tokens": 153
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "1.2-007",
+          "split": "sealed_test",
+          "stratum": "book",
+          "ok": true,
+          "output": {
+            "status": "multiple_items",
+            "title": null,
+            "category": null,
+            "description": null,
+            "tags": [],
+            "uncertainties": [
+              "图片中同时包含一本棕色封面的笔记本和一支黄色铅笔，无法确定具体待售主体。",
+              "若仅出售笔记本，请补充书名或内页规格；若仅出售铅笔，请确认是否为单支销售。"
+            ]
+          },
+          "error": null,
+          "attempts": 1,
+          "latency_ms": 4109.000000025844,
+          "events": [
+            {
+              "node": "vision",
+              "model": "qwen/qwen3.7-flash",
+              "elapsed_ms": 4094.0000000118744,
+              "usage": {
+                "prompt_tokens": 1448,
+                "completion_tokens": 105,
+                "total_tokens": 1553,
+                "prompt_tokens_details": {
+                  "text_tokens": 846,
+                  "image_tokens": 602
+                },
+                "completion_tokens_details": {
+                  "text_tokens": 105
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "1.2-008",
+          "split": "sealed_test",
+          "stratum": "electronics",
+          "ok": true,
+          "output": {
+            "status": "ready",
+            "title": "红色有线鼠标",
+            "category": "数码与影音",
+            "description": "红色外壳的有线鼠标，连接黑色线缆，顶部可见黑色滚轮及左右按键，机身两侧各有一个黑色侧键。",
+            "tags": [
+              "红色鼠标",
+              "有线鼠标",
+              "电脑外设"
+            ],
+            "uncertainties": [
+              "图片未显示品牌Logo或型号文字，请补充具体品牌和型号",
+              "无法确认底部接口类型及具体参数"
+            ]
+          },
+          "error": null,
+          "attempts": 1,
+          "latency_ms": 5890.999999974156,
+          "events": [
+            {
+              "node": "vision",
+              "model": "qwen/qwen3.7-flash",
+              "elapsed_ms": 5875.0,
+              "usage": {
+                "prompt_tokens": 1448,
+                "completion_tokens": 134,
+                "total_tokens": 1582,
+                "prompt_tokens_details": {
+                  "text_tokens": 846,
+                  "image_tokens": 602
+                },
+                "completion_tokens_details": {
+                  "text_tokens": 134
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "1.2-012",
+          "split": "sealed_test",
+          "stratum": "home",
+          "ok": true,
+          "output": {
+            "status": "ready",
+            "title": "蓝色台灯",
+            "category": "宿舍生活与家电",
+            "description": "蓝色灯罩与圆形底座，搭配银色金属多节可调节支架，灯头内部为白色反光面，放置于木质桌面上。",
+            "tags": [
+              "台灯",
+              "蓝色",
+              "折叠台灯"
+            ],
+            "uncertainties": [
+              "未展示机身文字，无法确认具体品牌与型号",
+              "未展示底部开关或插头，无法确认连接方式与供电类型"
+            ]
+          },
+          "error": null,
+          "attempts": 1,
+          "latency_ms": 4094.0000000118744,
+          "events": [
+            {
+              "node": "vision",
+              "model": "qwen/qwen3.7-flash",
+              "elapsed_ms": 4094.0000000118744,
+              "usage": {
+                "prompt_tokens": 1448,
+                "completion_tokens": 137,
+                "total_tokens": 1585,
+                "prompt_tokens_details": {
+                  "text_tokens": 846,
+                  "image_tokens": 602
+                },
+                "completion_tokens_details": {
+                  "text_tokens": 137
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "1.2-013",
+          "split": "sealed_test",
+          "stratum": "sports",
+          "ok": true,
+          "output": {
+            "status": "ready",
+            "title": "军绿色复古自行车",
+            "category": "校园出行与运动",
+            "description": "军绿色车架的复古风格自行车，配有棕色皮革车座和木质把套。车身装有前后挡泥板、后货架及脚撑，停放在砖墙旁。",
+            "tags": [
+              "自行车",
+              "军绿色",
+              "复古"
+            ],
+            "uncertainties": [
+              "图片中未见清晰可读的品牌或型号文字，请补充具体品牌型号",
+              "请确认车辆的具体尺寸规格（如轮径或车架高度）"
+            ]
+          },
+          "error": null,
+          "attempts": 1,
+          "latency_ms": 9421.000000002095,
+          "events": [
+            {
+              "node": "vision",
+              "model": "qwen/qwen3.7-flash",
+              "elapsed_ms": 9421.000000002095,
+              "usage": {
+                "prompt_tokens": 1448,
+                "completion_tokens": 151,
+                "total_tokens": 1599,
+                "prompt_tokens_details": {
+                  "text_tokens": 846,
+                  "image_tokens": 602
+                },
+                "completion_tokens_details": {
+                  "text_tokens": 151
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "1.2-014",
+          "split": "sealed_test",
+          "stratum": "electronics",
+          "ok": true,
+          "output": {
+            "status": "ready",
+            "title": "蓝色显示器",
+            "category": "数码与影音",
+            "description": "一台深蓝色边框的电脑显示器，配有同色圆柱形支架和椭圆形底座，屏幕处于黑屏状态，放置在木质桌面上。",
+            "tags": [
+              "显示器",
+              "蓝色",
+              "电脑配件"
+            ],
+            "uncertainties": [
+              "请补充显示器的具体品牌型号",
+              "请确认屏幕尺寸大小",
+              "请说明是否包含电源线及数据线"
+            ]
+          },
+          "error": null,
+          "attempts": 1,
+          "latency_ms": 4062.999999994645,
+          "events": [
+            {
+              "node": "vision",
+              "model": "qwen/qwen3.7-flash",
+              "elapsed_ms": 4030.9999999881256,
+              "usage": {
+                "prompt_tokens": 1448,
+                "completion_tokens": 133,
+                "total_tokens": 1581,
+                "prompt_tokens_details": {
+                  "text_tokens": 846,
+                  "image_tokens": 602
+                },
+                "completion_tokens_details": {
+                  "text_tokens": 133
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "1.2-015",
+          "split": "sealed_test",
+          "stratum": "book",
+          "ok": true,
+          "output": {
+            "status": "ready",
+            "title": "紫色精装书",
+            "category": "课程资料与书籍",
+            "description": "一本直立放置的紫色精装书，封面为纯色无文字设计，底部可见白色书页边缘。",
+            "tags": [
+              "紫色",
+              "精装书",
+              "书籍"
+            ],
+            "uncertainties": [
+              "请补充书名或具体用途（如笔记本、教材）",
+              "请确认是否为空白内页或特定内容书籍"
+            ]
+          },
+          "error": null,
+          "attempts": 1,
+          "latency_ms": 4719.000000011874,
+          "events": [
+            {
+              "node": "vision",
+              "model": "qwen/qwen3.7-flash",
+              "elapsed_ms": 4719.000000011874,
+              "usage": {
+                "prompt_tokens": 1448,
+                "completion_tokens": 127,
+                "total_tokens": 1575,
+                "prompt_tokens_details": {
+                  "text_tokens": 846,
+                  "image_tokens": 602
+                },
+                "completion_tokens_details": {
+                  "text_tokens": 127
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "usage": {
+        "calls": 9,
+        "input_tokens": 13032,
+        "output_tokens": 1201,
+        "failures": 0
+      },
+      "metrics": {
+        "valid_rate": 1.0,
+        "status_accuracy": 0.8888888888888888,
+        "category_accuracy": 0.8888888888888888,
+        "unsupported_attribute_rate": 0.2222222222222222,
+        "p95_latency_ms": 8008.999999990918
+      }
+    },
+    {
+      "node": "2.3",
+      "split": "sealed_test",
+      "candidate": "program",
+      "model": "lexical-alias-1",
+      "fixture": false,
+      "started_at": "2026-11-23T03:31:59.185646+00:00",
+      "samples": [
+        {
+          "id": "2.3-004",
+          "split": "sealed_test",
+          "stratum": "normal",
+          "ok": true,
+          "output": {
+            "ranked": [
+              "l6",
+              "l7",
+              "l4",
+              "l2",
+              "l1",
+              "l3"
+            ]
+          },
+          "error": null,
+          "attempts": 1,
+          "latency_ms": 0.0,
+          "events": [
+            {
+              "node": "recall",
+              "model": "lexical-alias",
+              "ranked": 6
+            }
+          ]
+        },
+        {
+          "id": "2.3-005",
+          "split": "sealed_test",
+          "stratum": "normal",
+          "ok": true,
+          "output": {
+            "ranked": [
+              "d6",
+              "d1"
+            ]
+          },
+          "error": null,
+          "attempts": 1,
+          "latency_ms": 0.0,
+          "events": [
+            {
+              "node": "recall",
+              "model": "lexical-alias",
+              "ranked": 2
+            }
+          ]
+        },
+        {
+          "id": "2.3-006",
+          "split": "sealed_test",
+          "stratum": "normal",
+          "ok": true,
+          "output": {
+            "ranked": [
+              "b9",
+              "b5",
+              "b4"
+            ]
+          },
+          "error": null,
+          "attempts": 1,
+          "latency_ms": 14.999999984866008,
+          "events": [
+            {
+              "node": "recall",
+              "model": "lexical-alias",
+              "ranked": 3
+            }
+          ]
+        },
+        {
+          "id": "2.3-007",
+          "split": "sealed_test",
+          "stratum": "normal",
+          "ok": true,
+          "output": {
+            "ranked": [
+              "h1",
+              "h7",
+              "h6",
+              "h4",
+              "h2",
+              "h3"
+            ]
+          },
+          "error": null,
+          "attempts": 1,
+          "latency_ms": 0.0,
+          "events": [
+            {
+              "node": "recall",
+              "model": "lexical-alias",
+              "ranked": 6
+            }
+          ]
+        },
+        {
+          "id": "2.3-008",
+          "split": "sealed_test",
+          "stratum": "normal",
+          "ok": true,
+          "output": {
+            "ranked": [
+              "x6",
+              "x1"
+            ]
+          },
+          "error": null,
+          "attempts": 1,
+          "latency_ms": 0.0,
+          "events": [
+            {
+              "node": "recall",
+              "model": "lexical-alias",
+              "ranked": 2
+            }
+          ]
+        },
+        {
+          "id": "2.3-009",
+          "split": "sealed_test",
+          "stratum": "normal",
+          "ok": true,
+          "output": {
+            "ranked": [
+              "c6"
+            ]
+          },
+          "error": null,
+          "attempts": 1,
+          "latency_ms": 0.0,
+          "events": [
+            {
+              "node": "recall",
+              "model": "lexical-alias",
+              "ranked": 1
+            }
+          ]
+        },
+        {
+          "id": "2.3-010",
+          "split": "sealed_test",
+          "stratum": "normal",
+          "ok": true,
+          "output": {
+            "ranked": [
+              "k1",
+              "k2",
+              "x4"
+            ]
+          },
+          "error": null,
+          "attempts": 1,
+          "latency_ms": 0.0,
+          "events": [
+            {
+              "node": "recall",
+              "model": "lexical-alias",
+              "ranked": 3
+            }
+          ]
+        },
+        {
+          "id": "2.3-014",
+          "split": "sealed_test",
+          "stratum": "boundary",
+          "ok": true,
+          "output": {
+            "ranked": [
+              "c7",
+              "c8",
+              "c2"
+            ]
+          },
+          "error": null,
+          "attempts": 1,
+          "latency_ms": 0.0,
+          "events": [
+            {
+              "node": "recall",
+              "model": "lexical-alias",
+              "ranked": 3
+            }
+          ]
+        },
+        {
+          "id": "2.3-015",
+          "split": "sealed_test",
+          "stratum": "boundary",
+          "ok": true,
+          "output": {
+            "ranked": [
+              "l6",
+              "l7",
+              "l4"
+            ]
+          },
+          "error": null,
+          "attempts": 1,
+          "latency_ms": 16.00000000325963,
+          "events": [
+            {
+              "node": "recall",
+              "model": "lexical-alias",
+              "ranked": 3
+            }
+          ]
+        },
+        {
+          "id": "2.3-016",
+          "split": "sealed_test",
+          "stratum": "boundary",
+          "ok": true,
+          "output": {
+            "ranked": [
+              "d8",
+              "d5"
+            ]
+          },
+          "error": null,
+          "attempts": 1,
+          "latency_ms": 0.0,
+          "events": [
+            {
+              "node": "recall",
+              "model": "lexical-alias",
+              "ranked": 2
+            }
+          ]
+        },
+        {
+          "id": "2.3-017",
+          "split": "sealed_test",
+          "stratum": "boundary",
+          "ok": true,
+          "output": {
+            "ranked": [
+              "c5"
+            ]
+          },
+          "error": null,
+          "attempts": 1,
+          "latency_ms": 0.0,
+          "events": [
+            {
+              "node": "recall",
+              "model": "lexical-alias",
+              "ranked": 1
+            }
+          ]
+        },
+        {
+          "id": "2.3-018",
+          "split": "sealed_test",
+          "stratum": "boundary",
+          "ok": true,
+          "output": {
+            "ranked": [
+              "m3",
+              "m1",
+              "m10",
+              "m8"
+            ]
+          },
+          "error": null,
+          "attempts": 1,
+          "latency_ms": 0.0,
+          "events": [
+            {
+              "node": "recall",
+              "model": "lexical-alias",
+              "ranked": 4
+            }
+          ]
+        },
+        {
+          "id": "2.3-019",
+          "split": "sealed_test",
+          "stratum": "boundary",
+          "ok": true,
+          "output": {
+            "ranked": [
+              "l6",
+              "l7",
+              "l4",
+              "l2"
+            ]
+          },
+          "error": null,
+          "attempts": 1,
+          "latency_ms": 0.0,
+          "events": [
+            {
+              "node": "recall",
+              "model": "lexical-alias",
+              "ranked": 4
+            }
+          ]
+        },
+        {
+          "id": "2.3-020",
+          "split": "sealed_test",
+          "stratum": "boundary",
+          "ok": true,
+          "output": {
+            "ranked": [
+              "c2"
+            ]
+          },
+          "error": null,
+          "attempts": 1,
+          "latency_ms": 0.0,
+          "events": [
+            {
+              "node": "recall",
+              "model": "lexical-alias",
+              "ranked": 1
+            }
+          ]
+        },
+        {
+          "id": "2.3-023",
+          "split": "sealed_test",
+          "stratum": "normal",
+          "ok": true,
+          "output": {
+            "ranked": [
+              "x6",
+              "x1"
+            ]
+          },
+          "error": null,
+          "attempts": 1,
+          "latency_ms": 16.00000000325963,
+          "events": [
+            {
+              "node": "recall",
+              "model": "lexical-alias",
+              "ranked": 2
+            }
+          ]
+        },
+        {
+          "id": "2.3-026",
+          "split": "sealed_test",
+          "stratum": "boundary",
+          "ok": true,
+          "output": {
+            "ranked": [
+              "c2"
+            ]
+          },
+          "error": null,
+          "attempts": 1,
+          "latency_ms": 0.0,
+          "events": [
+            {
+              "node": "recall",
+              "model": "lexical-alias",
+              "ranked": 1
+            }
+          ]
+        },
+        {
+          "id": "2.3-029",
+          "split": "sealed_test",
+          "stratum": "contradictory",
+          "ok": true,
+          "output": {
+            "ranked": [
+              "m10",
+              "b8",
+              "b7",
+              "m12",
+              "b5",
+              "m14",
+              "m8",
+              "m11",
+              "b3",
+              "m9"
+            ]
+          },
+          "error": null,
+          "attempts": 1,
+          "latency_ms": 0.0,
+          "events": [
+            {
+              "node": "recall",
+              "model": "lexical-alias",
+              "ranked": 10
+            }
+          ]
+        },
+        {
+          "id": "2.3-030",
+          "split": "sealed_test",
+          "stratum": "normal",
+          "ok": true,
+          "output": {
+            "ranked": [
+              "x5"
+            ]
+          },
+          "error": null,
+          "attempts": 1,
+          "latency_ms": 0.0,
+          "events": [
+            {
+              "node": "recall",
+              "model": "lexical-alias",
+              "ranked": 1
+            }
+          ]
+        }
+      ],
+      "usage": {
+        "calls": 0,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "failures": 0
+      },
+      "metrics": {
+        "valid_rate": 1.0,
+        "recall_at_10": 0.9603174603174602,
+        "p95_latency_ms": 16.00000000325963
+      }
+    }
+  ],
+  "checks": {
+    "1.1": {
+      "valid_rate": {
+        "value": 1.0,
+        "rule": {
+          "min": 0.98,
+          "hard": true
+        },
+        "pass": true
+      },
+      "field_macro_f1": {
+        "value": 0.8416666666666666,
+        "rule": {
+          "min": 0.85,
+          "hard": true
+        },
+        "pass": false
+      },
+      "clarification_accuracy": {
+        "value": 1.0,
+        "rule": {
+          "min": 0.8,
+          "hard": false
+        },
+        "pass": true
+      },
+      "p95_latency_ms": {
+        "value": 5592.449999997913,
+        "rule": {
+          "max": 20000,
+          "hard": true
+        },
+        "pass": true
+      }
+    },
+    "2.1": {
+      "valid_rate": {
+        "value": 1.0,
+        "rule": {
+          "min": 0.98,
+          "hard": true
+        },
+        "pass": true
+      },
+      "field_macro_f1": {
+        "value": 0.8641975308641975,
+        "rule": {
+          "min": 0.85,
+          "hard": true
+        },
+        "pass": true
+      },
+      "hard_field_exact": {
+        "value": 0.9722222222222222,
+        "rule": {
+          "min": 0.9,
+          "hard": true
+        },
+        "pass": true
+      },
+      "quote_recall": {
+        "value": 0.9861111111111112,
+        "rule": {
+          "min": 0.95,
+          "hard": true
+        },
+        "pass": true
+      },
+      "injection_structure_rate": {
+        "value": 1.0,
+        "rule": {
+          "min": 1.0,
+          "hard": true
+        },
+        "pass": true
+      },
+      "p95_latency_ms": {
+        "value": 5378.800000007321,
+        "rule": {
+          "max": 20000,
+          "hard": true
+        },
+        "pass": true
+      }
+    },
+    "2.4": {
+      "valid_rate": {
+        "value": 1.0,
+        "rule": {
+          "min": 0.98,
+          "hard": true
+        },
+        "pass": true
+      },
+      "verdict_accuracy": {
+        "value": 0.6666666666666666,
+        "rule": {
+          "min": 0.8,
+          "hard": false
+        },
+        "pass": false
+      },
+      "match_recall": {
+        "value": 0.7692307692307693,
+        "rule": {
+          "min": 0.85,
+          "hard": true
+        },
+        "pass": false
+      },
+      "grounding_rate": {
+        "value": 1.0,
+        "rule": {
+          "min": 1.0,
+          "hard": true
+        },
+        "pass": true
+      },
+      "exclusion_false_accept": {
+        "value": 0,
+        "rule": {
+          "max": 0,
+          "hard": true
+        },
+        "pass": true
+      },
+      "preference_only_reject": {
+        "value": 0,
+        "rule": {
+          "max": 0,
+          "hard": true
+        },
+        "pass": true
+      },
+      "p95_latency_ms": {
+        "value": 5798.8999999972275,
+        "rule": {
+          "max": 20000,
+          "hard": true
+        },
+        "pass": true
+      }
+    },
+    "1.2": {
+      "valid_rate": {
+        "value": 1.0,
+        "rule": {
+          "min": 0.98,
+          "hard": true
+        },
+        "pass": true
+      },
+      "status_accuracy": {
+        "value": 0.8888888888888888,
+        "rule": {
+          "min": 0.8,
+          "hard": true
+        },
+        "pass": true
+      },
+      "category_accuracy": {
+        "value": 0.8888888888888888,
+        "rule": {
+          "min": 0.8,
+          "hard": true
+        },
+        "pass": true
+      },
+      "unsupported_attribute_rate": {
+        "value": 0.2222222222222222,
+        "rule": {
+          "max": 0.05,
+          "hard": true
+        },
+        "pass": false
+      },
+      "p95_latency_ms": {
+        "value": 8008.999999990918,
+        "rule": {
+          "max": 30000,
+          "hard": true
+        },
+        "pass": true
+      }
+    },
+    "2.3": {
+      "valid_rate": {
+        "value": 1.0,
+        "rule": {
+          "min": 0.98,
+          "hard": true
+        },
+        "pass": true
+      },
+      "recall_at_10": {
+        "value": 0.9603174603174602,
+        "rule": {
+          "min": 0.8,
+          "hard": true
+        },
+        "pass": true
+      },
+      "p95_latency_ms": {
+        "value": 16.00000000325963,
+        "rule": {
+          "max": 5000,
+          "hard": false
+        },
+        "pass": true
+      }
+    }
+  }
+}
