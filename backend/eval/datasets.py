@@ -33,6 +33,15 @@ def git_sha():
         return None
 
 
+def git_dirty():
+    try:
+        result = subprocess.run(['git', 'status', '--porcelain'], capture_output=True, text=True,
+                                check=True).stdout.strip()
+    except (OSError, subprocess.SubprocessError):
+        return None
+    return bool(result)
+
+
 def read_rows(path):
     rows = []
     for number, line in enumerate(path.read_text(encoding='utf-8').splitlines(), 1):

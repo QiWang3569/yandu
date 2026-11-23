@@ -40,20 +40,25 @@ class Assessment(StrictModel):
     @classmethod
     def checked(cls, value, item, intent):
         result = cls.model_validate(value)
-        criteria = {*intent['keywords'], *intent['excluded_keywords'], *intent['preferences'], '商品'}
-        hard = {*intent['keywords'], *intent['excluded_keywords']}
+        keywords = intent.get('keywords', [])
+        excluded = intent.get('excluded_keywords', [])
+        criteria = {*keywords, *excluded, *intent.get('preferences', []), '商品'}
         source = [item['title'], item['description'], *item['tags']]
         if any(e.criterion not in criteria or not any(e.quote in s for s in source) for e in result.evidence):
             raise ValueError('Ungrounded evidence')
         if result.verdict in {'MATCH', 'NO_MATCH'} and not result.evidence:
             raise ValueError('A definitive judgment requires evidence')
-        if result.verdict == 'NO_MATCH' and not any(e.criterion in hard for e in result.evidence):
+        if result.verdict == 'NO_MATCH' and not any(e.criterion in {*keywords, *excluded} for e in result.evidence):
             raise ValueError('A preference cannot reject a candidate')
         if result.verdict == 'MATCH':
-            missing = hard - {e.criterion for e in result.evidence}
+            # Absence of an excluded term is normal; only required items need positive evidence.
+            if any(term and term in ' '.join(source) for term in excluded):
+                raise ValueError('Excluded term present in a MATCH')
+            missing = set(keywords) - {e.criterion for e in result.evidence}
             if missing:
                 result.verdict = 'UNCERTAIN'
-                result.questions = list(dict.fromkeys([*result.questions, *(f'请确认商品是否满足“{k}”这一条件？' if k in intent['keywords'] else f'请确认商品是否具有不接受的特征“{k}”？' for k in sorted(missing))]))[:6]
+                result.questions = list(dict.fromkeys([*result.questions, *(f'请确认商品是否满足“{k}”这一条件？'
+                                                                              for k in sorted(missing))]))[:6]
         if result.verdict == 'UNCERTAIN' and not result.questions:
             raise ValueError('An uncertain judgment requires a question')
         if any(not q.strip() or len(q) > 160 for q in result.questions):

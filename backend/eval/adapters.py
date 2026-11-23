@@ -40,7 +40,7 @@ def run_item(raw, settings, sink):
 
 
 def run_intent(query, settings, sink):
-    parsed = services.parse_intent(query, settings, observer=sink.append)
+    parsed, quotes = services.parse_intent_with_quotes(query, settings, observer=sink.append)
     return {
         'category': parsed.category,
         'max_price': float(parsed.max_price) if parsed.max_price is not None else None,
@@ -50,7 +50,7 @@ def run_intent(query, settings, sink):
         'preferences': list(parsed.preferences),
         'condition_grade': parsed.condition_grade,
         'clarification': parsed.clarification,
-        'quotes': [],
+        'quotes': quotes,
     }
 
 

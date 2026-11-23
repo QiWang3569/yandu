@@ -77,6 +77,11 @@ def test_models_config_contains_no_literal_secrets():
                                       'price_per_1k_input', 'price_per_1k_output'}
 
 
+def test_git_state_is_recorded_for_traceability():
+    assert isinstance(datasets.git_sha(), (str, type(None)))
+    assert isinstance(datasets.git_dirty(), (bool, type(None)))
+
+
 DUMMY_RUN = {'node': '1.1', 'candidate': 'c', 'split': 'dev', 'samples': [],
              'usage': {'calls': 0, 'input_tokens': 0, 'output_tokens': 0, 'failures': 0}}
 

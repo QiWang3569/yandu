@@ -152,8 +152,14 @@ def test_remote_parser_and_worker_use_single_chat_key_and_confirmed_fields(tmp_p
         data = json.loads(payload['messages'][1]['content'])
         calls.append(data)
         if 'query' in data:
-            return json_reply({'category': '数码与影音', 'max_price': 300, 'campus': '万柳学区',
-                               'keywords': ['鼠标', '无线'], 'preferences': ['静音'], 'excluded_keywords': ['游戏鼠标']})
+            return json_reply({'category': '数码与影音', 'max_price': 300, 'budget_quote': '300',
+                               'campus': '万柳学区', 'campus_quote': '万柳',
+                               'condition_grade': None, 'condition_quote': '',
+                               'conditions': [{'role': 'required', 'term': '鼠标', 'quote': '鼠标'},
+                                              {'role': 'required', 'term': '无线', 'quote': '无线'},
+                                              {'role': 'excluded', 'term': '游戏鼠标', 'quote': '游戏鼠标'},
+                                              {'role': 'preferred', 'term': '静音', 'quote': '静音'}],
+                               'clarification': None})
         # Confirmed fields, not the original sentence, are the only source of constraints.
         assert data['intent']['excluded_keywords'] == []
         return json_reply(sample_review(data))
@@ -211,8 +217,27 @@ def test_missing_hard_evidence_becomes_uncertain(tmp_path, monkeypatch):
     item = {'id': 'one', 'title': '无线鼠标', 'description': '无线鼠标，功能正常。', 'tags': ['鼠标']}
     fake_provider(monkeypatch, lambda request: json_reply({'assessments': [{'item_id': 'one', 'verdict': 'MATCH',
         'evidence': [{'criterion': '鼠标', 'quote': '无线鼠标'}], 'questions': []}]}))
-    result = review_candidates({'keywords': ['鼠标'], 'excluded_keywords': ['游戏鼠标'], 'preferences': []}, [item], remote_settings(tmp_path))[0]
-    assert result.verdict == 'UNCERTAIN' and '游戏鼠标' in result.questions[0]
+    result = review_candidates({'keywords': ['鼠标', '静音'], 'excluded_keywords': ['游戏鼠标'], 'preferences': []},
+                               [item], remote_settings(tmp_path))[0]
+    assert result.verdict == 'UNCERTAIN' and '静音' in result.questions[0]
+
+
+def test_absent_exclusion_does_not_block_match(tmp_path, monkeypatch):
+    item = {'id': 'one', 'title': '无线鼠标', 'description': '无线鼠标，功能正常。', 'tags': ['鼠标']}
+    fake_provider(monkeypatch, lambda request: json_reply({'assessments': [{'item_id': 'one', 'verdict': 'MATCH',
+        'evidence': [{'criterion': '鼠标', 'quote': '无线鼠标'}], 'questions': []}]}))
+    result = review_candidates({'keywords': ['鼠标'], 'excluded_keywords': ['游戏鼠标'], 'preferences': []},
+                               [item], remote_settings(tmp_path))[0]
+    assert result.verdict == 'MATCH'
+
+
+def test_exclusion_present_in_text_cannot_be_match(tmp_path, monkeypatch):
+    item = {'id': 'one', 'title': '静音游戏鼠标', 'description': '静音游戏鼠标，RGB 灯效。', 'tags': ['鼠标']}
+    fake_provider(monkeypatch, lambda request: json_reply({'assessments': [{'item_id': 'one', 'verdict': 'MATCH',
+        'evidence': [{'criterion': '鼠标', 'quote': '静音游戏鼠标'}], 'questions': []}]}))
+    with pytest.raises(ModelUnavailable):
+        review_candidates({'keywords': ['鼠标'], 'excluded_keywords': ['游戏鼠标'], 'preferences': []},
+                          [item], remote_settings(tmp_path))
 
 
 def test_failed_jobs_remain_saved_can_retry_and_are_owner_scoped(tmp_path, monkeypatch):
@@ -374,3 +399,22 @@ def test_invalid_embeddings_do_not_save_half_finished_intent(tmp_path, monkeypat
         assert client.get('/api/v1/intents/my').json() == []
         with app.state.session_factory() as db:
             assert db.scalar(select(MatchJob.id)) is None
+
+
+def test_observability_callback_is_optional_and_reports_usage(tmp_path, monkeypatch):
+    fake_provider(monkeypatch, lambda request: httpx.Response(200, json={
+        'choices': [{'message': {'content': json.dumps({'ok': True})}, 'finish_reason': 'stop'}],
+        'usage': {'prompt_tokens': 12, 'completion_tokens': 3}}))
+    settings = remote_settings(tmp_path)
+    assert buyer_agent.chat_json('system', {'query': 'x'}, settings) == {'ok': True}
+    events = []
+    assert buyer_agent.chat_json('system', {'query': 'x'}, settings, observer=events.append) == {'ok': True}
+    assert events[0]['node'] == 'chat' and events[0]['usage']['prompt_tokens'] == 12
+    assert events[0]['elapsed_ms'] >= 0
+
+    failed = []
+    fake_provider(monkeypatch, lambda request: httpx.Response(500, content=b'test-credential'))
+    with pytest.raises(ModelUnavailable):
+        buyer_agent.chat_json('system', {'query': 'x'}, settings, observer=failed.append)
+    assert failed[0]['error'] == 'model_unavailable'
+    assert 'test-credential' not in json.dumps(failed)

@@ -170,6 +170,7 @@ def cmd_real(args):
         'dataset_sha': {name: meta['sha256'] for name, meta in manifest.get('files', {}).items()},
         'dataset_verified': ok,
         'git_sha': datasets.git_sha(),
+        'git_dirty': datasets.git_dirty(),
         'prompt_versions': prompt_versions,
         'models': model_rows,
         'unavailable': unavailable,

@@ -85,6 +85,26 @@ class ParsedIntent(StrictModel):
         return self
 
 
+class IntentCondition(StrictModel):
+    role: Literal['required', 'preferred', 'excluded']
+    term: str = Field(min_length=1, max_length=30)
+    quote: str = Field(default='', max_length=40)
+
+
+class StructuredIntent(StrictModel):
+    """Internal extraction shape; flattened to ParsedIntent before it leaves the service."""
+    category: str | None = None
+    max_price: Decimal | None = None
+    budget_quote: str = Field(default='', max_length=40)
+    campus: str = '不限校区'
+    campus_quote: str = Field(default='', max_length=40)
+    condition_grade: str | None = None
+    condition_quote: str = Field(default='', max_length=40)
+    conditions: list[IntentCondition] = Field(default_factory=list, max_length=24)
+    clarification: str | None = Field(default=None, max_length=500)
+    clarification_quotes: list[str] = Field(default_factory=list, max_length=8)
+
+
 class IntentCreate(QueryIn):
     parsed: ParsedIntent
 
