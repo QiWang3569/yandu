@@ -164,12 +164,33 @@ def _group_summary(rows, manifest):
                                     if summary["total_cost_cny"] is not None and summary["passed_count"] else None)
     summary.update(_classification(rows, "score"))
     summary["raw_classification"] = _classification(rows, "raw_score")
+    def metrics(row):
+        return (row.get('score') or {}).get('metrics', {})
+
+    if task == 'candidate_review':
+        match = summary.get('per_class', {}).get('MATCH', {})
+        summary['match_recall'] = match['recall'] if match.get('support') else None
+        summary['match_support'] = match.get('support', 0)
+        summary['evidence_rule_pass_rate'] = sum(
+            row.get('status') == 'ok' and metrics(row).get('evidence_valid') is True for row in rows) / n
     if task == 'vision_draft':
         for field, metric in [('category', 'category_accuracy'), ('status', 'status_accuracy')]:
-            # Execution/schema failures are included as failures when all cases assert these fields.
-            success = sum(r.get('status') == 'ok' and any(c['field'] == field and c['passed']
-                          for c in r['score']['checks']) for r in rows)
-            summary[metric] = success / n
+            # An annotated execution/schema failure counts as incorrect. An
+            # unannotated row, including legacy failures without metadata, is excluded.
+            annotated = [row for row in rows if field in metrics(row).get('vision_annotated_fields', ())
+                         or any(c['field'] == field for c in (row.get('score') or {}).get('checks', []))]
+            success = sum(row.get('status') == 'ok' and metrics(row).get('schema_valid') is True
+                          and any(c['field'] == field and c['passed'] for c in row['score']['checks'])
+                          for row in annotated)
+            summary[metric] = success / len(annotated) if annotated else None
+            summary[field + '_annotated_count'] = len(annotated)
+        forbidden_rows = [row for row in rows if metrics(row).get('vision_has_forbidden_labels') is True]
+        scored = [metrics(row)['vision_forbidden_mention_detected'] for row in forbidden_rows
+                  if row.get('status') == 'ok' and metrics(row).get('schema_valid') is True
+                  and 'vision_forbidden_mention_detected' in metrics(row)]
+        summary['forbidden_mention_rate'] = sum(scored) / len(scored) if scored else None
+        summary['forbidden_mention_scored_count'] = len(scored)
+        summary['forbidden_mention_unscored_count'] = len(forbidden_rows) - len(scored)
     from .extended_reporting import group_diagnostics
     summary.update(group_diagnostics(rows, manifest))
     return summary
@@ -324,13 +345,16 @@ def _report_markdown(summary, manifest, policy, records):
     for g in summary["groups"]:
         if g["macro_f1"] is not None or g["raw_pass_rate"] is not None or g["application_pass_rate"] is not None:
             lines.append(f"- `{_cell(g['model'])}`／{g['task']}／{g['split']}：原始结果通过率 {_pct(g['raw_pass_rate'])}，应用结果通过率 {_pct(g['application_pass_rate'])}，macro-F1 {_fmt(g['macro_f1'])}，错误推荐率 {_pct(g['false_match_rate'])}，回退 {g['fallback_count']} 次。")
+    for g in summary["groups"]:
+        if g['task'] == 'candidate_review':
+            lines.append(f"- `{_cell(g['model'])}`／{g['split']}：MATCH 召回率 {_pct(g['match_recall'])}（正例 {g['match_support']}），证据规则通过率 {_pct(g['evidence_rule_pass_rate'])}。")
     failed = [r for r in records if not _passed(r) or r.get("status") != "ok"]
     if any(g['task'] == 'vision_draft' for g in summary['groups']):
         lines.extend(['', '## 图片测评', '',
             '复用线上图片预处理、提示词和输出校验；每次执行直接调用模型，不使用业务缓存。可见事实按预先标注的词组匹配，无法覆盖所有语义错误，仍需人工检查描述与图片是否一致。', ''])
         for g in summary['groups']:
             if g['task'] == 'vision_draft':
-                lines.append(f"- `{_cell(g['model'])}`：类别准确率 {_pct(g.get('category_accuracy'))}；状态准确率 {_pct(g.get('status_accuracy'))}。")
+                lines.append(f"- `{_cell(g['model'])}`：类别准确率 {_pct(g.get('category_accuracy'))}；状态准确率 {_pct(g.get('status_accuracy'))}；禁提词命中率 {_pct(g['forbidden_mention_rate'])}（可检 {g['forbidden_mention_scored_count']}，未能检查 {g['forbidden_mention_unscored_count']}）。")
     lines.extend(["", "## 失败用例", "", "完整结果与输出见 records.jsonl；下表列出最多 100 条失败记录。", "",
                   "| 用例 | 模型 | 重复 | 原因 |", "| --- | --- | ---: | --- |"])
     for row in failed[:100]:
@@ -354,7 +378,10 @@ def write_reports(output_dir, records, manifest, policy):
     fields = ["model", "task", "split", "case_count", "count", "expected_count", "complete", "pass_rate", "mean_score", "error_rate", "schema_valid_rate", "raw_pass_rate", "application_pass_rate", "macro_f1", "false_match_rate", "p50_latency_ms", "p95_latency_ms", "attempt_count", "total_cost_cny", "mean_cost_cny", "unknown_cost_count"]
     fields += ['mrr', 'map_at_5', 'recall_at_10', 'retrieval_positive_count', 'zero_result_error_rate',
                'zero_result_evaluated_count', 'first_schema_valid_rate', 'consistency_rate',
-               'metamorphic_pass_rate', 'p95_parse_latency_ms', 'p95_search_latency_ms', 'category_accuracy', 'status_accuracy']
+               'metamorphic_pass_rate', 'p95_parse_latency_ms', 'p95_search_latency_ms', 'category_accuracy', 'status_accuracy',
+               'category_annotated_count', 'status_annotated_count', 'forbidden_mention_rate',
+               'forbidden_mention_scored_count', 'forbidden_mention_unscored_count', 'match_recall',
+               'match_support', 'evidence_rule_pass_rate']
     with (output_dir / "summary.csv").open("w", newline="", encoding="utf-8-sig") as stream:
         writer = csv.DictWriter(stream, fields, extrasaction="ignore")
         writer.writeheader()

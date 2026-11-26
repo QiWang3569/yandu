@@ -95,6 +95,8 @@ def score_case(case: dict, output: Any, error=None) -> dict:
         metrics.update(_review_metrics(case, None if error is not None else output))
     elif case['task'] == 'vision_draft':
         metrics['requires_human_review'] = True
+        metrics['vision_annotated_fields'] = sorted(case['expected']['fields'])
+        metrics['vision_has_forbidden_labels'] = bool(case['expected'].get('forbidden_mentions'))
 
     def add(field, passed, expected, actual):
         checks.append({'field': field, 'passed': bool(passed), 'expected': expected, 'actual': actual})
@@ -128,6 +130,9 @@ def score_case(case: dict, output: Any, error=None) -> dict:
                 add(f'visual_fact[{i}]', any(normalize_term(term) in text for term in alternatives), alternatives, text)
             for i, term in enumerate(target.get('forbidden_mentions', [])):
                 add(f'forbidden_fact[{i}]', normalize_term(term) not in text, 'absent: ' + term, text)
+            if metrics['vision_has_forbidden_labels']:
+                metrics['vision_forbidden_mention_detected'] = any(
+                    not c['passed'] for c in checks if c['field'].startswith('forbidden_fact['))
             if target.get('uncertainty_required') is not None:
                 add('uncertainty', bool(output['uncertainties']) == target['uncertainty_required'],
                     target['uncertainty_required'], bool(output['uncertainties']))
