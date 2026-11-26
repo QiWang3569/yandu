@@ -581,12 +581,7 @@ export default function App() {
     navigate("market");
     setSearchRequest((value) => value + 1);
   }
-  function clearSearch() {
-    if (view === "wanted") {
-      setWantedSearch("");
-      setWantedQuery("");
-      return;
-    }
+  function resetMarketSearch() {
     setSearch("");
     setQuery("");
     setSmartQuery("");
@@ -594,6 +589,14 @@ export default function App() {
     setSmartError("");
     setPage(1);
     setSmartPage(1);
+  }
+  function clearSearch() {
+    if (view === "wanted") {
+      setWantedSearch("");
+      setWantedQuery("");
+      return;
+    }
+    resetMarketSearch();
   }
   const searchBarProps = {
     target: view === "wanted" ? "wanted" as const : "market" as const,
@@ -824,6 +827,11 @@ export default function App() {
               onClick={() => {
                 setCategory("");
                 setPrice("");
+                if (key === "market") {
+                  // The browse button also refreshes when the current route is already the market.
+                  resetMarketSearch();
+                  refresh();
+                }
                 navigate(key as View);
               }}
             >
