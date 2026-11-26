@@ -244,3 +244,40 @@ def test_score_drop_on_already_failed_case_is_a_regression(tmp_path, after_score
     assert result["regressions"] == []
     assert bool(result["score_regressions"]) is expected_regression
     assert result["has_regressions"] is expected_regression
+
+
+def test_vision_summary_separates_missing_labels_failed_runs_and_forbidden_mentions():
+    rows = [row(str(i)) for i in range(3)]
+    for entry in rows:
+        entry['task'] = 'vision_draft'
+    rows[0]['score']['metrics'].update(vision_annotated_fields=['category'],
+                                       vision_has_forbidden_labels=True,
+                                       vision_forbidden_mention_detected=True)
+    rows[1]['score']['checks'] = []
+    rows[1]['score']['metrics'].update(schema_valid=False, vision_annotated_fields=['category'],
+                                       vision_has_forbidden_labels=True)
+    rows[1]['status'] = 'error'
+    rows[2]['score']['checks'] = []
+    group = summarize(rows, manifest(), policy())['groups'][0]
+    assert group['category_annotated_count'] == 2
+    assert group['category_accuracy'] == 0.5
+    assert group['status_accuracy'] is None
+    assert group['forbidden_mention_rate'] == 1.0
+    assert group['forbidden_mention_scored_count'] == 1
+    assert group['forbidden_mention_unscored_count'] == 1
+
+
+def test_candidate_summary_keeps_recall_and_evidence_separate():
+    rows = [row(), row('b')]
+    for entry in rows:
+        entry['task'] = 'candidate_review'
+    rows[0]['score']['metrics'].update(
+        verdict_pairs=[{'expected': 'MATCH', 'actual': 'MATCH'}], evidence_valid=False)
+    rows[1]['score']['metrics'].update(
+        verdict_pairs=[{'expected': 'MATCH', 'actual': 'UNCERTAIN'}], evidence_valid=True)
+    group = summarize(rows, manifest(), policy())['groups'][0]
+    assert group['match_support'] == 2
+    assert group['match_recall'] == 0.5
+    assert group['evidence_rule_pass_rate'] == 0.5
+    rows[1]['score']['metrics']['verdict_pairs'] = [{'expected': 'NO_MATCH', 'actual': 'NO_MATCH'}]
+    assert summarize(rows[1:], manifest(), policy())['groups'][0]['match_recall'] is None

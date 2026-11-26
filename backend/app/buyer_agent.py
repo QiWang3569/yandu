@@ -6,6 +6,7 @@ import httpx
 from pydantic import Field
 
 from .config import Settings
+from .observability import collect_provider_usage, model_operation
 from .schemas import StrictModel
 
 
@@ -60,6 +61,7 @@ def chat_json(system: str, payload, settings: Settings, max_tokens=2500):
                                    {'role': 'user', 'content': json.dumps(payload, ensure_ascii=False)}]})
             response.raise_for_status()
             body = response.json()
+            collect_provider_usage(body)
             if body['choices'][0].get('finish_reason') == 'length':
                 raise ValueError('Truncated JSON')
             result = json.loads(body['choices'][0]['message']['content'])
@@ -91,21 +93,22 @@ def review_candidates(intent: dict, items: list[dict], settings: Settings) -> li
         '"evidence":[{"criterion":"静音","quote":"静音无线鼠标"}],'
         '"questions":["是否包含接收器？"]}]}。'
     )
-    response = chat_json(system, {'intent': intent, 'items': items}, settings, max_tokens=5000)
-    try:
-        if set(response) != {'assessments'} or not isinstance(response['assessments'], list):
-            raise ValueError('Invalid batch')
-        by_id = {i['id']: i for i in items}
-        results = []
-        seen = set()
-        for value in response['assessments']:
-            item_id = value['item_id']
-            if item_id not in by_id or item_id in seen:
-                raise ValueError('Unknown or duplicate candidate')
-            results.append(Assessment.checked(value, by_id[item_id], intent))
-            seen.add(item_id)
-        if seen != set(by_id):
-            raise ValueError('Missing candidate')
-        return results
-    except (ValueError, KeyError, TypeError):
-        raise ModelUnavailable('invalid_assessment') from None
+    with model_operation('candidate_review'):
+        response = chat_json(system, {'intent': intent, 'items': items}, settings, max_tokens=5000)
+        try:
+            if set(response) != {'assessments'} or not isinstance(response['assessments'], list):
+                raise ValueError('Invalid batch')
+            by_id = {i['id']: i for i in items}
+            results = []
+            seen = set()
+            for value in response['assessments']:
+                item_id = value['item_id']
+                if item_id not in by_id or item_id in seen:
+                    raise ValueError('Unknown or duplicate candidate')
+                results.append(Assessment.checked(value, by_id[item_id], intent))
+                seen.add(item_id)
+            if seen != set(by_id):
+                raise ValueError('Missing candidate')
+            return results
+        except (ValueError, KeyError, TypeError):
+            raise ModelUnavailable('invalid_assessment') from None

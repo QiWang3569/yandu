@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type FormEvent } from "react";
+import { useEffect, useLayoutEffect, useRef, useState, type FormEvent } from "react";
 import { ArrowLeft, ArrowRight, Flag, ImagePlus, LockKeyhole, Mail, MessageCircle, Send, ShieldOff, Sparkles, Trash2, X } from "lucide-react";
 import { api, statusText, type ChatMessage, type Conversation, type Item, type Meta, type TradeReview, type User } from "./api";
 import { Empty, Modal, ProductArt } from "./components";
@@ -214,6 +214,13 @@ export function PasswordSetup({ meta, initialEmail = "", onSignedIn }: {
   </form>;
 }
 
+type ChatDraft = { body: string; images: string[] };
+const emptyChatDraft: ChatDraft = { body: "", images: [] };
+function mergeMessages(current: ChatMessage[], updates: ChatMessage[]) {
+  const byId = new Map([...current, ...updates].map((message) => [message.id, message]));
+  return [...byId.values()].sort((a, b) => a.created_at.localeCompare(b.created_at) || a.id.localeCompare(b.id));
+}
+
 export function ChatCenter({ user, conversations, initialItem, initialDraft, initialConversationId, onConversationOpened, onStarted, onOpenItem, refresh }: {
   user: User;
   conversations: Conversation[];
@@ -232,8 +239,15 @@ export function ChatCenter({ user, conversations, initialItem, initialDraft, ini
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [hasMore, setHasMore] = useState(false);
   const [loadedOlder, setLoadedOlder] = useState(false);
-  const [draft, setDraft] = useState("");
-  const [images, setImages] = useState<string[]>([]);
+  const [drafts, setDrafts] = useState<Record<string, ChatDraft>>({});
+  const threadKey = activeId ? `conversation:${activeId}` : newItem ? `item:${newItem.id}` : "";
+  const { body: draft, images } = drafts[threadKey] ?? emptyChatDraft;
+  function updateDraft(key: string, update: (value: ChatDraft) => ChatDraft) {
+    if (key) setDrafts((all) => ({ ...all, [key]: update(all[key] ?? emptyChatDraft) }));
+  }
+  const setDraft = (body: string) => updateDraft(threadKey, (value) => ({ ...value, body }));
+  const setImages = (update: (value: string[]) => string[]) =>
+    updateDraft(threadKey, (value) => ({ ...value, images: update(value.images) }));
   const [uploading, setUploading] = useState(false);
   const [imageView, setImageView] = useState<string | null>(null);
   const uploadEpoch = useRef(0);
@@ -249,10 +263,34 @@ export function ChatCenter({ user, conversations, initialItem, initialDraft, ini
   const [reviewBusy, setReviewBusy] = useState(false);
   const [reportMessageId, setReportMessageId] = useState<string | null>(null);
   const [reportReason, setReportReason] = useState("");
-  const bottom = useRef<HTMLDivElement>(null);
+  const historyRef = useRef<HTMLDivElement>(null);
   const layoutRef = useRef<HTMLDivElement>(null);
   const [layoutHeight, setLayoutHeight] = useState<number>();
-  const loadingOlder = useRef(false);
+  const [historyLoading, setHistoryLoading] = useState(false);
+  const [historyError, setHistoryError] = useState("");
+  const [historyRevision, setHistoryRevision] = useState(0);
+  const [showLatest, setShowLatest] = useState(false);
+  const [olderLoading, setOlderLoading] = useState(false);
+  const olderRequest = useRef<object | null>(null);
+  const currentThread = useRef("");
+  const followLatest = useRef(true);
+  const prependAnchor = useRef<{ height: number; top: number } | null>(null);
+  const sending = useRef(false);
+  function resetThreadView() {
+    setMessages([]);
+    setHasMore(false);
+    setLoadedOlder(false);
+    setHistoryError("");
+    setError("");
+    setReportMessageId(null);
+    setNotice("");
+  }
+  function jumpToLatest() {
+    const history = historyRef.current;
+    if (history) history.scrollTop = history.scrollHeight;
+    followLatest.current = true;
+    setShowLatest(false);
+  }
   const handledItem = useRef<string | null>(null);
   useEffect(() => {
     if (!initialConversationId) return;
@@ -260,15 +298,12 @@ export function ChatCenter({ user, conversations, initialItem, initialDraft, ini
     setActiveId(null);
     setRecentConversation(null);
     setNewItem(null);
-    setMessages([]);
-    setError("");
+    resetThreadView();
     void api<Conversation>(`/conversations/${encodeURIComponent(initialConversationId)}`)
       .then((conversation) => {
         if (!alive) return;
         setActiveId(conversation.id);
         setRecentConversation(conversation);
-        setLoadedOlder(false);
-        setDraft("");
         onConversationOpened?.();
       })
       .catch(() => {
@@ -285,21 +320,26 @@ export function ChatCenter({ user, conversations, initialItem, initialDraft, ini
       const top = layout.getBoundingClientRect().top + window.scrollY;
       const navigation = window.innerWidth <= 650 ? document.querySelector(".sidebar")?.getBoundingClientRect().height ?? 62 : 0;
       const viewport = window.visualViewport?.height ?? window.innerHeight;
-      setLayoutHeight(Math.max(360, Math.min(1080, viewport - top - navigation - 16)));
+      setLayoutHeight(Math.max(360, viewport - top - navigation - 10));
     };
     measure();
     const observer = new ResizeObserver(measure);
-    for (const element of document.querySelectorAll(".chat-heading, .profile-nav")) observer.observe(element);
+    for (const element of document.querySelectorAll(".chat-heading, .profile-nav, .topbar, .sidebar")) observer.observe(element);
     window.addEventListener("resize", measure);
     window.visualViewport?.addEventListener("resize", measure);
     return () => { observer.disconnect(); window.removeEventListener("resize", measure); window.visualViewport?.removeEventListener("resize", measure); };
   }, []);
-  useEffect(() => {
+  useLayoutEffect(() => {
+    currentThread.current = threadKey;
     uploadEpoch.current += 1;
-    setImages([]);
     setUploading(false);
     setImageView(null);
-  }, [activeId, newItem?.id]);
+    olderRequest.current = null;
+    setOlderLoading(false);
+    prependAnchor.current = null;
+    followLatest.current = true;
+    setShowLatest(false);
+  }, [threadKey]);
   useEffect(() => {
     if (!initialItem) { handledItem.current = null; return; }
     if (handledItem.current === initialItem.id) return;
@@ -309,39 +349,41 @@ export function ChatCenter({ user, conversations, initialItem, initialDraft, ini
       setActiveId(existing.id);
       setRecentConversation(existing);
       setNewItem(null);
-      setMessages([]);
     } else {
       setActiveId(null);
       setNewItem(initialItem);
-      setMessages([]);
     }
-    setLoadedOlder(false);
-    setDraft(initialDraft);
+    resetThreadView();
+    if (initialDraft) {
+      updateDraft(existing ? `conversation:${existing.id}` : `item:${initialItem.id}`,
+        (value) => value.body || value.images.length ? value : { ...value, body: initialDraft });
+    }
   }, [initialItem, initialDraft, conversations]);
   useEffect(() => {
     if (!activeId) return;
     let alive = true;
     let loading = false;
+    setHistoryLoading(true);
     async function load() {
       if (loading || document.visibilityState !== "visible") return;
       loading = true;
       try {
         const result = await api<{ messages: ChatMessage[]; has_more: boolean }>(`/conversations/${activeId}/messages`);
         if (!alive) return;
-        setMessages((current) => {
-          if (current.length <= result.messages.length) return result.messages;
-          const merged = new Map([...current, ...result.messages].map((message) => [message.id, message]));
-          return [...merged.values()].sort((a, b) => a.created_at.localeCompare(b.created_at) || a.id.localeCompare(b.id));
-        });
+        setMessages((current) => mergeMessages(current, result.messages));
         if (!loadedOlder) setHasMore(result.has_more);
-        setError("");
+        setHistoryError("");
+        setHistoryLoading(false);
         const ids = result.messages.filter((message) => message.sender_id !== user.id && !message.read_at).map((message) => message.id);
         if (ids.length && document.visibilityState === "visible" && !document.querySelector('[aria-modal="true"]')) {
           await api(`/conversations/${activeId}/read`, "POST", { ids });
           if (alive) refresh();
         }
       } catch (cause) {
-        if (alive) setError((cause as Error).message);
+        if (alive) {
+          setHistoryError((cause as Error).message);
+          setHistoryLoading(false);
+        }
       } finally { loading = false; }
     }
     void load();
@@ -350,12 +392,24 @@ export function ChatCenter({ user, conversations, initialItem, initialDraft, ini
     document.addEventListener("visibilitychange", visible);
     window.addEventListener("focus", visible);
     return () => { alive = false; clearInterval(timer); document.removeEventListener("visibilitychange", visible); window.removeEventListener("focus", visible); };
-  }, [activeId, user.id, refresh, loadedOlder]);
-  useEffect(() => {
-    if (loadingOlder.current) { loadingOlder.current = false; return; }
-    const history = bottom.current?.parentElement;
-    if (history) history.scrollTop = history.scrollHeight;
-  }, [activeId, messages.length]);
+  }, [activeId, user.id, refresh, loadedOlder, historyRevision]);
+  useLayoutEffect(() => {
+    const history = historyRef.current;
+    if (!history) return;
+    const anchor = prependAnchor.current;
+    if (anchor) {
+      prependAnchor.current = null;
+      history.scrollTop = anchor.top + history.scrollHeight - anchor.height;
+    } else if (followLatest.current) {
+      history.scrollTop = history.scrollHeight;
+    }
+  }, [threadKey, messages]);
+  function trackHistoryScroll() {
+    const history = historyRef.current;
+    if (!history) return;
+    followLatest.current = history.scrollHeight - history.scrollTop - history.clientHeight < 64;
+    setShowLatest(!followLatest.current);
+  }
   const listedConversation = conversations.find((conversation) => conversation.id === activeId) ?? null;
   useEffect(() => {
     if (listedConversation && recentConversation?.id === listedConversation.id &&
@@ -417,7 +471,8 @@ export function ChatCenter({ user, conversations, initialItem, initialDraft, ini
       await api(`/conversations/${activeId}`, "DELETE");
       setActiveId(null);
       setRecentConversation(null);
-      setMessages([]);
+      resetThreadView();
+      updateDraft(threadKey, () => emptyChatDraft);
       setReviews([]);
       setNotice("会话已从列表移除。对方发来新消息后，会自动重新出现。");
       refresh();
@@ -452,18 +507,22 @@ export function ChatCenter({ user, conversations, initialItem, initialDraft, ini
     try {
       await api(`/conversations/${activeId}/messages/${reportMessageId}/reports`, "POST", { reason: reportReason });
       setReportMessageId(null); setReportReason("");
+      setNotice("举报已提交，等待管理员核实。");
     } catch (cause) { setError((cause as Error).message); }
     finally { setBusy(false); }
   }
   async function send(event: FormEvent) {
     event.preventDefault();
-    if (busy || uploading || (!draft.trim() && !images.length) || (!activeId && !newItem)) return;
+    if (sending.current || busy || uploading || active?.blocked || (!draft.trim() && !images.length) || (!activeId && !newItem)) return;
+    sending.current = true;
     setBusy(true);
     setError("");
     try {
       if (activeId) {
         const message = await api<ChatMessage>(`/conversations/${activeId}/messages`, "POST", { body: draft, images });
-        setMessages((current) => [...current, message]);
+        followLatest.current = true;
+        setShowLatest(false);
+        setMessages((current) => mergeMessages(current, [message]));
       } else if (newItem) {
         const result = await api<{ conversation: Conversation; message: ChatMessage }>(
           `/items/${newItem.id}/conversations`, "POST", { body: draft, images });
@@ -473,12 +532,12 @@ export function ChatCenter({ user, conversations, initialItem, initialDraft, ini
         setMessages([result.message]);
         onStarted();
       }
-      setDraft("");
-      setImages([]);
+      updateDraft(threadKey, () => emptyChatDraft);
       refresh();
     } catch (cause) {
       setError((cause as Error).message);
     } finally {
+      sending.current = false;
       setBusy(false);
     }
   }
@@ -502,20 +561,30 @@ export function ChatCenter({ user, conversations, initialItem, initialDraft, ini
     }
   }
   async function loadOlder() {
-    if (!activeId || !messages.length) return;
+    if (!activeId || !messages.length || olderRequest.current) return;
+    const request = {};
+    olderRequest.current = request;
+    setOlderLoading(true);
+    setHistoryError("");
     try {
       const result = await api<{ messages: ChatMessage[]; has_more: boolean }>(
         `/conversations/${activeId}/messages?before_id=${encodeURIComponent(messages[0].id)}`);
-      loadingOlder.current = result.messages.length > 0;
-      setMessages((current) => [...result.messages, ...current]);
+      if (currentThread.current !== threadKey || olderRequest.current !== request) return;
+      const history = historyRef.current;
+      if (result.messages.length && history) prependAnchor.current = { height: history.scrollHeight, top: history.scrollTop };
+      setMessages((current) => mergeMessages(result.messages, current));
       setHasMore(result.has_more);
       setLoadedOlder(true);
       const ids = result.messages.filter((message) => message.sender_id !== user.id && !message.read_at).map((message) => message.id);
       if (ids.length && document.visibilityState === "visible") {
         await api(`/conversations/${activeId}/read`, "POST", { ids });
-        refresh();
+        if (currentThread.current === threadKey) refresh();
       }
-    } catch (cause) { setError((cause as Error).message); }
+    } catch (cause) {
+      if (olderRequest.current === request) setHistoryError((cause as Error).message);
+    } finally {
+      if (olderRequest.current === request) { olderRequest.current = null; setOlderLoading(false); }
+    }
   }
   async function generateDraft() {
     if (!newItem) return;
@@ -537,7 +606,7 @@ export function ChatCenter({ user, conversations, initialItem, initialDraft, ini
   const counterpartReview = reviews.find((review) => review.reviewer_id !== user.id) ?? null;
   const canDeleteConversation = !!active && !["REQUESTED", "RESERVED", "SOLD"].includes(active.deal_status);
   return (
-    <section className="chat-page">
+    <section className={`chat-page ${activeId || newItem ? "chat-page-active" : ""}`}>
       <div className="chat-heading"><MessageCircle size={22} /><div><h1>站内消息</h1><p>关于商品的沟通会保存在这里，只有买卖双方可见。</p></div></div>
       {notice && <p className="chat-notice" role="status">{notice}</p>}
       {error && !active && !newItem && <p className="form-error" role="alert">{error}</p>}
@@ -546,7 +615,15 @@ export function ChatCenter({ user, conversations, initialItem, initialDraft, ini
           {conversations.length ? conversations.map((conversation) => (
             <button key={conversation.id} className={`chat-list-item ${activeId === conversation.id ? "active" : ""}`}
               disabled={busy || uploading}
-              onClick={() => { setActiveId(conversation.id); setRecentConversation(conversation); setMessages([]); setReviews([]); setReviewsOpen(false); setLoadedOlder(false); setNewItem(null); setDraft(""); setReportMessageId(null); setError(""); setNotice(""); onStarted(); }}>
+              aria-current={activeId === conversation.id ? "true" : undefined}
+              onClick={() => {
+                if (activeId === conversation.id && !newItem) return;
+                resetThreadView();
+                setActiveId(conversation.id);
+                setRecentConversation(conversation);
+                setNewItem(null);
+                onStarted();
+              }}>
               <span className="avatar">{conversation.counterpart.nickname[0]}</span>
               <span className="chat-list-text"><strong>{conversation.counterpart.nickname}</strong><small>{conversation.item_title}</small>
                 <span>{conversation.last_message ? conversation.last_message.body || "[图片]" : "开始沟通"}</span></span>
@@ -557,7 +634,7 @@ export function ChatCenter({ user, conversations, initialItem, initialDraft, ini
         <div className="chat-thread">
           {(active || newItem) ? <>
             <div className="chat-thread-head">
-              <button type="button" className="chat-back" disabled={busy || uploading} onClick={() => { setActiveId(null); setNewItem(null); onStarted(); }} aria-label="返回会话列表"><ArrowLeft size={18} /></button>
+              <button type="button" className="chat-back" disabled={busy || uploading} onClick={() => { resetThreadView(); setActiveId(null); setNewItem(null); onStarted(); }} aria-label="返回会话列表"><ArrowLeft size={18} /></button>
               <div><strong>{active?.counterpart.nickname ?? newItem?.seller.nickname}</strong></div>
               {active && <button type="button" className="text-button" disabled={busy} onClick={() => void toggleBlock()}>
                 <ShieldOff size={15} />{active.blocked_by_me ? "解除拉黑" : "拉黑"}
@@ -606,57 +683,68 @@ export function ChatCenter({ user, conversations, initialItem, initialDraft, ini
               <button type="button" className="text-button trade-review-open" onClick={() => setReviewsOpen(true)}>查看评价</button>
             </div>}
             {active?.blocked && <p className="hint">双方已停止联系。聊天记录仍可查看，不能发送新消息。</p>}
-            <div className="chat-history" aria-live="polite">
-              {hasMore && <button className="text-button" onClick={() => void loadOlder()}>加载更早的消息</button>}
-              {messages.map((message) => <div key={message.id} className={`chat-bubble ${message.sender_id === user.id ? "own" : ""}`}>
-                {message.body && <p>{message.body}</p>}
-                {message.images.length > 0 && <div className="chat-images">{message.images.map((url) =>
-                  <button key={url} type="button" className="chat-image-button" aria-label="查看聊天图片" onClick={() => setImageView(url)}>
-                    <img src={url} alt="聊天图片" loading="lazy" />
-                  </button>)}</div>}
-                <time>{new Date(message.created_at).toLocaleString("zh-CN")}</time>
-                {message.sender_id !== user.id && !message.hidden && <button className="text-button" type="button"
-                  onClick={() => { setReportMessageId(message.id); setReportReason(""); }}><Flag size={13} />举报消息</button>}
-              </div>)}
-              <div ref={bottom} />
-            </div>
-            {reportMessageId && <form className="chat-report-form" onSubmit={(event) => void submitReport(event)}>
-              <label>举报原因<input required minLength={5} maxLength={1000} value={reportReason}
-                onChange={(event) => setReportReason(event.target.value)} placeholder="请说明这条消息的问题" /></label>
-              <button className="button secondary" disabled={busy}>提交举报</button>
-              <button type="button" className="text-button" onClick={() => setReportMessageId(null)}>取消</button>
-            </form>}
-            <form className="chat-compose" onSubmit={(event) => void send(event)}>
-              <div className="chat-compose-tools">
-                <label className={`text-button chat-image-upload ${active?.blocked || busy || uploading || images.length >= 3 ? "disabled" : ""}`}>
-                  <ImagePlus size={17} />{uploading ? "上传中…" : "添加图片"}
-                  <input type="file" className="sr-only" accept="image/jpeg,image/png,image/webp" multiple
-                    aria-label="添加聊天图片" disabled={busy || uploading || active?.blocked || images.length >= 3}
-                    onChange={(event) => { void uploadImages(event.target.files); event.target.value = ""; }} />
-                </label>
-                <span>最多 3 张，每张不超过 6 MB</span>
+            <div className="chat-history-wrap">
+              <div ref={historyRef} className="chat-history" role="log" aria-label="聊天记录" onScroll={trackHistoryScroll}>
+                {historyError && <p className="hint" role="status">{historyError} <button type="button" className="text-button" onClick={() => setHistoryRevision((value) => value + 1)}>重试加载</button></p>}
+                {!historyError && !messages.length && <p className="hint" role="status">{activeId ? (historyLoading ? "正在加载消息…" : "还没有消息。") : "发送第一条消息，开始和卖家沟通。"}</p>}
+                {hasMore && <button type="button" className="text-button" disabled={olderLoading} onClick={() => void loadOlder()}>{olderLoading ? "加载中…" : "加载更早的消息"}</button>}
+                {messages.map((message) => <div key={message.id} className={`chat-bubble ${message.sender_id === user.id ? "own" : ""}`}>
+                  {message.body && <p>{message.body}</p>}
+                  {message.images.length > 0 && <div className="chat-images">{message.images.map((url) =>
+                    <button key={url} type="button" className="chat-image-button" aria-label="查看聊天图片" onClick={() => setImageView(url)}>
+                      <img src={url} alt="聊天图片" loading="lazy" />
+                    </button>)}</div>}
+                  <time>{new Date(message.created_at).toLocaleString("zh-CN")}</time>
+                  {message.sender_id !== user.id && !message.hidden && <button className="text-button" type="button"
+                    onClick={() => { setError(""); setReportMessageId(message.id); setReportReason(""); }}><Flag size={13} />举报消息</button>}
+                </div>)}
               </div>
-              {newItem && (
-                <button
-                  type="button"
-                  className="text-button chat-draft-tool"
-                  disabled={busy}
-                  onClick={() => void generateDraft()}
-                >
-                  <Sparkles size={15} />
-                  咨询草稿
-                </button>
-              )}
+              {showLatest && <button className="button secondary chat-jump-latest" type="button" onClick={jumpToLatest}>回到最新消息</button>}
+            </div>
+            {reportMessageId && <Modal title="举报消息" onClose={() => { if (!busy) { setReportMessageId(null); setError(""); } }}>
+              <form className="chat-report-form" onSubmit={(event) => void submitReport(event)}>
+                <label>举报原因<input required minLength={5} maxLength={1000} value={reportReason}
+                  onChange={(event) => setReportReason(event.target.value)} placeholder="请说明这条消息的问题" /></label>
+                <button className="button secondary" disabled={busy}>提交举报</button>
+                <button type="button" className="text-button" disabled={busy} onClick={() => { setReportMessageId(null); setError(""); }}>取消</button>
+                {error && <p className="form-error" role="alert">{error}</p>}
+              </form></Modal>}
+            <form className="chat-compose" onSubmit={(event) => void send(event)}>
               <label className="sr-only" htmlFor="chat-message">消息内容</label>
-              <textarea id="chat-message" value={draft} maxLength={2000} rows={2} disabled={busy || active?.blocked}
-                placeholder="输入消息，也可以直接发送图片…" onChange={(event) => setDraft(event.target.value)} />
+              <textarea id="chat-message" value={draft} maxLength={2000} rows={3} readOnly={busy} disabled={active?.blocked}
+                placeholder="输入消息，也可以直接发送图片…"
+                onKeyDown={(event) => {
+                  if (event.key === "Enter" && (event.ctrlKey || event.metaKey) && !event.nativeEvent.isComposing) void send(event);
+                }}
+                onChange={(event) => setDraft(event.target.value)} />
               {images.length > 0 && <div className="chat-attachment-preview">{images.map((url) =>
                 <div className="upload-preview" key={url}><img src={url} alt="待发送图片" />
                   <button type="button" disabled={busy || uploading} aria-label="移除待发送图片" onClick={() => setImages((current) => current.filter((image) => image !== url))}><X size={14} /></button>
                 </div>)}</div>}
-              <div><span>请勿提前转账；交接前当面核实商品。</span>
-                <button className="button primary" disabled={busy || uploading || active?.blocked || (!draft.trim() && !images.length)}><Send size={15} />确认发送</button></div>
-              {error && <p className="form-error" role="alert">{error}</p>}
+              <div className="chat-send-row">
+                <div className="chat-compose-tools">
+                  <label title="最多 3 张，每张不超过 6 MB" className={`text-button chat-image-upload ${active?.blocked || busy || uploading || images.length >= 3 ? "disabled" : ""}`}>
+                    <ImagePlus size={17} />{uploading ? "上传中…" : "添加图片"}
+                    <input type="file" className="sr-only" accept="image/jpeg,image/png,image/webp" multiple
+                      aria-description="最多 3 张，每张不超过 6 MB" aria-label="添加聊天图片" disabled={busy || uploading || active?.blocked || images.length >= 3}
+                      onChange={(event) => { void uploadImages(event.target.files); event.target.value = ""; }} />
+                  </label>
+                {newItem && (
+                  <button
+                    type="button"
+                    className="text-button chat-draft-tool"
+                    disabled={busy}
+                    onClick={() => void generateDraft()}
+                  >
+                    <Sparkles size={15} />
+                    咨询草稿
+                  </button>
+                )}
+                </div>
+                <span className="chat-safety-note" title="交接前请当面核实商品">请勿提前转账</span>
+                <button className="button primary" title="Ctrl / ⌘ + Enter 发送；Enter 换行" disabled={busy || uploading || active?.blocked || (!draft.trim() && !images.length)}><Send size={15} />确认发送</button>
+              </div>
+              {error && !reportMessageId && <p className="form-error" role="alert">{error}</p>}
             </form>
           </> : <Empty title="选择一条会话" text="你与其他同学的商品沟通会显示在这里。" />}
         </div>

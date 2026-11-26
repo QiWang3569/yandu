@@ -10,6 +10,7 @@ from sqlalchemy.orm import Session
 
 from .buyer_agent import ModelUnavailable, chat_json
 from .config import Settings
+from .observability import MODEL_FALLBACKS, collect_provider_usage, model_operation
 from .models import ActionLog, Announcement, Intent, Item, User, Wanted, now
 from .schemas import CAMPUSES, CATEGORIES, CONDITIONS, ParsedIntent, ParsedItem, ParsedWanted
 
@@ -151,7 +152,8 @@ def parse_intent(query: str, settings: Settings) -> ParsedIntent:
               '"preferences":["静音"],"condition_grade":null,"clarification":null}。'
               f'严格遵循 JSON schema：{json.dumps(schema, ensure_ascii=False)}')
     try:
-        return ParsedIntent.model_validate(chat_json(system, {'query': query}, settings))
+        with model_operation('intent_parse'):
+            return ParsedIntent.model_validate(chat_json(system, {'query': query}, settings))
     except (ModelUnavailable, ValueError, TypeError):
         raise HTTPException(502, '需求解析服务暂时不可用或返回无效条件，请稍后重试。') from None
 
@@ -190,8 +192,10 @@ def parse_item(raw: str, settings: Settings) -> ParsedItem:
               '不确定或描述冲突时填 clarification，否则为 null。'
               f'严格遵循 JSON schema：{json.dumps(schema, ensure_ascii=False)}')
     try:
-        return ParsedItem.model_validate(chat_json(system, {'description': raw}, settings))
+        with model_operation('item_parse'):
+            return ParsedItem.model_validate(chat_json(system, {'description': raw}, settings))
     except (ModelUnavailable, ValueError, TypeError):
+        MODEL_FALLBACKS.labels(node='item_parse').inc()
         return parse_item_local(raw)
 
 
@@ -209,6 +213,8 @@ def understand_intent(
     except HTTPException:
         if not fallback:
             raise
+        if settings.ai_mode == 'remote':
+            MODEL_FALLBACKS.labels(node='intent_parse').inc()
         return parse_local(query)
 
 
@@ -244,18 +250,21 @@ def parse_natural_language(
 def embed(text: str, settings: Settings) -> list[float] | None:
     if settings.embedding_mode == 'local':
         return None
-    try:
-        with httpx.Client(timeout=settings.model_timeout) as client:
-            r = client.post(settings.embedding_url.rstrip('/') + '/embeddings',
-                headers={'Authorization': f'Bearer {settings.embedding_key}'},
-                json={'model': settings.embedding_model, 'input': text, 'dimensions': 1536})
-            r.raise_for_status()
-            vector = r.json()['data'][0]['embedding']
-            if len(vector) != 1536 or not all(type(n) in (int, float) and math.isfinite(n) for n in vector):
-                raise ValueError('invalid embedding')
-            return vector
-    except (httpx.HTTPError, ValueError, KeyError, IndexError, TypeError, AttributeError):
-        raise HTTPException(502, '向量服务暂时不可用，本次操作尚未保存，请稍后重试。')
+    with model_operation('embedding'):
+        try:
+            with httpx.Client(timeout=settings.model_timeout) as client:
+                r = client.post(settings.embedding_url.rstrip('/') + '/embeddings',
+                    headers={'Authorization': f'Bearer {settings.embedding_key}'},
+                    json={'model': settings.embedding_model, 'input': text, 'dimensions': 1536})
+                r.raise_for_status()
+                body = r.json()
+                collect_provider_usage(body)
+                vector = body['data'][0]['embedding']
+                if len(vector) != 1536 or not all(type(n) in (int, float) and math.isfinite(n) for n in vector):
+                    raise ValueError('invalid embedding')
+                return vector
+        except (httpx.HTTPError, ValueError, KeyError, IndexError, TypeError, AttributeError):
+            raise HTTPException(502, '向量服务暂时不可用，本次操作尚未保存，请稍后重试。')
 
 
 def model_name(settings: Settings):
