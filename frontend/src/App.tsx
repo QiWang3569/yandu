@@ -195,6 +195,7 @@ export default function App() {
   useEffect(() => listenForNotificationChanges(() => setNotificationRevision((n) => n + 1)), []);
   const [feedbackId, setFeedbackId] = useState<string | null>(null);
   const feedbackAfterLogin = useRef(false);
+  const afterLogin = useRef<{ run: () => void; cancel?: () => void } | null>(null);
   const [theme, setTheme] = useState<"light" | "dark">(initialTheme);
   const [meta, setMeta] = useState<Meta | null>(null),
     [user, setUser] = useState<User | null>(null);
@@ -210,6 +211,8 @@ export default function App() {
   const [fatal, setFatal] = useState(""),
     [search, setSearch] = useState(""),
     [query, setQuery] = useState("");
+  const [wantedSearch, setWantedSearch] = useState(""),
+    [wantedQuery, setWantedQuery] = useState("");
   const [category, setCategory] = useState(""),
     [campus, setCampus] = useState(""),
     [price, setPrice] = useState(""),
@@ -447,25 +450,23 @@ export default function App() {
     setPendingConversation(null);
     setView(v);
     setPage(1);
-    setOnSale(v === "market");
-    if (v === "wanted") {
-      setSmartMode(false);
-      setSmartQuery("");
-      setSmartResult(null);
-    }
   };
-  const needUser = () => {
-    if (!user) {
-      setModal("login");
-      return false;
-    }
-    return true;
+  const needUser = (resume?: () => void) => {
+    if (user) return true;
+    const detail = modal === "detail" ? selected : null;
+    const restoreDetail = detail ? () => { void openItem(detail, detailFromChat); } : undefined;
+    const run = resume ?? restoreDetail;
+    afterLogin.current = run ? { run, cancel: detail ? () => setModal("detail") : undefined } : null;
+    setModal("login");
+    return false;
   };
   function signedIn(account: User) {
     setSessionExpired(false);
     setSessionEpoch((n) => n + 1);
     setUser(account);
     setCompare([]);
+    const continuation = afterLogin.current;
+    afterLogin.current = null;
     if (feedbackAfterLogin.current) {
       feedbackAfterLogin.current = false;
       setModal("feedback");
@@ -474,16 +475,12 @@ export default function App() {
     }
     const conversationId = currentConversation();
     setPendingConversation(conversationId);
-    if (conversationId) {
-      setModal(null);
+    setModal(null);
+    if (continuation) continuation.run();
+    else if (conversationId) {
       setChatItem(null);
       setChatDraft("");
-    } else if (selected) {
-      void api<Item>(`/items/${selected.id}`).then((item) => {
-        setSelected(item);
-        setModal("detail");
-      }).catch((error) => { setModal(null); setToast((error as Error).message); });
-    } else setModal(null);
+    }
     refresh();
   }
   async function operate(task: () => Promise<unknown>, message?: string) {
@@ -498,16 +495,19 @@ export default function App() {
       setBusy(false);
     }
   }
-  function openForm(type: "intent" | "publish" | "wanted", text = "") {
-    if (!needUser()) return;
+  function showForm(type: "intent" | "publish" | "wanted", text: string, wanted: Wanted | null) {
     if (type === "intent") { setIntentQuery(text); setEditingIntent(null); }
     if (type === "wanted") { setEditingWanted(null); setPublishingIntent(null); }
     if (type === "publish") {
-      setPrefill(null);
+      setPrefill(wanted);
       setEditingItem(null);
       setCopiedDraft(null);
     }
     setModal(type);
+  }
+  function openForm(type: "intent" | "publish" | "wanted", text = "", wanted: Wanted | null = null) {
+    const show = () => showForm(type, text, wanted);
+    if (needUser(show)) show();
   }
   async function openItem(item: Pick<Item, "id">, fromChat = false) {
     setReporting(false);
@@ -558,12 +558,19 @@ export default function App() {
   }
   function searchSubmit(e: FormEvent) {
     e.preventDefault();
+    if (view === "wanted") {
+      const nextQuery = wantedSearch.trim().replace(/\s+/g, " ");
+      setWantedSearch(nextQuery);
+      setWantedQuery(nextQuery);
+      return;
+    }
     const nextQuery = search.trim().replace(/\s+/g, " ");
     setSearch(nextQuery);
     setQuery(nextQuery);
-    if (view !== "wanted" && smartMode && nextQuery) {
+    if (smartMode && nextQuery) {
       setSmartQuery(nextQuery);
       setSmartPage(1);
+      setSmartRequest((value) => value + 1);
       setSmartResult(null);
       setSmartError("");
     } else {
@@ -571,10 +578,15 @@ export default function App() {
       setSmartResult(null);
       setPage(1);
     }
-    navigate(view === "wanted" ? "wanted" : "market");
+    navigate("market");
     setSearchRequest((value) => value + 1);
   }
   function clearSearch() {
+    if (view === "wanted") {
+      setWantedSearch("");
+      setWantedQuery("");
+      return;
+    }
     setSearch("");
     setQuery("");
     setSmartQuery("");
@@ -585,10 +597,10 @@ export default function App() {
   }
   const searchBarProps = {
     target: view === "wanted" ? "wanted" as const : "market" as const,
-    value: search,
-    showClear: Boolean(search || query || (view !== "wanted" && smartQuery)),
+    value: view === "wanted" ? wantedSearch : search,
+    showClear: view === "wanted" ? Boolean(wantedSearch || wantedQuery) : Boolean(search || query || smartQuery),
     smartMode,
-    onChange: setSearch,
+    onChange: view === "wanted" ? setWantedSearch : setSearch,
     onSubmit: searchSubmit,
     onClear: clearSearch,
     onToggleSmart: () => {
@@ -599,18 +611,19 @@ export default function App() {
       }
     },
   };
-  const listParams = new URLSearchParams({
-    q: query,
-    category,
-    campus,
-    sort,
-    page: String(page),
-    size: "12",
-  });
-  if (price) listParams.set("max_price", price);
+  const marketView = view === "market";
+  const listingQuery = marketView ? query : "";
+  const listParams = new URLSearchParams({ page: String(page), size: "12" });
+  if (marketView) {
+    listParams.set("q", query);
+    listParams.set("category", category);
+    listParams.set("campus", campus);
+    listParams.set("sort", sort);
+    if (price) listParams.set("max_price", price);
+  }
   if (view === "mine") listParams.set("mine", "true");
   if (view === "favorites") listParams.set("favorites", "true");
-  if (!onSale) listParams.set("on_sale", "false");
+  if (!marketView || !onSale) listParams.set("on_sale", "false");
   const listingView = ["market", "favorites", "mine"].includes(view);
   const items = useResource<{ items: Item[]; total: number }>(
     "/items/?" + listParams.toString(),
@@ -624,7 +637,7 @@ export default function App() {
     true,
   );
   const wanted = useResource<Wanted[]>(
-    "/wanted/?" + new URLSearchParams({ q: query }).toString(),
+    "/wanted/?" + new URLSearchParams({ q: wantedQuery }).toString(),
     revision,
     view === "wanted",
   );
@@ -1117,7 +1130,7 @@ export default function App() {
                   )}
                 </Intro>
               )}
-              {smartMode && smartQuery ? (
+              {marketView && smartMode && smartQuery ? (
                 <div className="smart-search-results">
                   <div className="smart-understanding">
                     <div className="smart-understanding-head">
@@ -1421,26 +1434,26 @@ export default function App() {
               ) : (
                 <Empty
                   title={
-                    query ? "没有找到匹配的好物" : view === "favorites"
+                    listingQuery ? "没有找到匹配的好物" : view === "favorites"
                       ? "把喜欢的好物，先收藏起来"
                       : view === "mine"
                         ? "你的第一件闲置，还在等待出发"
                         : "暂时没有合适的好物"
                   }
                   text={
-                    query ? "换个关键词试试，或清空搜索查看好物。" : view === "market"
+                    listingQuery ? "换个关键词试试，或清空搜索查看好物。" : view === "market"
                       ? "换个筛选条件，或留下求购，让有闲置的同学找到你。"
                       : "每一件物品，都值得一段新的故事。"
                   }
                   action={
-                    query ? "清空搜索" : view === "market"
+                    listingQuery ? "清空搜索" : view === "market"
                       ? "发布求购"
                       : view === "mine"
                         ? "发布闲置"
                         : "去逛逛校园"
                   }
                   onAction={() =>
-                    query ? clearSearch() : view === "market"
+                    listingQuery ? clearSearch() : view === "market"
                       ? openForm("wanted")
                       : view === "mine"
                         ? openForm("publish")
@@ -1636,9 +1649,9 @@ export default function App() {
                 </button>
               </Intro>
               <p className="search-rule">多个关键词用空格分隔，结果需同时包含所有关键词。</p>
-              {query && !wanted.loading && !wanted.error && (
+              {wantedQuery && !wanted.loading && !wanted.error && (
                 <p className="wanted-search-summary" role="status">
-                  “{query}”的搜索结果：显示 {wanted.data?.length ?? 0} 条求购
+                  “{wantedQuery}”的搜索结果：显示 {wanted.data?.length ?? 0} 条求购
                 </p>
               )}
               {wanted.loading ? (
@@ -1699,12 +1712,7 @@ export default function App() {
                         ) : (
                           <button
                             className="text-button"
-                            onClick={() => {
-                              if (needUser()) {
-                                setPrefill(w);
-                                setModal("publish");
-                              }
-                            }}
+                            onClick={() => openForm("publish", "", w)}
                           >
                             我有这件物品
                             <ArrowRight size={15} />
@@ -1716,11 +1724,11 @@ export default function App() {
                 </div>
               ) : (
                 <Empty
-                  title={query ? "没有找到匹配的求购" : "第一个心愿，由你开始"}
-                  text={query ? "换个关键词试试，或清空搜索查看全部求购。" : "写下想找的物品，让同学们帮你留意。"}
-                  action={query ? "清空搜索" : "发布求购"}
+                  title={wantedQuery ? "没有找到匹配的求购" : "第一个心愿，由你开始"}
+                  text={wantedQuery ? "换个关键词试试，或清空搜索查看全部求购。" : "写下想找的物品，让同学们帮你留意。"}
+                  action={wantedQuery ? "清空搜索" : "发布求购"}
                   onAction={() => {
-                    if (query) {
+                    if (wantedQuery) {
                       clearSearch();
                     } else {
                       openForm("wanted");
@@ -1887,7 +1895,13 @@ export default function App() {
       {modal === "login" && (
         <Modal
           title={user ? "当前账号" : "欢迎来到燕渡"}
-          onClose={() => { feedbackAfterLogin.current = false; setModal(null); }}
+          onClose={() => {
+            feedbackAfterLogin.current = false;
+            const cancel = afterLogin.current?.cancel;
+            afterLogin.current = null;
+            if (cancel) cancel();
+            else setModal(null);
+          }}
         >
           <div className="stack-form">
             {user?.email && <p className="auth-description">已验证邮箱：{user.email}<br />
@@ -2011,7 +2025,7 @@ export default function App() {
         >
           <WantedForm
             meta={meta}
-            initial={query}
+            initial={view === "wanted" ? wantedQuery : view === "market" ? query : ""}
             editingWanted={editingWanted}
             initialIntent={publishingIntent}
             onDone={() => {
