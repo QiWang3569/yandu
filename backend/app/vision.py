@@ -211,8 +211,11 @@ class VisionService:
         started = time.monotonic()
         outcome = 'error'
         try:
-            async with asyncio.timeout(self.settings.vision_timeout):
-                result = await (self._request_batch(images, note) if batch else self._request(images, note))
+            from .observability import model_operation
+
+            with model_operation('vision_batch' if batch else 'vision_draft'):
+                async with asyncio.timeout(self.settings.vision_timeout):
+                    result = await (self._request_batch(images, note) if batch else self._request(images, note))
             async with self.lock:
                 self.cache[key] = (time.monotonic(), result)
                 while len(self.cache) > 128:
@@ -256,7 +259,11 @@ class VisionService:
                     raise HTTPException(502, '识图服务暂不可用，请稍后重试或手动填写')
                 break
         try:
-            choice = response.json()['choices'][0]
+            body = response.json()
+            from .observability import collect_provider_usage
+
+            collect_provider_usage(body)
+            choice = body['choices'][0]
             if choice.get('finish_reason') != 'stop':
                 raise ValueError('incomplete answer')
             return schema.model_validate_json(choice['message']['content'], strict=True)

@@ -67,6 +67,7 @@ def test_admin_analytics_endpoints(client):
     assert 'ai_attribution' in biz_data
     assert 'friction' in biz_data
     assert 'dwell_insights' in biz_data
+    assert biz_data['liquidity']['avg_days_to_sell'] is None
     assert 'sell_through_rate_pct' in biz_data['liquidity']
     assert 'first_inquiry_rate_72h_pct' in biz_data['liquidity']
     assert 'zombie_rate_pct' in biz_data['liquidity']
@@ -121,3 +122,50 @@ def test_visitor_deduplication_and_healthcheck_exclusion(client):
     assert res.status_code == 200
     assert res.json()['realtime']['rolling_anon_uv'] == 0
 
+
+
+def test_model_metrics_count_one_operation_and_ignore_direct_local_mode(monkeypatch, tmp_path):
+    from app import services
+    from app.config import Settings
+    from app.observability import collect_provider_usage
+    from prometheus_client import REGISTRY
+
+    def value(metric, **labels):
+        return REGISTRY.get_sample_value(metric, labels) or 0
+
+    item_failure = 'yandu_model_calls_total', {'node': 'item_parse', 'status': 'error'}
+    fallback = 'yandu_model_fallbacks_total', {'node': 'item_parse'}
+    token = 'yandu_model_tokens_total', {'node': 'item_parse', 'kind': 'input'}
+    latency = 'yandu_model_latency_seconds_count', {'node': 'item_parse'}
+    counters = [item_failure, fallback, token, latency]
+    before = [value(metric, **labels) for metric, labels in counters]
+
+    def bad_remote(*args, **kwargs):
+        collect_provider_usage({'usage': {'prompt_tokens': 10}})
+        collect_provider_usage({'usage': {'prompt_tokens': 12, 'completion_tokens': 'invalid'}})
+        return {'not_a_draft': True}
+
+    monkeypatch.setattr(services, 'chat_json', bad_remote)
+    settings = Settings(ai_mode='remote', deepseek_key='test', data_dir=tmp_path)
+    services.parse_item('一把伞', settings)
+    services.parse_item('一把伞', Settings(ai_mode='local', data_dir=tmp_path))
+    assert [value(metric, **labels) - old for (metric, labels), old in zip(counters, before)] == [1, 1, 12, 1]
+
+
+def test_candidate_metrics_count_invalid_result_and_skip_empty_batch(monkeypatch, tmp_path):
+    import pytest
+    from app import buyer_agent
+    from app.config import Settings
+    from prometheus_client import REGISTRY
+
+    def errors():
+        return REGISTRY.get_sample_value(
+            'yandu_model_calls_total', {'node': 'candidate_review', 'status': 'error'}) or 0
+
+    monkeypatch.setattr(buyer_agent, 'chat_json', lambda *a, **kw: {'assessments': []})
+    settings = Settings(ai_mode='remote', deepseek_key='test', data_dir=tmp_path)
+    before = errors()
+    assert buyer_agent.review_candidates({}, [], settings) == []
+    with pytest.raises(buyer_agent.ModelUnavailable):
+        buyer_agent.review_candidates({}, [{'id': 'demo'}], settings)
+    assert errors() == before + 1

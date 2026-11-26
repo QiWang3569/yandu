@@ -18,7 +18,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from PIL import Image, UnidentifiedImageError
-from sqlalchemy import case, create_engine, delete, distinct, event, func, or_, select, update
+from sqlalchemy import and_, case, create_engine, delete, distinct, event, func, or_, select, update
 from sqlalchemy.orm import Session, sessionmaker
 from starlette.middleware.trustedhost import TrustedHostMiddleware
 from prometheus_fastapi_instrumentator import Instrumentator
@@ -1970,16 +1970,15 @@ def create_app(settings: Settings | None = None):
             for r in cat_stats
         ]
 
-        sold_convs = db.execute(
-            select(Item.created_at, Conversation.last_message_at)
+        confirmed_deals = db.execute(
+            select(Item.created_at, func.min(ActionLog.created_at))
             .join(Conversation, Conversation.item_id == Item.id)
-            .where(Item.status == 'SOLD', Conversation.deal_status.in_(['SOLD', 'CONFIRMED']))
+            .join(ActionLog, and_(ActionLog.target_id == Conversation.id, ActionLog.action == 'deal.confirm'))
+            .where(Conversation.deal_status == 'CONFIRMED', ActionLog.created_at >= Item.created_at)
+            .group_by(Item.id, Item.created_at)
         ).all()
-        if sold_convs:
-            diffs = [(c_end - i_start).total_seconds() for i_start, c_end in sold_convs if c_end >= i_start]
-            avg_days = round((sum(diffs) / len(diffs)) / 86400, 1) if diffs else 1.5
-        else:
-            avg_days = 2.0
+        diffs = [(confirmed - listed).total_seconds() for listed, confirmed in confirmed_deals]
+        avg_days = round(sum(diffs) / len(diffs) / 86400, 1) if diffs else None
 
         # 1. 72h 初次咨询率 (72h First Inquiry Rate) & 平均初次咨询用时
         thirty_days_ago = now() - timedelta(days=30)

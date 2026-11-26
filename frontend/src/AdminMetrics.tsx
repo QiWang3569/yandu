@@ -95,7 +95,7 @@ export interface BusinessOverviewData {
     total_items: number;
     sold_items: number;
     sell_through_rate_pct: number;
-    avg_days_to_sell: number;
+    avg_days_to_sell: number | null;
     total_gmv_yuan?: number;
     avg_order_value_yuan?: number;
     recent_30d_gmv_yuan?: number;
@@ -299,7 +299,7 @@ export function AdminMetrics({
             <div style={cardStyle}>
               <span style={cardLabelStyle}>平均成交周期</span>
               <div style={{ fontSize: '24px', fontWeight: 700, color: '#2b5e7d' }}>
-                {liq?.avg_days_to_sell ?? 0} 天
+                {liq?.avg_days_to_sell == null ? "暂无成交样本" : `${liq.avg_days_to_sell} 天`}
               </div>
               <span style={cardSubStyle}>从发布到买家确认</span>
             </div>

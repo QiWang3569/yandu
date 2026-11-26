@@ -79,6 +79,21 @@ def test_deal_confirmation_and_stale_match_notice(client, app):
     with app.state.session_factory() as db:
         assert db.get(Item, 'sample-1').status == 'SOLD'
         assert db.get(Conversation, conversation_id).deal_status == 'CONFIRMED'
+        # Later chat activity must not affect the confirmed transaction duration.
+        from datetime import timedelta
+        from sqlalchemy import select
+        from app.models import ActionLog
+
+        item = db.get(Item, 'sample-1')
+        confirmation = db.scalar(select(ActionLog).where(
+            ActionLog.action == 'deal.confirm', ActionLog.target_id == conversation_id))
+        item.created_at = confirmation.created_at - timedelta(days=3)
+        db.get(Conversation, conversation_id).last_message_at = confirmation.created_at + timedelta(days=6)
+        db.commit()
+    login(client, 'admin')
+    stats = client.get('/api/v1/admin/analytics/business-overview')
+    assert stats.status_code == 200
+    assert stats.json()['liquidity']['avg_days_to_sell'] == 3.0
 
 
 def test_buyer_sale_feedback_needs_seller_confirmation(client):
